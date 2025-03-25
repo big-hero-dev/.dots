@@ -116,12 +116,12 @@ mode "resize" {
 bindsym $super+r mode "resize"
 
 # colour of border, background, text, indicator, and child_border
-client.focused       = #5C6A72 #A7C080 #7A8478 #7A8478  #F85552
-client.focused_inactive = #3D484D #A7C080 #3D484D #3D484D #3D484D
-client.unfocused     = #3D484D #A7C080 #7A8478 #3D484D #3D484D
-client.urgent        = #F85552 #A7C080 #7A8478 #E67E80 #5C6A72
-client.placeholder   = #3D484D #A7C080 #7A8478 #3D484D #3D484D
-client.background    = #2B3339
+client.focused       = #484E54 #9CA4A8 #6C7278 #6C7278 #3C4448
+client.focused_inactive = #2C3338 #9CA4A8 #2C3338 #2C3338 #2C3338
+client.unfocused     = #2C3338 #9CA4A8 #6C7278 #2C3338 #2C3338
+client.urgent        = #3C4448 #9CA4A8 #6C7278 #3C4448 #484E54
+client.placeholder   = #2C3338 #9CA4A8 #6C7278 #2C3338 #2C3338
+client.background    = #121416
 
 # window rules, you can find the window class using xprop
 assign [class="Alacritty"] → $ws1

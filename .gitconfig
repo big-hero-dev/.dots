@@ -2,43 +2,61 @@
 	excludesfile = ~/.gitignore
 	editor = nvim
 [push]
-  default = simple
+	default = simple
 [color]
-  status = auto
-  diff = auto
-  branch = auto
-  interactive = auto
-  grep = auto
-  ui = auto
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto
+	grep = auto
+	ui = auto
 [alias]
-  dot = "!git --git-dir=$HOME/.dots --work-tree=$HOME"
-  a = "!git status --short | peco | awk '{print $2}' | xargs git add"
-  d = diff
-  cl = clone
-  co = checkout
-  ci = commit
-  ca = commit -a
-  ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
-  pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
-  st = status
-  br = branch
-  ba = branch -a
-  bm = branch --merged
-  bn = branch --no-merged
-  df = "!git hist | peco | awk '{print $2}' | xargs -I {} git diff {}^ {}"
-  hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all
-  llog = log --graph --name-status --pretty=format:\"%C(red)%h %C(reset)(%cd) %C(green)%an %Creset%s %C(yellow)%d%Creset\" --date=relative
-  type = cat-file -t
-  dump = cat-file -p
-  find = "!f() { git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative -S'pretty' -S\"$@\" | peco | awk '{print $1}' | xargs -I {} git diff {}^ {}; }; f"
-  # edit conflicted file on merge
-  edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
-  # add conflicted file on merge
-  add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+	dot = "!git --git-dir=$HOME/.dots --work-tree=$HOME"
+	aa = add -A .
+	amend = commit --amend -m
+	ba = branch -a
+	bm = branch --merged
+	bn = branch --no-merged
+	br = branch
+	brd = branch -d
+	ca = commit -a
+	cl = clone
+	cm = commit -m
+	co = checkout
+	cob = checkout -b
+	coo = !git fetch && git checkout
+	cp = cherry-pick
+	d = diff
+	df = "!git hist | peco | awk '{print $2}' | xargs -I {} git diff {}^ {}"
+	dump = cat-file -p
+	find = "!f() { git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative -S'pretty' -S\"$@\" | peco | awk '{print $1}' | xargs -I {} git diff {}^ {}; }; f"
+	fush = push -f
+	fix = commit --fixup
+	hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all
+	llog = log --graph --name-status --pretty=format:\"%C(red)%h %C(reset)(%cd) %C(green)%an %Creset%s %C(yellow)%d%Creset\" --date=relative
+	pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
+	ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
+	undo = reset HEAD~1
+	st = status
+	rv = revert
+	rb = rebase
+	rbc = rebase --continue
+	rba = rebase --abort
+	rb = rebase --skip
+	rl = reflog
+	mg = merge --no-ff
+	save = stash push
+	pop = stash pop
+	apply = stash apply
+	type = cat-file -t
+	# edit conflicted file on merge
+	edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+	# add conflicted file on merge
+	add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
 [difftool]
-    prompt = true
+	prompt = true
 [diff]
-  tool = vimdiff
+	tool = vimdiff
 [difftool "nvimdiff"]
 	cmd = vim -d \"$LOCAL\" \"$REMOTE\"
 	path =
@@ -54,8 +72,8 @@
 [status]
 	showUntrackedFiles = no
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !/usr/bin/gh auth git-credential
