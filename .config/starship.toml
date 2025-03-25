@@ -37,7 +37,7 @@ $line_break\
 $character\
 """
 
-palette = 'gruvbox_dark'
+palette = 'eink_dark'
 
 [palettes.default]
 
@@ -64,55 +64,27 @@ color_vimcmd_ok = 'green'
 color_vimcmd_replace = 'purple'
 color_vimcmd_visual = 'yellow'
 
-[palettes.gruvbox_dark]
-
-color_ok = '#b8bb26'
-color_danger = '#fb4934'
-color_caution = '#d79921'
-
-color_os = '#d65d0e'
-color_username = '#d65d0e'
-color_directory = '#d79921'
-color_git = '#689d6a'
-color_git_added = '#b8bb26'
-color_git_deleted = '#fb4934'
-color_env = '#458588'
-color_kubernetes = '#b16286'
-color_docker = '#458588'
-color_shell = '#a89984'
-color_container = '#cc241d'
-color_other = '#d5c4a1'
-color_time = '#fbf1c7'
-color_duration = '#fbf1c7'
-
-color_vimcmd_ok = '#8ec07c'
-color_vimcmd_replace = '#b16286'
-color_vimcmd_visual = '#d79921'
-
-[palettes.gruvbox_light]
-
-color_ok = '#79740e'
-color_danger = '#9d0006'
-color_caution = '#d79921'
-
-color_os = '#d65d0e'
-color_username = '#d65d0e'
-color_directory = '#d79921'
-color_git = '#689d6a'
-color_git_added = '#79740e'
-color_git_deleted = '#9d0006'
-color_env = '#458588'
-color_kubernetes = '#b16286'
-color_docker = '#458588'
-color_shell = '#7c6f64'
-color_container = '#cc241d'
-color_other = '#504945'
-color_time = '#282828'
-color_duration = '#282828'
-
-color_vimcmd_ok = '#689d6a'
-color_vimcmd_replace = '#b16286'
-color_vimcmd_visual = '#d79921'
+[palettes.eink_dark]
+color_ok = '#F0F0F0'       # Light gray for positive/success states
+color_danger = '#404040'   # Dark gray for danger/error states
+color_caution = '#808080'  # Medium gray for warning/caution
+color_os = '#606060'       # Muted gray for OS-related elements
+color_username = '#707070' # Slightly lighter gray for username
+color_directory = '#909090' # Lighter gray for directories
+color_git = '#505050'      # Dark gray for git-related elements
+color_git_added = '#A0A0A0' # Light gray for added git elements
+color_git_deleted = '#303030' # Very dark gray for deleted git elements
+color_env = '#707070'      # Muted gray for environment
+color_kubernetes = '#606060' # Dark gray for Kubernetes
+color_docker = '#808080'   # Medium gray for Docker
+color_shell = '#909090'    # Lighter gray for shell
+color_container = '#404040' # Dark gray for containers
+color_other = '#B0B0B0'    # Very light gray for other elements
+color_time = '#F0F0F0'     # Light gray for time
+color_duration = '#E0E0E0' # Slightly darker light gray for duration
+color_vimcmd_ok = '#A0A0A0'    # Light gray for successful Vim commands
+color_vimcmd_replace = '#707070' # Muted gray for replace mode
+color_vimcmd_visual = '#808080' # Medium gray for visual mode
 
 [os]
 disabled = false
