@@ -435,7 +435,6 @@ later(function()
 				{ name = "codeium" },
 				{ name = "buffer" },
 				{ name = "path" },
-				{ name = "tabnine" },
 				{ name = "emmet_vim" },
 			}),
 			enabled = function()

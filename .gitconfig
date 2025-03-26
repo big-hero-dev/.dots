@@ -22,6 +22,7 @@
 	ca = commit -a
 	cl = clone
 	cm = commit -m
+	ci = commit
 	co = checkout
 	cob = checkout -b
 	coo = !git fetch && git checkout
@@ -30,7 +31,7 @@
 	df = "!git hist | peco | awk '{print $2}' | xargs -I {} git diff {}^ {}"
 	dump = cat-file -p
 	find = "!f() { git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative -S'pretty' -S\"$@\" | peco | awk '{print $1}' | xargs -I {} git diff {}^ {}; }; f"
-	fush = push -f
+	fush = "!git push origin $(git rev-parse --abbrev-ref HEAD) -f"
 	fix = commit --fixup
 	hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all
 	llog = log --graph --name-status --pretty=format:\"%C(red)%h %C(reset)(%cd) %C(green)%an %Creset%s %C(yellow)%d%Creset\" --date=relative
