@@ -1,26 +1,42 @@
 #!/bin/bash
 
-# Đường dẫn đến video của bạn
-VIDEO_PATH="$HOME/userConfig/videos/Wake the F Up Samura.mp4"
+# Path to the video file
+VIDEO_PATH="$HOME/userConfig/videos/Wake the F Up Samurai.mp4"
 
-# Kiểm tra xem file video có tồn tại không
+# Check if the video file exists
 if [ ! -f "$VIDEO_PATH" ]; then
-    echo "Không tìm thấy file video tại $VIDEO_PATH"
+    notify-send "System Error" "Video file not found at $VIDEO_PATH" -u critical
     exit 1
 fi
 
-# Đợi PipeWire khởi động và chọn đầu ra tai nghe
-sleep 10  # Tăng thời gian chờ để PipeWire sẵn sàng
+# Display Cyberpunk 2077-style system boot notifications
+notify-send "NETRUNNER OS v7.7" "BOOT SEQUENCE INITIATED" -u normal -t 2000
+sleep 2
+notify-send "System" "> Initializing hardware... [OK]" -u low -t 2000
+sleep 2
+notify-send "System" "> Loading cyberware drivers... [OK]" -u low -t 2000
+sleep 2
+notify-send "Night City Grid" "> Connecting to Night City grid... [SECURE]" -u normal -t 2000
+sleep 2
+notify-send "Johnny Silverhand" "> Wake the f*** up, Samurai. We have a city to burn." -u critical -t 3000
 
-# Lấy tên sink của tai nghe (thay đổi theo hệ thống của bạn)
-AUDIO_SINK=$(pactl list short sinks | grep -i "headphones" | awk '{print $2}')
+# Wait for PipeWire to initialize and detect audio devices
+sleep 3  # Extended delay to ensure PipeWire is ready
 
-# Đặt đầu ra âm thanh cho tai nghe (nếu tìm thấy)
+# Get the sink name for USB headphones
+AUDIO_SINK=$(pactl list short sinks | grep -i "usb" | awk '{print $2}')
+
+# Set the USB headphone sink as default if found
 if [ -n "$AUDIO_SINK" ]; then
     pactl set-default-sink "$AUDIO_SINK"
+    notify-send "Audio System" "> Audio output rerouted to USB cyber-enhanced headphones... [OK]" -u normal -t 2000
+else
+    notify-send "Audio Warning" "> No USB headphones detected. Default sink unchanged." -u normal -t 2000
 fi
 
-# Chạy video bằng cvlc
+
+# Launch VLC with software rendering, specific size, and wait for it to finish
+notify-send "System" "> Video feed engaged. System online." -u normal -t 2000
 cvlc --no-video-title-show "$VIDEO_PATH" &
 
 exit 0
