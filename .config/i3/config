@@ -148,4 +148,4 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id fastcompmgr -o 0.4 -r 12 -c -C
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id $terminal -e tmux
-exec --no-startup-id bash -c "sleep 2 && $HOME/.local/share/bin/welcome"
+exec --no-startup-id bash -c "sleep 2 && $HOME/userConfig/videos/startup_video.sh"
