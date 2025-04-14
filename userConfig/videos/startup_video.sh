@@ -18,7 +18,6 @@ notify-send "System" "> Loading cyberware drivers... [OK]" -u low -t 2000
 sleep 2
 notify-send "Night City Grid" "> Connecting to Night City grid... [SECURE]" -u normal -t 2000
 sleep 2
-notify-send "Johnny Silverhand" "> Wake the f*** up, Samurai. We have a city to burn." -u critical -t 3000
 
 # Wait for PipeWire to initialize and detect audio devices
 sleep 3  # Extended delay to ensure PipeWire is ready
