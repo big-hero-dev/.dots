@@ -321,6 +321,9 @@ now(function()
 		add({ source = "folke/trouble.nvim" })
 		require("trouble").setup()
 
+		add({ source = "sphamba/smear-cursor.nvim" })
+		require("smear_cursor").setup()
+
 		-- Configure LSP servers
 		local lspconfig = require("lspconfig")
 		local servers = require("mason-lspconfig").get_installed_servers()
