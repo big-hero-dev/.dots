@@ -36,6 +36,8 @@ _Note :wrench: I use colemak-dh keyboard layout_
 - Font Awesome 6 Pro
 - Noto fonts emoji
 - Hack Nerd Font
+- Playfair
+- Space Mono
 
 ### Devtool
 
