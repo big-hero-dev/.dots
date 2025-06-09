@@ -166,6 +166,10 @@ now(function()
 		{ source = "lewis6991/gitsigns.nvim" },
 		{ source = "mbbill/undotree" },
 		{ source = "nvim-tree/nvim-web-devicons" },
+		{
+			source = "m4xshen/hardtime.nvim",
+			depends = { "MunifTanjim/nui.nvim" },
+		},
 		-- LSP setup
 		{
 			source = "neovim/nvim-lspconfig",
@@ -180,6 +184,9 @@ now(function()
 
 	-- Apply theme
 	vim.cmd.colorscheme("e-ink")
+
+	-- Hardtime setup
+	require("hardtime").setup()
 
 	-- Configure gitsigns
 	require("gitsigns").setup({ current_line_blame = true })
