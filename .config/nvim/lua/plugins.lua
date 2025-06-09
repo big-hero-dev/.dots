@@ -170,6 +170,7 @@ now(function()
 			source = "m4xshen/hardtime.nvim",
 			depends = { "MunifTanjim/nui.nvim" },
 		},
+		{ source = "folke/zen-mode.nvim" },
 		-- LSP setup
 		{
 			source = "neovim/nvim-lspconfig",
@@ -684,6 +685,15 @@ local function setup_keymaps()
 				require("namu.namu_symbols").show()
 			end,
 			desc = "Jump to LSP symbol",
+		},
+		-- Toggle Zen Mode
+		{
+			mode = "n",
+			key = "<Leader>zz",
+			fn = function()
+				require("zen-mode").toggle()
+			end,
+			desc = "Toggle Zen Mode",
 		},
 	}
 
