@@ -2,7 +2,7 @@
 
 # : Manager {{{
 
-[manager]
+[mgr]
 folder_offset  = [ 1, 0, 0, 0 ]
 preview_offset = [ 1, 1, 0, 1 ]
 ueberzug_offset= [ 1, 1, 0, 1 ]
