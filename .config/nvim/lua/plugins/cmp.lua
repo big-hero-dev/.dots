@@ -83,6 +83,9 @@ later(function()
 			{ name = "emmet_vim" },
 		}),
 		enabled = function()
+			if vim.bo.filetype == "minifiles" then
+				return false
+			end
 			return vim.bo.filetype ~= "scss" or vim.fn.getline("."):match("%$") == nil
 		end,
 		window = {
