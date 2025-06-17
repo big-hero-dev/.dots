@@ -14,6 +14,7 @@ add({
 		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
 		"windwp/nvim-ts-autotag",
 	},
+	event = { "BufReadPost", "BufNewFile" },
 })
 
 require("nvim-treesitter.configs").setup({
