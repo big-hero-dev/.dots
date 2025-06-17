@@ -122,7 +122,27 @@ opt.showtabline = 2
 opt.completeopt = { "menu", "menuone", "noselect" }
 
 vim.diagnostic.config({
-	virtual_lines = true,
 	virtual_text = false,
-	severity_sort = true,
+	virtual_lines = false,
+	float = {
+		border = "single",
+	},
+	underline = true,
+	jump = {
+		float = true,
+	},
+})
+
+vim.api.nvim_create_autocmd("CursorHold", {
+	buffer = bufnr,
+	callback = function()
+		local opts = {
+			focusable = false,
+			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+			source = "always",
+			prefix = " ",
+			scope = "cursor",
+		}
+		vim.diagnostic.open_float(nil, opts)
+	end,
 })

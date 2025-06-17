@@ -1,0 +1,49 @@
+local MiniDeps = require("mini.deps")
+local add = MiniDeps.add
+
+add({
+	source = "nvim-treesitter/nvim-treesitter",
+	checkout = "master",
+	monitor = "main",
+	hooks = {
+		post_checkout = function()
+			vim.Cmd("TSUpdate")
+		end,
+	},
+	depends = {
+		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+		"windwp/nvim-ts-autotag",
+	},
+})
+
+require("nvim-treesitter.configs").setup({
+	ensure_installed = {
+		"html",
+		"javascript",
+		"typescript",
+		"lua",
+		"css",
+		"php",
+		"jsdoc",
+		"json",
+		"tsx",
+		"markdown",
+		"markdown_inline",
+		"vim",
+		"bash",
+		"prisma",
+		"regex",
+		"java",
+		"xml",
+		"http",
+		"graphql",
+		"vimdoc",
+	},
+	auto_install = true,
+	highlight = { enable = true },
+	rainbow = { enable = true, disable = { "html" } },
+	autotag = { enable = true },
+	incremental_selection = { enable = true },
+	indent = { enable = true, disable = { "yaml" } },
+	ignore_install = { "help" },
+})
