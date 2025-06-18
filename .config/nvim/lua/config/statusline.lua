@@ -87,18 +87,15 @@ vim.lsp.handlers["$/progress"] = function(_, result, ctx)
 	if not client then
 		return
 	end
-
 	local value = result.value
 	if not value then
 		return
 	end
-
 	lsp_progress.client = client.name
 	lsp_progress.kind = value.kind
 	lsp_progress.title = value.title or ""
 	lsp_progress.percentage = value.percentage
 	lsp_progress.message = value.message
-
 	vim.cmd("redrawstatus")
 end
 
@@ -108,35 +105,30 @@ local function git_info()
 	if branch == "" then
 		return ""
 	end
-	return string.format("%%#Normal#  %s %%*", branch)
+	return string.format("%%#Normal#  %s %%*", branch)
 end
 
 local function git_diff()
 	local added = get_git_diff("added")
 	local changed = get_git_diff("changed")
 	local removed = get_git_diff("removed")
-
 	local parts = {}
-
 	if added ~= "" and added ~= "0" then
 		table.insert(parts, string.format("%%#diffAdded#+%s%%*", added))
 	end
-
 	if changed ~= "" and changed ~= "0" then
 		table.insert(parts, string.format("%%#diffChanged#~%s%%*", changed))
 	end
-
 	if removed ~= "" and removed ~= "0" then
 		table.insert(parts, string.format("%%#diffRemoved#-%s%%*", removed))
 	end
-
 	return table.concat(parts, " ")
 end
 
 -- File info
 local function file_percentage()
 	return string.format(
-		"%%#Normal#  %d%%%% %%*",
+		"%%#Normal#  %d%%%% %%*",
 		math.ceil(vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0) * 100)
 	)
 end
@@ -146,7 +138,7 @@ local function total_lines()
 end
 
 local function readonly_indicator()
-	return vim.bo.readonly and " " or ""
+	return vim.bo.readonly and " " or ""
 end
 
 local function keyboard_layout()
@@ -172,6 +164,15 @@ StatusLine.active = function()
 		" %3l:%-2c",
 		file_percentage(),
 		total_lines(),
+	})
+end
+
+-- THÊM FUNCTION INACTIVE BỊ THIẾU
+StatusLine.inactive = function()
+	return table.concat({
+		"%%#StatusLineNC# %t %%*", -- Chỉ hiển thị tên file với highlight inactive
+		"%=",
+		"%%#StatusLineNC# %3l:%-2c %%*", -- Position info
 	})
 end
 

@@ -108,7 +108,7 @@ local keymaps = {
 	{ mode = "n", key = "<Leader>o", fn = "<Cmd>Pick oldfiles<CR>", desc = "Pick Old Files" },
 	{ mode = "n", key = "<Leader>b", fn = "<Cmd>Pick buffers<CR>", desc = "Pick Buffers" },
 	{ mode = "n", key = "<Leader>h", fn = "<Cmd>Pick help<CR>", desc = "Pick Help" },
-	{ mode = "n", key = "<Leader>dg", fn = "<Cmd>Pick diagnostic<CR>", desc = "Pick Diagnostic" },
+	{ mode = "n", key = "<Leader>pd", fn = "<Cmd>Pick diagnostic<CR>", desc = "Pick Diagnostic" },
 	{ mode = "n", key = "<Leader>H", fn = "<Cmd>Pick hl_groups<CR>", desc = "Highlight" },
 
 	-- Utilities

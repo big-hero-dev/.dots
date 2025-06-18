@@ -1,44 +1,36 @@
 local MiniDeps = require("mini.deps")
 local add = MiniDeps.add
-
 add({ source = "neovim/nvim-lspconfig" })
 
-local lsp_path = vim.fn.stdpath("config") .. "/lua/lsp"
-local lsp_servers = vim.fn.glob(lsp_path .. "/*.lua", false, true)
-
 local function on_attach(_, bufnr)
-	local map = function(keys, func, desc)
-		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+	local map = function(key, func, desc)
+		vim.keymap.set("n", key, func, { buffer = bufnr, desc = desc, silent = true })
 	end
 
-	map("gd", vim.lsp.buf.definition, "[G]o to [D]efinition")
-	map("gD", vim.lsp.buf.declaration, "[G]o to [D]eclaration")
-	map("gr", vim.lsp.buf.references, "[G]o to [R]eferences")
-	map("gi", vim.lsp.buf.implementation, "[G]o to [I]mplementation")
-
+	map("gd", vim.lsp.buf.definition, "Go to Definition")
+	map("gD", vim.lsp.buf.declaration, "Go to Declaration")
+	map("gr", vim.lsp.buf.references, "Go to References")
+	map("gi", vim.lsp.buf.implementation, "Go to Implementation")
 	map("K", function()
 		vim.lsp.buf.hover({ border = "single" })
 	end, "Hover Documentation")
 	map("<C-k>", function()
 		vim.lsp.buf.signature_help({ border = "single" })
 	end, "Signature Help")
-
-	map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-	map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+	map("<leader>rn", vim.lsp.buf.rename, "Rename")
+	map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 end
 
-for _, file in ipairs(lsp_servers) do
-	local module_name = file
-		:gsub(vim.fn.stdpath("config") .. "/lua/", "") -- remove leading path
-		:gsub("%.lua$", "") -- remove extension
-		:gsub("/", ".") -- convert to module path
-	local server_name = module_name:match("lsp%.(.+)$") -- extract server name, e.g., "lua_ls"
-	local ok, config = pcall(require, module_name)
+-- Auto-load LSP servers from lua/lsp/*.lua
+local lsp_path = vim.fn.stdpath("config") .. "/lua/lsp"
+local lsp_files = vim.fn.glob(lsp_path .. "/*.lua", false, true)
+
+for _, file in ipairs(lsp_files) do
+	local server_name = vim.fn.fnamemodify(file, ":t:r")
+	local ok, config = pcall(require, "lsp." .. server_name)
+
 	if ok then
-		config.capabilities = config.capabilities or vim.lsp.protocol.make_client_capabilities()
 		config.on_attach = on_attach
 		require("lspconfig")[server_name].setup(config)
-	else
-		vim.notify("Error: Failed to load LSP config for " .. server_name, vim.log.levels.ERROR)
 	end
 end
