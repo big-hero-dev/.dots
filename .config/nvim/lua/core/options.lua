@@ -111,6 +111,16 @@ vim.diagnostic.config({
 	jump = {
 		float = true,
 	},
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "e",
+			[vim.diagnostic.severity.WARN] = "w",
+			[vim.diagnostic.severity.INFO] = "i",
+			[vim.diagnostic.severity.HINT] = "h",
+		},
+	},
+	update_in_insert = false,
+	severity_sort = true,
 })
 
 vim.cmd("syntax enable")

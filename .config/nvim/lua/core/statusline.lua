@@ -52,15 +52,15 @@ end
 
 local function diagnostics(severity, hl, symbol)
 	local count = get_lsp_diagnostics_count(severity)
-	return count > 0 and string.format("%%#%s# %s %s%%*", hl, symbol, count) or ""
+	return count > 0 and string.format("%%#%s# %s%s%%*", hl, count, symbol) or ""
 end
 
 local function diagnostics_display()
 	return table.concat({
-		diagnostics(vim.diagnostic.severity.ERROR, "DiagnosticError", ""),
-		diagnostics(vim.diagnostic.severity.WARN, "DiagnosticWarn", ""),
-		diagnostics(vim.diagnostic.severity.INFO, "DiagnosticInfo", ""),
-		diagnostics(vim.diagnostic.severity.HINT, "DiagnosticHint", ""),
+		diagnostics(vim.diagnostic.severity.ERROR, "DiagnosticError", "e"),
+		diagnostics(vim.diagnostic.severity.WARN, "DiagnosticWarn", "w"),
+		diagnostics(vim.diagnostic.severity.INFO, "DiagnosticInfo", "i"),
+		diagnostics(vim.diagnostic.severity.HINT, "DiagnosticHint", "h"),
 	}, " ")
 end
 

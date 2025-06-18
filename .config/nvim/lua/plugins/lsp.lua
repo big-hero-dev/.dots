@@ -1,64 +1,3 @@
--- Diagnostics {{{
-local config = vim.tbl_extend("force", {
-	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = "",
-			[vim.diagnostic.severity.WARN] = "",
-			[vim.diagnostic.severity.HINT] = "",
-			[vim.diagnostic.severity.INFO] = "",
-		},
-	},
-}, {
-	update_in_insert = true,
-	underline = true,
-	severity_sort = true,
-	float = {
-		focusable = false,
-		style = "minimal",
-		border = "single",
-		source = "always",
-		header = "",
-		prefix = "",
-	},
-})
-
-vim.diagnostic.config(config)
--- }}}
-
--- Improve LSPs UI {{{
-local icons = {
-	Class = " ",
-	Color = " ",
-	Constant = " ",
-	Constructor = " ",
-	Enum = " ",
-	EnumMember = " ",
-	Event = " ",
-	Field = " ",
-	File = " ",
-	Folder = " ",
-	Function = "󰊕 ",
-	Interface = " ",
-	Keyword = " ",
-	Method = "ƒ ",
-	Module = "󰏗 ",
-	Property = " ",
-	Snippet = " ",
-	Struct = " ",
-	Text = " ",
-	Unit = " ",
-	Value = " ",
-	Variable = " ",
-}
-
-local completion_kinds = vim.lsp.protocol.CompletionItemKind
-for i, kind in ipairs(completion_kinds) do
-	completion_kinds[i] = icons[kind] and icons[kind] .. kind or kind
-end
--- }}}
-
--- Lsp capabilities and on_attach {{{
--- Here we grab default Neovim capabilities and extend them with ones we want on top
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities.textDocument.foldingRange = {
@@ -71,22 +10,27 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 vim.lsp.config("*", {
 	capabilities = capabilities,
-	on_attach = function(client, bufnr)
-		local ok, diag = pcall(require, "rj.extras.workspace-diagnostic")
-		if ok then
-			diag.populate_workspace_diagnostics(client, bufnr)
-		end
+	on_attach = function(_, bufnr)
+		vim.api.nvim_create_autocmd("CursorHold", {
+			buffer = bufnr,
+			callback = function()
+				local opts = {
+					focusable = false,
+					close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+					source = false,
+					prefix = " ",
+					scope = "cursor",
+				}
+				vim.diagnostic.open_float(nil, opts)
+			end,
+		})
 	end,
 })
--- }}}
 
--- Disable the default keybinds {{{
 for _, bind in ipairs({ "grn", "gra", "gri", "grr" }) do
 	pcall(vim.keymap.del, "n", bind)
 end
--- }}}
 
--- Create keybindings, commands, inlay hints and autocommands on LSP attach {{{
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local bufnr = ev.buf
@@ -114,6 +58,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		---@diagnostic disable-next-line need-check-nil
 		client.server_capabilities.semanticTokensProvider = nil
 
+
 		-- All the keymaps
 		-- stylua: ignore start
 		local keymap = vim.keymap.set
@@ -123,16 +68,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			return vim.tbl_extend("force", opts, { desc = desc }, others or {})
 		end
 		keymap("n", "gd", lsp.buf.definition, opt("Go to definition"))
-		keymap("n", "gD", function()
-			local ok, diag = pcall(require, "rj.extras.definition")
-			if ok then
-				diag.get_def()
-			end
-		end, opt("Get the definition in a float"))
+		keymap("n", "gD", lsp.buf.type_definition, opt("Go to type definition"))
 		keymap("n", "gi", function() lsp.buf.implementation({ border = "single" }) end, opt("Go to implementation"))
 		keymap("n", "gr", lsp.buf.references, opt("Show References"))
 		keymap("n", "gl", vim.diagnostic.open_float, opt("Open diagnostic in float"))
-		keymap("n", "<C-k>", lsp.buf.signature_help, opts)
+		keymap("n", "<C-k>", function() lsp.buf.signature_help({border="single"}) end, opts)
 		-- disable the default binding first before using a custom one
 		pcall(vim.keymap.del, "n", "K", { buffer = ev.buf })
 		keymap("n", "K", function() lsp.buf.hover({ border = "single", max_height = 30, max_width = 120 }) end,
@@ -145,15 +85,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		keymap("n", "<Leader>lr", lsp.buf.rename, opt("Rename"))
 
 		-- diagnostic mappings
-		keymap("n", "<Leader>dD", function()
-			local ok, diag = pcall(require, "rj.extras.workspace-diagnostic")
-			if ok then
-				for _, cur_client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-					diag.populate_workspace_diagnostics(cur_client, 0)
-				end
-				vim.notify("INFO: Diagnostic populated")
-			end
-		end, opt("Popluate diagnostic for the whole workspace"))
 		keymap("n", "<Leader>dn", function() vim.diagnostic.jump({ count = 1, float = true }) end, opt("Next Diagnostic"))
 		keymap("n", "<Leader>dp", function() vim.diagnostic.jump({ count = -1, float = true }) end, opt("Prev Diagnostic"))
 		keymap("n", "<Leader>dq", vim.diagnostic.setloclist, opt("Set LocList"))
@@ -163,11 +94,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- stylua: ignore end
 	end,
 })
--- }}}
 
--- Servers {{{
-
--- Lua {{{
 vim.lsp.config.lua_ls = {
 	cmd = { "lua-language-server" },
 	filetypes = { "lua" },
@@ -209,63 +136,7 @@ vim.lsp.config.lua_ls = {
 	},
 }
 vim.lsp.enable("lua_ls")
--- }}}
 
--- Python {{{
-vim.lsp.config.basedpyright = {
-	name = "basedpyright",
-	filetypes = { "python" },
-	cmd = { "basedpyright-langserver", "--stdio" },
-	settings = {
-		python = {
-			venvPath = vim.fn.expand("~") .. "/.virtualenvs",
-		},
-		basedpyright = {
-			disableOrganizeImports = true,
-			analysis = {
-				autoSearchPaths = true,
-				autoImportCompletions = true,
-				useLibraryCodeForTypes = true,
-				diagnosticMode = "openFilesOnly",
-				typeCheckingMode = "strict",
-				inlayHints = {
-					variableTypes = true,
-					callArgumentNames = true,
-					functionReturnTypes = true,
-					genericTypes = false,
-				},
-			},
-		},
-	},
-}
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "python",
-	callback = function()
-		local ok, venv = pcall(require, "rj.extras.venv")
-		if ok then
-			venv.setup()
-		end
-		local root = vim.fs.root(0, {
-			"pyproject.toml",
-			"setup.py",
-			"setup.cfg",
-			"requirements.txt",
-			"Pipfile",
-			"pyrightconfig.json",
-			".git",
-			vim.uv.cwd(),
-		})
-		local client =
-			vim.lsp.start(vim.tbl_extend("force", vim.lsp.config.basedpyright, { root_dir = root }), { attach = false })
-		if client then
-			vim.lsp.buf_attach_client(0, client)
-		end
-	end,
-})
--- }}}
-
--- Go {{{
 vim.lsp.config.gopls = {
 	cmd = { "gopls" },
 	filetypes = { "go", "gotempl", "gowork", "gomod" },
@@ -287,9 +158,7 @@ vim.lsp.config.gopls = {
 	},
 }
 vim.lsp.enable("gopls")
--- }}}
 
--- C/C++ {{{
 vim.lsp.config.clangd = {
 	cmd = {
 		"clangd",
@@ -318,9 +187,7 @@ vim.lsp.config.clangd = {
 	},
 }
 vim.lsp.enable("clangd")
--- }}}
 
--- Rust {{{
 vim.lsp.config.rust_analyzer = {
 	filetypes = { "rust" },
 	cmd = { "rust-analyzer" },
@@ -349,9 +216,7 @@ vim.lsp.config.rust_analyzer = {
 	},
 }
 vim.lsp.enable("rust_analyzer")
--- }}}
 
--- Typst {{{
 vim.lsp.config.tinymist = {
 	cmd = { "tinymist" },
 	filetypes = { "typst" },
@@ -359,9 +224,7 @@ vim.lsp.config.tinymist = {
 }
 
 vim.lsp.enable("tinymist")
--- }}}
 
--- Bash {{{
 vim.lsp.config.bashls = {
 	cmd = { "bash-language-server", "start" },
 	filetypes = { "bash", "sh", "zsh" },
@@ -373,10 +236,7 @@ vim.lsp.config.bashls = {
 	},
 }
 vim.lsp.enable("bashls")
--- }}}
 
--- Web-dev {{{
--- TSServer {{{
 vim.lsp.config.ts_ls = {
 	cmd = { "typescript-language-server", "--stdio" },
 	filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
@@ -396,9 +256,7 @@ vim.lsp.config.ts_ls = {
 		},
 	},
 }
--- }}}
 
--- CSSls {{{
 vim.lsp.config.cssls = {
 	cmd = { "vscode-css-language-server", "--stdio" },
 	filetypes = { "css", "scss" },
@@ -407,9 +265,7 @@ vim.lsp.config.cssls = {
 		provideFormatter = true,
 	},
 }
--- }}}
 
--- TailwindCss {{{
 vim.lsp.config.tailwindcssls = {
 	cmd = { "tailwindcss-language-server", "--stdio" },
 	filetypes = {
@@ -456,9 +312,7 @@ vim.lsp.config.tailwindcssls = {
 		},
 	},
 }
--- }}}
 
--- HTML {{{
 vim.lsp.config.htmlls = {
 	cmd = { "vscode-html-language-server", "--stdio" },
 	filetypes = { "html" },
@@ -473,15 +327,9 @@ vim.lsp.config.htmlls = {
 		provideFormatter = true,
 	},
 }
--- }}}
 
 vim.lsp.enable({ "ts_ls", "cssls", "tailwindcssls", "htmlls" })
 
--- }}}
-
--- }}}
-
--- Start, Stop, Restart, Log commands {{{
 vim.api.nvim_create_user_command("LspStart", function()
 	vim.cmd.e()
 end, { desc = "Starts LSP clients in the current buffer" })
