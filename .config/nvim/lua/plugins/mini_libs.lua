@@ -1,3 +1,6 @@
+local MiniDeps = require("mini.deps")
+local later = MiniDeps.later
+
 local mini_basic_plugins = {
 	notify = { config = {} },
 	tabline = { config = {} },
@@ -51,9 +54,11 @@ local mini_basic_plugins = {
 	},
 }
 
-for plugin, options in pairs(mini_basic_plugins) do
-	require("mini." .. plugin).setup(options.config)
-end
+later(function()
+	for plugin, options in pairs(mini_basic_plugins) do
+		require("mini." .. plugin).setup(options.config)
+	end
+end)
 
 local miniclue = require("mini.clue")
 

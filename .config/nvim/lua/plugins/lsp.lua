@@ -1,5 +1,5 @@
 -- Diagnostics {{{
-local config = {
+local config = vim.tbl_extend("force", {
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = "",
@@ -8,6 +8,7 @@ local config = {
 			[vim.diagnostic.severity.INFO] = "",
 		},
 	},
+}, {
 	update_in_insert = true,
 	underline = true,
 	severity_sort = true,
@@ -18,9 +19,9 @@ local config = {
 		source = "always",
 		header = "",
 		prefix = "",
-		suffix = "",
 	},
-}
+})
+
 vim.diagnostic.config(config)
 -- }}}
 
