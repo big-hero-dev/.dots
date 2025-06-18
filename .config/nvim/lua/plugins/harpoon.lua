@@ -8,21 +8,21 @@ harpoon.setup()
 
 local mappings = {
 	{
-		key = "<Leader>pa",
+		key = "<Leader>ma",
 		fn = function()
 			harpoon:list():add()
 		end,
 		desc = "Add to quick menu",
 	},
 	{
-		key = "<Leader>pm",
+		key = "<Leader>mm",
 		fn = function()
 			harpoon.ui:toggle_quick_menu(harpoon:list())
 		end,
 		desc = "Toggle quick menu",
 	},
 	{
-		key = "<Leader>pn",
+		key = "<Leader>mn",
 		fn = function()
 			harpoon:list():select(1)
 		end,

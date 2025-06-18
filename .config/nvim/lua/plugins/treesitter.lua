@@ -7,7 +7,9 @@ add({
 	monitor = "main",
 	hooks = {
 		post_checkout = function()
-			vim.Cmd("TSUpdate")
+			vim.schedule(function()
+				vim.cmd("TSUpdate")
+			end)
 		end,
 	},
 	depends = {
@@ -46,5 +48,4 @@ require("nvim-treesitter.configs").setup({
 	autotag = { enable = true },
 	incremental_selection = { enable = true },
 	indent = { enable = true, disable = { "yaml" } },
-	ignore_install = { "help" },
 })

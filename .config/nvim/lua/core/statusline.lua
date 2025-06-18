@@ -1,18 +1,21 @@
 ---@diagnostic disable: duplicate-set-field
 local statusline_augroup = vim.api.nvim_create_augroup("gmr_statusline", { clear = true })
 
+vim.api.nvim_set_hl(0, "SLGitBranch", { fg = "#fab387", bold = true })
+vim.api.nvim_set_hl(0, "SLGitDiffAdd", { fg = "#a6e3a1" })
+vim.api.nvim_set_hl(0, "SLGitDiffChange", { fg = "#f9e2af" })
+vim.api.nvim_set_hl(0, "SLGitDiffDelete", { fg = "#f38ba8" })
+
 -- Get LSP diagnostic count
 local function get_lsp_diagnostics_count(severity)
-	return vim.diagnostic.count(0, { severity = severity })[severity] or 0
+	local diagnostics = vim.diagnostic.get(0, { severity = severity })
+	return #diagnostics
 end
 
 -- Get git diff stats
 local function get_git_diff(type)
 	local git_status = vim.b.gitsigns_status_dict
-	if not git_status or not git_status[type] or git_status[type] == 0 then
-		return ""
-	end
-	return tostring(git_status[type])
+	return (git_status and git_status[type] and git_status[type] ~= 0) and tostring(git_status[type]) or ""
 end
 
 -- Mode mappings
@@ -49,15 +52,15 @@ end
 
 local function diagnostics(severity, hl, symbol)
 	local count = get_lsp_diagnostics_count(severity)
-	return count > 0 and string.format("%%#%s# %s%s%%*", hl, symbol, count) or ""
+	return count > 0 and string.format("%%#%s# %s %s%%*", hl, symbol, count) or ""
 end
 
 local function diagnostics_display()
 	return table.concat({
-		diagnostics(vim.diagnostic.severity.ERROR, "DiagnosticError", "E"),
-		diagnostics(vim.diagnostic.severity.WARN, "DiagnosticWarn", "W"),
-		diagnostics(vim.diagnostic.severity.INFO, "DiagnosticInfo", "I"),
-		diagnostics(vim.diagnostic.severity.HINT, "DiagnosticHint", "H"),
+		diagnostics(vim.diagnostic.severity.ERROR, "DiagnosticError", ""),
+		diagnostics(vim.diagnostic.severity.WARN, "DiagnosticWarn", ""),
+		diagnostics(vim.diagnostic.severity.INFO, "DiagnosticInfo", ""),
+		diagnostics(vim.diagnostic.severity.HINT, "DiagnosticHint", ""),
 	}, " ")
 end
 
@@ -167,13 +170,12 @@ StatusLine.active = function()
 	})
 end
 
--- THÊM FUNCTION INACTIVE BỊ THIẾU
 StatusLine.inactive = function()
-	return table.concat({
-		"%%#StatusLineNC# %t %%*", -- Chỉ hiển thị tên file với highlight inactive
-		"%=",
-		"%%#StatusLineNC# %3l:%-2c %%*", -- Position info
-	})
+	local ft = vim.bo.filetype or ""
+	if ft == "qf" then
+		return "%#StatusLineNC# [Quickfix List] %= %3l:%-2c %#Normal#"
+	end
+	return "%#StatusLineNC# %t %= %3l:%-2c %#Normal#"
 end
 
 vim.opt.statusline = "%!v:lua.StatusLine.active()"

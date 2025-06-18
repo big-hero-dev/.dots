@@ -2,13 +2,16 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- Basic editor behavior
 autocmd("InsertLeave", { pattern = "*", command = "set nopaste" })
-autocmd("BufWinEnter", {
+autocmd("BufWritePre", { pattern = "", command = ":%s/\\s\\+$//e" })
+
+autocmd("BufWritePre", {
+	pattern = "*",
 	callback = function()
-		vim.opt.formatoptions:remove({ "c", "r", "o" })
+		pcall(function()
+			vim.lsp.buf.format({ async = false })
+		end)
 	end,
 })
-autocmd("BufWritePre", { pattern = "", command = ":%s/\\s\\+$//e" })
-autocmd("BufWritePre", { pattern = "", command = ":silent lua vim.lsp.buf.format()" })
 
 -- File type specific settings
 autocmd("Filetype", {
@@ -27,7 +30,9 @@ autocmd("Filetype", {
 	end,
 })
 
--- UI enhancements
+-- ╭──────────────────────────────────────╮
+-- │ UI Enhancements                      │
+-- ╰──────────────────────────────────────╯
 autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 1000 })
@@ -60,7 +65,7 @@ autocmd("FileType", {
 		"",
 	},
 	callback = function()
-		vim.cmd("nnoremap <silent> <buffer> q :close<CR> | set nobuflisted")
+		vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = true, silent = true, desc = "Close special buffer" })
 	end,
 })
 
@@ -96,8 +101,44 @@ autocmd("DiagnosticChanged", {
 autocmd("CursorHold", {
 	callback = function()
 		local ok, luasnip = pcall(require, "luasnip")
-		if ok and luasnip.expand_or_jumpable() then
-			luasnip.unlink_current()
+		if ok and luasnip.in_snippet() and not luasnip.jumpable(1) then
+			pcall(luasnip.unlink_current)
 		end
+	end,
+})
+
+autocmd("FocusGained", {
+	callback = function()
+		vim.cmd("checktime")
+	end,
+})
+
+autocmd("BufWritePre", {
+	callback = function(args)
+		local dir = vim.fn.fnamemodify(args.file, ":p:h")
+		if vim.fn.isdirectory(dir) == 0 then
+			vim.fn.mkdir(dir, "p")
+		end
+	end,
+})
+
+autocmd("BufReadPre", {
+	pattern = "*",
+	callback = function()
+		local ok, stats = pcall(vim.loop.fs_stat, vim.fn.expand("%:p"))
+		if ok and stats and stats.size > 1000000 then -- > 1MB
+			vim.b.large_file = true
+			vim.opt_local.swapfile = false
+			vim.opt_local.undofile = false
+			vim.opt_local.syntax = "off"
+			vim.opt_local.foldmethod = "manual"
+		end
+	end,
+})
+
+autocmd("TermOpen", {
+	callback = function()
+		vim.wo.number = false
+		vim.wo.relativenumber = false
 	end,
 })
