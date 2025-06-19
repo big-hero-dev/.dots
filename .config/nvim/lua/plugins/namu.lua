@@ -12,7 +12,7 @@ require("namu").setup({
 				max_width = 120,
 				max_height = 30,
 				padding = 2,
-				border = vim.g.border,
+				border = "single",
 				title_pos = "left",
 				footer_pos = "right",
 				show_footer = true,
