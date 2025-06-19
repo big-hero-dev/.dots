@@ -330,6 +330,19 @@ vim.lsp.config.htmlls = {
 
 vim.lsp.enable({ "ts_ls", "cssls", "tailwindcssls", "htmlls" })
 
+vim.lsp.config.intelephense = {
+	cmd = { "intelephense", "--stdio" },
+	filetypes = { "php" },
+	root_markers = { "composer.json", ".git" },
+	settings = {
+		intelephense = {
+			storagePath = vim.fn.stdpath("cache") .. "/intelephense",
+		},
+	},
+}
+
+vim.lsp.enable("intelephense")
+
 vim.api.nvim_create_user_command("LspStart", function()
 	vim.cmd.e()
 end, { desc = "Starts LSP clients in the current buffer" })
