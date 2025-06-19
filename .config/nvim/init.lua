@@ -1,3 +1,11 @@
+local bt_ok, bootstrap = pcall(require, "core.bootstrap")
+if not bt_ok then
+	vim.notify("Failed to load core.bootstrap\n" .. bootstrap, vim.log.levels.ERROR)
+	return
+end
+
+bootstrap.bootstrap_mini()
+
 local function safe_require(mod)
 	local ok, err = pcall(require, mod)
 	if not ok then
