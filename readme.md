@@ -4,7 +4,7 @@
 - **Notification Daemon** :loudspeaker: Dunst
 - **Shell** :fish: [ Fish ](https://fishshell.com/)
 - **File Manager** :duck: [ Yazi ](https://yazi-rs.github.io/docs/)
-- **Editor** :fire: [ Neovim ](https://github.com/neovim/neovim) (>= 0.10) (npm install -g neovim)
+- **Editor** :fire: [ Neovim ](https://github.com/neovim/neovim) (>= 0.11) (npm install -g neovim)
 
 ---
 _Warning :rotating_light: Don't blindly use my settings unless you know what that entails. Use at your own risk!_
