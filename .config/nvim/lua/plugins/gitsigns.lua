@@ -1,5 +1,4 @@
-local MiniDeps = require("mini.deps")
-local add = MiniDeps.add
+local add = require("mini.deps").add
 
 add({
 	source = "lewis6991/gitsigns.nvim",

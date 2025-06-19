@@ -1,5 +1,4 @@
-local MiniDeps = require("mini.deps")
-local add = MiniDeps.add
+local add = require("mini.deps").add
 
 add({ source = "chrisgrieser/nvim-lsp-endhints" })
 require("lsp-endhints").setup()

@@ -1,4 +1,3 @@
-local MiniDeps = require("mini.deps")
-local add = MiniDeps.add
+local add = require("mini.deps").add
 
-add({ source = "lambdalisue/suda.vim" })
+add({ source = "lambdalisue/suda.vim", on_cmd = { "SudaRead", "SudaWrite" } })

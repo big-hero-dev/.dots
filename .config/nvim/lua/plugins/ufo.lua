@@ -1,5 +1,4 @@
-local MiniDeps = require("mini.deps")
-local add = MiniDeps.add
+local add = require("mini.deps").add
 
 add({ source = "kevinhwang91/nvim-ufo", depends = { "kevinhwang91/promise-async" } })
 require("ufo").setup({

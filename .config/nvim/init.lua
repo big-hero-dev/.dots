@@ -7,6 +7,18 @@ end
 
 safe_require("core.options")
 safe_require("core.keymaps")
-safe_require("core.autocmds")
-safe_require("core.statusline")
-safe_require("core.mini_deps")
+
+vim.api.nvim_create_autocmd("UIEnter", {
+	once = true,
+	callback = function()
+		local later, now = require("mini.deps").later, require("mini.deps").now
+		now(function()
+			safe_require("core.colorscheme")
+		end)
+		later(function()
+			safe_require("core.autocmds")
+			safe_require("core.statusline")
+			safe_require("core.mini_deps")
+		end)
+	end,
+})

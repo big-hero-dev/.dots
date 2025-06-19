@@ -1,5 +1,4 @@
-local MiniDeps = require("mini.deps")
-local add = MiniDeps.add
+local add = require("mini.deps").add
 
 add({ source = "m4xshen/hardtime.nvim", depends = { "MunifTanjim/nui.nvim" } })
 

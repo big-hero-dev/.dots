@@ -1,4 +1,3 @@
-local MiniDeps = require("mini.deps")
-local add = MiniDeps.add
+local add = require("mini.deps").add
 
 add({ source = "dstein64/vim-startuptime" })

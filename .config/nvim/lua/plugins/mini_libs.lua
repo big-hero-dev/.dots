@@ -1,31 +1,37 @@
-local MiniDeps = require("mini.deps")
-local later = MiniDeps.later
-
 local mini_basic_plugins = {
-	notify = { config = {} },
-	tabline = { config = {} },
+	notify = {},
+	tabline = {},
 	files = {
-		config = {
-			mappings = {
-				go_in = "i",
-				go_in_plug = "I",
-			},
+		mappings = {
+			go_in = "i",
+			go_in_plug = "I",
 		},
 	},
-	basics = { config = {} },
-	icons = { config = {} },
-	ai = { config = {} },
-	align = { config = {} },
-	animate = { config = {} },
-	comment = { config = {} },
-	cursorword = { config = {} },
-	extra = { config = {} },
-	git = { config = {} },
-	pairs = { config = {} },
-	pick = { config = {} },
-	surround = { config = {} },
-	trailspace = { config = {} },
-	splitjoin = { config = {} },
+	basics = {},
+	icons = {},
+	ai = {
+		custom_textobjects = {
+			f = require("mini.ai").gen_spec.treesitter({
+				a = "@function.outer",
+				i = "@function.inner",
+			}, {}),
+			c = require("mini.ai").gen_spec.treesitter({
+				a = "@class.outer",
+				i = "@class.inner",
+			}, {}),
+		},
+	},
+	align = {},
+	animate = {},
+	comment = {},
+	cursorword = {},
+	extra = {},
+	git = {},
+	pairs = {},
+	pick = {},
+	surround = {},
+	trailspace = {},
+	splitjoin = {},
 	move = {
 		mappings = {
 			left = "<M-h>",
@@ -54,11 +60,9 @@ local mini_basic_plugins = {
 	},
 }
 
-later(function()
-	for plugin, options in pairs(mini_basic_plugins) do
-		require("mini." .. plugin).setup(options.config)
-	end
-end)
+for plugin, options in pairs(mini_basic_plugins) do
+	require("mini." .. plugin).setup(options)
+end
 
 local miniclue = require("mini.clue")
 

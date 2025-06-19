@@ -1,9 +1,6 @@
-local MiniDeps = require("mini.deps")
-local add, later = MiniDeps.add, MiniDeps.later
+local add = require("mini.deps").add
 
 add({ source = "akinsho/toggleterm.nvim" })
-later(function()
-	require("toggleterm").setup()
-end)
+require("toggleterm").setup()
 
 vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "Toggle Term" })

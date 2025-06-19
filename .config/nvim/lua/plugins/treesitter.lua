@@ -1,5 +1,4 @@
-local MiniDeps = require("mini.deps")
-local add = MiniDeps.add
+local add = require("mini.deps").add
 
 add({
 	source = "nvim-treesitter/nvim-treesitter",
@@ -43,6 +42,7 @@ require("nvim-treesitter.configs").setup({
 		"vimdoc",
 	},
 	auto_install = true,
+	sync_install = false,
 	highlight = { enable = true },
 	rainbow = { enable = true, disable = { "html" } },
 	autotag = { enable = true },
