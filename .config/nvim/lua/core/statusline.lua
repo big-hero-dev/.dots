@@ -52,15 +52,15 @@ end
 
 local function diagnostics(severity, hl, symbol)
 	local count = get_lsp_diagnostics_count(severity)
-	return count > 0 and string.format("%%#%s# %s%s%%*", hl, count, symbol) or ""
+	return count > 0 and string.format("%%#%s# %s%s%%*", hl, symbol, count) or ""
 end
 
 local function diagnostics_display()
 	return table.concat({
-		diagnostics(vim.diagnostic.severity.ERROR, "DiagnosticError", "e"),
-		diagnostics(vim.diagnostic.severity.WARN, "DiagnosticWarn", "w"),
-		diagnostics(vim.diagnostic.severity.INFO, "DiagnosticInfo", "i"),
-		diagnostics(vim.diagnostic.severity.HINT, "DiagnosticHint", "h"),
+		diagnostics(vim.diagnostic.severity.ERROR, "DiagnosticError", "E"),
+		diagnostics(vim.diagnostic.severity.WARN, "DiagnosticWarn", "W"),
+		diagnostics(vim.diagnostic.severity.INFO, "DiagnosticInfo", "I"),
+		diagnostics(vim.diagnostic.severity.HINT, "DiagnosticHint", "H"),
 	}, " ")
 end
 
@@ -145,7 +145,7 @@ local function readonly_indicator()
 end
 
 local function keyboard_layout()
-	return vim.g.toggle_colemark and " Colemak-DH" or ""
+	return vim.g.toggle_colemark and "󰨑 COLEMAK" or "󰌓 QWERTY"
 end
 
 -- Status line

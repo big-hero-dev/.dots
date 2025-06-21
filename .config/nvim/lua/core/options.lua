@@ -117,7 +117,6 @@ vim.diagnostic.config({
 		close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
 		scope = "cursor",
 		border = "single",
-		prefix = " - ",
 		header = "",
 	},
 	underline = true,
@@ -126,10 +125,10 @@ vim.diagnostic.config({
 	},
 	signs = {
 		text = {
-			[vim.diagnostic.severity.ERROR] = "e",
-			[vim.diagnostic.severity.WARN] = "w",
-			[vim.diagnostic.severity.INFO] = "i",
-			[vim.diagnostic.severity.HINT] = "h",
+			[vim.diagnostic.severity.ERROR] = "E",
+			[vim.diagnostic.severity.WARN] = "W",
+			[vim.diagnostic.severity.INFO] = "I",
+			[vim.diagnostic.severity.HINT] = "H",
 		},
 	},
 	update_in_insert = false,
