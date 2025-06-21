@@ -126,7 +126,6 @@ end, opts)
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
--- Apply layout
 -- Apply layout immediately and after short delay (for UI plugins to init)
 active_layout()
 vim.defer_fn(active_layout, 200)

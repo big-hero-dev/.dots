@@ -6,9 +6,22 @@ vim.g.netrw_browsex_viewer = "xdg-open"
 vim.g.netrw_liststyle = 3
 vim.g.netrw_winsize = 25
 vim.g.editorconfig = false
+vim.g.clipboard = {
+	name = "xclip",
+	copy = {
+		["+"] = "xclip -selection clipboard -i",
+		["*"] = "xclip -selection clipboard -i",
+	},
+	paste = {
+		["+"] = "xclip -selection clipboard -o",
+		["*"] = "xclip -selection clipboard -o",
+	},
+	cache_enabled = 0,
+}
 
 local opt = vim.opt
 
+opt.clipboard = "unnamedplus"
 opt.nu = true
 opt.relativenumber = true
 opt.mouse = "a"
@@ -93,7 +106,6 @@ opt.wildmode = { "longest:full", "full" }
 opt.wildignorecase = true
 
 vim.cmd("syntax enable")
-opt.clipboard = "unnamedplus"
 opt.errorbells = false
 opt.visualbell = true
 
