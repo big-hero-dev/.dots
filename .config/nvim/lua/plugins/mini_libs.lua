@@ -9,18 +9,6 @@ local mini_basic_plugins = {
 	},
 	basics = {},
 	icons = {},
-	ai = {
-		custom_textobjects = {
-			f = require("mini.ai").gen_spec.treesitter({
-				a = "@function.outer",
-				i = "@function.inner",
-			}, {}),
-			c = require("mini.ai").gen_spec.treesitter({
-				a = "@class.outer",
-				i = "@class.inner",
-			}, {}),
-		},
-	},
 	align = {},
 	animate = {},
 	comment = {},
@@ -114,3 +102,15 @@ local keymaps = {
 for _, map in ipairs(keymaps) do
 	vim.keymap.set(map.mode, map.key, map.fn, { desc = map.desc })
 end
+
+local ai = require("mini.ai")
+ai.setup({
+	custom_textobjects = {
+		f = ai.gen_spec.treesitter({
+			a = "@function.outer", -- Around function (works)
+			i = "@function.inner", -- Inner function (not working)
+		}),
+	},
+	n_lines = 100, -- Ensure enough lines for large functions
+	search_method = "cover_or_next",
+})

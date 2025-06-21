@@ -18,6 +18,8 @@ add({
 	event = { "BufReadPost", "BufNewFile" },
 })
 
+add({ source = "nvim-treesitter/nvim-treesitter-textobjects" })
+
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {
 		"html",
@@ -48,4 +50,14 @@ require("nvim-treesitter.configs").setup({
 	autotag = { enable = true },
 	incremental_selection = { enable = true },
 	indent = { enable = true, disable = { "yaml" } },
+	select = {
+		enable = true,
+		lookahead = true,
+		keymaps = {
+			["af"] = "@function.outer",
+			["if"] = "@function.inner",
+			["ac"] = "@class.outer",
+			["ic"] = "@class.inner",
+		},
+	},
 })

@@ -20,8 +20,8 @@ local function active_layout()
 	clear_mappings()
 
 	if vim.g.toggle_colemark then
-		local modes = { "n", "v", "x" }
-		local layout_map = {
+		-- Chỉ remap trong Normal mode để không phá textobjects
+		local normal_mode_keys = {
 			n = "j",
 			e = "k",
 			i = "l",
@@ -30,11 +30,11 @@ local function active_layout()
 			l = "u",
 		}
 
-		for lhs, rhs in pairs(layout_map) do
-			map(modes, lhs, rhs, opts)
+		for lhs, rhs in pairs(normal_mode_keys) do
+			map("n", lhs, rhs, opts)
 		end
 
-		map("x", "l", ":<C-U>undo<CR>", opts) -- Undo in visual mode
+		map("x", "l", ":<C-U>undo<CR>", opts) -- giữ undo trong visual mode
 	end
 
 	vim.defer_fn(function()
