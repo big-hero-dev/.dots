@@ -18,3 +18,13 @@ require("conform").setup({
 		lsp_format = "fallback",
 	},
 })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	callback = function(args)
+		require("conform").format({
+			bufnr = args.buf,
+			timeout_ms = 1000,
+			lsp_fallback = true,
+		})
+	end,
+})

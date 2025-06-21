@@ -14,14 +14,7 @@ vim.lsp.config("*", {
 		vim.api.nvim_create_autocmd("CursorHold", {
 			buffer = bufnr,
 			callback = function()
-				local opts = {
-					focusable = false,
-					close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-					source = false,
-					prefix = " ",
-					scope = "cursor",
-				}
-				vim.diagnostic.open_float(nil, opts)
+				vim.diagnostic.open_float()
 			end,
 		})
 	end,
@@ -85,8 +78,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		keymap("n", "<Leader>lr", lsp.buf.rename, opt("Rename"))
 
 		-- diagnostic mappings
-		keymap("n", "<Leader>dn", function() vim.diagnostic.jump({ count = 1, float = true }) end, opt("Next Diagnostic"))
-		keymap("n", "<Leader>dp", function() vim.diagnostic.jump({ count = -1, float = true }) end, opt("Prev Diagnostic"))
+		keymap("n", "<Leader>dn", function()
+			vim.diagnostic.jump({ count = 1 })
+		end, opt("Next Diagnostic"))
+		keymap("n", "<Leader>dp", function()
+			vim.diagnostic.jump({ count = -1})
+		end, opt("Prev Diagnostic"))
 		keymap("n", "<Leader>dq", vim.diagnostic.setloclist, opt("Set LocList"))
 		keymap("n", "<Leader>dv", function()
 			vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })

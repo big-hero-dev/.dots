@@ -7,19 +7,6 @@ vim.g.netrw_liststyle = 3
 vim.g.netrw_winsize = 25
 vim.g.editorconfig = false
 
-vim.g.clipboard = {
-	name = "xclip",
-	copy = {
-		["+"] = "xclip -selection clipboard -i",
-		["*"] = "xclip -selection clipboard -i",
-	},
-	paste = {
-		["+"] = "xclip -selection clipboard -o",
-		["*"] = "xclip -selection clipboard -o",
-	},
-	cache_enabled = 0,
-}
-
 local opt = vim.opt
 
 opt.nu = true
@@ -34,6 +21,7 @@ opt.hlsearch = false
 opt.incsearch = true
 opt.termguicolors = true
 opt.scrolloff = 8
+opt.scrolljump = 5
 opt.sidescrolloff = 8
 opt.signcolumn = "yes"
 opt.winblend = 0
@@ -78,7 +66,6 @@ opt.ignorecase = true
 opt.smartcase = true
 
 -- Others
-opt.clipboard = "unnamedplus"
 opt.backspace = "indent,eol,start"
 opt.listchars:append({ eol = "", tab = " ", trail = "·" })
 opt.isfname:append("@-@")
@@ -92,20 +79,34 @@ vim.wo.conceallevel = 2
 opt.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
 opt.fillchars = {
 	fold = " ",
-	eob = " ", -- End of buffer
+	eob = " ",
 	diff = "∙",
 	msgsep = "‾",
 }
 
 vim.scriptencoding = "utf-8"
-opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
+opt.fileencodings = "utf-8"
+
+opt.wildmenu = true
+opt.wildmode = { "longest:full", "full" }
+opt.wildignorecase = true
+
+vim.cmd("syntax enable")
+opt.clipboard = "unnamedplus"
+opt.errorbells = false
+opt.visualbell = true
 
 vim.diagnostic.config({
 	virtual_text = false,
 	virtual_lines = false,
 	float = {
+		focusable = false,
+		close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+		scope = "cursor",
 		border = "single",
+		prefix = " - ",
+		header = "",
 	},
 	underline = true,
 	jump = {
@@ -122,5 +123,3 @@ vim.diagnostic.config({
 	update_in_insert = false,
 	severity_sort = true,
 })
-
-vim.cmd("syntax enable")
