@@ -50,14 +50,43 @@ require("nvim-treesitter.configs").setup({
 	autotag = { enable = true },
 	incremental_selection = { enable = true },
 	indent = { enable = true, disable = { "yaml" } },
-	select = {
-		enable = true,
-		lookahead = true,
-		keymaps = {
-			["af"] = "@function.outer",
-			["if"] = "@function.inner",
-			["ac"] = "@class.outer",
-			["ic"] = "@class.inner",
+	textobjects = {
+		select = {
+			enable = true,
+			lookahead = true,
+			keymaps = {
+				-- Function
+				["af"] = "@function.outer",
+				["if"] = "@function.inner",
+
+				-- Class
+				["ac"] = "@class.outer",
+				["ic"] = "@class.inner",
+
+				-- Parameter
+				["aa"] = "@parameter.outer",
+				["ia"] = "@parameter.inner",
+
+				-- Block
+				["ab"] = "@block.outer",
+				["ib"] = "@block.inner",
+
+				-- Conditional
+				["ai"] = "@conditional.outer",
+				["ii"] = "@conditional.inner",
+
+				-- Loop
+				["al"] = "@loop.outer",
+				["il"] = "@loop.inner",
+
+				-- Statement
+				["as"] = "@statement.outer",
+				["is"] = "@statement.inner",
+
+				-- Call
+				["ak"] = "@call.outer",
+				["ik"] = "@call.inner",
+			},
 		},
 	},
 })

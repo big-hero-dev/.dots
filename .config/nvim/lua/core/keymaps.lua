@@ -31,7 +31,7 @@ local function active_layout()
 		}
 
 		for lhs, rhs in pairs(normal_mode_keys) do
-			map("n", lhs, rhs, opts)
+			map({ "n", "v" }, lhs, rhs, opts)
 		end
 
 		map("x", "l", ":<C-U>undo<CR>", opts) -- giữ undo trong visual mode
