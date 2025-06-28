@@ -131,7 +131,7 @@ end
 -- File info
 local function file_percentage()
 	return string.format(
-		"%%#Normal#  %d%%%% %%*",
+		"%%#Normal# %d%%%% %%*",
 		math.ceil(vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0) * 100)
 	)
 end
@@ -146,6 +146,11 @@ end
 
 local function keyboard_layout()
 	return vim.g.toggle_colemark and "󰨑 COLEMAK" or "󰌓 QWERTY"
+end
+
+local function file_encoding()
+	local fenc = vim.bo.fenc ~= "" and vim.bo.fenc or vim.o.enc
+	return string.format(" %s", fenc)
 end
 
 -- Status line
@@ -164,6 +169,7 @@ StatusLine.active = function()
 		lsp_status(),
 		lsp_active(),
 		keyboard_layout(),
+		file_encoding(),
 		" %3l:%-2c",
 		file_percentage(),
 		total_lines(),
