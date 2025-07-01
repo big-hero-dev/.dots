@@ -25,4 +25,4 @@ alias ff "~/.local/share/bin/fzf-preview.sh"
 # image preview
 alias iv "kitten icat"
 
-alias tocchien="scrcpy --max-size 1920 --video-bit-rate 8M --fullscreen"
+alias tocchien="scrcpy --max-size 2000 --video-bit-rate 16M --fullscreen"
