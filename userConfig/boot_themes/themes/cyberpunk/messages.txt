@@ -1,0 +1,7 @@
+$TITLE = CYBERPUNK OS v7.7
+
+> Boot sequence initiated                    | normal
+System > Initializing hardware... [OK]       | low
+System > Loading cyberware drivers... [OK]   | low
+> Connecting to Night City Grid... [SECURE]  | normal
+Night City Grid > Connection established     | critical

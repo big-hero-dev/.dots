@@ -1,0 +1,7 @@
+$TITLE = WUKONG OS v1.0
+
+> Awakening the soul of the Monkey King...        | normal
+System > Binding the golden staff... [OK]         | low
+Spiritual Energy > Unleashing primal Qi...        | low
+> Drawing power from the Five Elements...         | normal
+Mythical Realm > Establishing link... [SECURE]    | critical
