@@ -11,6 +11,10 @@ xset -dpms &
 xset s noblank &
 xset s off &
 
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
+
 # Start input method framework
 # ibus-daemon --xim &
 fcitx5 -d &
