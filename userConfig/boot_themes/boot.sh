@@ -60,4 +60,4 @@ fi
 
 # Play video
 notify-send --urgency=normal "System" "Launching memory feed..."
-cvlc --no-video-title-show "$VIDEO_PATH" &
+mpv "$VIDEO_PATH" &
