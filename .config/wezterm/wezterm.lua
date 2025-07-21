@@ -3,7 +3,7 @@ local colors = require("eink")
 
 return {
 	colors = colors,
-	font = wezterm.font("Hack Nerd Font"),
+	font = wezterm.font("Hack Nerd Font Mono"),
 	font_size = 15.5,
 	window_background_opacity = 0.6,
 	text_background_opacity = 1.0,
