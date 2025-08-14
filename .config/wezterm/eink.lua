@@ -1,7 +1,7 @@
 -- ~/.config/wezterm/colors/eink.lua
 return {
 	foreground = "#CCCCCC",
-	background = "#333333", -- hoặc đổi "#FFFFFF" nếu muốn light mode
+	background = "#333333",
 	cursor_bg = "#CCCCCC",
 	cursor_border = "#CCCCCC",
 	cursor_fg = "#333333",
