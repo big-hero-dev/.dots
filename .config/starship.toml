@@ -37,7 +37,7 @@ $line_break\
 $character\
 """
 
-palette = 'eink_dark'
+palette = 'kanagawa'
 
 [palettes.default]
 
@@ -64,27 +64,27 @@ color_vimcmd_ok = 'green'
 color_vimcmd_replace = 'purple'
 color_vimcmd_visual = 'yellow'
 
-[palettes.eink_dark]
-color_ok = '#F0F0F0'       # Light gray for positive/success states
-color_danger = '#404040'   # Dark gray for danger/error states
-color_caution = '#808080'  # Medium gray for warning/caution
-color_os = '#606060'       # Muted gray for OS-related elements
-color_username = '#707070' # Slightly lighter gray for username
-color_directory = '#909090' # Lighter gray for directories
-color_git = '#505050'      # Dark gray for git-related elements
-color_git_added = '#A0A0A0' # Light gray for added git elements
-color_git_deleted = '#303030' # Very dark gray for deleted git elements
-color_env = '#707070'      # Muted gray for environment
-color_kubernetes = '#606060' # Dark gray for Kubernetes
-color_docker = '#808080'   # Medium gray for Docker
-color_shell = '#909090'    # Lighter gray for shell
-color_container = '#404040' # Dark gray for containers
-color_other = '#B0B0B0'    # Very light gray for other elements
-color_time = '#F0F0F0'     # Light gray for time
-color_duration = '#E0E0E0' # Slightly darker light gray for duration
-color_vimcmd_ok = '#A0A0A0'    # Light gray for successful Vim commands
-color_vimcmd_replace = '#707070' # Muted gray for replace mode
-color_vimcmd_visual = '#808080' # Medium gray for visual mode
+[palettes.kanagawa]
+color_ok = '#76946A'
+color_danger = '#C34043'
+color_caution = '#FF9E3B'
+color_os = '#658594'
+color_username = '#6A9589'
+color_directory = '#DCD7BA'
+color_git = '#658594'
+color_git_added = '#76946A'
+color_git_deleted = '#C34043'
+color_env = '#6A9589'
+color_kubernetes = '#658594'
+color_docker = '#6A9589'
+color_shell = '#DCD7BA'
+color_container = '#54546D'
+color_other = '#FF9E3B'
+color_time = '#DCD7BA'
+color_duration = '#FF9E3B'
+color_vimcmd_ok = '#76946A'
+color_vimcmd_replace = '#6A9589'
+color_vimcmd_visual = '#FF9E3B'
 
 [os]
 disabled = false

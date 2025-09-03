@@ -1,8 +1,10 @@
 local add = require("mini.deps").add
 
 add({ source = "alexxGmZ/e-ink.nvim" })
+add({ source = "rebelot/kanagawa.nvim" })
 
-vim.cmd([[colorscheme e-ink]])
+vim.cmd([[colorscheme kanagawa-dragon]])
+-- vim.cmd([[colorscheme e-ink]])
 
 -- Transparent background
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })

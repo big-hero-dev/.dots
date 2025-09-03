@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local colors = require("eink")
+local colors = require("kanagawa")
 
 return {
 	colors = colors,
