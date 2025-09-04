@@ -12,6 +12,7 @@ require("conform").setup({
 		css = { "prettierd", "prettier", stop_after_first = true },
 		html = { "prettierd", "prettier", stop_after_first = true },
 		sh = { "beautysh" },
+		c = { "clang-format" },
 	},
 	format_on_save = {
 		timeout_ms = 1000,
