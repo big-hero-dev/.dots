@@ -1,10 +1,10 @@
 ---@diagnostic disable: duplicate-set-field
 local statusline_augroup = vim.api.nvim_create_augroup("gmr_statusline", { clear = true })
 
-vim.api.nvim_set_hl(0, "SLGitBranch", { fg = "#fab387", bold = true })
-vim.api.nvim_set_hl(0, "SLGitDiffAdd", { fg = "#a6e3a1" })
-vim.api.nvim_set_hl(0, "SLGitDiffChange", { fg = "#f9e2af" })
-vim.api.nvim_set_hl(0, "SLGitDiffDelete", { fg = "#f38ba8" })
+vim.api.nvim_set_hl(0, "SLGitBranch", { fg = "#7E9CD8", bold = true })
+vim.api.nvim_set_hl(0, "SLGitDiffAdd", { fg = "#76946A" })
+vim.api.nvim_set_hl(0, "SLGitDiffChange", { fg = "#C0A36E" })
+vim.api.nvim_set_hl(0, "SLGitDiffDelete", { fg = "#C34043" })
 
 -- Get LSP diagnostic count
 local function get_lsp_diagnostics_count(severity)
@@ -30,8 +30,33 @@ local mode_map = {
 	t = "TERM",
 }
 
+vim.cmd([[
+  hi StatusLineNormal  guifg=#1F1F28 guibg=#76946A gui=bold
+  hi StatusLineInsert  guifg=#1F1F28 guibg=#7E9CD8 gui=bold
+  hi StatusLineVisual  guifg=#1F1F28 guibg=#957FB8 gui=bold
+  hi StatusLineVLine   guifg=#1F1F28 guibg=#C0A36E gui=bold
+  hi StatusLineVBlock  guifg=#1F1F28 guibg=#C34043 gui=bold
+  hi StatusLineCommand guifg=#1F1F28 guibg=#6A9589 gui=bold
+  hi StatusLineReplace guifg=#1F1F28 guibg=#FFA066 gui=bold
+  hi StatusLineTerm    guifg=#1F1F28 guibg=#DCD7BA gui=bold
+]])
+
+local mode_color = {
+	NORMAL = "StatusLineNormal",
+	INSERT = "StatusLineInsert",
+	VISUAL = "StatusLineVisual",
+	["V-LINE"] = "StatusLineVLine",
+	["V-BLOCK"] = "StatusLineVBlock",
+	COMMAND = "StatusLineCommand",
+	REPLACE = "StatusLineReplace",
+	TERM = "StatusLineTerm",
+	UNKNOWN = "StatusLine",
+}
+
 local function mode()
-	return string.format("%%#StatusLine#%s%%*", mode_map[vim.api.nvim_get_mode().mode] or "UNKNOWN")
+	local current_mode = mode_map[vim.api.nvim_get_mode().mode] or "UNKNOWN"
+	local hl = mode_color[current_mode] or "StatusLine"
+	return string.format("%%#%s# %s %%*", hl, current_mode)
 end
 
 -- LSP Clients
