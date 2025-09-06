@@ -7,6 +7,7 @@ keymap = [
 	{ on = [ "<C-q>" ], run = "close",              desc = "Close the current tab, or quit if it is last tab" },
 	{ on = [ "<C-z>" ], run = "suspend",            desc = "Suspend the process" },
     { on = [ "<C-s>" ], run = 'shell "$SHELL" --block --confirm', desc = "Open shell here" },
+    { on = "<C-o>", run = "shell --confirm 'nemo .'", desc = "Open the current directory in Nemo" },
 
 	# Navigation
 	{ on = [ "e" ], run = "arrow -1", desc = "Move cursor up" },
