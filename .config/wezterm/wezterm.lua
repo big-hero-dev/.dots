@@ -5,7 +5,7 @@ return {
 	colors = colors,
 	font = wezterm.font("Hack Nerd Font Mono"),
 	font_size = 15.5,
-	window_background_opacity = 0.8,
+	window_background_opacity = 0.37,
 	text_background_opacity = 1.0,
 	enable_tab_bar = false,
 	default_cursor_style = "BlinkingBlock",
