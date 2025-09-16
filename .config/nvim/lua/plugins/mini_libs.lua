@@ -1,6 +1,5 @@
 local mini_basic_plugins = {
 	notify = {},
-	tabline = {},
 	files = {
 		mappings = {
 			go_in = "i",

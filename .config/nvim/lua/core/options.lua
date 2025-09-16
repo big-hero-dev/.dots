@@ -110,7 +110,7 @@ opt.errorbells = false
 opt.visualbell = true
 
 vim.diagnostic.config({
-	virtual_text = false,
+	virtual_text = true,
 	virtual_lines = false,
 	float = {
 		focusable = false,
