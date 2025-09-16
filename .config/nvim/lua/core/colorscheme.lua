@@ -1,7 +1,5 @@
 local add = require("mini.deps").add
 
-add({ source = "alexxGmZ/e-ink.nvim" })
-add({ source = "rebelot/kanagawa.nvim" })
 add({ source = "shaunsingh/nord.nvim" })
 
 vim.cmd([[colorscheme nord]])
@@ -16,3 +14,5 @@ local function bg_trans()
 	vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
 	vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
 end
+
+bg_trans()

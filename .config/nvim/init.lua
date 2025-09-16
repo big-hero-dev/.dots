@@ -25,7 +25,6 @@ vim.api.nvim_create_autocmd("UIEnter", {
 		end)
 		later(function()
 			safe_require("core.autocmds")
-			safe_require("core.statusline")
 			safe_require("core.mini_deps")
 		end)
 	end,

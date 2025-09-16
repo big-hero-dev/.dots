@@ -37,7 +37,7 @@ $line_break\
 $character\
 """
 
-palette = 'kanagawa'
+palette = 'nord'
 
 [palettes.default]
 
@@ -64,27 +64,27 @@ color_vimcmd_ok = 'green'
 color_vimcmd_replace = 'purple'
 color_vimcmd_visual = 'yellow'
 
-[palettes.kanagawa]
-color_ok = '#76946A'
-color_danger = '#C34043'
-color_caution = '#FF9E3B'
-color_os = '#658594'
-color_username = '#6A9589'
-color_directory = '#DCD7BA'
-color_git = '#658594'
-color_git_added = '#76946A'
-color_git_deleted = '#C34043'
-color_env = '#6A9589'
-color_kubernetes = '#658594'
-color_docker = '#6A9589'
-color_shell = '#DCD7BA'
-color_container = '#54546D'
-color_other = '#FF9E3B'
-color_time = '#DCD7BA'
-color_duration = '#FF9E3B'
-color_vimcmd_ok = '#76946A'
-color_vimcmd_replace = '#6A9589'
-color_vimcmd_visual = '#FF9E3B'
+[palettes.nord]
+color_ok = '#A3BE8C'          # green
+color_danger = '#BF616A'      # red
+color_caution = '#EBCB8B'     # yellow
+color_os = '#81A1C1'          # blue
+color_username = '#88C0D0'    # cyan
+color_directory = '#E5E9F0'   # light fg
+color_git = '#81A1C1'         # blue
+color_git_added = '#A3BE8C'   # green
+color_git_deleted = '#BF616A' # red
+color_env = '#88C0D0'         # cyan
+color_kubernetes = '#81A1C1'  # blue
+color_docker = '#88C0D0'      # cyan
+color_shell = '#E5E9F0'       # light fg
+color_container = '#4C566A'   # dark gray
+color_other = '#EBCB8B'       # yellow
+color_time = '#E5E9F0'        # light fg
+color_duration = '#EBCB8B'    # yellow
+color_vimcmd_ok = '#A3BE8C'   # green
+color_vimcmd_replace = '#88C0D0' # cyan
+color_vimcmd_visual = '#EBCB8B'  # yellow
 
 [os]
 disabled = false

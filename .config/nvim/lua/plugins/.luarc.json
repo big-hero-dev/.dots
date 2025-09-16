@@ -1,9 +1,12 @@
 {
 	"diagnostics.globals": [
-		"vim"
+		"vim",
+        "MiniDeps"
 	],
 	"diagnostics.disable": [
 		"missing-fields",
-        "undefined-field"
+        "undefined-field",
+        "param-type-mismatch",
+        "need-check-nil"
 	]
 }

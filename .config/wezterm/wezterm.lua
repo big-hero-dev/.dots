@@ -1,11 +1,10 @@
 local wezterm = require("wezterm")
-local colors = require("kanagawa")
 
 return {
-	colors = colors,
+	color_scheme = "nord",
 	font = wezterm.font("Hack Nerd Font Mono"),
 	font_size = 15.5,
-	window_background_opacity = 0.37,
+	window_background_opacity = 0.9,
 	text_background_opacity = 1.0,
 	enable_tab_bar = false,
 	default_cursor_style = "BlinkingBlock",
