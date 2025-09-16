@@ -31,14 +31,20 @@ local mode_map = {
 }
 
 vim.cmd([[
-  hi StatusLineNormal  guifg=#1F1F28 guibg=#76946A gui=bold
-  hi StatusLineInsert  guifg=#1F1F28 guibg=#7E9CD8 gui=bold
-  hi StatusLineVisual  guifg=#1F1F28 guibg=#957FB8 gui=bold
-  hi StatusLineVLine   guifg=#1F1F28 guibg=#C0A36E gui=bold
-  hi StatusLineVBlock  guifg=#1F1F28 guibg=#C34043 gui=bold
-  hi StatusLineCommand guifg=#1F1F28 guibg=#6A9589 gui=bold
-  hi StatusLineReplace guifg=#1F1F28 guibg=#FFA066 gui=bold
-  hi StatusLineTerm    guifg=#1F1F28 guibg=#DCD7BA gui=bold
+  " Nord palette reference:
+  " Polar Night (bg):   #2E3440, #3B4252, #434C5E, #4C566A
+  " Snow Storm (fg):    #D8DEE9, #E5E9F0, #ECEFF4
+  " Frost (blue/green): #8FBCBB, #88C0D0, #81A1C1, #5E81AC
+  " Aurora (accents):   #BF616A, #D08770, #EBCB8B, #A3BE8C, #B48EAD
+
+  hi StatusLineNormal  guifg=#2E3440 guibg=#A3BE8C gui=bold
+  hi StatusLineInsert  guifg=#2E3440 guibg=#81A1C1 gui=bold
+  hi StatusLineVisual  guifg=#2E3440 guibg=#B48EAD gui=bold
+  hi StatusLineVLine   guifg=#2E3440 guibg=#EBCB8B gui=bold
+  hi StatusLineVBlock  guifg=#2E3440 guibg=#BF616A gui=bold
+  hi StatusLineCommand guifg=#2E3440 guibg=#88C0D0 gui=bold
+  hi StatusLineReplace guifg=#2E3440 guibg=#D08770 gui=bold
+  hi StatusLineTerm    guifg=#2E3440 guibg=#D8DEE9 gui=bold
 ]])
 
 local mode_color = {
