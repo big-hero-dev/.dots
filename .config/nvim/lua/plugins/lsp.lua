@@ -240,7 +240,7 @@ later(function()
 				diagnostics = {
 					globals = { "vim", "spec", "Snacks" },
 					-- Disable undefined global warnings in certain contexts
-					disable = { "missing-fields" },
+					disable = { "missing-fields", "vim" },
 				},
 				runtime = {
 					version = "LuaJIT",
