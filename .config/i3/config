@@ -124,7 +124,7 @@ client.placeholder   = #2C3338 #9CA4A8 #6C7278 #2C3338 #2C3338
 client.background    = #121416
 
 # window rules, you can find the window class using xprop
-assign [class="Alacritty"] → $ws1
+assign [class="org.wezfurlong.wezterm"] → $ws1
 assign [class="firefox|Firefox|firefox-default|zen-beta|zen"] → $ws2
 assign [class="Zalo"] → $ws3
 assign [class="Google-chrome|google-chrome|google-chrome-stable|google-chrome-beta"] → $ws4
