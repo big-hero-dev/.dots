@@ -1,5 +1,5 @@
 * {
-  font: "Hack Nerd Font Mono 10";
+  font: "JetBrains Mono NF 10";
 
   bg0    : #2b3339;
   bg1    : #323c41;

@@ -11,7 +11,7 @@ config.color_scheme = "nord"
 
 -- Font Settings
 config.font = wezterm.font_with_fallback({
-	"JetBrains Mono",
+	"JetBrains Mono NF",
 })
 config.font_size = 16
 
