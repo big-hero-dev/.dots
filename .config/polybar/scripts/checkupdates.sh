@@ -59,7 +59,7 @@ fi
 
 # Display updates count with icon
 if [ "$updates" -gt 0 ] || [ "$updates" = "?" ]; then
-    echo " $updates"
+    echo "[UPD: $updates]"
 else
-    echo ""
+	echo ""
 fi

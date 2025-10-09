@@ -53,7 +53,7 @@ require("lualine").setup({
 		lualine_a = {
 			{
 				"mode",
-				separator = { left = "", right = "" },
+				separator = { right = "" },
 				padding = { left = 1, right = 1 },
 			},
 		},
@@ -74,16 +74,15 @@ require("lualine").setup({
 			{ "progress", separator = { left = "" } },
 		},
 		lualine_z = {
-			{ "location", separator = { left = "", right = "" } },
+			{ "location", separator = { left = "", right = "" } },
 		},
 	},
 	tabline = {
 
 		lualine_a = {
-			{ "searchcount", separator = { left = "", right = "" } },
+			{ "searchcount", separator = { left = "", right = "" } },
 			{
 				recording,
-				separator = { left = "", right = "" },
 				color = { fg = "white", bg = "#FF746C" },
 			},
 		},
@@ -103,7 +102,7 @@ require("lualine").setup({
 					directory = " ",
 					alternate_file = "",
 				},
-				separator = { left = "", right = "" },
+				separator = { left = "" },
 				component_separators = { right = "" },
 				section_separators = { left = "", right = "" },
 			},

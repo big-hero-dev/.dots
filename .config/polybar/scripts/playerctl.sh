@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MAX_LENGTH=60
+MAX_LENGTH=50
 MUSIC_ICON=""
 
 truncate_text() {

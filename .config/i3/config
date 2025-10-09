@@ -115,13 +115,34 @@ mode "resize" {
 	}
 bindsym $super+r mode "resize"
 
-# colour of border, background, text, indicator, and child_border
-client.focused       = #484E54 #9CA4A8 #6C7278 #6C7278 #3C4448
-client.focused_inactive = #2C3338 #9CA4A8 #2C3338 #2C3338 #2C3338
-client.unfocused     = #2C3338 #9CA4A8 #6C7278 #2C3338 #2C3338
-client.urgent        = #3C4448 #9CA4A8 #6C7278 #3C4448 #484E54
-client.placeholder   = #2C3338 #9CA4A8 #6C7278 #2C3338 #2C3338
-client.background    = #121416
+# Nord Color Palette
+set $nord0  #2E3440
+set $nord1  #3B4252
+set $nord2  #434C5E
+set $nord3  #4C566A
+set $nord4  #D8DEE9
+set $nord5  #E5E9F0
+set $nord6  #ECEFF4
+set $nord7  #8FBCBB
+set $nord8  #81A1C1
+set $nord9  #5D7481
+set $nord10 #5E81AC
+set $nord11 #BF616A
+set $nord12 #D08770
+set $nord13 #EBCB8B
+set $nord14 #A3BE8C
+set $nord15 #B48EAD
+
+# Window Colors
+#                       border  background text    indicator child_border
+client.focused          $nord9  $nord9     $nord6  $nord9    $nord9
+client.focused_inactive $nord3  $nord1     $nord4  $nord3    $nord3
+client.unfocused        $nord1  $nord0     $nord4  $nord1    $nord1
+client.urgent           $nord11 $nord11    $nord6  $nord11   $nord11
+client.placeholder      $nord0  $nord0     $nord4  $nord0    $nord0
+client.background       $nord0
+
+# i3bar colors
 
 # window rules, you can find the window class using xprop
 assign [class="org.wezfurlong.wezterm"] → $ws1
@@ -135,14 +156,13 @@ for_window [class="Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver|Nemo"] focus
 for_window [class="firefox|Firefox|firefox-default|zen-beta|zen"] focus
 for_window [class="scrcpy"] focus
 
-
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 7
 focus_on_window_activation focus
 # hide_edge_borders smart
 gaps inner 10
 gaps outer 0
 gaps top 0
-smart_gaps off
+smart_gaps on
 
 #arandr for home monitor
 exec --no-startup-id $HOME/.screenlayout/Home.sh
