@@ -161,8 +161,8 @@ focus_on_window_activation focus
 # hide_edge_borders smart
 gaps inner 10
 gaps outer 0
-gaps top 40
-smart_gaps off
+gaps top 0
+smart_gaps on
 
 #arandr for home monitor
 exec --no-startup-id $HOME/.screenlayout/Home.sh
