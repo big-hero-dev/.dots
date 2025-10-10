@@ -1,46 +1,37 @@
 * {
   font: "JetBrains Mono NF 10";
-
-  bg0    : #2b3339;
-  bg1    : #323c41;
-  bg2    : #3a454a;
-  bg3    : #445055;
-  fg0    : #d3c6aa;
-  fg1    : #a7c080;
-  accent : #83c092;
-  urgent : @accent;
-
+  bg0    : #2e3440;
+  bg1    : #3b4252;
+  bg2    : #434c5e;
+  bg3    : #4c566a;
+  fg0    : #eceff4;
+  fg1    : #d8dee9;
+  accent : #88c0d0;
+  urgent : #bf616a;
   background-color : transparent;
   text-color       : @fg0;
-
   margin  : 0;
   padding : 0;
   spacing : 0;
 }
-
 configuration {
   modes: [window, drun, emoji];
 }
-
 element-icon, element-text, scrollbar {
   cursor: pointer;
 }
-
 window {
   location : center;
   width    : 400px;
-  height   : 220px;
+  height   : 230px;
   y-offset : -6px;
-
   background-color : @bg1;
   border-radius    : 0px;
 }
-
 mainbox {
   padding : 8px;
   spacing : 8px;
 }
-
 inputbar {
   padding          : 8px 20px;
   spacing          : 4px;
@@ -50,28 +41,23 @@ inputbar {
   border-radius    : 2px;
   background-color : @bg0;
 }
-
 icon-search, entry, element-icon, element-text {
   vertical-align: 0.5;
 }
-
 icon-search {
   expand   : false;
   filename : "search-symbolic";
   size     : 24px;
 }
-
 entry {
   font              : "Hack Nerd Font Mono 10";
   placeholder-color : @fg1;
   color				: @fg1;
 }
-
 textbox {
   padding          : 4px 8px;
   background-color : @bg2;
 }
-
 listview {
   columns       : 1;
   spacing       : 8px;
@@ -79,42 +65,33 @@ listview {
   fixed-columns : true;
   scrollbar : false;
 }
-
 element {
   spacing       : 1em;
   padding       : 8px;
   border-radius : 2px;
   children		: ["element-icon", "element-text"];
 }
-
 element normal urgent {
   text-color: @urgent;
 }
-
 element normal active {
   text-color: @accent;
 }
-
 element alternate active {
   text-color: @accent;
 }
-
 element selected active {
   text-color: @accent;
 }
-
 element selected {
   background-color: @bg3;
 }
-
 element selected urgent {
   background-color: @urgent;
 }
-
 element-icon {
   size: 1.5em;
 }
-
 element-text {
   text-color: inherit;
 }
