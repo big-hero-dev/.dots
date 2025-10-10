@@ -159,7 +159,7 @@ for_window [class="scrcpy"] focus
 for_window [class="^.*"] border pixel 7
 focus_on_window_activation focus
 # hide_edge_borders smart
-gaps inner 10
+gaps inner 7
 gaps outer 0
 gaps top 0
 smart_gaps on
