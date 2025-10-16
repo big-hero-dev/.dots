@@ -31,3 +31,6 @@ bun add -g @antfu/ni
 ```
 npm install -g https://github.com/insulineru/ai-commit
 ```
+
+# Fix vlc error h264
+install vlc-plugin-ffmpeg
