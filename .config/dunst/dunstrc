@@ -1,9 +1,9 @@
 [global]
     monitor = 0
     follow = none
-    width = (100,300)
+    width = (150,300)
     origin = top-right
-    offset = (10,37)
+    offset = (0,48)
     scale = 0
     notification_limit = 0
     progress_bar = true
@@ -11,15 +11,15 @@
     progress_bar_frame_width = 1
     progress_bar_min_width = 150
     progress_bar_max_width = 300
-	highlight = "#7A8478"
+	highlight = "#ECEFF4"
     indicate_hidden = yes
     transparency = 0
     separator_height = 2
     padding = 4
     horizontal_padding = 4
     text_icon_padding = 4
-    frame_width = 3
-    gap_size = 4
+    frame_width = 7
+    gap_size = 7
     separator_color = frame
     sort = yes
     font = Iosevka Ori Sans 11
@@ -53,7 +53,8 @@
     mouse_left_click = close_current
     mouse_middle_click = do_action, close_current
     mouse_right_click = close_all
-	background = "#3D484D"
+	background = "#2E3440"
+	frame_color = "#5D7481"
 [experimental]
     per_monitor_dpi = false
 [urgency_low]
