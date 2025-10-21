@@ -168,7 +168,7 @@ smart_gaps on
 exec --no-startup-id $HOME/.screenlayout/Home.sh
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id fastcompmgr -o 0.4 -r 12 -c -C
+exec_always --no-startup-id fastcompmgr -o 0.4 -r 2 -c -C
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id $terminal -e tmux
 exec --no-startup-id bash -c "sleep 2 && $HOME/userConfig/boot_themes/boot.sh"

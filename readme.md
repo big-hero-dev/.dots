@@ -30,14 +30,11 @@ _Note :wrench: I use colemak-dh keyboard layout_
 - fastcommgr
 
 ### Font
-- [ Iosevka ](https://github.com/be5invis/Iosevka)
-- [ Source Han Sans CN](https://software.manjaro.org/package/adobe-source-han-sans-cn-fonts)
-- [ Source Han Sans KR](https://software.manjaro.org/package/adobe-source-han-sans-kr-fonts)
 - Font Awesome 6 Pro
-- Noto fonts emoji
-- Hack Nerd Font
-- Playfair
-- Space Mono
+- Noto Sans Mono CJK
+- Noto Sans Icon
+- JetBrains Mono
+- SpaceMono Nerd Font
 
 ### Devtool
 

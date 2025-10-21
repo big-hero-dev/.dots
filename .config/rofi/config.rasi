@@ -1,5 +1,5 @@
 * {
-  font: "JetBrains Mono NF 10";
+	font: "SpaceMono Nerd Font 10";
   bg0    : #2e3440;
   bg1    : #3b4252;
   bg2    : #434c5e;
@@ -27,6 +27,8 @@ window {
   y-offset : -6px;
   background-color : @bg1;
   border-radius    : 0px;
+  border-color     : @bg3;
+  border: 7px;
 }
 mainbox {
   padding : 8px;
