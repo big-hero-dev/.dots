@@ -23,7 +23,7 @@ element-icon, element-text, scrollbar {
 window {
   location : center;
   width    : 400px;
-  height   : 230px;
+  height   : 250px;
   y-offset : -6px;
   background-color : @bg1;
   border-radius    : 0px;
