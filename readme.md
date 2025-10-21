@@ -35,6 +35,7 @@ _Note :wrench: I use colemak-dh keyboard layout_
 - Noto Sans Icon
 - JetBrains Mono
 - SpaceMono Nerd Font
+- Lexend
 
 ### Devtool
 
