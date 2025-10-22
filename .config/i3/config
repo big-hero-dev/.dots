@@ -148,7 +148,7 @@ client.background       $nord0
 assign [class="org.wezfurlong.wezterm"] → $ws1
 assign [class="firefox|Firefox|firefox-default|zen-beta|zen"] → $ws2
 assign [class="Zalo"] → $ws3
-assign [class="Google-chrome|google-chrome|google-chrome-stable|google-chrome-beta"] → $ws4
+assign [class="obsidian"] → $ws4
 assign [class="scrcpy"] → $ws5
 
 for_window [class="Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver|Nemo"] floating enable
@@ -168,7 +168,7 @@ smart_gaps on
 exec --no-startup-id $HOME/.screenlayout/Home.sh
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id fastcompmgr -o 0.4 -r 2 -c -C
+exec_always --no-startup-id fastcompmgr
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id $terminal -e tmux
 exec --no-startup-id bash -c "sleep 2 && $HOME/userConfig/boot_themes/boot.sh"
