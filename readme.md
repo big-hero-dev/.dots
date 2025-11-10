@@ -52,6 +52,7 @@ _Note :wrench: I use colemak-dh keyboard layout_
 - `maim`: Screenshot tool
 - `glow`: Render markdown on the CLI, with pizzazz!
 - `xclip`: Clipboard tool
+- paleta: Color Paletes
 
 ### Input method
 - fcitx5-unikey
