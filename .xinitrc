@@ -3,28 +3,42 @@
 #  ╠═╣║ ║ ║ ║ ║╚═╗ ║ ╠═╣╠╦╝ ║
 #  ╩ ╩╚═╝ ╩ ╚═╝╚═╝ ╩ ╩ ╩╩╚═ ╩
 
-# Set cursor
-xsetroot -cursor_name left_ptr &
-
-# Display power management
-xset -dpms &
-xset s noblank &
-xset s off &
-
+###############################################################################
+# 1. Input Method – phải export TRƯỚC khi tạo DBus session
+###############################################################################
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
+export SDL_IM_MODULE=fcitx
 
-# Start input method framework
-# ibus-daemon --xim &
-fcitx5 -d &
+###############################################################################
+# 2. Khởi tạo DBus session – mọi thứ bên dưới phải sống chung bus này
+###############################################################################
+exec dbus-run-session sh -c '
 
-# Other startup applications
-dunst &                           # Start notification daemon
-blueman-applet &                  # Start Bluetooth applet
-unclutter -idle 10 &              # Hide cursor when inactive
-udiskie &                         # Automount removable media
+  ###########################################################################
+  # 3. Cursor & Power management
+  ###########################################################################
+  xsetroot -cursor_name left_ptr &
+  xset -dpms &
+  xset s noblank &
+  xset s off &
 
-# Start i3 (last line to prevent termination)
-exec i3
+  ###########################################################################
+  # 4. Input Method Framework
+  ###########################################################################
+  fcitx5 -d &
 
+  ###########################################################################
+  # 5. System / User services
+  ###########################################################################
+  dunst &                  # Notification daemon
+  blueman-applet &         # Bluetooth
+  unclutter -idle 10 &     # Hide cursor
+  udiskie &                # Automount removable media
+
+  ###########################################################################
+  # 6. Window Manager – luôn là dòng CUỐI
+  ###########################################################################
+  exec i3
+'

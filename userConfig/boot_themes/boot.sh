@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # === Select theme here ===
-THEME="cyberpunk"   # wukong | cyberpunk
+THEME="wukong"   # wukong | cyberpunk
 
 THEME_DIR="$HOME/userConfig/boot_themes/themes/$THEME"
 CONFIG_FILE="$THEME_DIR/config.conf"
