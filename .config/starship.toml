@@ -1,7 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = true
-command_timeout = 300000
 
 format = """
 $os\
@@ -38,6 +37,8 @@ $character\
 """
 
 palette = 'nord'
+scan_timeout = 3600
+command_timeout = 3600
 
 [palettes.default]
 
