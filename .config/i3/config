@@ -3,6 +3,7 @@ set $super Mod4
 set $alt Mod1
 
 set $terminal wezterm
+set $browser zen-browser
 
 # set font
 font pango:Ionicons 9, SF Pro Display 9
@@ -170,5 +171,5 @@ exec --no-startup-id $HOME/.screenlayout/Home.sh
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id fastcompmgr
 exec --no-startup-id nitrogen --restore
+exec --no-startup-id $browser
 exec --no-startup-id $terminal -e tmux
-exec --no-startup-id bash -c "sleep 2 && $HOME/userConfig/boot_themes/boot.sh"
