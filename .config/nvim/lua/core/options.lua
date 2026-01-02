@@ -65,7 +65,7 @@ opt.smartindent = true
 
 -- Cursor
 opt.cursorline = true
-opt.guicursor = "a:hor40-blinkwait700-blinkoff400-blinkon250"
+opt.guicursor = "n-v-c:block,i-ci-ve:hor20,a:blinkwait700-blinkoff400-blinkon250"
 
 -- Search
 opt.ignorecase = true
