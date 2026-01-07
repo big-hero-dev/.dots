@@ -25,15 +25,17 @@ later(function()
 	-- ── Capabilities ─────────────────────────────────────────────────────
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-	-- Enable folding range and semantic tokens
+	-- ── Folding Range ─────────────────────────────────────────────────────
+	capabilities.textDocument = capabilities.textDocument or {}
 	capabilities.textDocument.foldingRange = {
 		dynamicRegistration = true,
 		lineFoldingOnly = true,
 	}
-	capabilities.textDocument.semanticTokens = {
-		multilineTokenSupport = true,
-	}
-	capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+	-- ── Snippet Support ──────────────────────────────────────────────────
+	if capabilities.textDocument.completion and capabilities.textDocument.completion.completionItem then
+		capabilities.textDocument.completion.completionItem.snippetSupport = true
+	end
 
 	-- ── Global LSP on_attach function ────────────────────────────────────
 	local function on_attach(client, bufnr)
@@ -84,15 +86,14 @@ later(function()
 		end, opt("Hover documentation"))
 		keymap("n", "<C-k>", lsp.buf.signature_help, opt("Signature help"))
 		keymap("i", "<C-k>", lsp.buf.signature_help, opt("Signature help (insert)"))
-		keymap("n", "<Leader>K", function()
-			-- Alternative hover with more details
-			vim.lsp.buf.hover({ border = "single" })
-		end, opt("Hover (detailed)"))
 
 		-- ── LSP Actions ──────────────────────────────────────────────────
 		keymap({ "n", "v" }, "<Leader>la", lsp.buf.code_action, opt("Code Action"))
 		keymap("n", "<Leader>lA", function()
-			lsp.buf.code_action({ context = { only = { "source" } } })
+			lsp.buf.code_action({
+				context = { only = { "source" }, diagnostics = vim.diagnostic.get(0) },
+				apply = false,
+			})
 		end, opt("Source Actions"))
 		keymap("n", "<Leader>lr", lsp.buf.rename, opt("Rename symbol"))
 		keymap("n", "<Leader>lR", function()
@@ -176,47 +177,28 @@ later(function()
 		end, opt("Toggle diagnostics (global)"))
 		keymap("n", "<Leader>dv", function()
 			local config = vim.diagnostic.config()
+			local current_vt = false
+			if config and config.virtual_text then
+				current_vt = true
+			end
 			vim.diagnostic.config({
-				virtual_text = not config.virtual_text,
+				virtual_text = not current_vt,
 				virtual_lines = false,
 			})
 		end, opt("Toggle virtual text"))
 		keymap("n", "<Leader>dV", function()
 			local config = vim.diagnostic.config()
+			local current_vt = false
+			if config and config.virtual_text then
+				current_vt = true
+			end
 			vim.diagnostic.config({
-				virtual_lines = not config.virtual_lines,
+				virtual_lines = not current_vt,
 				virtual_text = false,
 			})
 		end, opt("Toggle virtual lines"))
 
-		-- ── Telescope Integration (if available) ─────────────────────────
-		local has_telescope = pcall(require, "telescope")
-		if has_telescope then
-			keymap("n", "<Leader>fr", "<cmd>Telescope lsp_references<cr>", opt("Find references"))
-			keymap("n", "<Leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", opt("Document symbols"))
-			keymap("n", "<Leader>fS", "<cmd>Telescope lsp_workspace_symbols<cr>", opt("Workspace symbols"))
-			keymap("n", "<Leader>fd", "<cmd>Telescope diagnostics<cr>", opt("Diagnostics"))
-			keymap("n", "<Leader>fi", "<cmd>Telescope lsp_implementations<cr>", opt("Implementations"))
-			keymap("n", "<Leader>ft", "<cmd>Telescope lsp_type_definitions<cr>", opt("Type definitions"))
-		end
-
-		-- ── Quick Actions ────────────────────────────────────────────────
-		keymap("n", "<Leader>o", function()
-			-- Organize imports (if supported)
-			lsp.buf.code_action({
-				context = { only = { "source.organizeImports" } },
-				apply = true,
-			})
-		end, opt("Organize imports"))
 		keymap("n", "<Leader>rn", lsp.buf.rename, opt("Rename (quick)"))
-
-		-- Format on save (optional - can be enabled per filetype)
-		-- vim.api.nvim_create_autocmd("BufWritePre", {
-		-- 	buffer = bufnr,
-		-- 	callback = function()
-		-- 		lsp.buf.format({ async = false, timeout_ms = 2000 })
-		-- 	end,
-		-- })
 	end
 
 	-- ── Setup lspconfig ──────────────────────────────────────────────────
@@ -238,7 +220,7 @@ later(function()
 			Lua = {
 				format = { enable = false },
 				diagnostics = {
-					globals = { "vim", "spec", "Snacks", "add" },
+					globals = { "vim", "spec", "Snacks", "add", "MiniDeps" },
 					disable = { "missing-fields" },
 				},
 				runtime = {
@@ -248,22 +230,17 @@ later(function()
 				},
 				workspace = {
 					checkThirdParty = false,
-					library = vim.api.nvim_get_runtime_file("", true),
+					library = {
+						vim.env.VIMRUNTIME,
+					},
+					maxPreload = 1000,
+					preloadFileSize = 150,
 				},
-				hint = {
-					enable = true,
-					arrayIndex = "Enable",
-					await = true,
-					paramName = "All",
-					paramType = true,
-					semicolon = "All",
-					setType = false,
-				},
+				hint = { enable = true },
 				telemetry = { enable = false },
 			},
 		},
 	}))
-
 	-- Go
 	lspconfig.gopls.setup(vim.tbl_extend("force", default_config, {
 		settings = {

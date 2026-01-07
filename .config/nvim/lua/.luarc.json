@@ -1,0 +1,17 @@
+{
+	"diagnostics": {
+		"globals": [
+			"vim",
+			"add",
+			"later",
+			"MiniDeps",
+			"spec",
+			"Snacks"
+		]
+	},
+	"workspace": {
+		"library": [
+			"$VIMRUNTIME"
+		]
+	}
+}

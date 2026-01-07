@@ -130,6 +130,14 @@ map("n", "<C-u>", "<C-u>zz")
 active_layout()
 vim.defer_fn(active_layout, 200)
 
+map("n", "<leader>td", function()
+	if vim.o.background == "dark" then
+		vim.o.background = "light"
+	else
+		vim.o.background = "dark"
+	end
+end, { desc = "Toggle Dark/Light Mode" })
+
 -- Optional export if you want to use this in other modules
 return {
 	active_layout = active_layout,

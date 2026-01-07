@@ -87,12 +87,12 @@ vim.notify = require("mini.notify").make_notify()
 
 local keymaps = {
 	{ mode = "n", key = "<Leader><Leader>", fn = "<Cmd>Pick files<CR>", desc = "Pick File" },
-	{ mode = "n", key = "<Leader>g", fn = "<Cmd>Pick grep_live<CR>", desc = "Pick Grep Live" },
-	{ mode = "n", key = "<Leader>o", fn = "<Cmd>Pick oldfiles<CR>", desc = "Pick Old Files" },
-	{ mode = "n", key = "<Leader>b", fn = "<Cmd>Pick buffers<CR>", desc = "Pick Buffers" },
-	{ mode = "n", key = "<Leader>h", fn = "<Cmd>Pick help<CR>", desc = "Pick Help" },
-	{ mode = "n", key = "<Leader>D", fn = "<Cmd>Pick diagnostic<CR>", desc = "Pick Diagnostic" },
-	{ mode = "n", key = "<Leader>H", fn = "<Cmd>Pick hl_groups<CR>", desc = "Highlight" },
+	{ mode = "n", key = "<Leader>pg", fn = "<Cmd>Pick grep_live<CR>", desc = "Pick Grep Live" },
+	{ mode = "n", key = "<Leader>po", fn = "<Cmd>Pick oldfiles<CR>", desc = "Pick Old Files" },
+	{ mode = "n", key = "<Leader>pb", fn = "<Cmd>Pick buffers<CR>", desc = "Pick Buffers" },
+	{ mode = "n", key = "<Leader>ph", fn = "<Cmd>Pick help<CR>", desc = "Pick Help" },
+	{ mode = "n", key = "<Leader>pd", fn = "<Cmd>Pick diagnostic<CR>", desc = "Pick Diagnostic" },
+	{ mode = "n", key = "<Leader>pH", fn = "<Cmd>Pick hl_groups<CR>", desc = "Highlight" },
 
 	-- Utilities
 	{ mode = "n", key = "<Leader>e", fn = "<Cmd>lua MiniFiles.open()<CR>", desc = "Explorer" },

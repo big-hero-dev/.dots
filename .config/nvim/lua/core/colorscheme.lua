@@ -5,8 +5,8 @@ add({ source = "mcchrish/zenbones.nvim", depends = { "rktjmp/lush.nvim" } })
 add({ source = "rebelot/kanagawa.nvim" })
 
 vim.g.zenbones_dark_contrast = "low"
-vim.o.background = "dark"
 vim.cmd([[colorscheme nordbones]])
+vim.o.background = "dark"
 
 local function bg_trans()
 	local groups = {

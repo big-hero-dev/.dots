@@ -7,21 +7,21 @@ harpoon.setup()
 
 local mappings = {
 	{
-		key = "<Leader>ma",
+		key = "<Leader>ha",
 		fn = function()
 			harpoon:list():add()
 		end,
 		desc = "Add to quick menu",
 	},
 	{
-		key = "<Leader>mm",
+		key = "<Leader>hm",
 		fn = function()
 			harpoon.ui:toggle_quick_menu(harpoon:list())
 		end,
 		desc = "Toggle quick menu",
 	},
 	{
-		key = "<Leader>mn",
+		key = "<Leader>hn",
 		fn = function()
 			harpoon:list():select(1)
 		end,
