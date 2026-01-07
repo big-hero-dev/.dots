@@ -1,18 +1,30 @@
 local add = require("mini.deps").add
 
 add({ source = "shaunsingh/nord.nvim" })
+add({ source = "mcchrish/zenbones.nvim", depends = { "rktjmp/lush.nvim" } })
+add({ source = "rebelot/kanagawa.nvim" })
 
-vim.cmd([[colorscheme nord]])
+vim.g.zenbones_dark_contrast = "low"
+vim.o.background = "dark"
+vim.cmd([[colorscheme nordbones]])
 
--- Transparent background
 local function bg_trans()
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-	vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
-	vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
-	vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
+	local groups = {
+		"Normal",
+		"NormalNC",
+		"NormalFloat",
+		"FloatBorder",
+		"TelescopeNormal",
+		"TelescopeBorder",
+		"Pmenu",
+		"SignColumn",
+		"LineNr",
+		"CursorLineNr",
+		"StatusLine",
+	}
+	for _, group in ipairs(groups) do
+		vim.api.nvim_set_hl(0, group, { bg = "none" })
+	end
 end
 
 bg_trans()

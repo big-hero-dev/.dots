@@ -238,20 +238,17 @@ later(function()
 			Lua = {
 				format = { enable = false },
 				diagnostics = {
-					globals = { "vim", "spec", "Snacks" },
-					-- Disable undefined global warnings in certain contexts
-					disable = { "missing-fields", "vim" },
+					globals = { "vim", "spec", "Snacks", "add" },
+					disable = { "missing-fields" },
 				},
 				runtime = {
 					version = "LuaJIT",
 					special = { spec = "require" },
+					path = vim.split(package.path, ";"),
 				},
 				workspace = {
 					checkThirdParty = false,
-					library = {
-						[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-						[vim.fn.stdpath("config") .. "/lua"] = true,
-					},
+					library = vim.api.nvim_get_runtime_file("", true),
 				},
 				hint = {
 					enable = true,

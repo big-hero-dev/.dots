@@ -38,7 +38,6 @@ opt.scrolljump = 5
 opt.sidescrolloff = 8
 opt.signcolumn = "yes"
 opt.winblend = 0
-opt.background = "dark"
 opt.list = true
 opt.title = true
 opt.pumheight = 10

@@ -12,6 +12,7 @@ local mini_basic_plugins = {
 	animate = {},
 	comment = {},
 	cursorword = {},
+	colors = {},
 	extra = {},
 	git = {},
 	pairs = {},
