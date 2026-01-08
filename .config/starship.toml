@@ -109,7 +109,7 @@ truncate_to_repo = true
 use_logical_path = true
 
 [git_branch]
-symbol = ""
+symbol = ""
 style = "bold fg:blue bg:bg2"
 format = '[ $symbol $branch ]($style)'
 only_attached = false
@@ -155,7 +155,7 @@ format = '[\($state( $progress_current/$progress_total)\) ]($style)'
 disabled = false
 
 [c]
-symbol = ""
+symbol = ""
 style = "fg:blue bg:bg2"
 format = '[ $symbol $version ]($style)'
 
@@ -170,37 +170,37 @@ style = "fg:blue bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [nodejs]
-symbol = ""
+symbol = ""
 style = "fg:green bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [php]
-symbol = ""
+symbol = ""
 style = "fg:purple bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [java]
-symbol = ""
+symbol = ""
 style = "fg:red bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [kotlin]
-symbol = ""
+symbol = ""
 style = "fg:purple bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [haskell]
-symbol = ""
+symbol = ""
 style = "fg:purple bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [python]
-symbol = ""
+symbol = ""
 style = "fg:yellow bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [lua]
-symbol = ""
+symbol = ""
 style = "fg:blue bg:bg2"
 format = '[ $symbol $version ]($style)'
 
@@ -211,7 +211,7 @@ format = '[ $symbol $version ]($style)'
 disabled = false
 
 [docker_context]
-symbol = ""
+symbol = ""
 style = "fg:blue bg:bg2"
 format = '[ $symbol $context ]($style)'
 
