@@ -38,6 +38,7 @@ end
 
 require("lualine").setup({
 	options = {
+		theme = "auto",
 		icons_enabled = true,
 		component_separators = "",
 		section_separators = "",
@@ -67,7 +68,7 @@ require("lualine").setup({
 		},
 
 		lualine_x = {
-			{ lsp_status, color = { fg = "#88C0D0", gui = "bold" } },
+			{ lsp_status },
 			"filetype",
 		},
 		lualine_y = {
@@ -78,7 +79,6 @@ require("lualine").setup({
 		},
 	},
 	tabline = {
-
 		lualine_a = {
 			{ "searchcount", separator = { left = "", right = "" } },
 			{
