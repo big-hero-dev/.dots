@@ -1,69 +1,114 @@
-# set modifier
+# ============================================================================
+# i3 Window Manager Configuration - Everforest Dark Theme
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Modifiers & Variables
+# ----------------------------------------------------------------------------
 set $super Mod4
 set $alt Mod1
-
 set $terminal wezterm
 set $browser zen-browser
 
-# set font
-font pango:Ionicons 9, SF Pro Display 9
+# Font Configuration
+font pango:JetBrainsMono Nerd Font 9
 
-# use mouse+$super to drag floating windows to their wanted position
-
+# Floating Window Modifier
 floating_modifier $super
 
-# start a terminal
+# ----------------------------------------------------------------------------
+# Everforest Dark Color Palette
+# ----------------------------------------------------------------------------
+set $bg_dim  #1e2326
+set $bg0     #272e33
+set $bg1     #2e383c
+set $bg2     #374145
+set $bg3     #414b50
+set $bg4     #495464
+set $bg5     #4f5b58
+set $fg      #d3c6aa
+set $red     #e67e80
+set $orange  #e69875
+set $yellow  #dbbc7f
+set $green   #a7c080
+set $aqua    #83c092
+set $blue    #7fbbb3
+set $purple  #d699b6
+set $grey0   #7a8478
+set $grey1   #859289
+
+# ----------------------------------------------------------------------------
+# Window Colors
+# ----------------------------------------------------------------------------
+#                       border   background text   indicator  child_border
+client.focused          $aqua    $aqua      $bg0   $blue      $aqua
+client.focused_inactive $bg3     $bg2       $grey1 $bg3       $bg3
+client.unfocused        $bg1     $bg0       $grey0 $bg1       $bg1
+client.urgent           $red     $red       $fg    $orange    $red
+client.placeholder      $bg0     $bg0       $grey0 $bg0       $bg0
+client.background       $bg0
+
+# ----------------------------------------------------------------------------
+# Key Bindings - Applications
+# ----------------------------------------------------------------------------
+# Terminal
 bindsym $super+Return exec $terminal
 
-# start launcher (a program launcher)
+# Launchers
 bindsym $super+space exec $HOME/.local/share/bin/rofi-launcher d
 bindsym $super+w exec $HOME/.local/share/bin/rofi-launcher w
 bindsym $super+u exec $HOME/.local/share/bin/rofi-launcher u
 bindsym $super+p exec $HOME/.local/share/bin/power-menu
 
-#flameshot
+# Screenshot & Lock
 bindsym Print exec $HOME/.local/share/bin/screenshot
 bindsym $super+l exec $HOME/.local/share/bin/i3lock
 
-# change volume and brightness
+# Color Picker
+bindsym $super+k exec gpick -o -s | tr -d '\n' | xclip -sel c
+
+# ----------------------------------------------------------------------------
+# Key Bindings - Media Controls
+# ----------------------------------------------------------------------------
 bindsym XF86AudioRaiseVolume exec $HOME/.local/share/bin/volume_control --inc
 bindsym XF86AudioLowerVolume exec $HOME/.local/share/bin/volume_control --dec
 bindsym XF86AudioMute exec $HOME/.local/share/bin/volume_control --toggle
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
-# kill focused window
+# ----------------------------------------------------------------------------
+# Key Bindings - Window Management
+# ----------------------------------------------------------------------------
+# Kill focused window
 bindsym $super+q kill
 
-# change focus
+# Change focus (Colemak-DH layout)
 bindsym $super+h focus left
 bindsym $super+n focus down
 bindsym $super+e focus up
 bindsym $super+i focus right
 
-# move focused window
+# Move focused window
 bindsym $super+Shift+h move left
 bindsym $super+Shift+n move down
 bindsym $super+Shift+e move up
 bindsym $super+Shift+i move right
 
-# split in horizontal or vertical orientation
+# Split orientation
 bindsym $super+v split h
 bindsym $super+s split v
 
-# enter fullscreen mode for the focused container
+# Fullscreen toggle
 bindsym $super+f fullscreen toggle
 
-# toggle tiling / floating
+# Floating toggle
 bindsym $super+Shift+f floating toggle
-
-# change focus between tiling / floating windows
 bindsym $super+Shift+space focus mode_toggle
 
-# switch to workspace
-bindsym $super+Right workspace next
-bindsym $super+Left workspace prev
-# Define workspaces with custom names
+# ----------------------------------------------------------------------------
+# Workspace Configuration
+# ----------------------------------------------------------------------------
+# Define workspaces
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -74,7 +119,7 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 
-# Bind keys to workspaces
+# Switch to workspace
 bindsym $super+1 workspace $ws1
 bindsym $super+2 workspace $ws2
 bindsym $super+3 workspace $ws3
@@ -85,7 +130,7 @@ bindsym $super+7 workspace $ws7
 bindsym $super+8 workspace $ws8
 bindsym $super+9 workspace $ws9
 
-# Move focused container to workspace
+# Move container to workspace
 bindsym $super+Shift+1 move container to workspace $ws1
 bindsym $super+Shift+2 move container to workspace $ws2
 bindsym $super+Shift+3 move container to workspace $ws3
@@ -96,80 +141,87 @@ bindsym $super+Shift+7 move container to workspace $ws7
 bindsym $super+Shift+8 move container to workspace $ws8
 bindsym $super+Shift+9 move container to workspace $ws9
 
-# Cycle through workspaces
+# Navigate workspaces
+bindsym $super+Right workspace next
+bindsym $super+Left workspace prev
 bindsym $super+Tab workspace back_and_forth
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $super+Shift+r exec "i3-msg restart"
-
-#gpick
-bindsym $super+k exec gpick -o -s | tr -d '\n' | xclip -sel c
-
-
-# resize window (you can also use the mouse for that)
+# ----------------------------------------------------------------------------
+# Resize Mode
+# ----------------------------------------------------------------------------
 mode "resize" {
-	bindsym Left resize shrink width 5 px or 5 ppt
-	bindsym Down resize shrink height 5 px or 5 ppt
-	bindsym Up resize grow height 5 px or 5 ppt
-	bindsym Right resize grow width 5 px or 5 ppt
-	bindsym Return mode "default"
-	}
+    bindsym h resize shrink width 5 px or 5 ppt
+    bindsym n resize shrink height 5 px or 5 ppt
+    bindsym e resize grow height 5 px or 5 ppt
+    bindsym i resize grow width 5 px or 5 ppt
+
+    bindsym Left resize shrink width 5 px or 5 ppt
+    bindsym Down resize shrink height 5 px or 5 ppt
+    bindsym Up resize grow height 5 px or 5 ppt
+    bindsym Right resize grow width 5 px or 5 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $super+r mode "default"
+}
 bindsym $super+r mode "resize"
 
-# Nord Color Palette
-set $nord0  #2E3440
-set $nord1  #3B4252
-set $nord2  #434C5E
-set $nord3  #4C566A
-set $nord4  #D8DEE9
-set $nord5  #E5E9F0
-set $nord6  #ECEFF4
-set $nord7  #8FBCBB
-set $nord8  #81A1C1
-set $nord9  #5D7481
-set $nord10 #5E81AC
-set $nord11 #BF616A
-set $nord12 #D08770
-set $nord13 #EBCB8B
-set $nord14 #A3BE8C
-set $nord15 #B48EAD
-
-# Window Colors
-#                       border  background text    indicator child_border
-client.focused          $nord9  $nord9     $nord6  $nord9    $nord9
-client.focused_inactive $nord3  $nord1     $nord4  $nord3    $nord3
-client.unfocused        $nord1  $nord0     $nord4  $nord1    $nord1
-client.urgent           $nord11 $nord11    $nord6  $nord11   $nord11
-client.placeholder      $nord0  $nord0     $nord4  $nord0    $nord0
-client.background       $nord0
-
-# i3bar colors
-
-# window rules, you can find the window class using xprop
+# ----------------------------------------------------------------------------
+# Window Rules
+# ----------------------------------------------------------------------------
+# Workspace assignments
 assign [class="org.wezfurlong.wezterm"] → $ws1
 assign [class="firefox|Firefox|firefox-default|zen-beta|zen"] → $ws2
 assign [class="Zalo"] → $ws3
 assign [class="obsidian"] → $ws4
 assign [class="scrcpy"] → $ws5
 
-for_window [class="Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver|Nemo"] floating enable
+# Floating windows
+for_window [class="Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver"] floating enable
+for_window [class="Nemo|Thunar|Pcmanfm"] floating enable
+for_window [class="Pavucontrol|Blueman-manager"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+
+# Focus rules
 for_window [class="Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver|Nemo"] focus
 for_window [class="firefox|Firefox|firefox-default|zen-beta|zen"] focus
 for_window [class="scrcpy"] focus
 
+# Border and gaps
 for_window [class="^.*"] border pixel 7
 focus_on_window_activation focus
-# hide_edge_borders smart
+
+# ----------------------------------------------------------------------------
+# Gaps Configuration
+# ----------------------------------------------------------------------------
 gaps inner 7
 gaps outer 0
 gaps top 0
 smart_gaps on
+smart_borders on
 
-#arandr for home monitor
-exec --no-startup-id $HOME/.screenlayout/Home.sh
+# ----------------------------------------------------------------------------
+# System Configuration
+# ----------------------------------------------------------------------------
+# Restart i3
+bindsym $super+Shift+r restart
 
+# Disable mouse warping
+mouse_warping none
+
+# Window focus follows mouse
+focus_follows_mouse yes
+
+# Workspace auto back and forth
+workspace_auto_back_and_forth no
+
+# ----------------------------------------------------------------------------
+# Autostart Applications
+# ----------------------------------------------------------------------------
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id fastcompmgr
+exec --no-startup-id $HOME/.screenlayout/Home.sh
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id $browser
 exec --no-startup-id $terminal -e tmux

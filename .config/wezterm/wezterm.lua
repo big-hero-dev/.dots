@@ -7,7 +7,7 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.color_scheme = "nord"
+config.color_scheme = "Everforest Dark (Gogh)"
 
 -- Font Settings
 config.font = wezterm.font_with_fallback({

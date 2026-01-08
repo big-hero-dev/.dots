@@ -3,14 +3,18 @@
 add_newline = true
 
 format = """
+[╭─](fg:#7a8478)\
 $os\
 $username\
+[](fg:#374145 bg:#2e383c)\
 $directory\
+[](fg:#2e383c bg:#374145)\
 $git_branch\
 $git_commit\
 $git_status\
 $git_metrics\
-$git_state\
+[](fg:#374145)\
+$fill\
 $c\
 $rust\
 $golang\
@@ -20,270 +24,207 @@ $java\
 $kotlin\
 $haskell\
 $python\
+$lua\
 $package\
+[](fg:#374145)\
 $docker_context\
 $kubernetes\
-$shell\
-$container\
-$jobs\
-$lua\
-$localip\
-$time\
+[](fg:#374145 bg:#2e383c)\
 $cmd_duration\
-$status\
-${battery}\
+$jobs\
+$battery\
+$time\
+[](fg:#2e383c)\
 $line_break\
-$character\
+[╰─](fg:#7a8478)$character\
 """
 
-palette = 'nord'
+palette = 'everforest'
 scan_timeout = 3600
 command_timeout = 3600
 
-[palettes.default]
+[palettes.everforest]
+bg0 = '#272e33'
+bg1 = '#2e383c'
+bg2 = '#374145'
+bg3 = '#414b50'
+fg = '#d3c6aa'
+red = '#e67e80'
+orange = '#e69875'
+yellow = '#dbbc7f'
+green = '#a7c080'
+aqua = '#83c092'
+blue = '#7fbbb3'
+purple = '#d699b6'
+grey = '#7a8478'
 
-color_ok = 'bright-green'
-color_danger = 'bright-red'
-color_caution = 'bright-yellow'
-
-color_os = 'blue'
-color_username = 'red'
-color_directory = 'yellow'
-color_git = 'cyan'
-color_git_added = 'bright-green'
-color_git_deleted = 'bright-red'
-color_env = 'blue'
-color_kubernetes = 'purple'
-color_docker = 'blue'
-color_shell = ''
-color_container = ''
-color_other = ''
-color_time = ''
-color_duration = ''
-
-color_vimcmd_ok = 'green'
-color_vimcmd_replace = 'purple'
-color_vimcmd_visual = 'yellow'
-
-[palettes.nord]
-color_ok = '#A3BE8C'          # green
-color_danger = '#BF616A'      # red
-color_caution = '#EBCB8B'     # yellow
-color_os = '#81A1C1'          # blue
-color_username = '#88C0D0'    # cyan
-color_directory = '#E5E9F0'   # light fg
-color_git = '#81A1C1'         # blue
-color_git_added = '#A3BE8C'   # green
-color_git_deleted = '#BF616A' # red
-color_env = '#88C0D0'         # cyan
-color_kubernetes = '#81A1C1'  # blue
-color_docker = '#88C0D0'      # cyan
-color_shell = '#E5E9F0'       # light fg
-color_container = '#4C566A'   # dark gray
-color_other = '#EBCB8B'       # yellow
-color_time = '#E5E9F0'        # light fg
-color_duration = '#EBCB8B'    # yellow
-color_vimcmd_ok = '#A3BE8C'   # green
-color_vimcmd_replace = '#88C0D0' # cyan
-color_vimcmd_visual = '#EBCB8B'  # yellow
+[fill]
+symbol = " "
 
 [os]
 disabled = false
-style = "fg:color_os"
-format = '[ $symbol]($style)'
+style = "fg:blue bg:bg1"
+format = '[ $symbol ]($style)'
 
 [os.symbols]
 Windows = "󰍲"
 Ubuntu = "󰕈"
-SUSE = ""
+SUSE = ""
 Raspbian = "󰐿"
 Mint = "󰣭"
 Macos = "󰀵"
-Manjaro = ""
+Manjaro = ""
 Linux = "󰌽"
 Gentoo = "󰣨"
 Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
+Alpine = ""
+Amazon = ""
+Android = ""
 Arch = "󰣇"
-CachyOS = ""
+CachyOS = ""
 Artix = "󰣇"
-EndeavourOS = ""
-CentOS = ""
+EndeavourOS = ""
+CentOS = ""
 Debian = "󰣚"
 Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
-Pop = ""
+Pop = ""
 
 [username]
-show_always = false
-style_user = "fg:color_username"
-style_root = "bold fg:color_danger"
-format = '[ $user]($style)'
+show_always = true
+style_user = "bold fg:aqua bg:bg1"
+style_root = "bold fg:red bg:bg1"
+format = '[$user ]($style)'
 
 [directory]
-style = "fg:color_directory"
-read_only_style = "fg:color_directory"
-repo_root_style = "bold fg:color_directory"
-format = " [$path]($style)"
-read_only = "  "
+style = "bold fg:fg bg:bg1"
+read_only_style = "fg:red bg:bg1"
+repo_root_style = "bold fg:yellow bg:bg1"
+format = "[ $path ]($style)[$read_only]($read_only_style)"
+read_only = " 󰌾 "
 home_symbol = "~"
-truncation_symbol = ".. /"
-truncation_length = 0
+truncation_symbol = "…/"
+truncation_length = 3
 truncate_to_repo = true
-fish_style_pwd_dir_length = 0
 use_logical_path = true
 
 [git_branch]
-symbol = ""
-style = "fg:color_git"
-format = ' [($symbol $branch)]($style)'
-only_attached = true
-ignore_branches = []
-truncation_length = 25
-truncation_symbol = "..."
-always_show_remote = false
+symbol = ""
+style = "bold fg:blue bg:bg2"
+format = '[ $symbol $branch ]($style)'
+only_attached = false
+truncation_length = 20
+truncation_symbol = "…"
 disabled = false
 
 [git_commit]
-style = "fg:color_git"
-format = "[ (( $tag)( @$hash))]($style)"
+style = "fg:blue bg:bg2"
+format = '[ @$hash$tag ]($style)'
 commit_hash_length = 7
 only_detached = true
-tag_symbol = "󰓼 "
+tag_symbol = " 󰓼 "
 tag_disabled = false
 disabled = false
 
 [git_status]
-style = "fg:color_git"
-format = '[ ($ahead_behind )($all_status)]($style)'
-stashed = "*${count}"
-ahead = "⇡ ${count}"
-behind = "⇣ ${count}"
+style = "fg:aqua bg:bg2"
+format = '([$all_status$ahead_behind ]($style))'
+stashed = "󰏖 $count "
+ahead = "⇡$count "
+behind = "⇣$count "
 up_to_date = ""
-diverged = "⇡ ${ahead_count}⇣${behind_count}"
-conflicted = "=${count}"
-deleted = "×${count}"
-renamed = "»${count}"
-modified = "!${count}"
-staged = "+${count}"
-untracked = "?${count}"
-ignore_submodules = false
+diverged = "⇕⇡$ahead_count⇣$behind_count "
+conflicted = "=$count "
+deleted = "✘$count "
+renamed = "»$count "
+modified = "●$count "
+staged = "+$count "
+untracked = "?$count "
 disabled = false
 
 [git_metrics]
-format = '[(([+$added]($added_style))([-$deleted]($deleted_style)))](fg:color_git)'
-added_style = "fg:color_git_added"
-deleted_style = "fg:color_git_deleted"
+format = '[+$added]($added_style)[-$deleted]($deleted_style) '
+added_style = "fg:green bg:bg2"
+deleted_style = "fg:red bg:bg2"
 only_nonzero_diffs = true
 disabled = false
 
 [git_state]
-style = "fg:color_danger"
-format = '[($state( $progress_current/$progress_total))]($style bold)'
-rebase = "REBASING"
-merge = "MERGING"
-revert = "REVERTING"
-cherry_pick = "CHERRY-PICKING"
-bisect = "BISECTING"
-am = "AM"
-am_or_rebase = "AM/REBASE"
+style = "bold fg:red bg:bg2"
+format = '[\($state( $progress_current/$progress_total)\) ]($style)'
 disabled = false
 
-[nodejs]
-symbol = ""
-style = "fg:color_env"
-format = '[( $symbol( $version))]($style)'
-
 [c]
-symbol = ""
-style = "fg:color_env"
-format = '[( $symbol( $version))]($style)'
+symbol = ""
+style = "fg:blue bg:bg2"
+format = '[ $symbol $version ]($style)'
 
 [rust]
 symbol = "󱘗"
-style = "fg:color_env"
-format = '[( $symbol( $version))]($style)'
+style = "fg:orange bg:bg2"
+format = '[ $symbol $version ]($style)'
 
 [golang]
 symbol = "󰟓"
-style = "fg:color_env"
-format = '[( $symbol( $version))]($style)'
+style = "fg:blue bg:bg2"
+format = '[ $symbol $version ]($style)'
+
+[nodejs]
+symbol = ""
+style = "fg:green bg:bg2"
+format = '[ $symbol $version ]($style)'
 
 [php]
-symbol = ""
-style = "fg:color_env"
-format = '[( $symbol( $version))]($style)'
+symbol = ""
+style = "fg:purple bg:bg2"
+format = '[ $symbol $version ]($style)'
 
 [java]
-symbol = ""
-style = "fg:color_env"
-format = '[( $symbol( $version))]($style)'
+symbol = ""
+style = "fg:red bg:bg2"
+format = '[ $symbol $version ]($style)'
 
 [kotlin]
-symbol = ""
-style = "fg:color_env"
-format = '[( $symbol( $version) )]($style)'
+symbol = ""
+style = "fg:purple bg:bg2"
+format = '[ $symbol $version ]($style)'
 
 [haskell]
-symbol = ""
-style = "fg:color_env"
-format = '[( $symbol( $version))]($style)'
+symbol = ""
+style = "fg:purple bg:bg2"
+format = '[ $symbol $version ]($style)'
 
 [python]
-symbol = ""
-style = "fg:color_env"
-format = '[( $symbol( $version)( $virtualenv))]($style)'
-version_format = '${raw}'
+symbol = ""
+style = "fg:yellow bg:bg2"
+format = '[ $symbol $version ]($style)'
+
+[lua]
+symbol = ""
+style = "fg:blue bg:bg2"
+format = '[ $symbol $version ]($style)'
 
 [package]
-disabled = false
 symbol = "󰏗"
-style = "fg:color_env"
-format = '[( $symbol( $version))]($style)'
+style = "fg:aqua bg:bg2"
+format = '[ $symbol $version ]($style)'
+disabled = false
 
 [docker_context]
-symbol = ""
-style = "fg:color_docker"
-format = '[( $symbol( $context))]($style)'
+symbol = ""
+style = "fg:blue bg:bg2"
+format = '[ $symbol $context ]($style)'
 
 [kubernetes]
 symbol = "󱃾"
-style = "fg:color_kubernetes"
-format = '[( $symbol( $cluster))]($style)'
+style = "fg:aqua bg:bg2"
+format = '[ $symbol $context/$cluster ]($style)'
 disabled = false
-
-[lua]
-symbol = ""
-style = "fg:blue"
-format = '[ $symbol $version]($style) '
-
-[shell]
-disabled = false
-format = '[  $indicator]($style)'
-bash_indicator = "bash"
-fish_indicator = "fish"
-zsh_indicator = "zsh"
-powershell_indicator = "powershell"
-pwsh_indicator = "psh"
-ion_indicator = "ion"
-elvish_indicator = "elvish"
-tcsh_indicator = "tcsh"
-xonsh_indicator = "xonsh"
-cmd_indicator = "cmd"
-nu_indicator = "nu"
-unknown_indicator = ""
-style = "fg:color_shell"
-
-[container]
-style = "fg:color_container"
-format = '[ $symbol $name]($style)'
 
 [jobs]
 symbol = "󰒋"
-style = "fg:color_other"
-format = '[ $symbol( $number)]($style)'
+style = "bold fg:orange bg:bg1"
+format = '[ $symbol $number ]($style)'
 symbol_threshold = 1
 number_threshold = 1
 
@@ -293,63 +234,56 @@ charging_symbol = "󰂄"
 discharging_symbol = "󰂃"
 unknown_symbol = "󰂑"
 empty_symbol = "󰂎"
-format = '( [$symbol( $percentage)]($style) )'
+format = '[$symbol $percentage ]($style)'
 disabled = false
 
 [[battery.display]]
-threshold = 10
-style = "bold fg:color_danger"
+threshold = 15
+style = "bold fg:red bg:bg1"
 
 [[battery.display]]
-threshold = 20
-style = "fg:color_caution"
+threshold = 30
+style = "bold fg:yellow bg:bg1"
 
 [[battery.display]]
 threshold = 100
-style = "fg:color_other"
+style = "fg:green bg:bg1"
 
 [time]
 disabled = false
-time_format = "%R"
-style = "fg:color_time"
-format = '[ 󰔛 $time]($style)'
+time_format = "%H:%M"
+style = "fg:fg bg:bg1"
+format = '[ 󰥔 $time ]($style)'
 
 [cmd_duration]
-min_time = 2000
-format = '[ 󱫑 $duration]($style)'
-style = 'fg:color_duration'
+min_time = 1000
+format = '[ 󱫑 $duration ]($style)'
+style = 'bold fg:yellow bg:bg1'
 show_milliseconds = false
 disabled = false
 
 [status]
 disabled = false
-format = '[( $symbol( $common_meaning)( $signal_name))]($style)'
+format = '[ $symbol$common_meaning$signal_name ]($style)'
 map_symbol = true
 pipestatus = true
-symbol = '󰅙 '
+symbol = '✗ '
 success_symbol = ''
-not_executable_symbol = '󰂭 '
-not_found_symbol = '󰍉'
-sigint_symbol = '󰐊'
-signal_symbol = '󱐋'
-style = 'bold fg:color_danger'
+not_executable_symbol = '🚫 '
+not_found_symbol = '󰍉 '
+sigint_symbol = '󰐊 '
+signal_symbol = '󱐋 '
+style = 'bold fg:red bg:bg1'
 recognize_signal_code = true
 
 [line_break]
 disabled = false
 
-[localip]
-ssh_only = false
-style = "fg:color_other"
-format = '[ 󰒪 $localipv4]($style)'
-disabled = false
-
 [character]
 disabled = false
-success_symbol = '[❯](bold fg:color_ok)'
-error_symbol = '[❯](bold fg:color_danger)'
-vimcmd_symbol = '[❮](bold fg:color_vimcmd_ok)'
-vimcmd_replace_one_symbol = '[❮](bold fg:color_vimcmd_replace)'
-vimcmd_replace_symbol = '[❮](bold fg:color_vimcmd_replace)'
-vimcmd_visual_symbol = '[❮](bold fg:color_vimcmd_visual)'
-
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:green)'
+vimcmd_replace_one_symbol = '[❮](bold fg:purple)'
+vimcmd_replace_symbol = '[❮](bold fg:purple)'
+vimcmd_visual_symbol = '[❮](bold fg:yellow)'
