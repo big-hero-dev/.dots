@@ -16,7 +16,7 @@ config.font = wezterm.font_with_fallback({
 config.font_size = 16
 
 -- CRT Effect Settings
-config.window_background_opacity = 0.9
+config.window_background_opacity = 1.0
 config.text_background_opacity = 1.0
 
 -- Cursor Style
