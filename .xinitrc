@@ -4,7 +4,7 @@
 #  ╩ ╩╚═╝ ╩ ╚═╝╚═╝ ╩ ╩ ╩╩╚═ ╩
 
 ###############################################################################
-# 1. Input Method – phải export TRƯỚC khi tạo DBus session
+# 1. Input Method
 ###############################################################################
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
@@ -12,7 +12,7 @@ export XMODIFIERS="@im=fcitx"
 export SDL_IM_MODULE=fcitx
 
 ###############################################################################
-# 2. Khởi tạo DBus session – mọi thứ bên dưới phải sống chung bus này
+# 2. Initial DBus session
 ###############################################################################
 exec dbus-run-session sh -c '
 
@@ -38,7 +38,7 @@ exec dbus-run-session sh -c '
   udiskie &                # Automount removable media
 
   ###########################################################################
-  # 6. Window Manager – luôn là dòng CUỐI
+  # 6. Window Manager
   ###########################################################################
   exec i3
 '
