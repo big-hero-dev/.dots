@@ -1,3 +1,4 @@
+---@diagnostic disable: duplicate-set-field
 local add, later = MiniDeps.add, MiniDeps.later
 
 later(function()
@@ -217,6 +218,32 @@ later(function()
 	-- =====================================================================
 	-- Language Servers
 	-- =====================================================================
+	local orig_open_win = vim.api.nvim_open_win
+	function vim.api.nvim_open_win(buf, enter, config)
+		if config.relative then
+			config.border = config.border or "single"
+
+			-- Giới hạn width và height
+			if config.width then
+				config.width = math.min(config.width, 80)
+			end
+			if config.height then
+				config.height = math.min(config.height, 30)
+			end
+		end
+
+		local win = orig_open_win(buf, enter, config)
+
+		-- Set wrap sau khi window được tạo
+		if config.relative and vim.api.nvim_win_is_valid(win) then
+			pcall(function()
+				vim.wo[win].wrap = true
+				vim.wo[win].linebreak = true
+			end)
+		end
+
+		return win
+	end
 
 	-- Lua
 	lspconfig.lua_ls.setup(vim.tbl_extend("force", default_config, {
