@@ -1,5 +1,4 @@
 local add = require("mini.deps").add
-
 add({ source = "sainnhe/everforest" })
 add({ source = "e-ink-colorscheme/e-ink.nvim" })
 
@@ -9,7 +8,6 @@ local function apply_transparency()
 	if not transparency_clon then
 		return
 	end
-
 	local groups = {
 		"Normal",
 		"NormalNC",
@@ -38,9 +36,18 @@ local function set_theme()
 	apply_transparency()
 end
 
-vim.o.background = "light"
+-- Set theme theo giờ khi mở vim
+local hour = tonumber(os.date("%H"))
+-- Tối (18h-6h sáng) -> dark mode
+-- Sáng (6h-18h) -> light mode
+if hour >= 18 or hour < 6 then
+	vim.o.background = "dark"
+else
+	vim.o.background = "light"
+end
 set_theme()
 
+-- Toggle dark/light mode
 vim.keymap.set("n", "td", function()
 	if vim.o.background == "dark" then
 		vim.o.background = "light"
@@ -50,6 +57,7 @@ vim.keymap.set("n", "td", function()
 	set_theme()
 end, { desc = "Toggle Dark/Light Mode" })
 
+-- Toggle transparency
 vim.keymap.set("n", "tt", function()
 	transparency_clon = not transparency_clon
 	set_theme()
