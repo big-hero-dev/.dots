@@ -4,15 +4,6 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd("InsertLeave", { pattern = "*", command = "set nopaste" })
 autocmd("BufWritePre", { pattern = "", command = ":%s/\\s\\+$//e" })
 
-autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function()
-		pcall(function()
-			vim.lsp.buf.format({ async = false })
-		end)
-	end,
-})
-
 -- File type specific settings
 autocmd("Filetype", {
 	pattern = { "xml", "html", "xhtml", "css", "scss", "javascript", "typescript", "yaml", "lua" },

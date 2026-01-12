@@ -1,110 +1,39 @@
-local add = require("mini.deps").add
+local later = require("mini.deps").later
 
-add({
-	source = "hrsh7th/nvim-cmp",
-	depends = {
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-cmdline",
-		"hrsh7th/cmp-nvim-lsp-signature-help",
-		"saadparwaiz1/cmp_luasnip",
-		"dcampos/cmp-emmet-vim",
-		"mattn/emmet-vim",
-	},
-})
+later(function()
+  local cmp = require("cmp")
+  local luasnip = require("luasnip")
 
-add({
-	source = "L3MON4D3/LuaSnip",
-	hooks = {
-		post_install = function(params)
-			vim.notify("Building lua snippets", vim.log.levels.INFO)
-			local result = vim.system({ "make", "install_jsregexp" }, { cwd = params.path }):wait()
-			local level = result.code == 0 and vim.log.levels.INFO or vim.log.levels.ERROR
-			local status = result.code == 0 and "done" or "failed"
-			vim.notify("Building lua snippets " .. status, level)
-		end,
-	},
-	depends = { "rafamadriz/friendly-snippets" },
-})
+  require("luasnip.loaders.from_vscode").lazy_load()
 
--- Codeium
-add({ source = "Exafunction/codeium.nvim", depends = { "nvim-lua/plenary.nvim" } })
-require("codeium").setup()
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        luasnip.lsp_expand(args.body)
+      end,
+    },
 
--- CMP configuration
-local cmp = require("cmp")
-local luasnip = require("luasnip")
+    mapping = cmp.mapping.preset.insert({
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<CR>"] = cmp.mapping.confirm({ select = false }),
+      ["<Tab>"] = cmp.mapping.select_next_item(),
+      ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+    }),
 
-require("luasnip.loaders.from_vscode").lazy_load()
+    sources = {
+      { name = "nvim_lsp" },
+      { name = "luasnip" },
+      { name = "buffer" },
+      { name = "path" },
+    },
 
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-d>"] = cmp.mapping.scroll_docs(4),
-		["<C-u>"] = cmp.mapping.scroll_docs(-4),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-	}),
-	sources = cmp.config.sources({
-		{
-			name = "nvim_lsp",
-			entry_filter = function(entry)
-				return entry:get_kind() ~= 15
-			end,
-		},
-		{ name = "nvim_lsp_signature_help" },
-		{ name = "luasnip" },
-		{ name = "codeium" },
-		{ name = "buffer" },
-		{ name = "path" },
-		{ name = "emmet_vim" },
-	}),
-	enabled = function()
-		if vim.bo.filetype == "minifiles" then
-			return false
-		end
-		return vim.bo.filetype ~= "scss" or vim.fn.getline("."):match("%$") == nil
-	end,
-	window = {
-		completion = {
-			border = "single",
-		},
-		documentation = {
-			border = "single",
-		},
-	},
-})
+    enabled = function()
+      return vim.bo.filetype ~= "minifiles"
+    end,
 
--- Command line completion
-cmp.setup.cmdline("/", {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = { { name = "buffer" } },
-})
-
-cmp.setup.cmdline(":", {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
-})
+    window = {
+      completion = { border = "single" },
+      documentation = { border = "single" },
+    },
+  })
+end)

@@ -46,7 +46,7 @@ opt.splitbelow = true
 opt.splitright = true
 opt.splitkeep = "cursor"
 opt.timeoutlen = 400
-opt.cmdheight = 1
+opt.cmdheight = 2
 opt.shortmess:append("c")
 opt.showcmdloc = "statusline"
 opt.showmode = false
