@@ -2,7 +2,6 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- Basic editor behavior
 autocmd("InsertLeave", { pattern = "*", command = "set nopaste" })
-autocmd("BufWritePre", { pattern = "", command = ":%s/\\s\\+$//e" })
 
 -- File type specific settings
 autocmd("Filetype", {
@@ -29,14 +28,6 @@ autocmd("TextYankPost", {
 		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 1000 })
 	end,
 })
-autocmd(
-	{ "BufWinLeave" },
-	{ pattern = "*", command = "if expand('%') != '' && &buftype != 'terminal' | mkview | endif" }
-)
-autocmd(
-	{ "BufWinEnter" },
-	{ pattern = "*", command = "if expand('%') != '' && &buftype != 'terminal' | silent! loadview | endif" }
-)
 
 -- Special buffer handling
 autocmd("FileType", {
@@ -131,5 +122,23 @@ autocmd("TermOpen", {
 	callback = function()
 		vim.wo.number = false
 		vim.wo.relativenumber = false
+	end,
+})
+
+autocmd("BufWinLeave", {
+	pattern = "*",
+	callback = function()
+		if vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
+			vim.cmd("mkview")
+		end
+	end,
+})
+
+autocmd("BufWinEnter", {
+	pattern = "*",
+	callback = function()
+		if vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
+			pcall(vim.cmd, "loadview")
+		end
 	end,
 })

@@ -1,34 +1,57 @@
 local MiniDeps = require("mini.deps")
+local add = MiniDeps.add
 
-MiniDeps.add({ source = "echasnovski/mini.nvim" })
-MiniDeps.add({ source = "nvim-lualine/lualine.nvim" })
-MiniDeps.add({
-	source = "hrsh7th/nvim-cmp",
+add({ source = "echasnovski/mini.nvim" })
+add({ source = "nvim-lualine/lualine.nvim" })
+add({
+	source = "saghen/blink.cmp",
 	depends = {
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
+		"rafamadriz/friendly-snippets",
 	},
-})
-
-MiniDeps.add({
-	source = "L3MON4D3/LuaSnip",
 	hooks = {
 		post_install = function(params)
-			vim.notify("Building lua snippets", vim.log.levels.INFO)
-			local result = vim.system({ "make", "install_jsregexp" }, { cwd = params.path }):wait()
-			vim.notify("Building lua snippets done", vim.log.levels.INFO)
+			vim.system({ "cargo", "build", "--release" }, { cwd = params.path })
 		end,
 	},
-	depends = { "rafamadriz/friendly-snippets" },
 })
 
-MiniDeps.add({ source = "neovim/nvim-lspconfig" })
-MiniDeps.add({ source = "williamboman/mason.nvim" })
-MiniDeps.add({ source = "williamboman/mason-lspconfig.nvim" })
-MiniDeps.add({ source = "stevearc/conform.nvim" })
+add({ source = "neovim/nvim-lspconfig" })
+add({ source = "williamboman/mason.nvim" })
+add({ source = "williamboman/mason-lspconfig.nvim" })
+add({ source = "stevearc/conform.nvim" })
 
-MiniDeps.add({ source = "dstein64/vim-startuptime" })
+add({ source = "dstein64/vim-startuptime" })
+add({ source = "chrisgrieser/nvim-lsp-endhints" })
+add({ source = "lambdalisue/suda.vim", on_cmd = { "SudaRead", "SudaWrite" } })
+
+add({
+	source = "nvim-treesitter/nvim-treesitter",
+	branch = "main",
+	now = true,
+	hooks = {
+		post_checkout = function()
+			vim.schedule(function()
+				vim.cmd("TSUpdate")
+			end)
+		end,
+	},
+	depends = {
+		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+		"windwp/nvim-ts-autotag",
+		"nvim-treesitter/nvim-treesitter-context",
+	},
+})
+-- add({source= "nvim-treesitter/nvim-treesitter-textobjects"})
+
+add({
+	source = "folke/trouble.nvim",
+})
+
+add({ source = "mbbill/undotree" })
+vim.keymap.set("n", "<leader>u", "<CMD>UndotreeToggle<CR>", { desc = "Toggle Undotree" })
+
+add({ source = "ThePrimeagen/harpoon", checkout = "harpoon2", depends = { "nvim-lua/plenary.nvim" } })
+add({ source = "bassamsdata/namu.nvim" })
 
 MiniDeps.setup()
 
@@ -63,9 +86,6 @@ local config = {
 			line_up = "<M-e>",
 		},
 	},
-	jump2d = {
-		mappings = { start_jumping = "f" },
-	},
 	splitjoin = {},
 	trailspace = {},
 	cursorword = {},
@@ -84,7 +104,6 @@ local config = {
 	},
 }
 
--- Thứ tự khởi tạo có chủ đích
 local order = {
 	"basics",
 	"icons",

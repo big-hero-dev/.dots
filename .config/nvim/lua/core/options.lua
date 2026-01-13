@@ -6,6 +6,8 @@ vim.g.netrw_browsex_viewer = "xdg-open"
 vim.g.netrw_liststyle = 3
 vim.g.netrw_winsize = 25
 vim.g.editorconfig = false
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
 vim.g.clipboard = {
 	name = "xclip",
 	copy = {
@@ -46,7 +48,7 @@ opt.splitbelow = true
 opt.splitright = true
 opt.splitkeep = "cursor"
 opt.timeoutlen = 400
-opt.cmdheight = 2
+opt.cmdheight = 1
 opt.shortmess:append("c")
 opt.showcmdloc = "statusline"
 opt.showmode = false
@@ -110,6 +112,7 @@ vim.diagnostic.config({
 		scope = "cursor",
 		border = "single",
 		header = "",
+		source = "if_many",
 	},
 	underline = true,
 	jump = {
