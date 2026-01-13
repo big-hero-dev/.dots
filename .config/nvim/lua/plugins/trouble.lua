@@ -27,3 +27,6 @@ vim.keymap.set("n", "<leader>tq", "<cmd>Trouble quickfix toggle<cr>", {
 vim.keymap.set("n", "gr", "<cmd>Trouble lsp_references toggle<cr>", {
 	desc = "LSP references",
 })
+
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Diag: prev" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Diag: next" })

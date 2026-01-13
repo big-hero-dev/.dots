@@ -30,7 +30,6 @@ opt.mouse = "a"
 opt.wrap = false
 opt.swapfile = false
 opt.backup = false
-opt.compatible = false
 opt.undofile = true
 opt.hlsearch = false
 opt.incsearch = true

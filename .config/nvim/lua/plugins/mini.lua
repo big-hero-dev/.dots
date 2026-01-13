@@ -58,6 +58,7 @@ vim.keymap.set("n", "<leader>u", "<CMD>UndotreeToggle<CR>", { desc = "Toggle Und
 add({ source = "ThePrimeagen/harpoon", checkout = "harpoon2", depends = { "nvim-lua/plenary.nvim" } })
 add({ source = "bassamsdata/namu.nvim" })
 
+add({ source = "tpope/vim-fugitive" })
 add({
 	source = "lewis6991/gitsigns.nvim",
 	event = { "BufReadPre", "BufNewFile" },
@@ -73,7 +74,10 @@ MiniDeps.setup()
 -- ======================
 
 local config = {
+	ai = {},
 	basics = {},
+	bracketed = {},
+	diff = {},
 	icons = {},
 	notify = {},
 	tabline = {},
