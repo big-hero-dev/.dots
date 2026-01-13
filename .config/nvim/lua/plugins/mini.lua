@@ -1,4 +1,7 @@
 local MiniDeps = require("mini.deps")
+
+MiniDeps.setup()
+
 local add = MiniDeps.add
 
 add({ source = "echasnovski/mini.nvim" })
@@ -48,9 +51,7 @@ add({
 })
 -- add({source= "nvim-treesitter/nvim-treesitter-textobjects"})
 
-add({
-	source = "folke/trouble.nvim",
-})
+add({ source = "folke/trouble.nvim" })
 
 add({ source = "mbbill/undotree" })
 vim.keymap.set("n", "<leader>u", "<CMD>UndotreeToggle<CR>", { desc = "Toggle Undotree" })
@@ -67,16 +68,12 @@ add({
 	end,
 })
 
-MiniDeps.setup()
-
 -- ======================
 -- Mini module configs
 -- ======================
 
 local config = {
-	ai = {},
 	basics = {},
-	bracketed = {},
 	diff = {},
 	icons = {},
 	notify = {},
@@ -176,6 +173,8 @@ clue.setup({
 vim.keymap.set("n", "<Leader><Leader>", "<Cmd>Pick files<CR>", { desc = "Pick files" })
 vim.keymap.set("n", "<Leader>pg", "<Cmd>Pick grep_live<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<Leader>pb", "<Cmd>Pick buffers<CR>", { desc = "Buffers" })
+vim.keymap.set("n", "<Leader>ph", "<Cmd>Pick help<CR>", { desc = "Pick Help" })
+
 vim.keymap.set("n", "<Leader>e", function()
 	require("mini.files").open()
 end, { desc = "Explorer" })

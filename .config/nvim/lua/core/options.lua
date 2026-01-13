@@ -113,7 +113,7 @@ vim.diagnostic.config({
 		header = "",
 		source = "if_many",
 	},
-	underline = true,
+	underline = false,
 	jump = {
 		float = true,
 	},
