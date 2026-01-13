@@ -5,13 +5,18 @@ add({ source = "echasnovski/mini.nvim" })
 add({ source = "nvim-lualine/lualine.nvim" })
 add({
 	source = "saghen/blink.cmp",
-	depends = {
-		"rafamadriz/friendly-snippets",
-	},
 	hooks = {
 		post_install = function(params)
 			vim.system({ "cargo", "build", "--release" }, { cwd = params.path })
 		end,
+	},
+})
+
+add({
+	source = "L3MON4D3/LuaSnip",
+	version = "v2.*",
+	depends = {
+		"rafamadriz/friendly-snippets",
 	},
 })
 
@@ -52,6 +57,14 @@ vim.keymap.set("n", "<leader>u", "<CMD>UndotreeToggle<CR>", { desc = "Toggle Und
 
 add({ source = "ThePrimeagen/harpoon", checkout = "harpoon2", depends = { "nvim-lua/plenary.nvim" } })
 add({ source = "bassamsdata/namu.nvim" })
+
+add({
+	source = "lewis6991/gitsigns.nvim",
+	event = { "BufReadPre", "BufNewFile" },
+	cond = function()
+		return vim.fn.isdirectory(".git") == 1
+	end,
+})
 
 MiniDeps.setup()
 

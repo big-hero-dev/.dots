@@ -42,6 +42,12 @@ blink.setup({
 	},
 
 	sources = {
-		default = { "lsp", "buffer", "path" },
+		default = { "lsp", "snippets", "buffer", "path" },
+	},
+
+	snippets = {
+		expand = function(snippet)
+			require("luasnip").lsp_expand(snippet)
+		end,
 	},
 })
