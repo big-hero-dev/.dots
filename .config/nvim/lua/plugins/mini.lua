@@ -31,6 +31,7 @@ add({ source = "stevearc/conform.nvim" })
 add({ source = "dstein64/vim-startuptime" })
 add({ source = "chrisgrieser/nvim-lsp-endhints" })
 add({ source = "lambdalisue/suda.vim", on_cmd = { "SudaRead", "SudaWrite" } })
+add({ source = "stevearc/aerial.nvim" })
 
 add({
 	source = "nvim-treesitter/nvim-treesitter",
@@ -57,7 +58,6 @@ add({ source = "mbbill/undotree" })
 vim.keymap.set("n", "<leader>u", "<CMD>UndotreeToggle<CR>", { desc = "Toggle Undotree" })
 
 add({ source = "ThePrimeagen/harpoon", checkout = "harpoon2", depends = { "nvim-lua/plenary.nvim" } })
-add({ source = "bassamsdata/namu.nvim" })
 
 add({ source = "tpope/vim-fugitive" })
 add({
@@ -126,7 +126,6 @@ local order = {
 	"pairs",
 	"surround",
 	"move",
-	"jump2d",
 	"splitjoin",
 	"trailspace",
 	"cursorword",

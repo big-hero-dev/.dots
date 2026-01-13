@@ -8,6 +8,7 @@ local servers = {
 	"jsonls",
 	"dockerls",
 	"intelephense",
+	-- "phpactor",
 }
 
 require("mason-lspconfig").setup({
@@ -82,6 +83,19 @@ vim.lsp.config("intelephense", {
 				maxSize = 1000000,
 			},
 			diagnostics = { enable = true },
+			logging = { level = "verbose" },
+		},
+	},
+})
+
+vim.lsp.config("phpactor", {
+	capabilities = capabilities,
+	on_attach = on_attach,
+	settings = {
+		phpactor = {
+			useComposer = true,
+			php_version = "8.1",
+			memory_limit = 2048,
 		},
 	},
 })
