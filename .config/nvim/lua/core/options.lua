@@ -114,9 +114,6 @@ vim.diagnostic.config({
 		source = "if_many",
 	},
 	underline = false,
-	jump = {
-		float = true,
-	},
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = "E",
@@ -127,4 +124,14 @@ vim.diagnostic.config({
 	},
 	update_in_insert = false,
 	severity_sort = true,
+})
+
+vim.filetype.add({
+	extension = {
+		templ = "templ",
+	},
+	pattern = {
+		[".*%.jsx"] = "javascriptreact",
+		[".*%.tsx"] = "typescriptreact",
+	},
 })

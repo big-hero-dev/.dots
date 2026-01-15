@@ -4,17 +4,17 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd("InsertLeave", { pattern = "*", command = "set nopaste" })
 
 -- File type specific settings
-autocmd("Filetype", {
+autocmd("FileType", {
 	pattern = { "xml", "html", "xhtml", "css", "scss", "javascript", "typescript", "yaml", "lua" },
-	callback = function()
+	callback = function(_)
 		vim.opt_local.shiftwidth = 2
 		vim.opt_local.tabstop = 2
 	end,
 })
-autocmd("Filetype", { pattern = { "python", "rst", "c", "cpp", "php" }, command = "set colorcolumn=80" })
-autocmd("Filetype", {
+
+autocmd("FileType", {
 	pattern = { "gitcommit", "markdown", "text", "NeogitCommitMessage" },
-	callback = function()
+	callback = function(_)
 		vim.opt_local.wrap = true
 		vim.opt_local.spell = false
 	end,

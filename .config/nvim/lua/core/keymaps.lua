@@ -42,7 +42,6 @@ map("n", "<leader>lc", toggle_layout, { desc = "Toggle Colemak layout" })
 map("n", "x", '"_x')
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit file" })
-map("n", "<leader>x", "<cmd>bd<cr>", { desc = "Close buffer" })
 map("n", "+", "<C-a>")
 map("n", "-", "<C-x>")
 

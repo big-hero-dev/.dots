@@ -5,7 +5,6 @@ MiniDeps.setup()
 local add = MiniDeps.add
 
 add({ source = "echasnovski/mini.nvim" })
-add({ source = "nvim-lualine/lualine.nvim" })
 add({
 	source = "saghen/blink.cmp",
 	hooks = {
@@ -31,7 +30,6 @@ add({ source = "stevearc/conform.nvim" })
 add({ source = "dstein64/vim-startuptime" })
 add({ source = "chrisgrieser/nvim-lsp-endhints" })
 add({ source = "lambdalisue/suda.vim", on_cmd = { "SudaRead", "SudaWrite" } })
-add({ source = "stevearc/aerial.nvim" })
 
 add({
 	source = "nvim-treesitter/nvim-treesitter",
@@ -50,7 +48,6 @@ add({
 		"nvim-treesitter/nvim-treesitter-context",
 	},
 })
--- add({source= "nvim-treesitter/nvim-treesitter-textobjects"})
 
 add({ source = "folke/trouble.nvim" })
 
@@ -59,7 +56,6 @@ vim.keymap.set("n", "<leader>u", "<CMD>UndotreeToggle<CR>", { desc = "Toggle Und
 
 add({ source = "ThePrimeagen/harpoon", checkout = "harpoon2", depends = { "nvim-lua/plenary.nvim" } })
 
-add({ source = "tpope/vim-fugitive" })
 add({
 	source = "lewis6991/gitsigns.nvim",
 	event = { "BufReadPre", "BufNewFile" },
@@ -74,9 +70,46 @@ add({
 
 local config = {
 	basics = {},
-	diff = {},
 	icons = {},
+	git = {},
+	diff = {},
 	notify = {},
+	statusline = {
+		content = {
+			active = function()
+				local MiniStatusline = require("mini.statusline")
+				local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+				local git = MiniStatusline.section_git({ trunc_width = 40 })
+				local diff = MiniStatusline.section_diff({ trunc_width = 75 })
+				local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+				local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+				local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+				local location = "%p%%"
+
+				-- LSP names
+				local lsp = ""
+				local clients = vim.lsp.get_clients({ bufnr = 0 })
+				if #clients > 0 then
+					local names = {}
+					for _, c in ipairs(clients) do
+						table.insert(names, c.name)
+					end
+					lsp = "󰭆 " .. table.concat(names, " ")
+				end
+				mode = mode:upper()
+
+				return MiniStatusline.combine_groups({
+					{ hl = mode_hl, strings = { mode } },
+					{ hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics, lsp } },
+					"%<", -- Mark general truncate point
+					{ hl = "MiniStatuslineFilename", strings = { filename } },
+					"%=", -- End left alignment
+					{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+					{ hl = mode_hl, strings = { location } },
+				})
+			end,
+		},
+	},
 	tabline = {},
 	files = {
 		mappings = {
@@ -116,12 +149,18 @@ local config = {
 			hex_color = require("mini.hipatterns").gen_highlighter.hex_color(),
 		},
 	},
+	bufremove = {},
 }
 
 local order = {
 	"basics",
 	"icons",
 	"notify",
+	"git",
+	"diff",
+	"statusline",
+	"tabline",
+	"bufremove",
 	"comment",
 	"pairs",
 	"surround",
@@ -146,6 +185,14 @@ end
 vim.notify = require("mini.notify").make_notify()
 
 -- ======================
+-- Mini.bufremove keymaps
+-- ======================
+
+vim.keymap.set("n", "<leader>x", function()
+	require("mini.bufremove").delete()
+end, { desc = "Buffer: Delete" })
+
+-- ======================
 -- Mini.clue
 -- ======================
 
@@ -166,6 +213,9 @@ clue.setup({
 		clue.gen_clues.g(),
 		clue.gen_clues.windows(),
 		clue.gen_clues.z(),
+
+		-- Buffer clues
+		{ mode = "n", keys = "<Leader>x", desc = "Buff delete" },
 	},
 })
 
@@ -177,6 +227,7 @@ vim.keymap.set("n", "<Leader>ph", "<Cmd>Pick help<CR>", { desc = "Pick Help" })
 vim.keymap.set("n", "<Leader>e", function()
 	require("mini.files").open()
 end, { desc = "Explorer" })
+
 vim.keymap.set("n", "<Leader>ll", function()
 	require("mini.trailspace").trim()
 end, { desc = "Trim trailing space" })
@@ -185,7 +236,6 @@ end, { desc = "Trim trailing space" })
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function()
-		-- Skip for certain filetypes
 		local exclude_ft = { "markdown", "text" }
 		if vim.tbl_contains(exclude_ft, vim.bo.filetype) then
 			return
