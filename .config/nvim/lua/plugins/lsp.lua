@@ -1,5 +1,14 @@
 require("mason").setup()
 
+local border = "single"
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+	opts = opts or {}
+	opts.border = opts.border or border
+	return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
 local servers = {
 	"lua_ls",
 	"ts_ls",
@@ -32,13 +41,28 @@ local function on_attach(client, bufnr)
 		vim.lsp.buf.hover({ border = "single", max_height = 30, max_width = 120 })
 	end, "LSP: Hover")
 
+	map("n", "<C-k>", function()
+		vim.lsp.buf.signature_help({ border = "single" })
+	end, "LSP: Signature help")
+
+	map("i", "<C-k>", function()
+		vim.lsp.buf.signature_help({ border = "single" })
+	end, "LSP: Signature help")
+
 	map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: Rename")
 	map({ "n", "v" }, "ga", vim.lsp.buf.code_action, "LSP: Code action")
 	map("n", "<leader>f", function()
 		vim.lsp.buf.format({ async = true })
 	end, "LSP: Format")
 
-	-- Auto show diagnostics on cursor hold
+	map("n", "<leader>th", function()
+		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
+	end, "LSP: Toggle inlay hints")
+
+	if client.server_capabilities.inlayHintProvider then
+		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+	end
+
 	vim.api.nvim_create_autocmd("CursorHold", {
 		buffer = bufnr,
 		callback = function()
@@ -52,7 +76,6 @@ local function on_attach(client, bufnr)
 		end,
 	})
 
-	-- Highlight symbol under cursor
 	if client.server_capabilities.documentHighlightProvider then
 		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 			buffer = bufnr,
@@ -65,7 +88,6 @@ local function on_attach(client, bufnr)
 	end
 end
 
--- Lua
 vim.lsp.config("lua_ls", {
 	capabilities = capabilities,
 	on_attach = on_attach,
@@ -90,6 +112,10 @@ vim.lsp.config("lua_ls", {
 			hint = {
 				enable = true,
 				semicolon = "Disable",
+				setType = true,
+				paramType = true,
+				paramName = "All",
+				arrayIndex = "Enable",
 			},
 			codeLens = { enable = true },
 			telemetry = { enable = false },
@@ -97,7 +123,6 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
--- PHP - Intelephense
 vim.lsp.config("intelephense", {
 	capabilities = capabilities,
 	on_attach = on_attach,
@@ -108,12 +133,23 @@ vim.lsp.config("intelephense", {
 				maxSize = 1000000,
 			},
 			diagnostics = { enable = true },
+			inlayHints = {
+				parameterNames = {
+					enabled = "all",
+					suppressWhenArgumentMatchesName = false,
+				},
+				functionReturnValues = {
+					enabled = true,
+				},
+				propertyDeclarationTypes = {
+					enabled = true,
+				},
+			},
 			logging = { level = "verbose" },
 		},
 	},
 })
 
--- TypeScript/JavaScript
 vim.lsp.config("ts_ls", {
 	capabilities = capabilities,
 	on_attach = on_attach,
@@ -122,6 +158,9 @@ vim.lsp.config("ts_ls", {
 			includeInlayParameterNameHints = "all",
 			includeInlayFunctionParameterTypeHints = true,
 			includeInlayVariableTypeHints = true,
+			includeInlayPropertyDeclarationTypeHints = true,
+			includeInlayFunctionLikeReturnTypeHints = true,
+			includeInlayEnumMemberValueHints = true,
 		},
 	},
 	filetypes = {
@@ -134,7 +173,6 @@ vim.lsp.config("ts_ls", {
 	},
 })
 
--- HTML
 vim.lsp.config("html", {
 	capabilities = capabilities,
 	on_attach = on_attach,
@@ -146,7 +184,6 @@ vim.lsp.config("html", {
 	filetypes = { "html", "templ" },
 })
 
--- CSS/SCSS/LESS
 vim.lsp.config("cssls", {
 	capabilities = capabilities,
 	on_attach = on_attach,
@@ -160,7 +197,6 @@ vim.lsp.config("cssls", {
 	},
 })
 
--- JSON
 vim.lsp.config("jsonls", {
 	capabilities = capabilities,
 	on_attach = on_attach,
@@ -169,18 +205,15 @@ vim.lsp.config("jsonls", {
 	},
 })
 
--- Docker
 vim.lsp.config("dockerls", {
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
 
--- Enable all configured servers
 for _, name in ipairs(servers) do
 	vim.lsp.enable(name)
 end
 
--- Global diagnostic config
 vim.diagnostic.config({
 	virtual_text = {
 		prefix = "●",
@@ -198,7 +231,6 @@ vim.diagnostic.config({
 	},
 })
 
--- Diagnostic signs
 local signs = {
 	{ name = "DiagnosticSignError", text = "" },
 	{ name = "DiagnosticSignWarn", text = "" },
@@ -209,3 +241,9 @@ local signs = {
 for _, sign in ipairs(signs) do
 	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
+
+vim.api.nvim_set_hl(0, "LspInlayHint", {
+	fg = "#7c7c7c",
+	bg = "NONE",
+	italic = true,
+})
