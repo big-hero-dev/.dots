@@ -180,3 +180,18 @@ end, { desc = "Explorer" })
 vim.keymap.set("n", "<Leader>ll", function()
 	require("mini.trailspace").trim()
 end, { desc = "Trim trailing space" })
+
+-- Auto trim with exclusions
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function()
+		-- Skip for certain filetypes
+		local exclude_ft = { "markdown", "text" }
+		if vim.tbl_contains(exclude_ft, vim.bo.filetype) then
+			return
+		end
+
+		require("mini.trailspace").trim()
+		require("mini.trailspace").trim_last_lines()
+	end,
+})

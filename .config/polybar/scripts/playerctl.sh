@@ -1,32 +1,114 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-MAX_LENGTH=50
-MUSIC_ICON=""
+# ============================================================================
+# Polybar Playerctl Script - Multi-player Support
+# ============================================================================
 
-truncate_text() {
-    local text="$1"
+MAX_LENGTH=40
 
-    if command -v python3 >/dev/null 2>&1; then
-        echo "$text" | python3 -c "
-text = input()
-if len(text) > $MAX_LENGTH:
-    print(text[:$((MAX_LENGTH-3))] + '...')
-else:
-    print(text)
-"
-    else
-        if [ ${#text} -gt $MAX_LENGTH ]; then
-            echo "${text:0:$((MAX_LENGTH/2))}..."
-        else
-            echo "$text"
-        fi
+# Check playerctl exists
+if ! command -v playerctl &> /dev/null; then
+    exit 0
+fi
+
+# Priority order for players (customize as needed)
+PRIORITY_PLAYERS=(
+    "spotify"
+    "vlc"
+    "mpv"
+    "chromium"
+    "firefox"
+    "brave"
+)
+
+# ============================================================================
+# Find active player
+# ============================================================================
+
+get_active_player() {
+    local players=$(playerctl -l 2>/dev/null)
+
+    if [ -z "$players" ]; then
+        return 1
     fi
+
+    # First, check priority players
+    for priority in "${PRIORITY_PLAYERS[@]}"; do
+        for player in $players; do
+            if [[ "$player" == "$priority"* ]]; then
+                local status=$(playerctl -p "$player" status 2>/dev/null)
+                if [ "$status" = "Playing" ]; then
+                    echo "$player"
+                    return 0
+                fi
+            fi
+        done
+    done
+
+    # If no priority player is playing, check any playing player
+    for player in $players; do
+        local status=$(playerctl -p "$player" status 2>/dev/null)
+        if [ "$status" = "Playing" ]; then
+            echo "$player"
+            return 0
+        fi
+    done
+
+    # If nothing is playing, check for paused
+    for player in $players; do
+        local status=$(playerctl -p "$player" status 2>/dev/null)
+        if [ "$status" = "Paused" ]; then
+            echo "$player"
+            return 0
+        fi
+    done
+
+    # Return first player as fallback
+    echo "$players" | head -n1
+    return 0
 }
 
-status=$(playerctl status 2>/dev/null)
-title=$(playerctl metadata title 2>/dev/null)
+# ============================================================================
+# Main Logic
+# ============================================================================
 
-if [ "$status" = "Playing" ] && [ -n "$title" ]; then
-    title=$(truncate_text "$title")
-    echo "$MUSIC_ICON $title"
+ACTIVE_PLAYER=$(get_active_player)
+
+if [ -z "$ACTIVE_PLAYER" ]; then
+    exit 0
 fi
+
+# Get metadata from active player
+STATUS=$(playerctl -p "$ACTIVE_PLAYER" status 2>/dev/null)
+TITLE=$(playerctl -p "$ACTIVE_PLAYER" metadata title 2>/dev/null)
+ARTIST=$(playerctl -p "$ACTIVE_PLAYER" metadata artist 2>/dev/null)
+
+# Exit if no title
+if [ -z "$TITLE" ]; then
+    exit 0
+fi
+
+# Build output
+if [ -n "$ARTIST" ]; then
+    OUTPUT="${ARTIST} - ${TITLE}"
+else
+    OUTPUT="${TITLE}"
+fi
+
+# Truncate
+if [ ${#OUTPUT} -gt $MAX_LENGTH ]; then
+    OUTPUT="${OUTPUT:0:$((MAX_LENGTH-1))}…"
+fi
+
+# Show with icon based on status
+case "$STATUS" in
+    Playing)
+        echo "%{F#a7c080}󰐊%{F-} $OUTPUT"
+        ;;
+    Paused)
+        echo "%{F#dbbc7f}󰏤%{F-} $OUTPUT"
+        ;;
+    *)
+        exit 0
+        ;;
+esac
