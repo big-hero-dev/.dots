@@ -68,6 +68,8 @@ add({
 -- Mini module configs
 -- ======================
 
+local MiniStatusline = require("mini.statusline")
+
 local config = {
 	basics = {},
 	icons = {},
@@ -77,7 +79,6 @@ local config = {
 	statusline = {
 		content = {
 			active = function()
-				local MiniStatusline = require("mini.statusline")
 				local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
 				local git = MiniStatusline.section_git({ trunc_width = 40 })
 				local diff = MiniStatusline.section_diff({ trunc_width = 75 })
