@@ -1,13 +1,6 @@
 require("mason").setup()
 
-local border = "single"
-
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-	opts = opts or {}
-	opts.border = opts.border or border
-	return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end
+local border = "rounded"
 
 local servers = {
 	"lua_ls",
@@ -38,15 +31,15 @@ local function on_attach(client, bufnr)
 	map("n", "gt", vim.lsp.buf.type_definition, "LSP: Type definition")
 
 	map("n", "K", function()
-		vim.lsp.buf.hover({ border = "single", max_height = 30, max_width = 120 })
+		vim.lsp.buf.hover({ border = border, max_height = 30, max_width = 120 })
 	end, "LSP: Hover")
 
 	map("n", "<C-k>", function()
-		vim.lsp.buf.signature_help({ border = "single" })
+		vim.lsp.buf.signature_help({ border = border })
 	end, "LSP: Signature help")
 
 	map("i", "<C-k>", function()
-		vim.lsp.buf.signature_help({ border = "single" })
+		vim.lsp.buf.signature_help({ border = border })
 	end, "LSP: Signature help")
 
 	map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: Rename")
@@ -68,7 +61,7 @@ local function on_attach(client, bufnr)
 		callback = function()
 			local opts = {
 				focusable = true,
-				border = "single",
+				border = border,
 				scope = "cursor",
 				source = "if_many",
 			}
@@ -216,31 +209,20 @@ end
 
 vim.diagnostic.config({
 	virtual_text = {
-		prefix = "●",
 		source = "if_many",
 	},
-	signs = true,
 	underline = true,
 	update_in_insert = false,
 	severity_sort = true,
 	float = {
-		border = "single",
+		border = border,
 		source = "if_many",
 		header = "",
 		prefix = "",
+		close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
 	},
+	signs = true,
 })
-
-local signs = {
-	{ name = "DiagnosticSignError", text = "" },
-	{ name = "DiagnosticSignWarn", text = "" },
-	{ name = "DiagnosticSignHint", text = "" },
-	{ name = "DiagnosticSignInfo", text = "" },
-}
-
-for _, sign in ipairs(signs) do
-	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
 
 vim.api.nvim_set_hl(0, "LspInlayHint", {
 	fg = "#7c7c7c",

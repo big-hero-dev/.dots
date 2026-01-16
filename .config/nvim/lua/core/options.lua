@@ -102,30 +102,6 @@ vim.cmd("syntax enable")
 opt.errorbells = false
 opt.visualbell = true
 
-vim.diagnostic.config({
-	virtual_text = true,
-	virtual_lines = false,
-	float = {
-		focusable = false,
-		close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-		scope = "cursor",
-		border = "single",
-		header = "",
-		source = "if_many",
-	},
-	underline = false,
-	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = "E",
-			[vim.diagnostic.severity.WARN] = "W",
-			[vim.diagnostic.severity.INFO] = "I",
-			[vim.diagnostic.severity.HINT] = "H",
-		},
-	},
-	update_in_insert = false,
-	severity_sort = true,
-})
-
 vim.filetype.add({
 	extension = {
 		templ = "templ",

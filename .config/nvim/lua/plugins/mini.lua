@@ -214,9 +214,6 @@ clue.setup({
 		clue.gen_clues.g(),
 		clue.gen_clues.windows(),
 		clue.gen_clues.z(),
-
-		-- Buffer clues
-		{ mode = "n", keys = "<Leader>x", desc = "Buff delete" },
 	},
 })
 
@@ -246,3 +243,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		require("mini.trailspace").trim_last_lines()
 	end,
 })
+
+vim.keymap.set("n", "<Leader>U", "<cmd>DepsUpdate<cr>", { desc = "DepsUpdate" })
