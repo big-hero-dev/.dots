@@ -1,8 +1,11 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = nvim
+	fsmonitor = true
+	quotepath = false
 [push]
-	default = simple
+	default = current
+	followTags = true
 [color]
 	status = auto
 	diff = auto
@@ -10,60 +13,58 @@
 	interactive = auto
 	grep = auto
 	ui = auto
+
 [alias]
-	dot = "!git --git-dir=$HOME/.dots --work-tree=$HOME"
-	aa = add -A .
-	amend = commit --amend -m
-	ba = branch -a
-	bm = branch --merged
-	bn = branch --no-merged
-	br = branch
-	brd = branch -d
-	ca = commit -a
-	cl = clone
-	cm = commit -m
-	ci = commit
+	# --- ESSENTIAL SHORTHANDS ---
+	st = status
 	co = checkout
 	cob = checkout -b
-	coo = !git fetch && git checkout
-	cp = cherry-pick
-	d = diff
-	df = "!git hist | peco | awk '{print $2}' | xargs -I {} git diff {}^ {}"
-	dump = cat-file -p
-	find = "!f() { git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative -S'pretty' -S\"$@\" | peco | awk '{print $1}' | xargs -I {} git diff {}^ {}; }; f"
-	fush = "!git push origin $(git rev-parse --abbrev-ref HEAD) -f"
-	fix = commit --fixup
-	hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all
-	llog = log --graph --name-status --pretty=format:\"%C(red)%h %C(reset)(%cd) %C(green)%an %Creset%s %C(yellow)%d%Creset\" --date=relative
+	cm = commit -m
+	aa = add -A .
+	br = branch
+
+	# --- SMART SYNCING (No need to type branch name) ---
+	# Pull from origin of the current branch
 	pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
+	# Push to origin of the current branch
 	ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
-	undo = reset HEAD~1
-	st = status
-	rv = revert
-	rb = rebase
-	rbc = rebase --continue
-	rba = rebase --abort
-	rb = rebase --skip
-	rl = reflog
-	mg = merge --no-ff
-	save = stash push
-	pop = stash pop
-	apply = stash apply
-	type = cat-file -t
-	# edit conflicted file on merge
-	edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
-	# add conflicted file on merge
-	add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+	# Force push current branch (use with caution)
+	fush = "!git push origin $(git rev-parse --abbrev-ref HEAD) -f"
+
+	# --- POWERFUL WORKFLOWS ---
+	# Fast-fix the last commit (great for typos or forgotten files)
+	amend = commit --amend --no-edit
+	# Undo the last commit, but keep your work staged
+	undo = reset --soft HEAD~1
+	# The most readable log view (History)
+	hist = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+	# --- MERGE CONFLICTS ---
+	# Open all files with conflicts in Neovim
+	edit-unmerged = "!nvim $(git ls-files --unmerged | cut -f2 | sort -u)"
+	# Add all resolved files after a conflict
+	add-unmerged = "!git ls-files --unmerged | cut -f2 | sort -u | xargs git add"
+
+	# --- UTILS ---
+	# Manage your dotfiles
+	dot = "!git --git-dir=$HOME/.dots --work-tree=$HOME"
+	# Clean up merged local branches to keep things tidy
+	bclean = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
 [difftool]
-	prompt = true
+	prompt = false
 [diff]
-	tool = vimdiff
+	tool = nvimdiff
 [difftool "nvimdiff"]
 	cmd = vim -d \"$LOCAL\" \"$REMOTE\"
 	path =
+[mergetool]
+	prompt = true
 [mergetool "nvimdiff"]
-	cmd = vim -d \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+    layout = "LOCAL,MERGED,REMOTE"
+	cmd = nvim -d "$LOCAL" "$REMOTE" "$MERGED" -c 'wincmd J'
+[merge]
+    tool= nvimdiff
+	conflictstyle = diff3
 
 [init]
 	defaultBranch = main
