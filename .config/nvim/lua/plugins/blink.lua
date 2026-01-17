@@ -5,17 +5,18 @@ end
 
 blink.setup({
 	keymap = {
-		preset = "default",
+		preset = "none",
 
 		["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
 		["<CR>"] = { "accept", "fallback" },
+		["<C-e>"] = { "hide", "fallback" },
 
 		["<Tab>"] = {
 			function(cmp)
 				if cmp.is_visible() then
 					return cmp.select_next()
 				end
-				return cmp.fallback()
+				return false
 			end,
 			"fallback",
 		},
@@ -25,7 +26,7 @@ blink.setup({
 				if cmp.is_visible() then
 					return cmp.select_prev()
 				end
-				return cmp.fallback()
+				return false
 			end,
 			"fallback",
 		},

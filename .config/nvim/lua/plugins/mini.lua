@@ -75,7 +75,11 @@ local config = {
 	icons = {},
 	git = {},
 	diff = {},
-	notify = {},
+	notify = {
+		window = {
+			config = { border = "rounded" },
+		},
+	},
 	statusline = {
 		content = {
 			active = function()

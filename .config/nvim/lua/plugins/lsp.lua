@@ -159,10 +159,8 @@ vim.lsp.config("ts_ls", {
 	filetypes = {
 		"javascript",
 		"javascriptreact",
-		"javascript.jsx",
 		"typescript",
 		"typescriptreact",
-		"typescript.tsx",
 	},
 })
 
@@ -174,7 +172,7 @@ vim.lsp.config("html", {
 		embeddedLanguages = { css = true, javascript = true },
 		provideFormatter = true,
 	},
-	filetypes = { "html", "templ" },
+	filetypes = { "html" },
 })
 
 vim.lsp.config("cssls", {
