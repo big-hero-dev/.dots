@@ -6,7 +6,7 @@ end
 trouble.setup({
 	auto_close = true,
 	use_diagnostic_signs = true,
-	focus = true,
+	focus = false,
 	modes = {
 		diagnostics = {
 			auto_open = false,
@@ -66,11 +66,11 @@ end, { desc = "Next trouble/qf" })
 
 -- Diagnostics
 vim.keymap.set("n", "[d", function()
-	vim.diagnostic.jump({ count = -1, float = { border = "single" } })
+	vim.diagnostic.jump({ count = -1 })
 end, { desc = "Prev diagnostic" })
 
 vim.keymap.set("n", "]d", function()
-	vim.diagnostic.jump({ count = 1, float = { border = "single" } })
+	vim.diagnostic.jump({ count = 1 })
 end, { desc = "Next diagnostic" })
 
 vim.keymap.set("n", "[e", function()

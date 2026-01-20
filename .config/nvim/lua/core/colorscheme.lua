@@ -1,22 +1,15 @@
 local function setup_themes()
-	local ok, add = pcall(function()
+	local has_mini, add = pcall(function()
 		return require("mini.deps").add
 	end)
 
-	if ok then
+	if has_mini then
 		add({ source = "sainnhe/everforest" })
 		add({ source = "e-ink-colorscheme/e-ink.nvim" })
 	end
 end
 
-if package.loaded["mini.deps"] then
-	setup_themes()
-else
-	vim.api.nvim_create_autocmd("VimEnter", {
-		once = true,
-		callback = setup_themes,
-	})
-end
+setup_themes()
 
 local transparency_clon = false
 
@@ -60,7 +53,7 @@ else
 	vim.o.background = "light"
 end
 
-vim.defer_fn(set_theme, 10)
+set_theme()
 
 vim.keymap.set("n", "td", function()
 	if vim.o.background == "dark" then

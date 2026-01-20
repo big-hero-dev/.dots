@@ -1,8 +1,4 @@
-local MiniDeps = require("mini.deps")
-
-MiniDeps.setup()
-
-local add = MiniDeps.add
+local add = require("mini.deps").add
 
 add({ source = "echasnovski/mini.nvim" })
 add({
@@ -52,7 +48,7 @@ add({
 add({ source = "folke/trouble.nvim" })
 
 add({ source = "mbbill/undotree" })
-vim.keymap.set("n", "<leader>u", "<CMD>UndotreeToggle<CR>", { desc = "Toggle Undotree" })
+vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Toggle Undotree" })
 
 add({ source = "ThePrimeagen/harpoon", checkout = "harpoon2", depends = { "nvim-lua/plenary.nvim" } })
 
@@ -209,9 +205,11 @@ clue.setup({
 		{ mode = "x", keys = "<Leader>" },
 		{ mode = "n", keys = "g" },
 		{ mode = "x", keys = "g" },
-		{ mode = "n", keys = "<C-w>" },
 		{ mode = "n", keys = "z" },
 		{ mode = "x", keys = "z" },
+		{ mode = "n", keys = "[" },
+		{ mode = "n", keys = "]" },
+		{ mode = "n", keys = "<C-w>" },
 	},
 	clues = {
 		clue.gen_clues.builtin_completion(),
@@ -221,10 +219,10 @@ clue.setup({
 	},
 })
 
-vim.keymap.set("n", "<Leader><Leader>", "<Cmd>Pick files<CR>", { desc = "Pick files" })
-vim.keymap.set("n", "<Leader>pg", "<Cmd>Pick grep_live<CR>", { desc = "Grep" })
-vim.keymap.set("n", "<Leader>pb", "<Cmd>Pick buffers<CR>", { desc = "Buffers" })
-vim.keymap.set("n", "<Leader>ph", "<Cmd>Pick help<CR>", { desc = "Pick Help" })
+vim.keymap.set("n", "<Leader><Leader>", "<cmd>Pick files<cr>", { desc = "Pick files" })
+vim.keymap.set("n", "<Leader>pg", "<cmd>Pick grep_live<cr>", { desc = "Grep" })
+vim.keymap.set("n", "<Leader>pb", "<cmd>Pick buffers<cr>", { desc = "Buffers" })
+vim.keymap.set("n", "<Leader>ph", "<cmd>Pick help<cr>", { desc = "Pick Help" })
 
 vim.keymap.set("n", "<Leader>e", function()
 	require("mini.files").open()

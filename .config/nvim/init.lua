@@ -1,6 +1,7 @@
 local path_package = vim.fn.stdpath("data") .. "/site"
 local mini_path = path_package .. "/pack/deps/start/mini.nvim"
 local uv = vim.uv or vim.loop
+
 if not uv.fs_stat(mini_path) then
 	vim.cmd('echo "Installing `mini.nvim`" | redraw')
 	local clone_cmd = {
@@ -10,12 +11,9 @@ if not uv.fs_stat(mini_path) then
 		"https://github.com/nvim-mini/mini.nvim",
 		mini_path,
 	}
-	local result = vim.fn.system(clone_cmd)
-	if vim.v.shell_error ~= 0 then
-		error("Failed to install mini.nvim\n" .. result)
-	end
+
+	vim.fn.system(clone_cmd)
 	vim.cmd("packadd mini.nvim | helptags ALL")
-	vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 
 require("core.options")
@@ -23,6 +21,7 @@ require("core.keymaps")
 require("core.autocmds")
 
 local MiniDeps = require("mini.deps")
+MiniDeps.setup({ path = { package = path_package } })
 local now, later = MiniDeps.now, MiniDeps.later
 
 now(function()
@@ -32,7 +31,6 @@ now(function()
 end)
 
 later(function()
-	require("plugins.treesitter")
 	require("plugins.lsp")
 	require("plugins.endhints")
 	require("plugins.blink")
