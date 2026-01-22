@@ -39,5 +39,6 @@ later(function()
 	require("plugins.format")
 
 	pcall(require, "plugins.trouble")
+	pcall(require, "plugins.harpoon")
 	pcall(require, "plugins.mini_haunt")
 end)

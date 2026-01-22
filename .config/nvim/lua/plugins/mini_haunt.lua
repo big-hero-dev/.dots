@@ -116,6 +116,9 @@ function M.clear_line()
 
 	local items = state.haunts[path]
 	if not items then
+		vim.notify("No haunts to clear", vim.log.levels.INFO, {
+			title = "Mini Haunt",
+		})
 		return
 	end
 
@@ -256,11 +259,11 @@ function M.setup(opts)
 	})
 
 	-- keymaps (parity with haunt.nvim)
-	vim.keymap.set("n", "<leader>ha", M.add, { desc = "Haunt add" })
-	vim.keymap.set("n", "<leader>hd", M.clear_line, { desc = "Haunt delete" })
-	vim.keymap.set("n", "<leader>hl", M.list, { desc = "Haunt list" })
-	vim.keymap.set("n", "<leader>hD", M.clear_buffer, { desc = "Haunt delete buffer" })
-	vim.keymap.set("n", "<leader>hX", M.clear_all, { desc = "Haunt delete all" })
+	vim.keymap.set("n", "<leader>na", M.add, { desc = "Haunt add" })
+	vim.keymap.set("n", "<leader>nd", M.clear_line, { desc = "Haunt delete" })
+	vim.keymap.set("n", "<leader>nl", M.list, { desc = "Haunt list" })
+	vim.keymap.set("n", "<leader>nD", M.clear_buffer, { desc = "Haunt delete buffer" })
+	vim.keymap.set("n", "<leader>nX", M.clear_all, { desc = "Haunt delete all" })
 end
 
 M.setup()

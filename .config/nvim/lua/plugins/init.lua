@@ -1,6 +1,5 @@
 local add = require("mini.deps").add
 
--- add({ source = "echasnovski/mini.nvim" })
 add({
 	source = "saghen/blink.cmp",
 	hooks = {
@@ -58,6 +57,12 @@ add({
 	cond = function()
 		return vim.fn.isdirectory(".git") == 1
 	end,
+})
+
+add({
+	source = "ThePrimeagen/harpoon",
+	checkout = "harpoon2",
+	depends = { "nvim-lua/plenary.nvim" },
 })
 
 -- ======================
