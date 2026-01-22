@@ -25,18 +25,19 @@ MiniDeps.setup({ path = { package = path_package } })
 local now, later = MiniDeps.now, MiniDeps.later
 
 now(function()
-	require("plugins.mini")
+	require("plugins")
 	require("core.colorscheme")
 	require("plugins.treesitter")
 end)
 
 later(function()
+	require("plugins.mini")
 	require("plugins.lsp")
 	require("plugins.endhints")
 	require("plugins.blink")
 	require("plugins.luasnip")
 	require("plugins.format")
 
-	pcall(require, "plugins.harpoon")
 	pcall(require, "plugins.trouble")
+	pcall(require, "plugins.mini_haunt")
 end)

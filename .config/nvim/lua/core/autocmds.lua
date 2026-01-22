@@ -62,12 +62,6 @@ autocmd("VimResized", {
 		vim.cmd("tabdo wincmd =")
 	end,
 })
-autocmd("BufWinEnter", {
-	pattern = "*",
-	callback = function()
-		vim.cmd("checktime")
-	end,
-})
 
 -- Diagnostics
 autocmd("DiagnosticChanged", {
@@ -129,16 +123,29 @@ autocmd("BufWinLeave", {
 	pattern = "*",
 	callback = function()
 		if vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
-			vim.cmd("mkview")
+			pcall(function()
+				vim.cmd("silent! mkview")
+			end)
 		end
 	end,
 })
 
-autocmd("BufWinEnter", {
+autocmd("BufReadPost", {
 	pattern = "*",
 	callback = function()
-		if vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
-			pcall(vim.cmd, "loadview")
+		if vim.bo.buftype == "" then
+			pcall(function()
+				vim.cmd("silent! loadview")
+			end)
+		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	once = true,
+	callback = function()
+		if vim.fn.argc() == 0 then
+			vim.cmd("enew")
 		end
 	end,
 })
