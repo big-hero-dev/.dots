@@ -175,6 +175,7 @@ local config = {
 		},
 	},
 	bufremove = {},
+	jump2d = {},
 }
 
 local order = {
@@ -197,6 +198,7 @@ local order = {
 	"hipatterns",
 	"pick",
 	"files",
+	"jump2d",
 }
 
 for _, name in ipairs(order) do

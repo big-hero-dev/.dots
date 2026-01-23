@@ -258,7 +258,6 @@ function M.setup(opts)
 		end,
 	})
 
-	-- keymaps (parity with haunt.nvim)
 	vim.keymap.set("n", "<leader>na", M.add, { desc = "Haunt add" })
 	vim.keymap.set("n", "<leader>nd", M.clear_line, { desc = "Haunt delete" })
 	vim.keymap.set("n", "<leader>nl", M.list, { desc = "Haunt list" })
