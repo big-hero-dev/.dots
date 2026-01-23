@@ -1,5 +1,20 @@
+-- =========================================================
+-- Plugin manager helper
+-- =========================================================
 local add = require("mini.deps").add
 
+-- =========================================================
+-- Core editing & basic UI
+-- =========================================================
+add({ source = "mbbill/undotree" })
+vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Toggle Undotree" })
+
+add({ source = "dstein64/vim-startuptime" })
+add({ source = "lambdalisue/suda.vim", on_cmd = { "SudaRead", "SudaWrite" } })
+
+-- =========================================================
+-- Completion & snippets
+-- =========================================================
 add({
 	source = "saghen/blink.cmp",
 	hooks = {
@@ -17,15 +32,20 @@ add({
 	},
 })
 
+-- =========================================================
+-- LSP, formatting & diagnostics
+-- =========================================================
 add({ source = "neovim/nvim-lspconfig" })
 add({ source = "williamboman/mason.nvim" })
 add({ source = "williamboman/mason-lspconfig.nvim" })
+
 add({ source = "stevearc/conform.nvim" })
-
-add({ source = "dstein64/vim-startuptime" })
 add({ source = "chrisgrieser/nvim-lsp-endhints" })
-add({ source = "lambdalisue/suda.vim", on_cmd = { "SudaRead", "SudaWrite" } })
+add({ source = "folke/trouble.nvim" })
 
+-- =========================================================
+-- Syntax tree & structural intelligence
+-- =========================================================
 add({
 	source = "nvim-treesitter/nvim-treesitter",
 	branch = "main",
@@ -44,13 +64,9 @@ add({
 	},
 })
 
-add({ source = "folke/trouble.nvim" })
-
-add({ source = "mbbill/undotree" })
-vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Toggle Undotree" })
-
-add({ source = "ThePrimeagen/harpoon", checkout = "harpoon2", depends = { "nvim-lua/plenary.nvim" } })
-
+-- =========================================================
+-- Git & project context
+-- =========================================================
 add({
 	source = "lewis6991/gitsigns.nvim",
 	event = { "BufReadPre", "BufNewFile" },
@@ -59,16 +75,19 @@ add({
 	end,
 })
 
+-- =========================================================
+-- Navigation & memory
+-- Harpoon 2
+-- =========================================================
 add({
 	source = "ThePrimeagen/harpoon",
 	checkout = "harpoon2",
 	depends = { "nvim-lua/plenary.nvim" },
 })
 
--- ======================
--- Mini module configs
--- ======================
-
+-- =========================================================
+-- Mini.nvim ecosystem
+-- =========================================================
 local MiniStatusline = require("mini.statusline")
 
 local config = {
@@ -92,7 +111,6 @@ local config = {
 				local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
 				local location = "%p%%"
 
-				-- LSP names
 				local lsp = ""
 				local clients = vim.lsp.get_clients({ bufnr = 0 })
 				if #clients > 0 then
@@ -102,14 +120,15 @@ local config = {
 					end
 					lsp = "󰭆 " .. table.concat(names, " ")
 				end
+
 				mode = mode:upper()
 
 				return MiniStatusline.combine_groups({
 					{ hl = mode_hl, strings = { mode } },
 					{ hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics, lsp } },
-					"%<", -- Mark general truncate point
+					"%<",
 					{ hl = "MiniStatuslineFilename", strings = { filename } },
-					"%=", -- End left alignment
+					"%=",
 					{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
 					{ hl = mode_hl, strings = { location } },
 				})
@@ -184,16 +203,14 @@ for _, name in ipairs(order) do
 	require("mini." .. name).setup(config[name] or {})
 end
 
--- ======================
+-- =========================================================
 -- Notify override
--- ======================
-
+-- =========================================================
 vim.notify = require("mini.notify").make_notify()
 
--- ======================
+-- =========================================================
 -- Mini.clue
--- ======================
-
+-- =========================================================
 local clue = require("mini.clue")
 
 clue.setup({
