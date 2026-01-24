@@ -90,6 +90,37 @@ add({
 -- =========================================================
 local MiniStatusline = require("mini.statusline")
 
+local function shorten_path(path, max_len)
+	if not path or path == "" then
+		return ""
+	end
+
+	max_len = max_len or 40
+
+	path = vim.fn.fnamemodify(path, ":~")
+
+	if #path <= max_len then
+		return path
+	end
+
+	local parts = vim.split(path, "/")
+	local filename = table.remove(parts)
+
+	for i = 1, #parts do
+		if parts[i] ~= "~" then
+			parts[i] = parts[i]:sub(1, 1)
+		end
+	end
+
+	local short = table.concat(parts, "/") .. "/" .. filename
+
+	if #short > max_len then
+		short = "…" .. short:sub(#short - max_len + 2)
+	end
+
+	return short
+end
+
 local config = {
 	basics = {},
 	icons = {},
@@ -107,7 +138,7 @@ local config = {
 				local git = MiniStatusline.section_git({ trunc_width = 40 })
 				local diff = MiniStatusline.section_diff({ trunc_width = 75 })
 				local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
-				local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+				local filename = shorten_path(vim.api.nvim_buf_get_name(0), 45)
 				local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
 				local location = "%p%%"
 
