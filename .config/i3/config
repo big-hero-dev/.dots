@@ -53,6 +53,9 @@ client.background       $bg0
 # ----------------------------------------------------------------------------
 # Terminal
 bindsym $super+Return exec $terminal
+bindsym $super+Shift+Return exec --no-startup-id \
+  STARSHIP_CONFIG=$HOME/.config/starship-float.toml \
+  wezterm start --class floatcmd fish
 
 # Launchers
 bindsym $super+space exec $HOME/.local/share/bin/rofi-launcher d
@@ -182,6 +185,11 @@ for_window [class="Nemo|Thunar|Pcmanfm"] floating enable
 for_window [class="Pavucontrol|Blueman-manager"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
+
+for_window [class="floatcmd"] floating enable
+for_window [class="floatcmd"] resize set width 900 px height 300 px
+for_window [class="floatcmd"] move position center
+for_window [class="floatcmd"] border pixel 3
 
 # Focus rules
 for_window [class="Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver|Nemo"] focus
