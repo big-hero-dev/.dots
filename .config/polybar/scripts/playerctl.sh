@@ -76,7 +76,7 @@ case "$STATUS" in
     echo "%{F#a7c080}󰐊%{F-} $OUTPUT"
     ;;
   Paused)
-    echo "%{F#859289}󰏤% $OUTPUT{F-}"
+    echo "%{F#859289}󰏤 $OUTPUT%{F-}"
     ;;
   *)
     echo "%{F#7a8478}— silence —%{F-}"
