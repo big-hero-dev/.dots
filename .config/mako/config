@@ -1,16 +1,36 @@
+# =========================
+# Default
+# =========================
 background-color=#272e33
 text-color=#d3c6aa
 border-color=#7fbbb3
-progress-color=over #7fbbb3
-
 border-size=2
-border-radius=6
+border-radius=9
 padding=10
 margin=10
-width=360
-font=JetBrainsMono Nerd Font 9
-
+font=JetBrains Mono Nerd Font 10
 default-timeout=5000
-max-visible=5
-layer=overlay
 anchor=top-right
+
+# =========================
+# Volume Style (Steam Deck - Everforest Dark)
+# =========================
+[app-name=volume]
+anchor=top-center
+width=300
+height=35
+margin=10
+padding=0,10
+
+background-color=#1e2326
+text-color=#e6e2cc
+border-color=#4a555b
+border-size=2
+border-radius=9
+
+progress-color=over #83c092
+font=JetBrains Mono Nerd Font 12
+
+format=<span font='10'><b>%s</b> %b</span>
+max-icon-size=20
+default-timeout=2000

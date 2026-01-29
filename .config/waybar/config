@@ -65,6 +65,9 @@
   "custom/powermenu": {
     "format": "⏻",
     "on-click": "~/.local/share/bin/power-menu"
+  },
+  "tray" :{
+	  "icon-size":18,
+	  "spacing": 10
   }
 }
-
