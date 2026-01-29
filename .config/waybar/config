@@ -1,73 +1,103 @@
 {
-  "layer": "top",
-  "position": "top",
-  "height": 36,
-  "spacing": 0,
-
-  "modules-left": ["custom/launcher", "sway/workspaces", "tray"],
-  "modules-center": ["clock"],
-  "modules-right": [
-    "pulseaudio",
-    "memory",
-    "cpu",
-    "temperature",
-    "battery",
-    "custom/powermenu"
-  ],
-
-  "sway/workspaces": {
-    "disable-scroll": true,
-    "format": "{icon}",
-    "format-icons": {
-      "1": "一",
-      "2": "二",
-      "3": "三",
-      "4": "四",
-      "5": "五",
-      "default": "○"
-    }
-  },
-
-  "clock": {
-    "format": "󰃰 {:%d %b · %H:%M}"
-  },
-
-  "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-muted": "󰖁 muted",
-    "format-icons": ["󰕿", "󰖀", "󰕾"],
-    "on-click-right": "pavucontrol"
-  },
-
-  "memory": {
-    "format": "󰍛 {percentage}%"
-  },
-
-  "cpu": {
-    "format": "󰻠 {usage}%"
-  },
-
-  "temperature": {
-    "critical-threshold": 70,
-    "format": "󰔏 {temperatureC}°C"
-  },
-
-  "battery": {
-    "format": "{icon} {capacity}%",
-    "format-icons": ["󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂"]
-  },
-
-  "custom/launcher": {
-    "format": "󰣇",
-    "on-click": "fuzzel"
-  },
-
-  "custom/powermenu": {
-    "format": "⏻",
-    "on-click": "~/.local/share/bin/power-menu"
-  },
-  "tray" :{
-	  "icon-size":18,
-	  "spacing": 10
-  }
+	"layer": "top",
+	"position": "top",
+	"height": 36,
+	"spacing": 0,
+	"modules-left": [
+		"custom/launcher",
+		"sway/workspaces",
+		"tray",
+		"custom/player",
+		"custom/cava"
+	],
+	"modules-center": [
+		"clock"
+	],
+	"modules-right": [
+		"custom/updates",
+		"pulseaudio",
+		"memory",
+		"cpu",
+		"temperature",
+		"battery",
+		"custom/powermenu"
+	],
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"format": "{icon}",
+		"format-icons": {
+			"1": "一",
+			"2": "二",
+			"3": "三",
+			"4": "四",
+			"5": "五",
+			"default": "○"
+		}
+	},
+	"clock": {
+		"format": "{:%a %d/%m ·  %H:%M}",
+		"tooltip-format": "{:%A, %d %B %Y · Week %V}"
+	},
+	"pulseaudio": {
+		"format": "{icon} {volume}%",
+		"format-muted": "󰖁 muted",
+		"format-icons": [
+			"󰕿",
+			"󰖀",
+			"󰕾"
+		],
+		"on-click-right": "pavucontrol"
+	},
+	"memory": {
+		"format": "󰍛 {percentage}%"
+	},
+	"cpu": {
+		"format": "󰻠 {usage}%"
+	},
+	"temperature": {
+		"critical-threshold": 70,
+		"format": "󰔏 {temperatureC}°C"
+	},
+	"battery": {
+		"format": "{icon} {capacity}%",
+		"format-icons": [
+			"󰂎",
+			"󰁺",
+			"󰁻",
+			"󰁼",
+			"󰁽",
+			"󰁾",
+			"󰁿",
+			"󰂀",
+			"󰂁",
+			"󰂂"
+		]
+	},
+	"custom/player": {
+		"exec": "~/.config/waybar/scripts/playerctl.sh",
+		"interval": 1,
+		"return-type": "json"
+	},
+	"custom/cava": {
+		"exec": "~/.config/waybar/scripts/cava.sh",
+		"interval": 0,
+		"return-type": "json"
+	},
+	"custom/launcher": {
+		"format": "󰣇",
+		"on-click": "fuzzel"
+	},
+	"custom/powermenu": {
+		"format": "⏻",
+		"on-click": "~/.local/share/bin/power-menu"
+	},
+	"tray": {
+		"icon-size": 18,
+		"spacing": 10
+	},
+	"custom/updates": {
+		"exec": "~/.config/waybar/scripts/updates.sh",
+		"interval": 900,
+		"format": "󰏖 {}"
+	}
 }

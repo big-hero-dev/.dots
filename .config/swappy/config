@@ -1,0 +1,6 @@
+[Default]
+save_dir=$HOME/Pictures/Screenshots
+save_filename_format=screenshot_%Y%m%d_%H%M%S.png
+show_panel=true
+copy_command=wl-copy
+quit=q

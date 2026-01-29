@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+WALL_DIR="$HOME/Pictures/Wallpapers"
+CONF="$HOME/.config/sway/wallpaper"
+
+chosen=$(find "$WALL_DIR" -type f \( -iname "*.png" -o -iname "*.jpg" \) \
+  | sed "s|$WALL_DIR/||" \
+  | fuzzel --dmenu --prompt="Wallpaper")
+
+[ -z "$chosen" ] && exit 0
+
+echo "$WALL_DIR/$chosen" > "$CONF"
+
+# reload wallpaper
+pkill swaybg
+swaybg -i "$WALL_DIR/$chosen" -m fill &
+

@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
-chosen=$(echo -e "Shutdown\nReboot\nSuspend" | rofi -dmenu -i -p "Power Menu")
+chosen=$(printf "Shutdown\nReboot\nSuspend\nLogout\nLock\n" | \
+    fuzzel --dmenu --prompt="Power")
 
 case "$chosen" in
     Shutdown)
@@ -12,4 +13,11 @@ case "$chosen" in
     Suspend)
         systemctl suspend
         ;;
+    Logout)
+        swaymsg exit
+        ;;
+    Lock)
+        swaylock
+        ;;
 esac
+

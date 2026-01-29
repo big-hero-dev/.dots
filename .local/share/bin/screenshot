@@ -1,29 +1,26 @@
 #!/bin/bash
 
-# Directory to store screenshots
-SCREENSHOT_DIR="$HOME/Pictures/Screenshots"
+MODE="$1"   # empty | edit
 
-# Ensure the screenshot directory exists
+SCREENSHOT_DIR="$HOME/Pictures/Screenshots"
 mkdir -p "$SCREENSHOT_DIR"
 
-# Generate a timestamped filename
-SCREENSHOT_FILE="screenshot_$(date +%Y%m%d_%H%M%S).png"
-FULL_PATH="$SCREENSHOT_DIR/$SCREENSHOT_FILE"
+FILE="screenshot_$(date +%Y%m%d_%H%M%S).png"
+FULL="$SCREENSHOT_DIR/$FILE"
 
-# Take screenshot
-maim -s "$FULL_PATH"
+GEOMETRY=$(slurp)
+[ -z "$GEOMETRY" ] && notify-send -u low "Screenshot cancelled" && exit 0
 
-# Check if screenshot was successful
-if [ $? -eq 0 ]; then
-    # Copy to clipboard
-    xclip -selection clipboard -t image/png < "$FULL_PATH"
+grim -g "$GEOMETRY" "$FULL" || exit 1
 
-    # Send notification with the screenshot as an icon
-    notify-send -i "$FULL_PATH" "Screenshot Captured" "Saved to $FULL_PATH"
-else
-    # Remove the empty/invalid file if screenshot was cancelled
-    rm -f "$FULL_PATH"
-
-    # Send a simple notification without referencing any file path
-    notify-send -u low "Screenshot Cancelled"
-fi
+case "$MODE" in
+  edit)
+    swappy -f "$FULL" -o "$FULL"
+    wl-copy < "$FULL"
+    notify-send -i "$FULL" "Screenshot edited" "$FULL"
+    ;;
+  *)
+    wl-copy < "$FULL"
+    notify-send -i "$FULL" "Screenshot saved" "$FULL"
+    ;;
+esac

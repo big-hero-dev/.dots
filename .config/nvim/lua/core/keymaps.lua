@@ -100,4 +100,8 @@ end, opts)
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
+map("n", "<Leader>f", function()
+	vim.lsp.buf.format()
+end, { desc = "Format code" })
+
 active_layout()
