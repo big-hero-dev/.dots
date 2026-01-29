@@ -69,6 +69,6 @@ sway swaybg swaylock-effects swayidle \
 waybar foot \
 grim slurp wl-clipboard \
 xdg-desktop-portal-wlr \
-swappy
+swappy imv
 
 ```
