@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-sleep 1
 
 BARS=(▁ ▂ ▃ ▄ ▅ ▆ ▇ █)
-
 export LC_ALL=C
+
+printf '{"text":""}\n'
 
 cava -p "$HOME/.config/cava/config" | while IFS= read -r line; do
   out=""
