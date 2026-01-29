@@ -1,0 +1,4 @@
+include ~/.config/sway/variables.conf
+include ~/.config/sway/colors.conf
+include ~/.config/sway/keybinds.conf
+include ~/.config/sway/autostart.conf

@@ -1,64 +1,107 @@
-- **Window Manager** :bento: [i3](https://i3wm.org/)
-- **Status Bar** :chocolate_bar: [ Polybar ](https://polybar.github.io/)
-- **Application Launcher** :rocket: Rofi
-- **Notification Daemon** :loudspeaker: Dunst
-- **Shell** :fish: [ Fish ](https://fishshell.com/)
-- **File Manager** :duck: [ Yazi ](https://yazi-rs.github.io/docs/)
-- **Editor** :fire: [ Neovim ](https://github.com/neovim/neovim) (>= 0.11) (npm install -g neovim)
+## 🧭 Current Setup (Wayland / Sway)
+
+- **Compositor / WM** :bento: **Sway**
+- **Status Bar** :chocolate_bar: **Waybar**
+- **Application Launcher** :rocket: **Fuzzel**
+- **Menu (script)** :gear: **bemenu**
+- **Notification Daemon** :loudspeaker: **Mako**
+- **Shell** :fish: Fish
+- **File Manager (TUI)** :duck: Yazi
+- **Editor** :fire: Neovim (>= 0.11)
 
 ---
-_Warning :rotating_light: Don't blindly use my settings unless you know what that entails. Use at your own risk!_
 
-_Note :wrench: I use colemak-dh keyboard layout_
+⚠️ Warning  
+Don't blindly use my settings unless you know what that entails.
 
-### Required
-- `nodejs`
-- `npm`
-- `rustup default nightly`
-```
-    fisher install jorgebucaran/nvm.fish
-    fisher install rstacruz/fish-npm-global
-```
+🔧 Note  
+Keyboard layout: Colemak-DH
 
-### Shell setup
+---
 
-- [starship](https://starship.rs/) - Shell theme
-- [zoxide](https://github.com/ajeetdsouza/zoxide) - Directory jumping
-- [peco](https://github.com/peco/peco) - Interactive filtering
-- [tmux](https://github.com/tmux/tmux) - Terminal multiplexer
-- [tpm](https://github.com/tmux-plugins/tpm) - Tmux Plugin Manager
-- fastcommgr
+## Required
 
-### Font
-- Font Awesome 6 Pro
+- nodejs
+- npm
+- rustup default nightly
+
+fisher install jorgebucaran/nvm.fish  
+fisher install rstacruz/fish-npm-global
+
+---
+
+## Shell setup
+
+- starship
+- zoxide
+- peco
+- tmux
+- tpm
+- fastfetch
+
+---
+
+## Font
+
+- JetBrains Mono Nerd Font
 - Noto Sans Mono CJK
-- Noto Sans Icon
-- JetBrains Mono
-- SpaceMono Nerd Font
+- Noto Sans Symbols / Icons
 - Lexend
 
-### Devtool
+---
 
-- `hyperfine`: Benmarking tool.
-- `translate-shell`: command-line translation.
-- `bun`: JavaScript runtime and toolkit.
-- `@antfu/ni`: Use the right package manager.
+## Dev Tools
 
-### Tool
+- hyperfine
+- translate-shell
+- bun
+- @antfu/ni
 
-- `android-file-transfer`: File transfer android.
-- `pavucontrol`: Audio configuration.
-- `pamixer`: Sound controller
-- `maim`: Screenshot tool
-- `glow`: Render markdown on the CLI, with pizzazz!
-- `xclip`: Clipboard tool
-- paleta: Color Paletes
+---
 
-### Input method
+## Tools (Wayland-native)
+
+- pavucontrol
+- pamixer
+- grim
+- slurp
+- wl-clipboard
+- glow
+- paleta
+
+---
+
+## Input Method
+
+- fcitx5
 - fcitx5-unikey
 - fcitx5-chinese-addons
 
-### App
-- [WebCatalog Desktop](https://webcatalog.io/vi/apps/)
+---
+
+## Apps
+
+- WebCatalog Desktop
 - pomotroid
-- grub-customize
+- grub-customizer
+
+---
+
+## SWAY (Required)
+
+sway  
+swaybg  
+swaylock  
+swayidle  
+waybar  
+foot  
+fuzzel  
+bemenu  
+mako  
+grim  
+slurp  
+wl-clipboard  
+xdg-desktop-portal  
+xdg-desktop-portal-wlr  
+pipewire  
+wireplumber

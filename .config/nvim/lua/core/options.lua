@@ -1,3 +1,5 @@
+local opt = vim.opt
+
 -- Global settings
 vim.g.netrw_altv = 1
 vim.g.netrw_banner = 0
@@ -8,20 +10,6 @@ vim.g.netrw_winsize = 25
 vim.g.editorconfig = false
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
-vim.g.clipboard = {
-	name = "xclip",
-	copy = {
-		["+"] = "xclip -selection clipboard -i",
-		["*"] = "xclip -selection clipboard -i",
-	},
-	paste = {
-		["+"] = "xclip -selection clipboard -o",
-		["*"] = "xclip -selection clipboard -o",
-	},
-	cache_enabled = 0,
-}
-
-local opt = vim.opt
 
 opt.clipboard = "unnamedplus"
 opt.nu = true
