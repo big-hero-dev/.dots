@@ -80,7 +80,7 @@
 	},
 	"custom/cava": {
 		"exec": "~/.config/waybar/scripts/cava.sh",
-		"interval": 0,
+		"interval": 1,
 		"return-type": "json"
 	},
 	"custom/launcher": {
