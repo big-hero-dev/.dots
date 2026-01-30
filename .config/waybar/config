@@ -218,7 +218,6 @@
 		"exec": "~/.config/waybar/scripts/updatecheck.sh",
 		"return-type": "json",
 		"exec-if": "exit 0",
-		"signal": 8,
-		"on-click": "kitty -e paru -Syu"
+		"signal": 8
 	}
 }
