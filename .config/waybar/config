@@ -8,8 +8,7 @@
 	"margin-right": 12,
 	"modules-left": [
 		"custom/launcher",
-		"sway/workspaces",
-		"sway/mode",
+		"niri/workspaces",
 		"tray",
 		"custom/player",
 		"custom/cava"
@@ -40,17 +39,11 @@
 			"disk"
 		]
 	},
-	"sway/workspaces": {
-		"disable-scroll": false,
+	"niri/workspaces": {
 		"format": "{icon}",
 		"all-outputs": true,
-		"persistent-workspaces": {
-			"1": [],
-			"2": [],
-			"3": [],
-			"4": [],
-			"5": []
-		},
+		"on-click": "activate",
+		"disable-scroll": false,
 		"format-icons": {
 			"1": "󰎤",
 			"2": "󰎧",
@@ -63,10 +56,6 @@
 			"9": "󰎼",
 			"10": "󰏁"
 		}
-	},
-	"sway/mode": {
-		"format": "<span style=\"italic\"> {}</span>",
-		"tooltip": false
 	},
 	"idle_inhibitor": {
 		"format": "{icon}",

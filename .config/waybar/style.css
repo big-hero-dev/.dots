@@ -12,11 +12,11 @@
    ========================= */
 window#waybar {
   background-color: #272e33;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 /* =========================
-   Workspaces
+   Niri Workspaces
    ========================= */
 #workspaces {
   margin: 0;
@@ -33,57 +33,29 @@ window#waybar {
   transition: all 0.25s ease;
 }
 
-#workspaces button:first-child {
-  margin-left: 0;
-}
-
-#workspaces button:last-child {
-  margin-right: 0;
-}
-
-#workspaces button.visible {
-  background-color: #374247;
-  color: #859289;
-  font-weight: 500;
-}
-
-/* Workspace đang focus */
 #workspaces button.focused {
   background-color: #414b50;
-  color: #1e2326;
+  color: #a7c080;
   font-weight: 700;
-  box-shadow: 0 3px 12px rgba(167, 192, 128, 0.35);
+  box-shadow: 0 3px 12px rgba(167, 192, 128, 0.3);
 }
 
-/* Workspace urgent */
-#workspaces button.urgent {
-  background-color: #e67e80;
-  color: #1e2326;
-  font-weight: 700;
-  animation: urgent-pulse 1.5s ease-in-out infinite;
-}
-
-/* Hover effect */
-#workspaces button:hover {
+#workspaces button.active {
   background-color: #374247;
   color: #d3c6aa;
 }
 
-/* Animation cho urgent - CHỈ dùng properties Waybar hỗ trợ */
-@keyframes urgent-pulse {
-  0% {
-    background-color: #e67e80;
-    opacity: 1;
-  }
-  100% {
-    background-color: #e67e80;
-    opacity: 1;
-  }
-  50% {
-    background-color: #e69875;
-    opacity: 0.85;
-  }
+#workspaces button.urgent {
+  background-color: #e67e80;
+  color: #1e2326;
+  animation: urgent-pulse 1.5s ease-in-out infinite;
 }
+
+#workspaces button:hover {
+  background-color: #414b50;
+  color: #d3c6aa;
+}
+
 /* =========================
    Standard modules
    ========================= */

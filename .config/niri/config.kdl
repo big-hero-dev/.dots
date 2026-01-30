@@ -1,0 +1,117 @@
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+    }
+}
+
+layout {
+    gaps 10
+	preset-column-widths {
+        proportion 0.33333 // 1/3
+        proportion 0.5     // 1/2
+        proportion 0.66667 // 2/3
+    }
+    default-column-width { proportion 0.5; }
+    focus-ring {
+        width 2
+        active-color "#83c092"
+        inactive-color "#374145"
+    }
+}
+
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+window-rule {
+    match title="^Picture-in-Picture$"
+    match title="^Picture in picture$"
+    open-floating true
+}
+
+binds {
+    // Terminal & Launcher
+    Mod+Return { spawn "foot"; }
+    Mod+Space { spawn "sh" "-c" "GTK_USE_PORTAL=1 fuzzel"; }
+
+    // Kill & Reload
+    Mod+Q { close-window; }
+    Mod+Shift+R { spawn "niri" "msg" "reload"; }
+
+    // Focus (Colemak-DH: HNEI)
+    Mod+H { focus-column-left; }
+    Mod+N { focus-window-or-workspace-down; }
+    Mod+E { focus-window-or-workspace-up; }
+    Mod+I { focus-column-right; }
+
+    // Move (Colemak-DH: HNEI)
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+N { move-window-down; }
+    Mod+Shift+E { move-window-up; }
+    Mod+Shift+I { move-column-right; }
+
+    // Layout / Sizing
+    Mod+V { maximize-column; } // Niri không có split h/v truyền thống
+    Mod+S { switch-preset-column-width; }
+    Mod+F { maximize-column; }
+    Mod+Shift+F { toggle-window-floating; }
+
+    // Workspaces (Niri gọi là Workspaces nhưng hoạt động theo chiều dọc)
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+
+    Mod+Tab { focus-window-previous; }
+
+    // Media & System
+    XF86AudioRaiseVolume  { spawn "volume" "--inc"; }
+    XF86AudioLowerVolume  { spawn "volume" "--dec"; }
+    XF86AudioMute         { spawn "volume" "--toggle"; }
+    Mod+Shift+Up          { spawn "volume" "--inc"; }
+    Mod+Shift+Down        { spawn "volume" "--dec"; }
+    Mod+Shift+M           { spawn "volume" "--toggle"; }
+
+    XF86MonBrightnessUp   { spawn "brightnessctl" "set" "+5%"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
+
+    Print                 { spawn "screenshot"; }
+    Shift+Print           { spawn "screenshot" "edit"; }
+    Mod+P                 { spawn "power-menu"; }
+    Mod+Shift+W           { spawn "change-wallpaper"; }
+    Mod+L                 { spawn "lockscreen"; }
+    Mod+K                 { spawn "hyprpicker" "-aq"; }
+
+    // Notification Control (Mako)
+    Mod+Shift+D           { spawn "makoctl" "dismiss"; }
+    Mod+D                 { spawn "makoctl" "dismiss" "--all"; }
+
+    // Waybar reload
+    Mod+Shift+B           { spawn "pkill" "-SIGUSR2" "waybar"; }
+}
+
+spawn-at-startup "fcitx5" "-d"
+spawn-at-startup "mako"
+spawn-at-startup "udiskie"
+spawn-at-startup "waybar"
+spawn-at-startup "cava"
+spawn-at-startup "swaybg" "-i" "$(cat ~/.config/sway/wallpaper)" "-m" "fill"
+spawn-at-startup "swayidle" "-w" "timeout" "5" "niri msg action do-screen-transition; niri msg action set-cursor-visiblity hide" "resume" "niri msg action set-cursor-visiblity show"
