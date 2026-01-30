@@ -75,7 +75,7 @@ niri xwayland-satellite
 waybar foot mako fuzzel
 
 # Wallpaper & Lock (Wayland native)
-swaybg hyprlock hypridle
+swww hyprlock hypridle
 
 # Utilities
 grim slurp wl-clipboard swappy imv hyprpicker
