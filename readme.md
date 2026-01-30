@@ -65,10 +65,10 @@ _Note :wrench: I use colemak-dh keyboard layout_
 
 ### SWAY
 ```
-sway swaybg swaylock-effects swayidle \
+swayfx swaybg swaylock-effects swayidle \
 waybar foot \
 grim slurp wl-clipboard \
 xdg-desktop-portal-wlr \
-swappy imv
+swappy imv hyprpicker
 
 ```

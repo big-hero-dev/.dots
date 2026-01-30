@@ -1,25 +1,92 @@
+/* =========================
+   Global
+   ========================= */
 * {
   font-family: JetBrainsMono Nerd Font;
   font-size: 16px;
   color: #d3c6aa;
 }
 
+/* =========================
+   Waybar container
+   ========================= */
 window#waybar {
-  background: #272e33;
+  background-color: #272e33;
+  border-radius: 8px;
+}
+
+/* =========================
+   Workspaces
+   ========================= */
+#workspaces {
+  margin: 0;
 }
 
 #workspaces button {
-  padding: 0 8px;
-  background: #2e383c;
+  padding: 5px 14px;
+  margin: 0 4px;
+  min-height: 0;
+  border-radius: 16px;
+  background-color: rgba(46, 56, 60, 0.6);
+  color: #7a8478;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+#workspaces button:first-child {
+  margin-left: 0;
+}
+
+#workspaces button:last-child {
+  margin-right: 0;
+}
+
+#workspaces button.visible {
+  background-color: #374247;
   color: #859289;
-  border-radius: 4px;
+  font-weight: 500;
 }
 
+/* Workspace đang focus */
 #workspaces button.focused {
-  background: #7fbbb3;
-  color: #272e33;
+  background-color: #414b50;
+  color: #1e2326;
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(167, 192, 128, 0.35);
 }
 
+/* Workspace urgent */
+#workspaces button.urgent {
+  background-color: #e67e80;
+  color: #1e2326;
+  font-weight: 700;
+  animation: urgent-pulse 1.5s ease-in-out infinite;
+}
+
+/* Hover effect */
+#workspaces button:hover {
+  background-color: #374247;
+  color: #d3c6aa;
+}
+
+/* Animation cho urgent - CHỈ dùng properties Waybar hỗ trợ */
+@keyframes urgent-pulse {
+  0% {
+    background-color: #e67e80;
+    opacity: 1;
+  }
+  100% {
+    background-color: #e67e80;
+    opacity: 1;
+  }
+  50% {
+    background-color: #e69875;
+    opacity: 0.85;
+  }
+}
+/* =========================
+   Standard modules
+   ========================= */
 #clock,
 #pulseaudio,
 #memory,
@@ -28,37 +95,106 @@ window#waybar {
 #battery,
 #tray,
 #custom-launcher,
-#custom-powermenu {
-  background: #2e383c;
-  padding: 0 10px;
+#custom-powermenu,
+#network,
+#backlight,
+#disk,
+#idle_inhibitor {
+  background-color: #2e383c;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-/* Player title */
+/* =========================
+   Custom modules
+   ========================= */
 #custom-player {
-  color: #859289; /* grey1 */
+  color: #859289;
   opacity: 0.75;
 }
 
-/* Cava visualizer */
 #custom-cava {
-  color: #7a8478; /* grey0 */
+  color: #7a8478;
   opacity: 0.55;
 }
 
-#custom-player,
-#custom-cava {
-  font-weight: 400;
-  letter-spacing: 0.5px;
-}
-
 #custom-updates {
-  color: #7a8478; /* grey0 */
-  opacity: 0.7;
+  color: #a7c080;
+  opacity: 0.85;
 }
 
 #custom-player,
 #custom-cava,
 #custom-updates {
-  background: rgba(46, 56, 60, 0.85);
-  padding: 0 10px;
+  background-color: rgba(46, 56, 60, 0.85);
+  padding-left: 10px;
+  padding-right: 10px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+/* =========================
+   Module states
+   ========================= */
+#network.disconnected {
+  color: #e67e80;
+}
+
+#battery.charging {
+  color: #a7c080;
+}
+
+#battery.warning:not(.charging) {
+  color: #dbbc7f;
+}
+
+#battery.critical:not(.charging) {
+  color: #e67e80;
+  animation: blink 1s linear infinite;
+}
+
+#temperature.critical {
+  color: #e67e80;
+}
+
+#idle_inhibitor.activated {
+  color: #a7c080;
+}
+
+#sway-mode {
+  background-color: #e67e80;
+  color: #2d353b;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-weight: 600;
+}
+
+/* =========================
+   Animations
+   ========================= */
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes urgent-blink {
+  0% {
+    background-color: #e67e80;
+    opacity: 1;
+  }
+  100% {
+    background-color: #e67e80;
+    opacity: 1;
+  }
+  50% {
+    background-color: #e67e80;
+    opacity: 0.7;
+  }
 }

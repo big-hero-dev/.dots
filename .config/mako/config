@@ -6,11 +6,14 @@ text-color=#d3c6aa
 border-color=#7fbbb3
 border-size=2
 border-radius=9
-padding=10
 margin=10
 font=JetBrains Mono Nerd Font 10
-default-timeout=5000
 anchor=top-right
+sort=-time
+default-timeout=3400
+ignore-timeout=0
+group-by=none
+invisible=0
 
 # =========================
 # Volume Style (Steam Deck - Everforest Dark)
