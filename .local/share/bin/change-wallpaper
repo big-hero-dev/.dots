@@ -1,17 +1,17 @@
 #!/usr/bin/env sh
 
 WALL_DIR="$HOME/Pictures/Wallpapers"
-CONF="$HOME/.config/sway/wallpaper"
 
-chosen=$(find "$WALL_DIR" -type f \( -iname "*.png" -o -iname "*.jpg" \) \
+chosen=$(find "$WALL_DIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.gif" \) \
   | sed "s|$WALL_DIR/||" \
-  | fuzzel --dmenu --prompt="Wallpaper")
+  | fuzzel --dmenu --prompt="󰸉 Wallpaper: ")
 
 [ -z "$chosen" ] && exit 0
 
-echo "$WALL_DIR/$chosen" > "$CONF"
+FULL_PATH="$WALL_DIR/$chosen"
 
-# reload wallpaper
-pkill swaybg
-swaybg -i "$WALL_DIR/$chosen" -m fill &
-
+swww img "$FULL_PATH" \
+    --transition-type grow \
+    --transition-pos center \
+    --transition-fps 60 \
+    --transition-duration 2
