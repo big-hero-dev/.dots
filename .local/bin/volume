@@ -1,22 +1,17 @@
 #!/usr/bin/env bash
 iDIR="$HOME/.local/share/icons/audio/"
-
 # =====================
 # Helpers
 # =====================
-
 get_sink() {
     pactl get-default-sink
 }
-
 get_source() {
     pactl get-default-source
 }
-
 # =====================
 # Volume (Speaker)
 # =====================
-
 get_volume() {
     if pactl get-sink-mute "$(get_sink)" | grep -q yes; then
         echo "Muted"
@@ -25,7 +20,6 @@ get_volume() {
             | grep -o '[0-9]\+%' | head -n1
     fi
 }
-
 get_icon() {
     vol=$(get_volume)
     if [[ "$vol" == "Muted" ]]; then
@@ -41,11 +35,9 @@ get_icon() {
         fi
     fi
 }
-
 notify_user() {
     vol=$(get_volume)
     icon=$(get_icon)
-
     if [[ "$vol" == "Muted" ]]; then
         notify-send -a volume -e -u low -i "$icon" \
             -h string:x-canonical-private-synchronous:volume_notif \
@@ -57,28 +49,37 @@ notify_user() {
             "Volume: $vol"
     fi
 }
-
 inc_volume() {
     pactl set-sink-mute "$(get_sink)" 0
-    pactl set-sink-volume "$(get_sink)" +5%
+
+    # Lấy âm lượng hiện tại (loại bỏ ký tự %)
+    current_vol=$(pactl get-sink-volume "$(get_sink)" | grep -o '[0-9]\+%' | head -n1 | tr -d '%')
+
+    # Chỉ tăng nếu chưa đạt 100%
+    if (( current_vol < 100 )); then
+        pactl set-sink-volume "$(get_sink)" +5%
+
+        # Đảm bảo không vượt quá 100%
+        new_vol=$(pactl get-sink-volume "$(get_sink)" | grep -o '[0-9]\+%' | head -n1 | tr -d '%')
+        if (( new_vol > 100 )); then
+            pactl set-sink-volume "$(get_sink)" 100%
+        fi
+    fi
+
     notify_user
 }
-
 dec_volume() {
     pactl set-sink-mute "$(get_sink)" 0
     pactl set-sink-volume "$(get_sink)" -5%
     notify_user
 }
-
 toggle_mute() {
     pactl set-sink-mute "$(get_sink)" toggle
     notify_user
 }
-
 # =====================
 # Microphone
 # =====================
-
 get_mic_volume() {
     if pactl get-source-mute "$(get_source)" | grep -q yes; then
         echo "Muted"
@@ -87,7 +88,6 @@ get_mic_volume() {
             | grep -o '[0-9]\+%' | head -n1
     fi
 }
-
 get_mic_icon() {
     if [[ "$(get_mic_volume)" == "Muted" ]]; then
         echo "$iDIR/microphone-mute.png"
@@ -95,11 +95,9 @@ get_mic_icon() {
         echo "$iDIR/microphone.png"
     fi
 }
-
 notify_mic_user() {
     vol=$(get_mic_volume)
     icon=$(get_mic_icon)
-
     if [[ "$vol" == "Muted" ]]; then
         notify-send -a mic -e -u low -i "$icon" \
             -h string:x-canonical-private-synchronous:mic_notif \
@@ -111,28 +109,37 @@ notify_mic_user() {
             "Mic: $vol"
     fi
 }
-
 inc_mic_volume() {
     pactl set-source-mute "$(get_source)" 0
-    pactl set-source-volume "$(get_source)" +5%
+
+    # Lấy âm lượng hiện tại
+    current_vol=$(pactl get-source-volume "$(get_source)" | grep -o '[0-9]\+%' | head -n1 | tr -d '%')
+
+    # Chỉ tăng nếu chưa đạt 100%
+    if (( current_vol < 100 )); then
+        pactl set-source-volume "$(get_source)" +5%
+
+        # Đảm bảo không vượt quá 100%
+        new_vol=$(pactl get-source-volume "$(get_source)" | grep -o '[0-9]\+%' | head -n1 | tr -d '%')
+        if (( new_vol > 100 )); then
+            pactl set-source-volume "$(get_source)" 100%
+        fi
+    fi
+
     notify_mic_user
 }
-
 dec_mic_volume() {
     pactl set-source-mute "$(get_source)" 0
     pactl set-source-volume "$(get_source)" -5%
     notify_mic_user
 }
-
 toggle_mic() {
     pactl set-source-mute "$(get_source)" toggle
     notify_mic_user
 }
-
 # =====================
 # Dispatcher
 # =====================
-
 case "$1" in
     --get) get_volume ;;
     --inc) inc_volume ;;

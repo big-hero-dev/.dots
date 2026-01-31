@@ -18,6 +18,7 @@
 	],
 	"niri/workspaces": {
 		"format": "{icon}",
+		"separate-outputs": true,
 		"all-outputs": true,
 		"on-click": "activate",
 		"format-icons": {
