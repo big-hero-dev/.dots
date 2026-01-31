@@ -1,120 +1,129 @@
 {
-    "layer": "top",
-    "position": "left",
-    "width": 48,
-    "spacing": 4,
-    "margin-top": 8,
-    "margin-bottom": 8,
-    "margin-left": 8,
-    "modules-center": [
-        "custom/launcher",
+	"layer": "top",
+	"position": "left",
+	"width": 48,
+	"spacing": 4,
+	"margin-top": 8,
+	"margin-bottom": 8,
+	"margin-left": 8,
+	"modules-center": [
+		"custom/launcher",
 		"clock",
 		"tray",
-        "niri/workspaces",
+		"niri/workspaces",
 		"pulseaudio",
 		"backlight",
-        "custom/powermenu"
-    ],
-    "group/utils": {
-        "orientation": "vertical",
-        "drawer": {
-            "transition-duration": 400,
-            "transition-left-to-right": true
-        },
-        "modules": [
-            "custom/updates",
-            "disk"
-        ]
-    },
-
-    "niri/workspaces": {
-        "format": "{icon}",
-        "all-outputs": true,
-        "on-click": "activate",
-        "format-icons": {
-            "default": "○",
-            "active": "●"
-        }
-    },
-
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "󰅶",
-            "deactivated": "󰾪"
-        }
-    },
-
-    "clock": {
-        "format": "{:%H\n%M}",
-        "format-alt": "{:%d\n%m}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "calendar": {
-            "mode": "month",
-            "on-scroll": 1,
-            "format": {
-                "months": "<span color='#a7c080'><b>{}</b></span>",
-                "days": "<span color='#d3c6aa'><b>{}</b></span>",
-                "today": "<span color='#e67e80'><b><u>{}</u></b></span>"
-            }
-        }
-    },
-
-    "pulseaudio": {
-        "format": "{icon}",
-        "format-muted": "󰖁",
-        "format-icons": {
-            "default": ["󰕿", "󰖀", "󰕾"]
-        },
-        "on-click": "pavucontrol"
-    },
-
-    "backlight": {
-        "device": "intel_backlight",
-        "format": "{icon}",
-        "format-icons": ["󰃞", "󰃟", "󰃠"]
-    },
-
-    "memory": {
-        "format": "󰍛",
-        "tooltip-format": "RAM: {percentage}%"
-    },
-
-    "cpu": {
-        "format": "󰻠",
-        "tooltip-format": "CPU: {usage}%"
-    },
-
-    "temperature": {
-        "critical-threshold": 75,
-        "format": "{icon}",
-        "format-icons": ["󰔏", "󱃂", "󰸁"]
-    },
-
-    "battery": {
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{icon}",
-        "format-charging": "󰂄",
-        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂"]
-    },
-
-    "custom/launcher": {
-        "format": "󰣇",
-        "on-click": "fuzzel",
-        "tooltip": false
-    },
-
-    "custom/powermenu": {
-        "format": "⏻",
-        "on-click": "~/.local/share/bin/power-menu",
-        "tooltip": false
-    },
-
-    "tray": {
-        "icon-size": 18,
-        "spacing": 10
-    }
+		"custom/updates",
+		"custom/powermenu"
+	],
+	"niri/workspaces": {
+		"format": "{icon}",
+		"all-outputs": true,
+		"on-click": "activate",
+		"format-icons": {
+			"default": "○",
+			"active": "●"
+		}
+	},
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "󰅶",
+			"deactivated": "󰾪"
+		}
+	},
+	"clock": {
+		"format": "{:%H\n%M}",
+		"format-alt": "{:%d\n%m}",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode": "month",
+			"on-scroll": 1,
+			"format": {
+				"months": "<span color='#a7c080'><b>{}</b></span>",
+				"days": "<span color='#d3c6aa'><b>{}</b></span>",
+				"today": "<span color='#e67e80'><b><u>{}</u></b></span>"
+			}
+		}
+	},
+	"pulseaudio": {
+		"format": "{icon}",
+		"format-muted": "󰖁",
+		"format-icons": {
+			"default": [
+				"󰕿",
+				"󰖀",
+				"󰕾"
+			]
+		},
+		"on-click": "pavucontrol"
+	},
+	"backlight": {
+		"device": "intel_backlight",
+		"format": "{icon}",
+		"format-icons": [
+			"󰃞",
+			"󰃟",
+			"󰃠"
+		]
+	},
+	"memory": {
+		"format": "󰍛",
+		"tooltip-format": "RAM: {percentage}%"
+	},
+	"cpu": {
+		"format": "󰻠",
+		"tooltip-format": "CPU: {usage}%"
+	},
+	"temperature": {
+		"critical-threshold": 75,
+		"format": "{icon}",
+		"format-icons": [
+			"󰔏",
+			"󱃂",
+			"󰸁"
+		]
+	},
+	"battery": {
+		"states": {
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon}",
+		"format-charging": "󰂄",
+		"format-icons": [
+			"󰂎",
+			"󰁺",
+			"󰁻",
+			"󰁼",
+			"󰁽",
+			"󰁾",
+			"󰁿",
+			"󰂀",
+			"󰂁",
+			"󰂂"
+		]
+	},
+	"custom/launcher": {
+		"format": "󰣇",
+		"on-click": "fuzzel",
+		"tooltip": false
+	},
+	"custom/powermenu": {
+		"format": "⏻",
+		"on-click": "power-menu",
+		"tooltip": false
+	},
+	"custom/updates": {
+		"format": "{}",
+		"interval": 3600,
+		"exec": "~/.config/waybar/scripts/updatecheck.sh",
+		"return-type": "json",
+		"exec-if": "exit 0",
+		"signal": 8
+	},
+	"tray": {
+		"icon-size": 18,
+		"spacing": 10
+	}
 }
