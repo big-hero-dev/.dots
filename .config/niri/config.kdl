@@ -9,9 +9,11 @@ input {
 layout {
     gaps 10
 	preset-column-widths {
+		proportion 0.25    // 1/4
         proportion 0.33333 // 1/3
         proportion 0.5     // 1/2
         proportion 0.66667 // 2/3
+        proportion 0.75    // 3/4
     }
     default-column-width { proportion 0.5; }
     focus-ring {
@@ -31,6 +33,12 @@ window-rule {
     match title="^Picture in picture$"
     open-floating true
 }
+
+window-rule {
+    match app-id="^floating$"
+    open-floating true
+}
+
 
 binds {
     // Terminal & Launcher
@@ -54,12 +62,11 @@ binds {
     Mod+Shift+I { move-column-right; }
 
     // Layout / Sizing
-    Mod+V { maximize-column; } // Niri không có split h/v truyền thống
+    Mod+V { maximize-column; }
     Mod+S { switch-preset-column-width; }
-    Mod+F { maximize-column; }
     Mod+Shift+F { toggle-window-floating; }
 
-    // Workspaces (Niri gọi là Workspaces nhưng hoạt động theo chiều dọc)
+    // Workspaces
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
     Mod+3 { focus-workspace 3; }
@@ -79,6 +86,9 @@ binds {
     Mod+Shift+7 { move-column-to-workspace 7; }
     Mod+Shift+8 { move-column-to-workspace 8; }
     Mod+Shift+9 { move-column-to-workspace 9; }
+
+	Mod+Ctrl+N { move-column-to-workspace-down; }
+	Mod+Ctrl+E { move-column-to-workspace-up; }
 
     Mod+Tab { focus-window-previous; }
 
@@ -106,6 +116,23 @@ binds {
 
     // Waybar reload
     Mod+Shift+B           { spawn "pkill" "-SIGUSR2" "waybar"; }
+
+	// Consume / Expel windows
+	Mod+Comma { consume-window-into-column; }
+	Mod+Period { expel-window-from-column; }
+
+	// Center column
+	Mod+C { center-column;  }
+
+	// FullScreen
+	Mod+F { fullscreen-window; }
+
+	// Exit Niri
+	Mod+Shift+Q { quit; }
+
+	Mod+WheelScrollDown { set-column-width "-10%"; }
+    Mod+WheelScrollUp { set-column-width "+10%"; }
+
 }
 
 spawn-at-startup "fcitx5" "-d"

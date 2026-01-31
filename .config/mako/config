@@ -1,39 +1,77 @@
-# =========================
-# Default
-# =========================
-background-color=#272e33
-text-color=#d3c6aa
-border-color=#7fbbb3
-border-size=2
-border-radius=9
-margin=16,16,10,0
-font=JetBrains Mono Nerd Font 10
-anchor=top-right
-sort=-time
-default-timeout=3400
-ignore-timeout=0
-group-by=none
-invisible=0
+# Mako Configuration with Slide Animation
 
-# =========================
-# Volume Style (Steam Deck - Everforest Dark)
-# =========================
-[app-name=volume]
+# Default settings
+anchor=top-right
+margin=10
+padding=15
+width=350
+height=150
+border-size=2
+border-radius=12
+border-color=#83c092
+background-color=#2d353bdd
+text-color=#d3c6aa
+font=Inter 11
+
+# Icon
+icon-path=/usr/share/icons/Papirus-Dark
+max-icon-size=48
+
+# Grouping
+group-by=app-name
+max-visible=5
+
+# Timeout
+default-timeout=5000
+ignore-timeout=0
+
+# Progress bar
+progress-color=over #83c092
+
+# Do Not Disturb mode
+[mode=do-not-disturb]
+invisible=1
+
+# Urgency levels
+[urgency=low]
+border-color=#7fbbb3
+default-timeout=3000
+on-notify=exec paplay /usr/share/sounds/freedesktop/stereo/message.oga
+
+[urgency=normal]
+border-color=#83c092
+default-timeout=5000
+on-notify=exec paplay /usr/share/sounds/freedesktop/stereo/message.oga
+
+[urgency=critical]
+border-color=#e67e80
+default-timeout=0
+on-notify=exec paplay /usr/share/sounds/freedesktop/stereo/complete.oga
+
+# App-specific rules
+[app-name="Spotify"]
+border-color=#a7c080
+default-timeout=3000
+
+# Volume notification (Steam Deck style)
+[app-name="volume"]
 anchor=top-center
 width=300
 height=35
 margin=10
 padding=0,10
-
 background-color=#1e2326
 text-color=#e6e2cc
 border-color=#4a555b
 border-size=2
 border-radius=9
-
 progress-color=over #83c092
 font=JetBrains Mono Nerd Font 12
-
 format=<span font='10'><b>%s</b> %b</span>
 max-icon-size=20
+default-timeout=2000
+
+# Brightness notification
+[app-name="Brightness"]
+border-color=#d699b6
 default-timeout=2000
