@@ -15,6 +15,7 @@ cursor {
     hide-when-typing true
 }
 
+
 layout {
     gaps 10
 	preset-column-widths {
@@ -36,9 +37,17 @@ window-rule {
 }
 
 window-rule {
-    match title="^Picture-in-Picture$"
-    match title="^Picture in picture$"
-    open-floating true
+    match app-id="firefox$" title="^Picture-in-Picture$"
+    default-floating-position x=32 y=32 relative-to="bottom-left"
+}
+
+window-rule {
+    match app-id="firefox$"
+    scroll-factor 0.75
+}
+
+window-rule {
+    draw-border-with-background false
 }
 
 binds {

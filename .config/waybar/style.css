@@ -1,172 +1,127 @@
-/* =========================
-   Global
-   ========================= */
-* {
-  font-family: JetBrainsMono Nerd Font;
-  font-size: 16px;
-  color: #d3c6aa;
-}
+/* Everforest Palette */
+@define-color bg #2b3339;
+@define-color bg_alt #323c41;
+@define-color fg #d3c6aa;
+@define-color red #e67e80;
+@define-color orange #e69875;
+@define-color yellow #dbbc7f;
+@define-color green #a7c080;
+@define-color aqua #83c092;
+@define-color blue #7fbbb3;
+@define-color grey #859289;
 
-/* =========================
-   Waybar container
-   ========================= */
-window#waybar {
-  background-color: #272e33;
+* {
+  font-family: "JetBrainsMono Nerd Font", "Material Design Icons", "sans-serif";
+  font-size: 14px;
+  border: none;
   border-radius: 12px;
 }
 
-/* =========================
-   Niri Workspaces
-   ========================= */
-#workspaces {
-  margin: 0;
+main-bar {
+  background-color: @bg;
+  border-radius: 15px;
+  border: 1px solid @bg_alt;
 }
 
-#workspaces button {
-  padding: 5px 14px;
-  margin: 0 4px;
-  min-height: 0;
-  border-radius: 16px;
-  background-color: rgba(46, 56, 60, 0.6);
-  color: #7a8478;
-  border: none;
-  transition: all 0.25s ease;
+window#waybar {
+  border-radius: 12px;
+  color: @fg;
+  background: transparent;
 }
 
-#workspaces button.focused {
-  background-color: #414b50;
-  color: #a7c080;
-  font-weight: 700;
-  box-shadow: 0 3px 12px rgba(167, 192, 128, 0.3);
+.modules-center {
+  background-color: @bg;
+  border: 2px solid @blue;
 }
 
-#workspaces button.active {
-  background-color: #374247;
-  color: #d3c6aa;
-}
-
-#workspaces button.urgent {
-  background-color: #e67e80;
-  color: #1e2326;
-  animation: urgent-pulse 1.5s ease-in-out infinite;
-}
-
-#workspaces button:hover {
-  background-color: #414b50;
-  color: #d3c6aa;
-}
-
-/* =========================
-   Standard modules
-   ========================= */
+/* Common style for all modules */
+#custom-launcher,
+#workspaces,
 #clock,
 #pulseaudio,
+#backlight,
 #memory,
 #cpu,
 #temperature,
 #battery,
+#idle_inhibitor,
 #tray,
-#custom-launcher,
-#custom-powermenu,
-#network,
-#backlight,
-#disk,
+#custom-powermenu {
+  padding: 8px 0;
+  margin: 4px 6px;
+}
+
+/* Launcher */
+#custom-launcher {
+  font-size: 20px;
+  color: @green;
+  margin-bottom: 10px;
+}
+
+/* Workspaces */
+#workspaces {
+  background-color: @bg_alt;
+  border-radius: 8px;
+}
+
+#workspaces button {
+  padding: 4px 0;
+  color: @grey;
+}
+
+#workspaces button.active {
+  color: @aqua;
+}
+
+#workspaces button.urgent {
+  color: @red;
+}
+
+/* Clock - centered vertical */
+#clock {
+  font-weight: bold;
+  color: @fg;
+}
+
+/* Utilities colors */
+#pulseaudio {
+  color: @blue;
+}
+#backlight {
+  color: @yellow;
+}
+#memory {
+  color: @orange;
+}
+#cpu {
+  color: @aqua;
+}
+#temperature {
+  color: @green;
+}
+#battery {
+  color: @green;
+}
+
+#battery.warning {
+  color: @orange;
+}
+#battery.critical {
+  color: @red;
+}
+
 #idle_inhibitor {
-  background-color: #2e383c;
-  padding-left: 10px;
-  padding-right: 10px;
+  color: @yellow;
 }
 
-/* =========================
-   Custom modules
-   ========================= */
-#custom-player {
-  color: #859289;
-  opacity: 0.75;
+/* Powermenu */
+#custom-powermenu {
+  color: @red;
+  font-size: 18px;
+  margin-top: 10px;
 }
 
-#custom-cava {
-  color: #7a8478;
-  opacity: 0.55;
-}
-
-#custom-updates {
-  color: #a7c080;
-  opacity: 0.85;
-}
-
-#custom-player,
-#custom-cava,
-#custom-updates {
-  background-color: rgba(46, 56, 60, 0.85);
-  padding-left: 10px;
-  padding-right: 10px;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-}
-
-/* =========================
-   Module states
-   ========================= */
-#network.disconnected {
-  color: #e67e80;
-}
-
-#battery.charging {
-  color: #a7c080;
-}
-
-#battery.warning:not(.charging) {
-  color: #dbbc7f;
-}
-
-#battery.critical:not(.charging) {
-  color: #e67e80;
-  animation: blink 1s linear infinite;
-}
-
-#temperature.critical {
-  color: #e67e80;
-}
-
-#idle_inhibitor.activated {
-  color: #a7c080;
-}
-
-#sway-mode {
-  background-color: #e67e80;
-  color: #2d353b;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-weight: 600;
-}
-
-/* =========================
-   Animations
-   ========================= */
-@keyframes blink {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-@keyframes urgent-blink {
-  0% {
-    background-color: #e67e80;
-    opacity: 1;
-  }
-  100% {
-    background-color: #e67e80;
-    opacity: 1;
-  }
-  50% {
-    background-color: #e67e80;
-    opacity: 0.7;
-  }
+/* Tray */
+#tray {
+  margin-top: 10px;
 }
