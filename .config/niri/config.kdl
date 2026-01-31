@@ -6,20 +6,59 @@ input {
     }
 }
 
+cursor {
+    hide-when-typing true
+}
+
 layout {
-    gaps 10
+    gaps 8
 	preset-column-widths {
-		proportion 0.25    // 1/4
         proportion 0.33333 // 1/3
         proportion 0.5     // 1/2
         proportion 0.66667 // 2/3
-        proportion 0.75    // 3/4
     }
     default-column-width { proportion 0.5; }
     focus-ring {
-        width 2
+        width 3
         active-color "#83c092"
         inactive-color "#374145"
+    }
+}
+
+animations {
+    window-open {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+
+    window-close {
+        duration-ms 150
+        curve "ease-out-cubic"
+    }
+
+    window-resize {
+        duration-ms 200
+        curve "ease-out-expo"
+    }
+
+    window-movement {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+
+    horizontal-view-movement {
+        duration-ms 250
+        curve "ease-out-cubic"
+    }
+
+	workspace-switch {
+        duration-ms 250
+        curve "ease-out-expo"
+    }
+
+    config-notification-open-close {
+        duration-ms 200
+        curve "ease-out-quad"
     }
 }
 
@@ -38,7 +77,6 @@ window-rule {
     match app-id="^floating$"
     open-floating true
 }
-
 
 binds {
     // Terminal & Launcher
@@ -116,6 +154,8 @@ binds {
 
     // Waybar reload
     Mod+Shift+B           { spawn "pkill" "-SIGUSR2" "waybar"; }
+	// Toogle waybar
+    Mod+Shift+T			  { spawn "killall" "-SIGUSR1" "waybar"; }
 
 	// Consume / Expel windows
 	Mod+Comma { consume-window-into-column; }
