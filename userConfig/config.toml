@@ -1,0 +1,10 @@
+# /etc/greetd/config.toml
+[terminal]
+vt = 1
+
+[default_session]
+command = "tuigreet --cmd .local/bin/niri-session"
+
+# Styling options for tuigreet
+[default_session]
+command = "tuigreet --time --time-format '%Y-%m-%d %H:%M:%S' --greeting 'Welcome to Niri' --asterisks --asterisks-char '*' --window-padding 2 --container-padding 2 --prompt-padding 1 --remember --remember-session --cmd /home/xxx/.local/bin/niri-session"

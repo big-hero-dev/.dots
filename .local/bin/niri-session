@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Export PATH trước
+export PATH="$HOME/.local/bin:$PATH"
+
+# Session variables
+export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=niri
+export XDG_SESSION_DESKTOP=niri
+
+# GTK config
+export GTK_USE_PORTAL=1
+export QT_QPA_PLATFORMTHEME=gtk3
+
+exec niri

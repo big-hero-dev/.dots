@@ -1,3 +1,4 @@
+
 input {
     keyboard {
         xkb {
@@ -6,12 +7,16 @@ input {
     }
 }
 
+hotkey-overlay {
+    skip-at-startup
+}
+
 cursor {
     hide-when-typing true
 }
 
 layout {
-    gaps 8
+    gaps 10
 	preset-column-widths {
         proportion 0.33333 // 1/3
         proportion 0.5     // 1/2
@@ -25,43 +30,6 @@ layout {
     }
 }
 
-animations {
-    window-open {
-        duration-ms 200
-        curve "ease-out-cubic"
-    }
-
-    window-close {
-        duration-ms 150
-        curve "ease-out-cubic"
-    }
-
-    window-resize {
-        duration-ms 200
-        curve "ease-out-expo"
-    }
-
-    window-movement {
-        duration-ms 200
-        curve "ease-out-cubic"
-    }
-
-    horizontal-view-movement {
-        duration-ms 250
-        curve "ease-out-cubic"
-    }
-
-	workspace-switch {
-        duration-ms 250
-        curve "ease-out-expo"
-    }
-
-    config-notification-open-close {
-        duration-ms 200
-        curve "ease-out-quad"
-    }
-}
-
 window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
@@ -70,11 +38,6 @@ window-rule {
 window-rule {
     match title="^Picture-in-Picture$"
     match title="^Picture in picture$"
-    open-floating true
-}
-
-window-rule {
-    match app-id="^floating$"
     open-floating true
 }
 
@@ -143,7 +106,6 @@ binds {
 
     Print                 { spawn "screenshot"; }
     Shift+Print           { spawn "screenshot" "edit"; }
-    Mod+P                 { spawn "power-menu"; }
     Mod+Shift+W           { spawn "change-wallpaper"; }
     Mod+L                 { spawn "lockscreen"; }
     Mod+K                 { spawn "hyprpicker" "-aq"; }
