@@ -129,8 +129,8 @@ binds {
     Mod+Shift+Down        { spawn "volume" "--dec"; }
     Mod+Shift+M           { spawn "volume" "--toggle"; }
 
-    XF86MonBrightnessUp   { spawn "backlight" "--inc"; }
-    XF86MonBrightnessDown { spawn "backlight" "--dec"; }
+    XF86MonBrightnessUp   { spawn "brightness" "--inc"; }
+    XF86MonBrightnessDown { spawn "brightness" "--dec"; }
 
     Print                 { spawn "screenshot"; }
     Shift+Print           { spawn "screenshot" "edit"; }

@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+
+# =====================
+# Helpers
+# =====================
+get_backlight_device() {
+    if [[ -d /sys/class/backlight/intel_backlight ]]; then
+        echo "intel_backlight"
+    elif [[ -d /sys/class/backlight/amdgpu_bl0 ]]; then
+        echo "amdgpu_bl0"
+    elif [[ -d /sys/class/backlight/acpi_video0 ]]; then
+        echo "acpi_video0"
+    else
+        ls /sys/class/backlight/ | head -n1
+    fi
+}
+
+BACKLIGHT_DEVICE=$(get_backlight_device)
+BACKLIGHT_PATH="/sys/class/backlight/$BACKLIGHT_DEVICE"
+
+# =====================
+# Brightness
+# =====================
+get_brightness() {
+    [[ -d "$BACKLIGHT_PATH" ]] || { echo 0; return; }
+
+    current=$(cat "$BACKLIGHT_PATH/brightness")
+    max=$(cat "$BACKLIGHT_PATH/max_brightness")
+
+    echo $((current * 100 / max))
+}
+
+get_icon() {
+    b=$(get_brightness)
+
+    if (( b <= 5 )); then
+        echo "󰃞"   # off
+    elif (( b <= 25 )); then
+        echo "󰃟"
+    elif (( b <= 50 )); then
+        echo "󰃠"
+    elif (( b <= 75 )); then
+        echo "󰃝"
+    else
+        echo "󰃡"
+    fi
+}
+
+notify_user() {
+    b=$(get_brightness)
+    icon=$(get_icon)
+
+    notify-send -a brightness -u low -e \
+        -h int:value:"$b" \
+        -h string:x-canonical-private-synchronous:brightness \
+        "$icon  Brightness: ${b}%"
+}
+
+set_brightness() {
+    [[ -d "$BACKLIGHT_PATH" ]] || return 1
+
+    percent=$1
+
+    # Clamp 5–100
+    (( percent < 5 )) && percent=5
+    (( percent > 100 )) && percent=100
+
+    if command -v brightnessctl &>/dev/null; then
+        brightnessctl -d "$BACKLIGHT_DEVICE" set "${percent}%" > /dev/null
+    else
+        max=$(cat "$BACKLIGHT_PATH/max_brightness")
+        echo $((max * percent / 100)) \
+            | tee "$BACKLIGHT_PATH/brightness" > /dev/null
+    fi
+
+    notify_user
+}
+
+inc_brightness() {
+    current=$(get_brightness)
+    set_brightness $((current + 5))
+}
+
+dec_brightness() {
+    current=$(get_brightness)
+    set_brightness $((current - 5))
+}
+
+# =====================
+# Dispatcher
+# =====================
+case "$1" in
+    --get) get_brightness ;;
+    --inc) inc_brightness ;;
+    --dec) dec_brightness ;;
+    --set) set_brightness "$2" ;;
+    *) get_brightness ;;
+esac

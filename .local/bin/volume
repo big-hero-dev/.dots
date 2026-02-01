@@ -27,15 +27,15 @@ get_icon() {
     vol=$(get_volume)
 
     if [[ "$vol" == "Muted" ]]; then
-        echo "audio-volume-muted"
+        echo "󰖁"   # muted
     else
         v=${vol%\%}
         if (( v <= 30 )); then
-            echo "audio-volume-low"
+            echo "󰕿"
         elif (( v <= 60 )); then
-            echo "audio-volume-medium"
+            echo "󰖀"
         else
-            echo "audio-volume-high"
+            echo "󰕾"
         fi
     fi
 }
@@ -45,30 +45,30 @@ notify_user() {
     icon=$(get_icon)
 
     if [[ "$vol" == "Muted" ]]; then
-        notify-send -a volume -e -u low -i "$icon" \
-            -h string:x-canonical-private-synchronous:volume_notif \
-            "Volume: Muted"
+        notify-send -a volume -u low -e \
+            -h string:x-canonical-private-synchronous:volume \
+            "$icon  Volume: Muted"
     else
-        notify-send -a volume -e -u low -i "$icon" \
+        notify-send -a volume -u low -e \
             -h int:value:"${vol%\%}" \
-            -h string:x-canonical-private-synchronous:volume_notif \
-            "Volume: $vol"
+            -h string:x-canonical-private-synchronous:volume \
+            "$icon  Volume: $vol"
     fi
 }
 
 inc_volume() {
     pactl set-sink-mute "$(get_sink)" 0
 
-    current_vol=$(pactl get-sink-volume "$(get_sink)" \
+    current=$(pactl get-sink-volume "$(get_sink)" \
         | grep -o '[0-9]\+%' | head -n1 | tr -d '%')
 
-    if (( current_vol < 100 )); then
+    if (( current < 100 )); then
         pactl set-sink-volume "$(get_sink)" +5%
 
-        new_vol=$(pactl get-sink-volume "$(get_sink)" \
+        new=$(pactl get-sink-volume "$(get_sink)" \
             | grep -o '[0-9]\+%' | head -n1 | tr -d '%')
 
-        if (( new_vol > 100 )); then
+        if (( new > 100 )); then
             pactl set-sink-volume "$(get_sink)" 100%
         fi
     fi
@@ -101,9 +101,9 @@ get_mic_volume() {
 
 get_mic_icon() {
     if [[ "$(get_mic_volume)" == "Muted" ]]; then
-        echo "microphone-sensitivity-muted"
+        echo "󰍭"
     else
-        echo "microphone-sensitivity-high"
+        echo "󰍬"
     fi
 }
 
@@ -112,32 +112,25 @@ notify_mic_user() {
     icon=$(get_mic_icon)
 
     if [[ "$vol" == "Muted" ]]; then
-        notify-send -a mic -e -u low -i "$icon" \
-            -h string:x-canonical-private-synchronous:mic_notif \
-            "Mic: Muted"
+        notify-send -a mic -u low -e \
+            -h string:x-canonical-private-synchronous:mic \
+            "$icon  Mic: Muted"
     else
-        notify-send -a mic -e -u low -i "$icon" \
+        notify-send -a mic -u low -e \
             -h int:value:"${vol%\%}" \
-            -h string:x-canonical-private-synchronous:mic_notif \
-            "Mic: $vol"
+            -h string:x-canonical-private-synchronous:mic \
+            "$icon  Mic: $vol"
     fi
 }
 
 inc_mic_volume() {
     pactl set-source-mute "$(get_source)" 0
 
-    current_vol=$(pactl get-source-volume "$(get_source)" \
+    current=$(pactl get-source-volume "$(get_source)" \
         | grep -o '[0-9]\+%' | head -n1 | tr -d '%')
 
-    if (( current_vol < 100 )); then
+    if (( current < 100 )); then
         pactl set-source-volume "$(get_source)" +5%
-
-        new_vol=$(pactl get-source-volume "$(get_source)" \
-            | grep -o '[0-9]\+%' | head -n1 | tr -d '%')
-
-        if (( new_vol > 100 )); then
-            pactl set-source-volume "$(get_source)" 100%
-        fi
     fi
 
     notify_mic_user
@@ -163,8 +156,6 @@ case "$1" in
     --dec) dec_volume ;;
     --toggle) toggle_mute ;;
     --toggle-mic) toggle_mic ;;
-    --get-icon) get_icon ;;
-    --get-mic-icon) get_mic_icon ;;
     --mic-inc) inc_mic_volume ;;
     --mic-dec) dec_mic_volume ;;
     *) get_volume ;;
