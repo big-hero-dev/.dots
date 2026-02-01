@@ -141,8 +141,8 @@ binds {
     Print                 { spawn "screenshot"; }
     Shift+Print           { spawn "screenshot" "edit"; }
     Mod+Shift+W           { spawn "change-wallpaper"; }
-    Mod+L                 { spawn "lockscreen"; }
     Mod+K                 { spawn "hyprpicker" "-aq"; }
+    Mod+P                 { spawn "power-menu"; }
 
     // Notification Control (Mako)
     Mod+Shift+D           { spawn "makoctl" "dismiss"; }

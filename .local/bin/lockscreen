@@ -1,21 +1,53 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-WALLPAPER="$(cat ~/.config/sway/wallpaper)"
+BG="#2d353b"
+SURFACE="#343f44"
+TEXT="#d3c6aa"
 
-swaylock \
-  --image "$WALLPAPER" \
-  --scaling fill \
+GREEN="#a7c080"
+BLUE="#7fbbb3"
+RED="#e67e80"
+YELLOW="#dbbc7f"
+
+exec swaylock \
+  --daemonize \
+  --screenshots \
+  \
   --clock \
+  --timestr "%H:%M" \
+  --datestr "%d %B" \
+  \
   --indicator \
-  --ring-color 7a8478 \
-  --inside-color 1e2326cc \
-  --key-hl-color a7c080 \
+  --indicator-radius 120 \
+  --indicator-thickness 10 \
+  \
+  --effect-blur 10x5 \
+  --effect-vignette 0.3:0.3 \
+  \
+  --inside-color ${BG}cc \
+  --ring-color ${GREEN}cc \
   --separator-color 00000000 \
+  \
+  --key-hl-color ${BLUE}ff \
+  --bs-hl-color ${RED}ff \
+  \
+  --inside-clear-color ${SURFACE}cc \
+  --ring-clear-color ${YELLOW}ff \
+  --text-clear-color ${YELLOW}ff \
+  \
+  --inside-ver-color ${SURFACE}cc \
+  --ring-ver-color ${BLUE}ff \
+  --text-ver-color ${BLUE}ff \
+  \
+  --inside-wrong-color ${SURFACE}cc \
+  --ring-wrong-color ${RED}ff \
+  --text-wrong-color ${RED}ff \
+  \
   --line-color 00000000 \
-  --inside-ver-color 1e2326cc \
-  --ring-ver-color 7fbbb3 \
-  --inside-wrong-color 1e2326cc \
-  --ring-wrong-color e67e80 \
-  --text-color d3c6aa \
-  --text-ver-color d3c6aa \
-  --text-wrong-color d3c6aa \
+  --line-clear-color 00000000 \
+  --line-ver-color 00000000 \
+  --line-wrong-color 00000000 \
+  \
+  --text-color ${TEXT}ff \
+  --font "JetBrainsMono Nerd Font" \
+  --font-size 32
