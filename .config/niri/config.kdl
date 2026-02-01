@@ -60,6 +60,12 @@ window-rule {
     default-floating-position x=32 y=32 relative-to="bottom-left"
 }
 
+layer-rule {
+    match namespace="waybar"
+    opacity 0.92
+    geometry-corner-radius 12
+}
+
 window-rule {
     match app-id="firefox$"
     scroll-factor 0.75
