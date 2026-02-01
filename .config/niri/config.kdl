@@ -129,8 +129,8 @@ binds {
     Mod+Shift+Down        { spawn "volume" "--dec"; }
     Mod+Shift+M           { spawn "volume" "--toggle"; }
 
-    XF86MonBrightnessUp   { spawn "brightnessctl" "set" "+5%"; }
-    XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
+    XF86MonBrightnessUp   { spawn "backlight" "--inc"; }
+    XF86MonBrightnessDown { spawn "backlight" "--dec"; }
 
     Print                 { spawn "screenshot"; }
     Shift+Print           { spawn "screenshot" "edit"; }
@@ -172,3 +172,5 @@ spawn-at-startup "waybar"
 spawn-at-startup "cava"
 spawn-at-startup "swayidle" "-w" "timeout" "5" "niri msg action do-screen-transition; niri msg action set-cursor-visiblity hide" "resume" "niri msg action set-cursor-visiblity show"
 spawn-at-startup "swww-daemon"
+spawn-at-startup "systemctl" "--user" "import-environment" "DISPLAY" "WAYLAND_DISPLAY"
+spawn-at-startup "/usr/libexec/xdg-desktop-portal-gtk"

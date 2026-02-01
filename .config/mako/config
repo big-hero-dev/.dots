@@ -14,8 +14,9 @@ text-color=#d3c6aa
 font=Inter 11
 
 # Icon
-icon-path=/usr/share/icons/Papirus-Dark
-max-icon-size=48
+icons=1
+max-icon-size=32
+icon-path=/usr/share/icons
 
 # Grouping
 group-by=app-name
@@ -71,7 +72,20 @@ format=<span font='10'><b>%s</b> %b</span>
 max-icon-size=20
 default-timeout=2000
 
-# Brightness notification
-[app-name="Brightness"]
-border-color=#d699b6
+# Brightness
+[app-name="brightness"]
+anchor=top-center
+width=300
+height=35
+margin=10
+padding=0,10
+background-color=#1e2326
+text-color=#e6e2cc
+border-color=#4a555b
+border-size=2
+border-radius=9
+progress-color=over #83c092
+font=JetBrains Mono Nerd Font 12
+format=<span font='10'><b>%s</b> %b</span>
+max-icon-size=20
 default-timeout=2000

@@ -14,10 +14,9 @@ case "$chosen" in
         systemctl suspend
         ;;
     Logout)
-        swaymsg exit
+        niri msg action quit
         ;;
     Lock)
         swaylock
         ;;
 esac
-

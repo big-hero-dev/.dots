@@ -1,6 +1,9 @@
 #!/usr/bin/env sh
 
-WALL_DIR="$HOME/Pictures/Wallpapers"
+WALL_DIR="${WALL_DIR:-$HOME/Pictures/Wallpapers}"
+
+# Check if directory exists
+[ ! -d "$WALL_DIR" ] && notify-send "Error" "Wallpaper directory not found" && exit 1
 
 chosen=$(find "$WALL_DIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.gif" \) \
   | sed "s|$WALL_DIR/||" \
@@ -9,6 +12,9 @@ chosen=$(find "$WALL_DIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname 
 [ -z "$chosen" ] && exit 0
 
 FULL_PATH="$WALL_DIR/$chosen"
+
+# Verify file exists
+[ ! -f "$FULL_PATH" ] && exit 1
 
 swww img "$FULL_PATH" \
     --transition-type grow \

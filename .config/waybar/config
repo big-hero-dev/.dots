@@ -13,6 +13,8 @@
 		"niri/workspaces",
 		"pulseaudio",
 		"backlight",
+		"battery",
+		"temperature",
 		"custom/updates",
 		"custom/powermenu"
 	],

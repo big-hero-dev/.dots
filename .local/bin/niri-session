@@ -4,6 +4,7 @@
 export PATH="$HOME/.local/bin:$PATH"
 
 # Session variables
+export XDG_DATA_DIRS="/usr/share:/usr/local/share"
 export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=niri
 export XDG_SESSION_DESKTOP=niri
