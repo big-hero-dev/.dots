@@ -65,7 +65,7 @@ window-rule {
 
 layer-rule {
     match namespace="waybar"
-    opacity 0.92
+    opacity 0.82
     geometry-corner-radius 12
 }
 
@@ -180,7 +180,7 @@ spawn-at-startup "mako"
 spawn-at-startup "udiskie"
 spawn-at-startup "waybar"
 spawn-at-startup "cava"
-spawn-at-startup "swayidle" "-w" "timeout" "5" "niri msg action do-screen-transition; niri msg action set-cursor-visiblity hide" "resume" "niri msg action set-cursor-visiblity show"
+spawn-at-startup "swayidle" "-w" "timeout" "60" "niri msg action do-screen-transition; niri msg action set-cursor-visibility hide" "resume" "niri msg action set-cursor-visibility show"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "systemctl" "--user" "import-environment" "DISPLAY" "WAYLAND_DISPLAY"
 spawn-at-startup "/usr/libexec/xdg-desktop-portal-gtk"
