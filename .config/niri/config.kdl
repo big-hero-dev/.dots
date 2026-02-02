@@ -53,6 +53,7 @@ layout {
 window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
+    draw-border-with-background false
 }
 
 window-rule {
@@ -61,22 +62,28 @@ window-rule {
     default-column-width { fixed 480; }
     default-window-height { fixed 270; }
 	default-floating-position x=10 y=10 relative-to="bottom-right"
+	shadow {
+		on
+	}
 }
 
 layer-rule {
     match namespace="waybar"
+	match at-startup=true
     opacity 0.82
     geometry-corner-radius 12
+	block-out-from "screencast"
 }
 
-window-rule {
-    match app-id="firefox$"
-    scroll-factor 0.75
+layer-rule {
+    match namespace="^launcher$"
+    opacity 0.95
+	shadow {
+        on
+    }
+	geometry-corner-radius 10
 }
 
-window-rule {
-    draw-border-with-background false
-}
 
 binds {
     // Terminal & Launcher
