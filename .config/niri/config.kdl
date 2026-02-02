@@ -42,7 +42,7 @@ layout {
         proportion 0.5     // 1/2
         proportion 0.66667 // 2/3
     }
-    default-column-width { proportion 0.5; }
+    default-column-width { proportion 1.0; }
     focus-ring {
         width 3
         active-color "#83c092"
@@ -57,7 +57,10 @@ window-rule {
 
 window-rule {
     match app-id="firefox$" title="^Picture-in-Picture$"
-    default-floating-position x=32 y=32 relative-to="bottom-left"
+    open-floating true
+    default-column-width { fixed 480; }
+    default-window-height { fixed 270; }
+	default-floating-position x=10 y=10 relative-to="bottom-right"
 }
 
 layer-rule {
@@ -79,6 +82,7 @@ binds {
     // Terminal & Launcher
     Mod+Return { spawn "foot"; }
     Mod+Space { spawn "sh" "-c" "GTK_USE_PORTAL=1 fuzzel"; }
+	Mod+B     { spawn "firefox"; }
 
     // Kill & Reload
     Mod+Q { close-window; }

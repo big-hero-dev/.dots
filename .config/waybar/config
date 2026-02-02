@@ -59,7 +59,9 @@
 				"󰕾"
 			]
 		},
-		"on-click": "pavucontrol"
+		"on-click": "pavucontrol",
+		"on-scroll-up": "volume --inc",
+		"on-scroll-down": "volume --dec"
 	},
 	"backlight": {
 		"device": "intel_backlight",
@@ -68,7 +70,9 @@
 			"󰃞",
 			"󰃟",
 			"󰃠"
-		]
+		],
+		"on-scroll-up": "brightness --inc",
+		"on-scroll-down": "brightness --dec"
 	},
 	"memory": {
 		"format": "󰍛",
