@@ -38,7 +38,6 @@ cursor {
 layout {
     gaps 10
 	preset-column-widths {
-        proportion 0.33333 // 1/3
         proportion 0.5     // 1/2
         proportion 0.66667 // 2/3
     }
@@ -137,6 +136,7 @@ binds {
 	Mod+Ctrl+E { move-column-to-workspace-up; }
 
     Mod+Tab { focus-window-previous; }
+	Mod+Shift+Tab { switch-focus-between-floating-and-tiling; }
 
     // Media & System
     XF86AudioRaiseVolume  { spawn "volume" "--inc"; }
