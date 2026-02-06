@@ -47,6 +47,10 @@ layout {
         active-color "#83c092"
         inactive-color "#374145"
     }
+	insert-hint {
+        color "#ffc87f80"
+        gradient from="#ffbb6680" to="#ffc88080" angle=45 relative-to="workspace-view"
+    }
 }
 
 window-rule {
@@ -92,7 +96,6 @@ binds {
 
     // Kill & Reload
     Mod+Q { close-window; }
-    Mod+Shift+R { spawn "niri" "msg" "reload"; }
 
     // Focus (Colemak-DH: HNEI)
     Mod+H { focus-column-left; }
