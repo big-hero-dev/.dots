@@ -91,7 +91,7 @@ layer-rule {
 binds {
     // Terminal & Launcher
     Mod+Return { spawn "foot"; }
-    Mod+Space { spawn "sh" "-c" "GTK_USE_PORTAL=1 fuzzel"; }
+    Mod+Space { spawn "fuzzel"; }
 	Mod+B     { spawn "firefox"; }
 
     // Kill & Reload
