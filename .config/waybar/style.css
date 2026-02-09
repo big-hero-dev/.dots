@@ -11,26 +11,27 @@
 @define-color grey #859289;
 
 * {
-  font-family: "JetBrainsMono Nerd Font", "Material Design Icons", "sans-serif";
+  font-family: "JetBrainsMono Nerd Font", "Material Design Icons", sans-serif;
   font-size: 14px;
   border: none;
   border-radius: 12px;
 }
 
-main-bar {
-  background-color: @bg;
-  border-radius: 15px;
-  border: 1px solid @bg_alt;
-}
-
-window#waybar {
+#waybar {
   border-radius: 12px;
   color: @fg;
   background: transparent;
 }
 
-.modules-center {
+.modules-left,
+.modules-center,
+.modules-right {
   background-color: @bg;
+  border-radius: 15px;
+  border: 1px solid @bg_alt;
+}
+
+.modules-center {
   border: 2px solid @blue;
 }
 
@@ -44,11 +45,11 @@ window#waybar {
 #cpu,
 #temperature,
 #battery,
-#idle_inhibitor,
 #tray,
-#custom-powermenu {
+#custom-powermenu,
+#custom-music {
   padding: 8px 0;
-  margin: 4px 6px;
+  margin: 4px 0;
 }
 
 /* Launcher */
@@ -65,19 +66,28 @@ window#waybar {
 }
 
 #workspaces button {
-  padding: 4px 0;
+  padding: 4px 8px;
+  margin: 2px;
   color: @grey;
+  background: transparent;
+  transition: all 0.3s ease;
 }
 
 #workspaces button.active {
   color: @aqua;
+  background-color: rgba(131, 192, 146, 0.2);
 }
 
 #workspaces button.urgent {
   color: @red;
+  background-color: rgba(230, 126, 128, 0.2);
 }
 
-/* Clock - centered vertical */
+#workspaces button:hover {
+  background-color: rgba(211, 198, 170, 0.1);
+}
+
+/* Clock - centered */
 #clock {
   font-weight: bold;
   color: @fg;
@@ -87,18 +97,23 @@ window#waybar {
 #pulseaudio {
   color: @blue;
 }
+
 #backlight {
   color: @yellow;
 }
+
 #memory {
   color: @orange;
 }
+
 #cpu {
   color: @aqua;
 }
+
 #temperature {
   color: @green;
 }
+
 #battery {
   color: @green;
 }
@@ -106,12 +121,17 @@ window#waybar {
 #battery.warning {
   color: @orange;
 }
+
 #battery.critical {
   color: @red;
 }
 
 #idle_inhibitor {
   color: @yellow;
+}
+
+#idle_inhibitor.activated {
+  color: @orange;
 }
 
 /* Powermenu */
@@ -124,4 +144,30 @@ window#waybar {
 /* Tray */
 #tray {
   margin-top: 10px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+#custom-music {
+  font-size: 18px;
+}
+
+#custom-music.playing {
+  color: @green;
+}
+
+#custom-music.paused {
+  color: @orange;
+  opacity: 0.7;
+}
+
+#custom-music.stopped {
+  color: @grey;
+  opacity: 0.5;
 }

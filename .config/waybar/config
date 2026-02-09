@@ -11,8 +11,8 @@
 		"clock",
 		"tray",
 		"niri/workspaces",
-		"idle_inhibitor",
 		"pulseaudio",
+		"custom/music",
 		"backlight",
 		"battery",
 		"temperature",
@@ -27,13 +27,6 @@
 		"format-icons": {
 			"default": "○",
 			"active": "●"
-		}
-	},
-	"idle_inhibitor": {
-		"format": "{icon}",
-		"format-icons": {
-			"activated": "󰅶",
-			"deactivated": "󰾪"
 		}
 	},
 	"clock": {
@@ -136,5 +129,15 @@
 	"tray": {
 		"icon-size": 18,
 		"spacing": 10
+	},
+	"custom/music": {
+		"format": "{}",
+		"return-type": "json",
+		"exec": "~/.config/waybar/scripts/music.sh",
+		"on-click": "playerctl play-pause",
+		"on-click-right": "playerctl next",
+		"on-scroll-up": "playerctl previous",
+		"on-scroll-down": "playerctl next",
+		"escape": true
 	}
 }
