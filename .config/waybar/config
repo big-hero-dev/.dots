@@ -1,8 +1,8 @@
 {
 	"layer": "top",
 	"position": "left",
-	"width": 48,
-	"spacing": 4,
+	"width": 56,
+	"spacing": 2,
 	"margin-top": 8,
 	"margin-bottom": 8,
 	"margin-left": 8,
@@ -127,8 +127,8 @@
 		"signal": 8
 	},
 	"tray": {
-		"icon-size": 18,
-		"spacing": 10
+		"icon-size": 16,
+		"spacing": 6
 	},
 	"custom/music": {
 		"format": "{}",
