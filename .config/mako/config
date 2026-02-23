@@ -2,12 +2,12 @@
 
 # Default settings
 anchor=top-right
-margin=10
-padding=15
+margin=6
+padding=10
 width=350
 height=150
 border-size=2
-border-radius=12
+border-radius=10
 border-color=#83c092
 background-color=#2d353bdd
 text-color=#d3c6aa
@@ -60,7 +60,7 @@ anchor=top-center
 width=300
 height=35
 margin=10
-padding=0,10
+padding=0,6
 background-color=#1e2326
 text-color=#e6e2cc
 border-color=#4a555b

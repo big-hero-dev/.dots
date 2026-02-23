@@ -36,25 +36,24 @@ cursor {
 
 
 layout {
-    gaps 10
+    gaps 6
 	preset-column-widths {
         proportion 0.5     // 1/2
         proportion 0.66667 // 2/3
     }
     default-column-width { proportion 0.5; }
     focus-ring {
-        width 3
+        width 2
         active-color "#83c092"
         inactive-color "#374145"
     }
 	insert-hint {
         color "#ffc87f80"
-        gradient from="#ffbb6680" to="#ffc88080" angle=45 relative-to="workspace-view"
     }
 }
 
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 10
     clip-to-geometry true
     draw-border-with-background false
 }
@@ -73,8 +72,8 @@ window-rule {
 layer-rule {
     match namespace="waybar"
 	match at-startup=true
-    opacity 0.82
-    geometry-corner-radius 12
+    opacity 0.9
+    geometry-corner-radius 10
 	block-out-from "screencast"
 }
 

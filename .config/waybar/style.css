@@ -1,173 +1,95 @@
-/* Everforest Palette */
-@define-color bg #2b3339;
-@define-color bg_alt #323c41;
-@define-color fg #d3c6aa;
-@define-color red #e67e80;
-@define-color orange #e69875;
-@define-color yellow #dbbc7f;
-@define-color green #a7c080;
-@define-color aqua #83c092;
-@define-color blue #7fbbb3;
-@define-color grey #859289;
+/* Palette */
+@define-color bg #0f1115;
+@define-color fg #cdd6f4;
+@define-color dim #5c6370;
+@define-color cyan #83c092;
+@define-color red #ff4d4d;
+@define-color yellow #ffcc00;
 
+/* Base */
 * {
-  font-family: "JetBrainsMono Nerd Font", "Material Design Icons", sans-serif;
+  font-family: "JetBrainsMono Nerd Font";
   font-size: 12px;
   border: none;
-  border-radius: 12px;
 }
 
+/* Main bar */
 #waybar {
-  border-radius: 12px;
+  background: @bg;
   color: @fg;
-  background: transparent;
+  border-radius: 10px;
 }
 
-.modules-left,
-.modules-center,
-.modules-right {
-  background-color: @bg;
-  border-radius: 15px;
-  border: 1px solid @bg_alt;
+#waybar > * {
+  min-height: 0;
 }
 
-.modules-center {
-  border: 2px solid @blue;
+/* Modules spacing */
+#waybar > box {
+  padding: 4px 0;
 }
 
-/* Common style for all modules */
-#custom-launcher,
-#workspaces,
-#clock,
-#pulseaudio,
-#backlight,
-#memory,
-#cpu,
-#temperature,
-#battery,
-#tray,
-#custom-powermenu,
-#custom-music {
-  padding: 8px 0;
-  margin: 4px 0;
-}
-
-/* Launcher */
-#custom-launcher {
-  font-size: 20px;
-  color: @green;
-  margin-bottom: 10px;
-}
-
-/* Workspaces */
-#workspaces {
-  background-color: @bg_alt;
-  border-radius: 8px;
-}
-
+/* Workspace */
 #workspaces button {
-  padding: 4px 8px;
-  margin: 2px;
-  color: @grey;
+  padding: 4px 0;
+  color: @dim;
   background: transparent;
-  transition: all 0.3s ease;
 }
 
 #workspaces button.active {
-  color: @aqua;
-  background-color: rgba(131, 192, 146, 0.2);
+  color: @cyan;
 }
 
 #workspaces button.urgent {
   color: @red;
-  background-color: rgba(230, 126, 128, 0.2);
 }
 
-#workspaces button:hover {
-  background-color: rgba(211, 198, 170, 0.1);
-}
-
-/* Clock - centered */
+/* Clock */
 #clock {
   font-weight: bold;
   color: @fg;
 }
 
-/* Utilities colors */
-#pulseaudio {
-  color: @blue;
-}
-
-#backlight {
-  color: @yellow;
-}
-
-#memory {
-  color: @orange;
-}
-
-#cpu {
-  color: @aqua;
-}
-
+/* Numbers > icons for clarity */
+#battery,
+#pulseaudio,
+#backlight,
 #temperature {
-  color: @green;
+  padding: 4px 0;
 }
 
-#battery {
-  color: @green;
-}
-
+/* Battery states */
 #battery.warning {
-  color: @orange;
+  color: @yellow;
 }
 
 #battery.critical {
   color: @red;
 }
 
-#idle_inhibitor {
-  color: @yellow;
+/* Updates */
+#custom-updates {
+  color: @cyan;
 }
 
-#idle_inhibitor.activated {
-  color: @orange;
+/* Launcher + power */
+#custom-launcher {
+  font-size: 16px;
+  color: @fg;
 }
 
-/* Powermenu */
 #custom-powermenu {
+  font-size: 16px;
   color: @red;
-  font-size: 18px;
-  margin-top: 10px;
 }
 
 /* Tray */
 #tray {
-  margin-top: 10px;
+  margin: 4px 0;
 }
 
-#tray > .passive {
-  -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-  -gtk-icon-effect: highlight;
-}
-
+/* Music subtle */
 #custom-music {
-  font-size: 18px;
-}
-
-#custom-music.playing {
-  color: @green;
-}
-
-#custom-music.paused {
-  color: @orange;
-  opacity: 0.7;
-}
-
-#custom-music.stopped {
-  color: @grey;
-  opacity: 0.5;
+  color: @dim;
+  font-size: 16px;
 }

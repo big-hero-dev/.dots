@@ -1,22 +1,27 @@
 {
 	"layer": "top",
+	"height": 500,
 	"position": "left",
-	"width": 56,
-	"spacing": 2,
-	"margin-top": 8,
-	"margin-bottom": 8,
-	"margin-left": 8,
-	"modules-center": [
+	"width": 48,
+	"spacing": 4,
+	"margin-top": 4,
+	"margin-bottom": 4,
+	"margin-left": 4,
+	"modules-left": [
 		"custom/launcher",
+		"niri/workspaces"
+	],
+	"modules-center": [
 		"clock",
-		"tray",
-		"niri/workspaces",
-		"pulseaudio",
-		"custom/music",
-		"backlight",
 		"battery",
-		"temperature",
+		"pulseaudio",
+		"backlight",
+		"temperature"
+	],
+	"modules-right": [
 		"custom/updates",
+		"tray",
+		"custom/music",
 		"custom/powermenu"
 	],
 	"niri/workspaces": {
@@ -25,13 +30,12 @@
 		"all-outputs": true,
 		"on-click": "activate",
 		"format-icons": {
-			"default": "○",
+			"default": "·",
 			"active": "●"
 		}
 	},
 	"clock": {
 		"format": "{:%H\n%M}",
-		"format-alt": "{:%d\n%m}",
 		"tooltip": true,
 		"tooltip-format": "{calendar}",
 		"calendar": {
@@ -46,70 +50,33 @@
 			}
 		}
 	},
-	"pulseaudio": {
-		"format": "{icon}",
-		"format-muted": "󰖁",
-		"format-icons": {
-			"default": [
-				"󰕿",
-				"󰖀",
-				"󰕾"
-			]
+	"battery": {
+		"states": {
+			"warning": 30,
+			"critical": 15
 		},
+		"format": "{capacity}%",
+		"format-charging": "+{capacity}%"
+	},
+	"pulseaudio": {
+		"format": "{volume}",
+		"format-muted": "MUTE",
 		"on-click": "pavucontrol",
 		"on-scroll-up": "volume --inc",
 		"on-scroll-down": "volume --dec"
 	},
 	"backlight": {
 		"device": "intel_backlight",
-		"format": "{icon}",
-		"format-icons": [
-			"󰃞",
-			"󰃟",
-			"󰃠"
-		],
+		"format": "{percent}%",
 		"on-scroll-up": "brightness --inc",
 		"on-scroll-down": "brightness --dec"
 	},
-	"memory": {
-		"format": "󰍛",
-		"tooltip-format": "RAM: {percentage}%"
-	},
-	"cpu": {
-		"format": "󰻠",
-		"tooltip-format": "CPU: {usage}%"
-	},
 	"temperature": {
 		"critical-threshold": 75,
-		"format": "{icon}",
-		"format-icons": [
-			"󰔏",
-			"󱃂",
-			"󰸁"
-		]
-	},
-	"battery": {
-		"states": {
-			"warning": 30,
-			"critical": 15
-		},
-		"format": "{icon}",
-		"format-charging": "󰂄",
-		"format-icons": [
-			"󰂎",
-			"󰁺",
-			"󰁻",
-			"󰁼",
-			"󰁽",
-			"󰁾",
-			"󰁿",
-			"󰂀",
-			"󰂁",
-			"󰂂"
-		]
+		"format": "{temperatureC}°"
 	},
 	"custom/launcher": {
-		"format": "󰣇",
+		"format": "λ",
 		"on-click": "fuzzel",
 		"tooltip": false
 	},
@@ -127,8 +94,8 @@
 		"signal": 8
 	},
 	"tray": {
-		"icon-size": 16,
-		"spacing": 6
+		"icon-size": 14,
+		"spacing": 4
 	},
 	"custom/music": {
 		"format": "{}",
