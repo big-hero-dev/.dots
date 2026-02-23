@@ -56,19 +56,6 @@ local function on_attach(client, bufnr)
 		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 	end
 
-	vim.api.nvim_create_autocmd("CursorHold", {
-		buffer = bufnr,
-		callback = function()
-			local opts = {
-				focusable = true,
-				border = border,
-				scope = "cursor",
-				source = "if_many",
-			}
-			vim.diagnostic.open_float(nil, opts)
-		end,
-	})
-
 	if client.server_capabilities.documentHighlightProvider then
 		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 			buffer = bufnr,
@@ -206,19 +193,10 @@ for _, name in ipairs(servers) do
 end
 
 vim.diagnostic.config({
-	virtual_text = {
-		source = "if_many",
-	},
+	virtual_text = false,
 	underline = true,
 	update_in_insert = false,
 	severity_sort = true,
-	float = {
-		border = border,
-		source = "if_many",
-		header = "",
-		prefix = "",
-		close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-	},
 	signs = true,
 })
 
