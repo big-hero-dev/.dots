@@ -13,15 +13,15 @@
 	],
 	"modules-center": [
 		"clock",
+		"custom/music"
+	],
+	"modules-right": [
 		"battery",
 		"pulseaudio",
 		"backlight",
-		"temperature"
-	],
-	"modules-right": [
+		"temperature",
 		"custom/updates",
 		"tray",
-		"custom/music",
 		"custom/powermenu"
 	],
 	"niri/workspaces": {
@@ -59,7 +59,7 @@
 		"format-charging": "+{capacity}%"
 	},
 	"pulseaudio": {
-		"format": "{volume}",
+		"format": "{volume}%",
 		"format-muted": "MUTE",
 		"on-click": "pavucontrol",
 		"on-scroll-up": "volume --inc",
