@@ -67,7 +67,7 @@ border-color=#4a555b
 border-size=2
 border-radius=9
 progress-color=over #83c092
-font=JetBrains Mono Nerd Font 12
+font=IBM Plex Mono 12
 format=<span font='10'><b>%s</b> %b</span>
 max-icon-size=20
 default-timeout=2000
