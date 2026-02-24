@@ -16,8 +16,8 @@
 		"custom/music"
 	],
 	"modules-right": [
-		"temperature",
 		"battery",
+		"temperature",
 		"pulseaudio",
 		"backlight",
 		"custom/updates",
@@ -36,8 +36,9 @@
 	},
 	"clock": {
 		"format": "{:%H\n%M}",
+		"format-alt": "{:%d\n%m}",
 		"tooltip": true,
-		"tooltip-format": "{calendar}",
+		"tooltip-format": "<small>{calendar}</small>",
 		"calendar": {
 			"mode": "month",
 			"weeks-pos": "right",
@@ -48,6 +49,9 @@
 				"weekdays": "<span color='#dbbc7f'><b>{}</b></span>",
 				"today": "<span color='#7fbbb3'><b><u>{}</u></b></span>"
 			}
+		},
+		"action":{
+			"on-click": "mode"
 		}
 	},
 	"battery": {
