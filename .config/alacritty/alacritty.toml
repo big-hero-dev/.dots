@@ -16,7 +16,7 @@ thickness = 0.15
 
 [cursor.style]
 blinking = "Always"
-shape = "Block"
+shape = "underline"
 
 [selection]
 save_to_clipboard = true

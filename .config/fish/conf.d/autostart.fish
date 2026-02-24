@@ -1,5 +1,3 @@
-if status is-login
-	and not set -q DISPLAY
-	and test (tty) = "/dev/tty1"
-	exec startx -- -keeptty
+function reset_cursor_to_underline --on-event fish_prompt
+    echo -ne "\e[3 q"
 end
