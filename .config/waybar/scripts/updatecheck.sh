@@ -60,7 +60,7 @@ text=${#updates[@]}
 tooltip="<b>$text  updates (arch+aur) </b>\n"
 tooltip+="<b>$(stringToLen "PkgName" 20) $(stringToLen "PrevVersion" 15) $(stringToLen "NextVersion" 15)</b>\n"
 
-[ "$text" -eq 0 ] && text="" || text="󰑣"
+[ "$text" -eq 0 ] && text="" || text=""
 
 count=0
 for i in "${updates[@]}"; do

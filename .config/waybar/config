@@ -2,7 +2,7 @@
 	"layer": "top",
 	"height": 500,
 	"position": "left",
-	"width": 48,
+	"width": 46,
 	"spacing": 4,
 	"margin-top": 4,
 	"margin-bottom": 4,
@@ -16,10 +16,10 @@
 		"custom/music"
 	],
 	"modules-right": [
+		"temperature",
 		"battery",
 		"pulseaudio",
 		"backlight",
-		"temperature",
 		"custom/updates",
 		"tray",
 		"custom/powermenu"
@@ -59,8 +59,16 @@
 		"format-charging": "+{capacity}%"
 	},
 	"pulseaudio": {
-		"format": "{volume}%",
-		"format-muted": "MUTE",
+		"format": "{icon}",
+		"format-bluetooth": "{icon}",
+		"format-muted": "",
+		"format-icons": {
+			"headphone": "",
+			"default": [
+				"",
+				""
+			]
+		},
 		"on-click": "pavucontrol",
 		"on-scroll-up": "volume --inc",
 		"on-scroll-down": "volume --dec"
@@ -73,7 +81,7 @@
 	},
 	"temperature": {
 		"critical-threshold": 75,
-		"format": "{temperatureC}°"
+		"format": " {temperatureC}°"
 	},
 	"custom/launcher": {
 		"format": "λ",

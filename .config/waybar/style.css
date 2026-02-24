@@ -54,8 +54,11 @@
 #battery,
 #pulseaudio,
 #backlight,
+#custom-powermenu,
+#custom-launcher,
+#clock,
 #temperature {
-  padding: 4px 0;
+  padding: 8px 0;
 }
 
 /* Battery states */
@@ -70,6 +73,7 @@
 /* Updates */
 #custom-updates {
   color: @cyan;
+  font-size: 18px;
 }
 
 /* Launcher + power */
