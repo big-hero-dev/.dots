@@ -38,8 +38,9 @@ blink.setup({
 
 	completion = {
 		menu = {
-			auto_show = false,
+			auto_show = true,
 		},
+		list = { selection = { preselect = false, auto_insert = true } },
 	},
 
 	sources = {
