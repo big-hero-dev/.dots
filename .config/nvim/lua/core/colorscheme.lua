@@ -4,45 +4,22 @@ local function setup_themes()
 	end)
 
 	if has_mini then
-		add({ source = "sainnhe/everforest" })
-		add({ source = "e-ink-colorscheme/e-ink.nvim" })
+		add({ source = "rose-pine/neovim" })
 	end
 end
 
 setup_themes()
-
-local transparency_clon = false
-
-local function apply_transparency()
-	if not transparency_clon then
-		return
-	end
-	local groups = {
-		"Normal",
-		"NormalNC",
-		"NormalFloat",
-		"FloatBorder",
-		"TelescopeNormal",
-		"TelescopeBorder",
-		"Pmenu",
-		"SignColumn",
-		"LineNr",
-		"CursorLineNr",
-	}
-	for _, group in ipairs(groups) do
-		vim.api.nvim_set_hl(0, group, { bg = "none" })
-	end
-end
+local theme = {
+	dark = "rose-pine-moon",
+	light = "rose-pine-dawn",
+}
 
 local function set_theme()
 	if vim.o.background == "dark" then
-		vim.g.everforest_background = "soft"
-		vim.g.everforest_better_performance = 1
-		vim.cmd([[colorscheme everforest]])
+		vim.cmd("colorscheme " .. theme["dark"])
 	else
-		vim.cmd([[colorscheme e-ink]])
+		vim.cmd("colorscheme " .. theme["light"])
 	end
-	apply_transparency()
 end
 
 local hour = tonumber(os.date("%H"))
@@ -63,8 +40,3 @@ vim.keymap.set("n", "td", function()
 	end
 	set_theme()
 end, { desc = "Toggle Dark/Light Mode" })
-
-vim.keymap.set("n", "tt", function()
-	transparency_clon = not transparency_clon
-	set_theme()
-end, { desc = "Toggle Transparency" })
