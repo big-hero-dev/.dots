@@ -44,7 +44,7 @@ layout {
     default-column-width { proportion 0.5; }
     focus-ring {
         width 2
-        active-color "#83c092"
+        active-color "#c28f2c"
         inactive-color "#374145"
     }
 	insert-hint {
@@ -53,7 +53,7 @@ layout {
 }
 
 window-rule {
-    geometry-corner-radius 10
+    geometry-corner-radius 0
     clip-to-geometry true
     draw-border-with-background false
 }
@@ -73,7 +73,7 @@ layer-rule {
     match namespace="waybar"
 	match at-startup=true
     opacity 0.9
-    geometry-corner-radius 10
+    geometry-corner-radius 0
 	block-out-from "screencast"
 }
 
@@ -83,7 +83,7 @@ layer-rule {
 	shadow {
         on
     }
-	geometry-corner-radius 10
+	geometry-corner-radius 0
 }
 
 

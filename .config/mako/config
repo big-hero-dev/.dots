@@ -6,12 +6,12 @@ margin=6
 padding=10
 width=350
 height=150
-border-size=2
-border-radius=10
-border-color=#83c092
-background-color=#2d353bdd
+border-size=1
+border-radius=0
+border-color=#c28f2c
+background-color=#0a1428
 text-color=#d3c6aa
-font=Inter 11
+font=IBM Flex Mono 11
 
 # Icon
 icons=1
@@ -27,7 +27,7 @@ default-timeout=5000
 ignore-timeout=0
 
 # Progress bar
-progress-color=over #83c092
+progress-color=over #c28f2c
 
 # Do Not Disturb mode
 [mode=do-not-disturb]
@@ -40,7 +40,7 @@ default-timeout=3000
 on-notify=exec paplay /usr/share/sounds/freedesktop/stereo/message.oga
 
 [urgency=normal]
-border-color=#83c092
+border-color=#c28f2c
 default-timeout=5000
 on-notify=exec paplay /usr/share/sounds/freedesktop/stereo/message.oga
 
@@ -61,12 +61,12 @@ width=300
 height=35
 margin=10
 padding=0,6
-background-color=#1e2326
+background-color=#0a1428
 text-color=#e6e2cc
 border-color=#4a555b
-border-size=2
-border-radius=9
-progress-color=over #83c092
+border-size=1
+border-radius=4
+progress-color=over #c28f2c
 font=IBM Plex Mono 12
 format=<span font='10'><b>%s</b> %b</span>
 max-icon-size=20
@@ -79,12 +79,12 @@ width=300
 height=35
 margin=10
 padding=0,10
-background-color=#1e2326
+background-color=#0a1428
 text-color=#e6e2cc
 border-color=#4a555b
-border-size=2
-border-radius=9
-progress-color=over #83c092
+border-size=1
+border-radius=4
+progress-color=over #c28f2c
 font=JetBrains Mono Nerd Font 12
 format=<span font='10'><b>%s</b> %b</span>
 max-icon-size=20

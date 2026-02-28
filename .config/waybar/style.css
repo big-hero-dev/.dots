@@ -1,10 +1,10 @@
 /* Palette */
-@define-color bg #0f1115;
-@define-color fg #cdd6f4;
+@define-color bg #0a1428;
+@define-color fg #c8aa6e;
+@define-color border #c28f2c;
 @define-color dim #5c6370;
 @define-color cyan #83c092;
 @define-color red #ff4d4d;
-@define-color yellow #ffcc00;
 
 /* Base */
 * {
@@ -17,7 +17,8 @@
 #waybar {
   background: @bg;
   color: @fg;
-  border-radius: 10px;
+  border-radius: 0;
+  border: 1px solid @border;
 }
 
 #waybar > * {
@@ -37,7 +38,7 @@
 }
 
 #workspaces button.active {
-  color: @cyan;
+  color: @fg;
 }
 
 #workspaces button.urgent {
@@ -63,7 +64,7 @@
 
 /* Battery states */
 #battery.warning {
-  color: @yellow;
+  color: @fg;
 }
 
 #battery.critical {
@@ -72,7 +73,7 @@
 
 /* Updates */
 #custom-updates {
-  color: @cyan;
+  color: @fg;
   font-size: 18px;
 }
 
@@ -94,6 +95,6 @@
 
 /* Music subtle */
 #custom-music {
-  color: @cyan;
+  color: @fg;
   font-size: 16px;
 }

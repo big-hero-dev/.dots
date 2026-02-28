@@ -31,7 +31,7 @@
 		"on-click": "activate",
 		"format-icons": {
 			"default": "·",
-			"active": "●"
+			"active": ""
 		}
 	},
 	"clock": {
@@ -88,7 +88,7 @@
 		"format": " {temperatureC}°"
 	},
 	"custom/launcher": {
-		"format": "λ",
+		"format": "",
 		"on-click": "fuzzel",
 		"tooltip": false
 	},
