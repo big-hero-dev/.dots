@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 chosen=$(printf "Lock\nShutdown\nReboot\nSuspend\nLogout\n" | \
-    fuzzel --dmenu --prompt="Power")
+    fuzzel --dmenu --prompt="Power ")
 
 case "$chosen" in
     Shutdown)
