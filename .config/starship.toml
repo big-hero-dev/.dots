@@ -3,17 +3,17 @@
 add_newline = true
 
 format = """
-[╭─](fg:#7a8478)\
+[╭─](fg:#928374)\
 $os\
 $username\
-[](fg:#374145 bg:#2e383c)\
+[](fg:#504945 bg:#3c3836)\
 $directory\
-[](fg:#2e383c bg:#374145)\
+[](fg:#3c3836 bg:#504945)\
 $git_branch\
 $git_commit\
 $git_status\
 $git_metrics\
-[](fg:#374145)\
+[](fg:#504945)\
 $fill\
 $c\
 $rust\
@@ -26,37 +26,37 @@ $haskell\
 $python\
 $lua\
 $package\
-[](fg:#374145)\
+[](fg:#504945)\
 $docker_context\
 $kubernetes\
-[](fg:#374145 bg:#2e383c)\
+[](fg:#504945 bg:#3c3836)\
 $cmd_duration\
 $jobs\
 $battery\
 $time\
-[](fg:#2e383c)\
+[](fg:#3c3836)\
 $line_break\
-[╰─](fg:#7a8478)$character\
+[╰─](fg:#928374)$character\
 """
 
-palette = 'everforest'
+palette = 'gruvbox'
 scan_timeout = 3600
 command_timeout = 3600
 
-[palettes.everforest]
-bg0 = '#272e33'
-bg1 = '#2e383c'
-bg2 = '#374145'
-bg3 = '#414b50'
-fg = '#d3c6aa'
-red = '#e67e80'
-orange = '#e69875'
-yellow = '#dbbc7f'
-green = '#a7c080'
-aqua = '#83c092'
-blue = '#7fbbb3'
-purple = '#d699b6'
-grey = '#7a8478'
+[palettes.gruvbox]
+bg0 = '#282828'
+bg1 = '#3c3836'
+bg2 = '#504945'
+bg3 = '#665c54'
+fg = '#ebdbb2'
+red = '#cc241d'
+orange = '#d65d0e'
+yellow = '#d79921'
+green = '#98971a'
+aqua = '#689d6a'
+blue = '#458588'
+purple = '#b16286'
+grey = '#928374'
 
 [fill]
 symbol = " "
@@ -109,7 +109,7 @@ truncate_to_repo = true
 use_logical_path = true
 
 [git_branch]
-symbol = ""
+symbol = ""
 style = "bold fg:blue bg:bg2"
 format = '[ $symbol $branch ]($style)'
 only_attached = false
@@ -155,7 +155,7 @@ format = '[\($state( $progress_current/$progress_total)\) ]($style)'
 disabled = false
 
 [c]
-symbol = ""
+symbol = ""
 style = "fg:blue bg:bg2"
 format = '[ $symbol $version ]($style)'
 
@@ -170,37 +170,37 @@ style = "fg:blue bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [nodejs]
-symbol = ""
+symbol = ""
 style = "fg:green bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [php]
-symbol = ""
+symbol = ""
 style = "fg:purple bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [java]
-symbol = ""
+symbol = ""
 style = "fg:red bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [kotlin]
-symbol = ""
+symbol = ""
 style = "fg:purple bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [haskell]
-symbol = ""
+symbol = ""
 style = "fg:purple bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [python]
-symbol = ""
+symbol = ""
 style = "fg:yellow bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [lua]
-symbol = ""
+symbol = ""
 style = "fg:blue bg:bg2"
 format = '[ $symbol $version ]($style)'
 
@@ -211,7 +211,7 @@ format = '[ $symbol $version ]($style)'
 disabled = false
 
 [docker_context]
-symbol = ""
+symbol = ""
 style = "fg:blue bg:bg2"
 format = '[ $symbol $context ]($style)'
 
