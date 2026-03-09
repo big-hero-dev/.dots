@@ -30,8 +30,8 @@
 		"all-outputs": true,
 		"on-click": "activate",
 		"format-icons": {
-			"default": "·",
-			"active": ""
+			"default": "󰋙",
+			"active": "󰋘"
 		}
 	},
 	"clock": {
@@ -50,7 +50,7 @@
 				"today": "<span color='#7fbbb3'><b><u>{}</u></b></span>"
 			}
 		},
-		"action":{
+		"action": {
 			"on-click": "mode"
 		}
 	},
@@ -59,18 +59,26 @@
 			"warning": 30,
 			"critical": 15
 		},
-		"format": "{capacity}%",
-		"format-charging": "+{capacity}%"
+		"format": "󰁹 {capacity}%",
+		"format-charging": "󰂄 {capacity}%",
+		"format-plugged": "󰚥 {capacity}%",
+		"format-warning": "󰁻 {capacity}%",
+		"format-critical": "󰁺 {capacity}%",
+		"format-icons": [
+			"󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"
+		]
 	},
 	"pulseaudio": {
 		"format": "{icon}",
-		"format-bluetooth": "{icon}",
-		"format-muted": "",
+		"format-bluetooth": "󰂰",
+		"format-muted": "󰝟",
 		"format-icons": {
-			"headphone": "",
+			"headphone": "󰋋",
+			"headset": "󰋎",
 			"default": [
-				"",
-				""
+				"󰕿",
+				"󰖀",
+				"󰕾"
 			]
 		},
 		"on-click": "pavucontrol",
@@ -79,21 +87,25 @@
 	},
 	"backlight": {
 		"device": "intel_backlight",
-		"format": "{percent}%",
+		"format": "󰃞 {percent}%",
+		"format-icons": [
+			"󰃞", "󰃝", "󰃟", "󰃠"
+		],
 		"on-scroll-up": "brightness --inc",
 		"on-scroll-down": "brightness --dec"
 	},
 	"temperature": {
 		"critical-threshold": 75,
-		"format": " {temperatureC}°"
+		"format": "󰔏",
+		"format-critical": "󰸁"
 	},
 	"custom/launcher": {
-		"format": "",
+		"format": "󱄅",
 		"on-click": "fuzzel",
 		"tooltip": false
 	},
 	"custom/powermenu": {
-		"format": "⏻",
+		"format": "󰐥",
 		"on-click": "power-menu",
 		"tooltip": false
 	},

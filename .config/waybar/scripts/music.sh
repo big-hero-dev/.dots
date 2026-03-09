@@ -3,9 +3,12 @@
 ICONS=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
 ICON_INDEX=0
 
-PLAYING_ICON="󰐊"    # Playing
-PAUSED_ICON="󰏤"     # Paused
-STOPPED_ICON="󰝚"    # Stopped
+PLAYING_ICON="󰐊"   # nf-md-play
+PAUSED_ICON="󰏤"    # nf-md-pause
+STOPPED_ICON="󰝚"   # nf-md-music_off
+ARTIST_ICON="󰠃"    # nf-md-account_music
+TITLE_ICON="󰎈"     # nf-md-music
+ALBUM_ICON="󰀥"     # nf-md-album
 
 get_music_status() {
     if ! command -v playerctl &> /dev/null; then
@@ -30,8 +33,8 @@ get_music_status() {
         SPINNER="${ICONS[$ICON_INDEX]}"
         ICON_INDEX=$(( (ICON_INDEX + 1) % ${#ICONS[@]} ))
 
-        TOOLTIP="🎵 Playing\\n${ARTIST}\\n${TITLE}"
-        [ -n "$ALBUM" ] && TOOLTIP="${TOOLTIP}\\n📀 ${ALBUM}"
+        TOOLTIP="${PLAYING_ICON} Playing\\n${ARTIST_ICON} ${ARTIST}\\n${TITLE_ICON} ${TITLE}"
+        [ -n "$ALBUM" ] && TOOLTIP="${TOOLTIP}\\n${ALBUM_ICON} ${ALBUM}"
 
         printf '{"text":"%s","class":"playing","tooltip":"%s"}\n' "$SPINNER" "$TOOLTIP"
 
@@ -44,8 +47,7 @@ get_music_status() {
         TITLE="${TITLE//\\/\\\\}"
         TITLE="${TITLE//\"/\\\"}"
 
-        TOOLTIP="⏸ Paused\\n${ARTIST}\\n${TITLE}"
-
+        TOOLTIP="${PAUSED_ICON} Paused\\n${ARTIST_ICON} ${ARTIST}\\n${TITLE_ICON} ${TITLE}"
         printf '{"text":"%s","class":"paused","tooltip":"%s"}\n' "$PAUSED_ICON" "$TOOLTIP"
 
     else

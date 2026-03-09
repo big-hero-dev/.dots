@@ -52,7 +52,7 @@ autocmd("FileType", {
 })
 
 -- Window management
-autocmd("CmdWinEnter", {
+autocmd("CmdwinEnter", {
 	callback = function()
 		vim.cmd("quit")
 	end,
