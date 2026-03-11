@@ -38,6 +38,7 @@ cursor {
 layout {
     gaps 6
 	preset-column-widths {
+		proportion 0.33337 // 1/3
         proportion 0.5     // 1/2
         proportion 0.66667 // 2/3
     }
