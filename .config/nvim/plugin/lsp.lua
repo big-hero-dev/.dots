@@ -75,7 +75,7 @@ vim.lsp.config("lua_ls", {
 		Lua = {
 			format = { enable = false },
 			diagnostics = {
-				globals = { "vim", "spec", "add", "MiniDeps" },
+				globals = { "vim", "spec", "add" },
 				disable = { "missing-fields" },
 			},
 			runtime = {

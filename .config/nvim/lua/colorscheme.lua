@@ -1,11 +1,5 @@
 local function setup_themes()
-	local has_mini, add = pcall(function()
-		return require("mini.deps").add
-	end)
-
-	if has_mini then
-		add({ source = "sainnhe/gruvbox-material" })
-	end
+	vim.pack.add({"https://github.com/sainnhe/gruvbox-material"})
 
 	vim.g.gruvbox_material_enable_italic = true
 	vim.g.gruvbox_material_cursor = "auto"

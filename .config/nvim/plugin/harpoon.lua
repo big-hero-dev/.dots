@@ -1,5 +1,4 @@
 local harpoon = require("harpoon")
-
 harpoon:setup({
 	settings = {
 		save_on_toggle = true,
@@ -9,23 +8,19 @@ harpoon:setup({
 })
 
 local map = vim.keymap.set
-local list = harpoon:list()
 
--- Add file
 map("n", "<leader>ha", function()
-	list:add()
+	harpoon:list():add()
 end, { desc = "Harpoon add file" })
 
--- Toggle quick menu
 map("n", "<leader>hh", function()
-	harpoon.ui:toggle_quick_menu(list)
+	harpoon.ui:toggle_quick_menu(harpoon:list())
 end, { desc = "Harpoon menu" })
 
--- Cycle
 map("n", "<leader>hn", function()
-	list:next()
+	harpoon:list():next()
 end, { desc = "Harpoon next" })
 
 map("n", "<leader>hp", function()
-	list:prev()
+	harpoon:list():prev()
 end, { desc = "Harpoon prev" })

@@ -1,9 +1,4 @@
-local ok, conform = pcall(require, "conform")
-if not ok then
-	return
-end
-
-conform.setup({
+require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
 		javascript = { "prettierd" },

@@ -465,7 +465,7 @@ function M.setup(opts)
 		desc = "Delete all in project",
 	})
 	vim.keymap.set("n", "<leader>np", M.open_panel, {
-		desc = "Open panelg",
+		desc = "Open panel",
 	})
 end
 

@@ -1,9 +1,4 @@
-local ok, ls = pcall(require, "luasnip")
-if not ok then
-	return
-end
-
-ls.config.set_config({
+require("luasnip").config.set_config({
 	history = true,
 	updateevents = "TextChanged,TextChangedI",
 	enable_autosnippets = false,
