@@ -174,7 +174,9 @@ vim.keymap.set("n", "<Leader>ll", function()
 	require("mini.trailspace").trim()
 end, { desc = "Trim trailing space" })
 
-vim.keymap.set("n", "<Leader>U", "<cmd>DepsUpdate<cr>", { desc = "DepsUpdate" })
+vim.keymap.set("n", "<Leader>U", function()
+	vim.pack.update()
+end, { desc = "DepsUpdate" })
 
 vim.keymap.set("n", "<leader>x", function()
 	require("mini.bufremove").delete()
