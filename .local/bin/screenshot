@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MODE="$1"   # empty | edit
+MODE="$1"
 
 SCREENSHOT_DIR="$HOME/Pictures/Screenshots"
 mkdir -p "$SCREENSHOT_DIR"
@@ -14,14 +14,12 @@ GEOMETRY=$(slurp)
 case "$MODE" in
   edit)
     grim -g "$GEOMETRY" - | swappy -f - -o "$FULL"
-    if [ ! -f "$FULL" ] || [ "$FULL" -ot /proc/$$/status ]; then
-      rm -f "$FULL"
-      exit 0
-    fi
+    [ ! -f "$FULL" ] && exit 0
     wl-copy < "$FULL"
     notify-send -i "$FULL" "Screenshot edited" "$FULL"
     ;;
   *)
+    grim -g "$GEOMETRY" "$FULL"
     wl-copy < "$FULL"
     notify-send -i "$FULL" "Screenshot saved" "$FULL"
     ;;
