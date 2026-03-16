@@ -152,12 +152,30 @@ clue.setup({
 		{ mode = "n", keys = "[" },
 		{ mode = "n", keys = "]" },
 		{ mode = "n", keys = "<C-w>" },
+		{ mode = "o", keys = "a" },
+		{ mode = "o", keys = "i" },
+		{ mode = "x", keys = "a" },
+		{ mode = "x", keys = "i" },
 	},
 	clues = {
 		clue.gen_clues.builtin_completion(),
 		clue.gen_clues.g(),
 		clue.gen_clues.windows(),
 		clue.gen_clues.z(),
+		-- textobjects
+		{ mode = "o", keys = "af", desc = "function outer" },
+		{ mode = "o", keys = "if", desc = "function inner" },
+		{ mode = "o", keys = "ac", desc = "class outer" },
+		{ mode = "o", keys = "ic", desc = "class inner" },
+		{ mode = "o", keys = "aa", desc = "parameter outer" },
+		{ mode = "o", keys = "ia", desc = "parameter inner" },
+		-- visual mode
+		{ mode = "x", keys = "af", desc = "function outer" },
+		{ mode = "x", keys = "if", desc = "function inner" },
+		{ mode = "x", keys = "ac", desc = "class outer" },
+		{ mode = "x", keys = "ic", desc = "class inner" },
+		{ mode = "x", keys = "aa", desc = "parameter outer" },
+		{ mode = "x", keys = "ia", desc = "parameter inner" },
 	},
 })
 

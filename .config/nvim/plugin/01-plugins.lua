@@ -31,7 +31,7 @@ vim.pack.add({
 -- =========================================================
 -- Syntax tree & structural intelligence
 -- =========================================================
--- Dependencies phải list TRƯỚC target plugin
+-- Dependencies need list first target plugin
 vim.pack.add({
 	"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
 	"https://github.com/windwp/nvim-ts-autotag",
