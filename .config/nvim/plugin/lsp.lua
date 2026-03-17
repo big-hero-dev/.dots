@@ -22,19 +22,26 @@ local function on_attach(client, bufnr)
 		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 	end
 
+	-- Diagnostic float on hold
+	vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+		buffer = bufnr,
+		callback = function()
+			vim.diagnostic.open_float({
+				focusable = false,
+				close_events = { "CursorMoved", "CursorMovedI", "BufLeave", "InsertEnter" },
+				border = "rounded",
+				source = "if_many",
+				prefix = " ",
+				scope = "cursor",
+			})
+		end,
+	})
+
+	-- Document highlight
 	if client.server_capabilities.documentHighlightProvider then
 		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 			buffer = bufnr,
-			callback = function()
-				vim.diagnostic.open_float({
-					focusable = false,
-					close_events = { "CursorMoved", "CursorMovedI", "BufLeave", "InsertEnter" },
-					border = "rounded",
-					source = "if_many",
-					prefix = " ",
-					scope = "cursor",
-				})
-			end,
+			callback = vim.lsp.buf.document_highlight,
 		})
 		vim.api.nvim_create_autocmd("CursorMoved", {
 			buffer = bufnr,
@@ -56,7 +63,6 @@ vim.lsp.config("lua_ls", {
 			runtime = {
 				version = "LuaJIT",
 				special = { spec = "require" },
-				path = vim.split(package.path, ";"),
 			},
 			workspace = {
 				checkThirdParty = false,
@@ -167,8 +173,39 @@ for _, name in ipairs(servers) do
 	vim.lsp.enable(name)
 end
 
+local signs = {
+	Error = "\u{eb1a} ",
+	Warn = "\u{f071} ",
+	Hint = "\u{f0eb} ",
+	Info = "\u{f129} ",
+}
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+vim.diagnostic.config({
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = " ",
+			[vim.diagnostic.severity.WARN] = " ",
+			[vim.diagnostic.severity.HINT] = "󰌵 ",
+			[vim.diagnostic.severity.INFO] = " ",
+		},
+		linehl = {
+			[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+		},
+		numhl = {
+			[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+			[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+			[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+			[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+		},
+	},
+})
+
 vim.api.nvim_set_hl(0, "LspInlayHint", {
-	fg = "#7c7c7c",
+	fg = "#b8963e",
 	bg = "NONE",
 	italic = true,
 })
