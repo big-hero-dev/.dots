@@ -1,7 +1,5 @@
 require("mason").setup()
 
-local border = "rounded"
-
 local servers = {
 	"lua_ls",
 	"ts_ls",
@@ -20,38 +18,6 @@ require("mason-lspconfig").setup({
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 local function on_attach(client, bufnr)
-	local map = function(mode, lhs, rhs, desc)
-		vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, desc = desc })
-	end
-
-	map("n", "gd", vim.lsp.buf.definition, "LSP: Definition")
-	map("n", "gD", vim.lsp.buf.declaration, "LSP: Declaration")
-	map("n", "gr", vim.lsp.buf.references, "LSP: References")
-	map("n", "gi", vim.lsp.buf.implementation, "LSP: Implementation")
-	map("n", "gt", vim.lsp.buf.type_definition, "LSP: Type definition")
-
-	map("n", "K", function()
-		vim.lsp.buf.hover({ border = border, max_height = 30, max_width = 120 })
-	end, "LSP: Hover")
-
-	map("n", "<C-k>", function()
-		vim.lsp.buf.signature_help({ border = border })
-	end, "LSP: Signature help")
-
-	map("i", "<C-k>", function()
-		vim.lsp.buf.signature_help({ border = border })
-	end, "LSP: Signature help")
-
-	map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: Rename")
-	map({ "n", "v" }, "ga", vim.lsp.buf.code_action, "LSP: Code action")
-	map("n", "<leader>f", function()
-		vim.lsp.buf.format({ async = true })
-	end, "LSP: Format")
-
-	map("n", "<leader>th", function()
-		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
-	end, "LSP: Toggle inlay hints")
-
 	if client.server_capabilities.inlayHintProvider then
 		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 	end
@@ -59,7 +25,16 @@ local function on_attach(client, bufnr)
 	if client.server_capabilities.documentHighlightProvider then
 		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 			buffer = bufnr,
-			callback = vim.lsp.buf.document_highlight,
+			callback = function()
+				vim.diagnostic.open_float({
+					focusable = false,
+					close_events = { "CursorMoved", "CursorMovedI", "BufLeave", "InsertEnter" },
+					border = "rounded",
+					source = "if_many",
+					prefix = " ",
+					scope = "cursor",
+				})
+			end,
 		})
 		vim.api.nvim_create_autocmd("CursorMoved", {
 			buffer = bufnr,
@@ -191,14 +166,6 @@ vim.lsp.config("dockerls", {
 for _, name in ipairs(servers) do
 	vim.lsp.enable(name)
 end
-
-vim.diagnostic.config({
-	virtual_text = false,
-	underline = true,
-	update_in_insert = false,
-	severity_sort = true,
-	signs = true,
-})
 
 vim.api.nvim_set_hl(0, "LspInlayHint", {
 	fg = "#7c7c7c",
