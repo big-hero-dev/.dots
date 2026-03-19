@@ -6,7 +6,7 @@ vim.g.maplocalleader = " "
 vim.g.toggle_colemark = true
 
 local function clear_mappings()
-	local modes = { "n", "v", "x", "i" }
+	local modes = { "n", "v", "x" }
 	local keys = { "n", "e", "i", "u", "U", "l" }
 	for _, mode in ipairs(modes) do
 		for _, key in ipairs(keys) do
@@ -29,7 +29,7 @@ local function active_layout()
 		for lhs, rhs in pairs(normal_mode_keys) do
 			map({ "n", "v" }, lhs, rhs, opts)
 		end
-		map("x", "l", ":<C-U>undo<CR>", opts)
+		map("x", "l", "u", opts)
 	end
 end
 
@@ -40,21 +40,20 @@ end
 
 map("n", "<leader>lc", toggle_layout, { desc = "Toggle Colemak layout" })
 
-map("n", "x", '"_x')
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit file" })
-map("n", "+", "<C-a>")
-map("n", "-", "<C-x>")
+map("n", "x", '"_x', { desc = "Delete without yank" })
+map("n", "+", "<C-a>", { desc = "Increment number" })
+map("n", "-", "<C-x>", { desc = "Decrement number" })
+map("n", "ss", "<cmd>split<CR><C-w>w", { desc = "Horizontal split" })
+map("n", "sv", "<cmd>vsplit<CR><C-w>w", { desc = "Vertical split" })
+map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down centered" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up centered" })
 
-map("n", "ss", ":split<CR><C-w>w")
-map("n", "sv", ":vsplit<CR><C-w>w")
-map("n", "wh", "<C-w>h")
-map("n", "wn", "<C-w>j")
-map("n", "we", "<C-w>k")
-map("n", "wi", "<C-w>l")
-
-map({ "n", "v" }, "<A-n>", ":m .+1<CR>==", opts)
-map({ "n", "v" }, "<A-e>", ":m .-2<CR>==", opts)
+map("n", "<A-n>", "<cmd>m .+1<CR>==", opts)
+map("n", "<A-e>", "<cmd>m .-2<CR>==", opts)
+map("v", "<A-n>", ":m '>+1<CR>gv=gv", opts)
+map("v", "<A-e>", ":m '<-2<CR>gv=gv", opts)
 map("i", "<A-n>", "<Esc>:m .+1<CR>==gi", opts)
 map("i", "<A-e>", "<Esc>:m .-2<CR>==gi", opts)
 
@@ -65,12 +64,11 @@ map("n", "<leader>R", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { 
 
 map("c", "<C-e>", "<C-p>")
 
-map("n", "<Tab>", vim.cmd.bn)
-map("n", "<S-Tab>", vim.cmd.bp)
+map("n", "<Tab>", "<cmd>bn<cr>")
+map("n", "<S-Tab>", "<cmd>bp<cr>")
 
 map("n", "gx", function()
-	local url = vim.fn.expand("<cfile>")
-	vim.fn.jobstart({ "xdg-open", url }, { detach = true })
+	vim.ui.open(vim.fn.expand("<cfile>"))
 end, { desc = "Open link under cursor" })
 
 map({ "n", "v" }, "s", "<Nop>")
@@ -98,11 +96,8 @@ map("n", "<C-Right>", function()
 	move("l", "R")
 end, opts)
 
-map("n", "<C-d>", "<C-d>zz")
-map("n", "<C-u>", "<C-u>zz")
-
 map("n", "<Leader>f", function()
-	vim.lsp.buf.format()
+	vim.lsp.buf.format({ async = true })
 end, { desc = "Format code" })
 
 active_layout()

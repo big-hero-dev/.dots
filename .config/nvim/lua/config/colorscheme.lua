@@ -1,6 +1,4 @@
 local function setup_themes()
-	vim.pack.add({"https://github.com/sainnhe/gruvbox-material"})
-
 	vim.g.gruvbox_material_enable_italic = true
 	vim.g.gruvbox_material_cursor = "auto"
 	vim.g.gruvbox_material_background = "soft"
@@ -8,6 +6,7 @@ local function setup_themes()
 	vim.g.gruvbox_material_diagnostic_text_highlight = 1
 	vim.g.gruvbox_material_inlay_hints_background = "dimmed"
 	vim.g.gruvbox_material_current_word = "underline"
+	vim.pack.add({ "https://github.com/sainnhe/gruvbox-material" })
 	vim.cmd.colorscheme("gruvbox-material")
 end
 

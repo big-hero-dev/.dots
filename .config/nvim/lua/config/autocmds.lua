@@ -1,8 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
 
--- Basic editor behavior
-autocmd("InsertLeave", { pattern = "*", command = "set nopaste" })
-
 -- File type specific settings
 autocmd("FileType", {
 	pattern = { "xml", "html", "xhtml", "css", "scss", "javascript", "typescript", "yaml", "lua" },
@@ -53,6 +50,7 @@ autocmd("FileType", {
 
 -- Window management
 autocmd("CmdwinEnter", {
+	desc = "Disable command-line window",
 	callback = function()
 		vim.cmd("quit")
 	end,
@@ -64,28 +62,42 @@ autocmd("VimResized", {
 })
 
 -- Diagnostics
+local diag_timer = nil
 autocmd("DiagnosticChanged", {
 	callback = function()
-		if #vim.diagnostic.get(0) > 0 then
-			vim.diagnostic.setloclist({ open = false })
+		if diag_timer then
+			diag_timer:stop()
 		end
-		vim.diagnostic.setqflist({ open = false })
+		diag_timer = vim.defer_fn(function()
+			vim.diagnostic.setloclist({ open = false })
+			vim.diagnostic.setqflist({ open = false })
+		end, 200)
 	end,
 })
 
 -- LuaSnip handling
+local luasnip = nil
 autocmd("CursorHold", {
 	callback = function()
-		local ok, luasnip = pcall(require, "luasnip")
-		if ok and luasnip.in_snippet() and not luasnip.jumpable(1) then
+		if not luasnip then
+			local ok, ls = pcall(require, "luasnip")
+			if not ok then
+				return
+			end
+			luasnip = ls
+		end
+		if luasnip.in_snippet() and not luasnip.jumpable(1) then
 			pcall(luasnip.unlink_current)
 		end
 	end,
 })
 
 autocmd("FocusGained", {
+	pattern = "*",
 	callback = function()
-		vim.cmd("checktime")
+		if vim.bo.buftype ~= "nofile" then
+			vim.cmd("checktime")
+		end
 	end,
 })
 
@@ -100,22 +112,25 @@ autocmd("BufWritePre", {
 
 autocmd("BufReadPre", {
 	pattern = "*",
-	callback = function()
-		local ok, stats = pcall(vim.loop.fs_stat, vim.fn.expand("%:p"))
+	callback = function(args)
+		local ok, stats = pcall(vim.uv.fs_stat, args.match)
 		if ok and stats and stats.size > 1000000 then -- > 1MB
 			vim.b.large_file = true
-			vim.opt_local.swapfile = false
-			vim.opt_local.undofile = false
-			vim.opt_local.syntax = "off"
 			vim.opt_local.foldmethod = "manual"
+			vim.opt_local.signcolumn = "no"
+			vim.opt_local.spell = false
+			vim.opt_local.swapfile = false
+			vim.opt_local.syntax = "off"
+			vim.opt_local.undofile = false
+			vim.treesitter.stop()
 		end
 	end,
 })
 
 autocmd("TermOpen", {
 	callback = function()
-		vim.wo.number = false
-		vim.wo.relativenumber = false
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
 	end,
 })
 
@@ -123,9 +138,7 @@ autocmd("BufWinLeave", {
 	pattern = "*",
 	callback = function()
 		if vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
-			pcall(function()
-				vim.cmd("silent! mkview")
-			end)
+			vim.cmd("silent! mkview")
 		end
 	end,
 })
@@ -134,9 +147,7 @@ autocmd("BufReadPost", {
 	pattern = "*",
 	callback = function()
 		if vim.bo.buftype == "" then
-			pcall(function()
-				vim.cmd("silent! loadview")
-			end)
+			vim.cmd("silent! loadview")
 		end
 	end,
 })

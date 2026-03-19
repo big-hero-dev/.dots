@@ -1,12 +1,6 @@
 local opt = vim.opt
 
 -- Global settings
-vim.g.netrw_altv = 1
-vim.g.netrw_banner = 0
-vim.g.netrw_browse_split = 4
-vim.g.netrw_browsex_viewer = "xdg-open"
-vim.g.netrw_liststyle = 3
-vim.g.netrw_winsize = 25
 vim.g.editorconfig = false
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
@@ -19,9 +13,9 @@ opt.wrap = false
 opt.swapfile = false
 opt.backup = false
 opt.undofile = true
+opt.undodir = vim.fn.stdpath("data") .. "/undodir"
 opt.hlsearch = false
 opt.incsearch = true
-opt.termguicolors = true
 opt.scrolloff = 8
 opt.scrolljump = 5
 opt.sidescrolloff = 8
@@ -35,7 +29,7 @@ opt.splitbelow = true
 opt.splitright = true
 opt.splitkeep = "cursor"
 opt.timeoutlen = 400
-opt.cmdheight = 1
+opt.cmdheight = 0
 opt.shortmess:append("c")
 opt.showcmdloc = "statusline"
 opt.showmode = false
@@ -70,7 +64,7 @@ opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldenable = true
 vim.wo.conceallevel = 2
-opt.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
+opt.matchpairs = "(:),{:},[:],<:>"
 opt.fillchars = {
 	fold = " ",
 	eob = " ",
@@ -85,7 +79,4 @@ opt.fileencodings = "utf-8"
 opt.wildmenu = true
 opt.wildmode = { "longest:full", "full" }
 opt.wildignorecase = true
-
-vim.cmd("syntax enable")
-opt.errorbells = false
-opt.visualbell = true
+opt.visualbell = false
