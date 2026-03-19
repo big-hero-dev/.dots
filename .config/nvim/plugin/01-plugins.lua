@@ -31,12 +31,14 @@ vim.pack.add({
 -- =========================================================
 -- Syntax tree & structural intelligence
 -- =========================================================
+vim.pack.add({
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+})
 -- Dependencies need list first target plugin
 vim.pack.add({
 	"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
 	"https://github.com/windwp/nvim-ts-autotag",
 	"https://github.com/nvim-treesitter/nvim-treesitter-context",
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 })
 
 -- =========================================================
@@ -45,7 +47,8 @@ vim.pack.add({
 vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
 	once = true,
 	callback = function()
-		if vim.fn.isdirectory(".git") == 1 then
+		local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+		if vim.v.shell_error == 0 and git_root then
 			vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim" })
 			require("gitsigns").setup()
 		end

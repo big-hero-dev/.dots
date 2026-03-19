@@ -6,24 +6,16 @@ local function setup_themes()
 	vim.g.gruvbox_material_diagnostic_text_highlight = 1
 	vim.g.gruvbox_material_inlay_hints_background = "dimmed"
 	vim.g.gruvbox_material_current_word = "underline"
+
+	-- Set background trước khi load để tránh flash
+	local hour = tonumber(os.date("%H"))
+	vim.o.background = (hour >= 18 or hour < 6) and "dark" or "light"
+
 	vim.pack.add({ "https://github.com/sainnhe/gruvbox-material" })
 	vim.cmd.colorscheme("gruvbox-material")
 end
-
 setup_themes()
 
-local hour = tonumber(os.date("%H"))
-
-if hour >= 18 or hour < 6 then
-	vim.o.background = "dark"
-else
-	vim.o.background = "light"
-end
-
 vim.keymap.set("n", "td", function()
-	if vim.o.background == "dark" then
-		vim.o.background = "light"
-	else
-		vim.o.background = "dark"
-	end
+	vim.o.background = vim.o.background == "dark" and "light" or "dark"
 end, { desc = "Toggle Dark/Light Mode" })

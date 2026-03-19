@@ -158,11 +158,27 @@ vim.api.nvim_create_autocmd("VimEnter", {
 		if vim.fn.argc() == 0 then
 			vim.cmd("enew")
 		end
+		vim.defer_fn(function()
+			require("config.lsp")
+		end, 10)
 	end,
 })
 
 vim.api.nvim_create_autocmd("VimLeave", {
 	callback = function()
 		io.write("\27[3 q")
+	end,
+})
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+	once = true,
+	callback = function()
+		require("luasnip").setup({
+			history = true,
+			updateevents = "TextChanged,TextChangedI",
+			enable_autosnippets = false,
+		})
+		require("luasnip.loaders.from_vscode").lazy_load()
+		require("luasnip.loaders.from_lua").lazy_load()
 	end,
 })

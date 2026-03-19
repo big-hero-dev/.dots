@@ -31,8 +31,24 @@ local function shorten_path(path, max_len)
 	return short
 end
 
+local lsp_cache = {}
+vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach", "BufEnter" }, {
+	callback = function(args)
+		local clients = vim.lsp.get_clients({ bufnr = args.buf })
+		local names = {}
+		for _, c in ipairs(clients) do
+			table.insert(names, c.name)
+		end
+		lsp_cache[args.buf] = #names > 0 and ("󰭆 " .. table.concat(names, " ")) or ""
+	end,
+})
+
 local config = {
-	basics = {},
+	basics = {
+		options = { basic = false },
+		mappings = { basic = false },
+		autocommands = { basic = false },
+	},
 	icons = {},
 	git = {},
 	diff = {},
@@ -57,15 +73,7 @@ local config = {
 				local filename = shorten_path(vim.api.nvim_buf_get_name(0), 45)
 				local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
 				local location = "%p%%"
-				local lsp = ""
-				local clients = vim.lsp.get_clients({ bufnr = 0 })
-				if #clients > 0 then
-					local names = {}
-					for _, c in ipairs(clients) do
-						table.insert(names, c.name)
-					end
-					lsp = "󰭆 " .. table.concat(names, " ")
-				end
+				local lsp = lsp_cache[vim.api.nvim_get_current_buf()] or ""
 				mode = mode:upper()
 				return MiniStatusline.combine_groups({
 					{ hl = mode_hl, strings = { mode } },
@@ -117,10 +125,12 @@ local config = {
 	jump2d = {},
 }
 
+require("mini.notify").setup(config.notify)
+vim.notify = require("mini.notify").make_notify()
+
 local order = {
 	"basics",
 	"icons",
-	"notify",
 	"git",
 	"diff",
 	"statusline",
@@ -139,11 +149,10 @@ local order = {
 	"files",
 	"jump2d",
 }
+
 for _, name in ipairs(order) do
 	require("mini." .. name).setup(config[name] or {})
 end
-
-vim.notify = require("mini.notify").make_notify()
 
 -- =========================================================
 -- Mini.clue
