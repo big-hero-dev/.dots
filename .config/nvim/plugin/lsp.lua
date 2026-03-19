@@ -169,6 +169,24 @@ vim.lsp.config("dockerls", {
 	on_attach = on_attach,
 })
 
+vim.lsp.config("emmet_ls", {
+	filetypes = {
+		"astro",
+		"css",
+		"eruby",
+		"html",
+		"htmlangular",
+		"htmldjango",
+		"javascriptreact",
+		"less",
+		"sass",
+		"scss",
+		"svelte",
+		"typescriptreact",
+		"vue",
+	},
+})
+
 for _, name in ipairs(servers) do
 	vim.lsp.enable(name)
 end

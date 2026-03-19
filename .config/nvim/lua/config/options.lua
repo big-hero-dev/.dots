@@ -89,13 +89,3 @@ opt.wildignorecase = true
 vim.cmd("syntax enable")
 opt.errorbells = false
 opt.visualbell = true
-
-vim.filetype.add({
-	extension = {
-		templ = "templ",
-	},
-	pattern = {
-		[".*%.jsx"] = "javascriptreact",
-		[".*%.tsx"] = "typescriptreact",
-	},
-})
