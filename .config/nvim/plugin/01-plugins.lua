@@ -11,7 +11,7 @@ vim.pack.add({
 -- Completion & snippets
 -- =========================================================
 vim.pack.add({
-	"https://github.com/saghen/blink.cmp",
+	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
 	"https://github.com/rafamadriz/friendly-snippets",
 	{ src = "https://github.com/L3MON4D3/LuaSnip", version = vim.version.range("2.x") },
 })
