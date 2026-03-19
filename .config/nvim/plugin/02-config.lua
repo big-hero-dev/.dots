@@ -202,11 +202,11 @@ end, { desc = "Trim trailing space" })
 
 vim.keymap.set("n", "<Leader>U", function()
 	vim.pack.update()
-end, { desc = "DepsUpdate" })
+end, { desc = "Pack update" })
 
 vim.keymap.set("n", "<leader>x", function()
 	require("mini.bufremove").delete()
-end, { desc = "Buffer: Delete" })
+end, { desc = "Remove buffer" })
 
 -- Auto trim with exclusions
 vim.api.nvim_create_autocmd("BufWritePre", {
