@@ -1,3 +1,4 @@
+local has_rust = vim.fn.executable("cargo") == 1
 require("blink.cmp").setup({
 	keymap = {
 		preset = "none",
@@ -23,7 +24,7 @@ require("blink.cmp").setup({
 			"fallback",
 		},
 	},
-	fuzzy = { implementation = "prefer_rust_with_warning" },
+	fuzzy = { implementation = has_rust and "prefer_rust_with_warning" or "lua" },
 	completion = {
 		menu = { auto_show = true },
 		list = { selection = { preselect = false, auto_insert = true } },
