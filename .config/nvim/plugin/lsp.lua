@@ -66,7 +66,7 @@ vim.lsp.config("lua_ls", {
 			},
 			workspace = {
 				checkThirdParty = false,
-				library = { vim.env.VIMRUNTIME },
+				library = { vim.env.VIMRUNTIME, vim.fn.stdpath("config") },
 				maxPreload = 1000,
 				preloadFileSize = 150,
 			},

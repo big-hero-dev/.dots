@@ -7,7 +7,6 @@ local function setup_themes()
 	vim.g.gruvbox_material_inlay_hints_background = "dimmed"
 	vim.g.gruvbox_material_current_word = "underline"
 
-	-- Set background trước khi load để tránh flash
 	local hour = tonumber(os.date("%H"))
 	vim.o.background = (hour >= 18 or hour < 6) and "dark" or "light"
 

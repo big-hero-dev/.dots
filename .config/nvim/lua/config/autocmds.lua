@@ -152,18 +152,6 @@ autocmd("BufReadPost", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-	once = true,
-	callback = function()
-		if vim.fn.argc() == 0 then
-			vim.cmd("enew")
-		end
-		vim.defer_fn(function()
-			require("config.lsp")
-		end, 10)
-	end,
-})
-
 vim.api.nvim_create_autocmd("VimLeave", {
 	callback = function()
 		io.write("\27[3 q")
