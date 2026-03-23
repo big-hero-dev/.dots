@@ -8,6 +8,7 @@ local servers = {
 	"jsonls",
 	"dockerls",
 	"intelephense",
+	"pyright",
 }
 
 require("mason-lspconfig").setup({
@@ -184,6 +185,20 @@ vim.lsp.config("emmet_ls", {
 		"svelte",
 		"typescriptreact",
 		"vue",
+	},
+})
+
+vim.lsp.config("pyright", {
+	capabilities = capabilities,
+	on_attach = on_attach,
+	settings = {
+		python = {
+			analysis = {
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
+				typeCheckingMode = "basic",
+			},
+		},
 	},
 })
 
