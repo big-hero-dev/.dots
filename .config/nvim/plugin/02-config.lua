@@ -19,7 +19,7 @@ end, { desc = "Toggle Dark/Light Mode" })
 -- =========================================================
 -- Core keymaps
 -- =========================================================
-vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Toggle Undotree" })
+vim.keymap.set("n", "<Leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Toggle Undotree" })
 
 -- =========================================================
 -- Mini.nvim ecosystem
@@ -231,9 +231,28 @@ vim.keymap.set("n", "<Leader>U", function()
 	vim.pack.update()
 end, { desc = "Pack update" })
 
-vim.keymap.set("n", "<leader>x", function()
+vim.keymap.set("n", "<Leader>x", function()
 	require("mini.bufremove").delete()
 end, { desc = "Remove buffer" })
+
+require("toggleterm").setup({
+	sade_terminals = false,
+	highlights = {
+		Normal = {
+			link = "Normal",
+		},
+		NormalFloat = {
+			link = "Normal",
+		},
+		StatusLine = {
+			link = "StatusLine",
+		},
+		StatusLineNC = {
+			link = "StatusLineNC",
+		},
+	},
+})
+vim.keymap.set("n", "<Leader>T", "<cmd>ToggleTerm<cr>", { desc = "Toggle Terminal" })
 
 -- Auto trim with exclusions
 vim.api.nvim_create_autocmd("BufWritePre", {
