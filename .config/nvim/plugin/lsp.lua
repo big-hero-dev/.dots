@@ -200,6 +200,9 @@ vim.lsp.config("pyright", {
 			},
 		},
 	},
+	handlers = {
+		["$/progress"] = function() end,
+	},
 })
 
 for _, name in ipairs(servers) do
