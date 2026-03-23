@@ -69,22 +69,22 @@ format = '[ $symbol ]($style)'
 [os.symbols]
 Windows = "󰍲"
 Ubuntu = "󰕈"
-SUSE = ""
+SUSE = ""
 Raspbian = "󰐿"
 Mint = "󰣭"
 Macos = "󰀵"
-Manjaro = ""
+Manjaro = "󱘊"
 Linux = "󰌽"
 Gentoo = "󰣨"
 Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
+Alpine = ""
+Amazon = ""
+Android = ""
 Arch = "󰣇"
 CachyOS = ""
 Artix = "󰣇"
-EndeavourOS = ""
-CentOS = ""
+EndeavourOS = ""
+CentOS = ""
 Debian = "󰣚"
 Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
@@ -155,7 +155,7 @@ format = '[\($state( $progress_current/$progress_total)\) ]($style)'
 disabled = false
 
 [c]
-symbol = ""
+symbol = ""
 style = "fg:blue bg:bg2"
 format = '[ $symbol $version ]($style)'
 
@@ -170,37 +170,37 @@ style = "fg:blue bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [nodejs]
-symbol = ""
+symbol = ""
 style = "fg:green bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [php]
-symbol = ""
+symbol = ""
 style = "fg:purple bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [java]
-symbol = ""
+symbol = ""
 style = "fg:red bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [kotlin]
-symbol = ""
+symbol = ""
 style = "fg:purple bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [haskell]
-symbol = ""
+symbol = ""
 style = "fg:purple bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [python]
-symbol = ""
+symbol = ""
 style = "fg:yellow bg:bg2"
 format = '[ $symbol $version ]($style)'
 
 [lua]
-symbol = ""
+symbol = ""
 style = "fg:blue bg:bg2"
 format = '[ $symbol $version ]($style)'
 
