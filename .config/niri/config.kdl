@@ -3,6 +3,7 @@ output "HDMI-A-1" {
     mode "1920x1080@100.001"
     scale 1.0
     position x=0 y=0
+	focus-at-startup
 }
 
 output "eDP-1" {
@@ -11,6 +12,7 @@ output "eDP-1" {
     scale 1.2
     position x=0 y=1080
     variable-refresh-rate
+	focus-at-startup
 }
 
 input {
@@ -102,6 +104,10 @@ binds {
     Mod+N { focus-window-or-workspace-down; }
     Mod+E { focus-window-or-workspace-up; }
     Mod+I { focus-column-right; }
+	Mod+Up { focus-monitor-up; }
+	Mod+Down { focus-monitor-down; }
+	Mod+Right { focus-monitor-right; }
+	Mod+Left { focus-monitor-left; }
 
     // Move (Colemak-DH: HNEI)
     Mod+Shift+H { move-column-left; }
