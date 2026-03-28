@@ -1,0 +1,11 @@
+[Unit]
+Description=Auto Scrcpy when Android connected
+After=default.target
+
+[Service]
+ExecStart=/home/xxx/.local/bin/gamedock
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=default.target

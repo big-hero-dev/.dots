@@ -7,7 +7,6 @@ while true; do
               --fullscreen \
               --max-size 1920 \
               --video-bit-rate 16M \
-              --max-fps 60 \
               --turn-screen-off &
         fi
     fi
