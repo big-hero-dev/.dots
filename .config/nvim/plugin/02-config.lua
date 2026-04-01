@@ -1,17 +1,22 @@
-local function setup_themes()
+local function setup_themes(scheme, opts, auto_bg)
 	vim.g.gruvbox_material_enable_italic = true
-	vim.g.gruvbox_material_cursor = "auto"
-	vim.g.gruvbox_material_background = "soft"
-	vim.g.gruvbox_material_show_eob = 1
-	vim.g.gruvbox_material_diagnostic_text_highlight = 1
-	vim.g.gruvbox_material_inlay_hints_background = "dimmed"
-	vim.g.gruvbox_material_current_word = "underline"
+	-- ... các globals khác
 
-	local hour = tonumber(os.date("%H"))
-	vim.o.background = (hour >= 18 or hour < 6) and "dark" or "light"
-	vim.cmd.colorscheme("gruvbox-material")
+	if opts then
+		require("mfd").setup(opts)
+	end
+
+	if auto_bg then
+		local hour = tonumber(os.date("%H"))
+		vim.o.background = (hour >= 18 or hour < 6) and "dark" or "light"
+	end
+
+	vim.cmd.colorscheme(scheme)
 end
-setup_themes()
+
+-- setup_themes("gruvbox-material", nil, true)
+
+setup_themes("mfd-dark", { accessibility_contrast = 5 }, false)
 
 vim.keymap.set("n", "td", function()
 	vim.o.background = vim.o.background == "dark" and "light" or "dark"
@@ -53,7 +58,7 @@ local function shorten_path(path, max_len)
 end
 
 local lsp_cache = {}
-vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach", "BufEnter" }, {
+vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach" }, {
 	callback = function(args)
 		local clients = vim.lsp.get_clients({ bufnr = args.buf })
 		local names = {}
@@ -73,9 +78,6 @@ local config = {
 	icons = {},
 	git = {},
 	diff = {},
-	notify = {
-		window = { config = { border = "rounded" } },
-	},
 	statusline = {
 		content = {
 			active = function()
@@ -146,7 +148,10 @@ local config = {
 	jump2d = {},
 }
 
-require("mini.notify").setup(config.notify)
+require("mini.notify").setup({
+	window = { config = { border = "rounded" } },
+})
+
 vim.notify = require("mini.notify").make_notify()
 
 local order = {
@@ -239,7 +244,7 @@ vim.keymap.set("n", "<Leader>x", function()
 end, { desc = "Remove buffer" })
 
 require("toggleterm").setup({
-	sade_terminals = false,
+	shade_terminals = false,
 	highlights = {
 		Normal = {
 			link = "Normal",
@@ -258,6 +263,7 @@ require("toggleterm").setup({
 vim.keymap.set("n", "<Leader>T", "<cmd>ToggleTerm<cr>", { desc = "Toggle Terminal" })
 
 -- Auto trim with exclusions
+local trailspace = require("mini.trailspace")
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function()
@@ -266,7 +272,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			return
 		end
 
-		require("mini.trailspace").trim()
-		require("mini.trailspace").trim_last_lines()
+		trailspace.trim()
+		trailspace.trim_last_lines()
 	end,
 })

@@ -1,7 +1,8 @@
 -- =========================================================
 -- Core editing & basic UI
 -- =========================================================
-vim.pack.add({ "https://github.com/sainnhe/gruvbox-material" })
+-- vim.pack.add({ "https://github.com/sainnhe/gruvbox-material" })
+vim.pack.add({ "https://github.com/kungfusheep/mfd.nvim" })
 vim.pack.add({
 	"https://github.com/dstein64/vim-startuptime",
 	"https://github.com/lambdalisue/suda.vim",
