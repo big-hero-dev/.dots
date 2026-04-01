@@ -16,7 +16,7 @@ FULL_PATH="$WALL_DIR/$chosen"
 # Verify file exists
 [ ! -f "$FULL_PATH" ] && exit 1
 
-swww img "$FULL_PATH" \
+awww img "$FULL_PATH" \
     --transition-type grow \
     --transition-pos center \
     --transition-fps 60 \
