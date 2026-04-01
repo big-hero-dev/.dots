@@ -3,11 +3,12 @@
 -- =========================================================
 vim.pack.add({ "https://github.com/sainnhe/gruvbox-material" })
 vim.pack.add({
-	"https://github.com/mbbill/undotree",
 	"https://github.com/dstein64/vim-startuptime",
 	"https://github.com/lambdalisue/suda.vim",
 	"https://github.com/akinsho/toggleterm.nvim",
 })
+
+vim.cmd("packadd nvim.undotree")
 
 -- =========================================================
 -- Completion & snippets

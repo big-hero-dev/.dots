@@ -19,7 +19,9 @@ end, { desc = "Toggle Dark/Light Mode" })
 -- =========================================================
 -- Core keymaps
 -- =========================================================
-vim.keymap.set("n", "<Leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Toggle Undotree" })
+vim.keymap.set("n", "<Leader>u", function()
+	require("undotree").open({ command = "60vnew" })
+end, { desc = "Undotree" })
 
 -- =========================================================
 -- Mini.nvim ecosystem
