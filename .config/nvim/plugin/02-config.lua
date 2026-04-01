@@ -1,26 +1,5 @@
-local function setup_themes(scheme, opts, auto_bg)
-	vim.g.gruvbox_material_enable_italic = true
-	-- ... các globals khác
-
-	if opts then
-		require("mfd").setup(opts)
-	end
-
-	if auto_bg then
-		local hour = tonumber(os.date("%H"))
-		vim.o.background = (hour >= 18 or hour < 6) and "dark" or "light"
-	end
-
-	vim.cmd.colorscheme(scheme)
-end
-
--- setup_themes("gruvbox-material", nil, true)
-
-setup_themes("mfd-dark", { accessibility_contrast = 5 }, false)
-
-vim.keymap.set("n", "td", function()
-	vim.o.background = vim.o.background == "dark" and "light" or "dark"
-end, { desc = "Toggle Dark/Light Mode" })
+require("mfd").setup({ accessibility_contrast = 5 })
+vim.cmd.colorscheme("mfd-paper")
 
 -- =========================================================
 -- Core keymaps
@@ -113,6 +92,7 @@ local config = {
 	tabline = {},
 	files = { mappings = { go_in = "i", go_in_plug = "I" } },
 	pick = {},
+	colorscheme = {},
 	comment = {},
 	pairs = {},
 	surround = {},
