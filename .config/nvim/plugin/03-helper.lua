@@ -1,13 +1,8 @@
 local function pack_clean()
-	local active = {}
 	local unused = {}
 
 	for _, plugin in ipairs(vim.pack.get()) do
-		active[plugin.spec.name] = plugin.active
-	end
-
-	for _, plugin in ipairs(vim.pack.get()) do
-		if not active[plugin.spec.name] then
+		if not plugin.active or not plugin.spec then
 			table.insert(unused, plugin.spec.name)
 		end
 	end
@@ -17,7 +12,8 @@ local function pack_clean()
 		return
 	end
 
-	local choice = vim.fn.confirm("Remove unused plugins?", "&Yes\n&No", 2)
+	local choice =
+		vim.fn.confirm("Remove " .. #unused .. " unused plugins?\n" .. table.concat(unused, "\n"), "&Yes\n&No", 2)
 	if choice == 1 then
 		vim.pack.del(unused)
 	end

@@ -51,11 +51,8 @@ vim.pack.add({
 vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
 	once = true,
 	callback = function()
-		local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
-		if vim.v.shell_error == 0 and git_root then
-			vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim" })
-			require("gitsigns").setup()
-		end
+		vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim" })
+		require("gitsigns").setup()
 	end,
 })
 
