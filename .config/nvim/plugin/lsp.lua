@@ -31,7 +31,6 @@ local function on_attach(client, bufnr)
 			vim.diagnostic.open_float({
 				focusable = false,
 				close_events = { "CursorMoved", "CursorMovedI", "BufLeave", "InsertEnter" },
-				border = "rounded",
 				source = "if_many",
 				prefix = " ",
 				scope = "cursor",
@@ -240,3 +239,11 @@ vim.diagnostic.config({
 		},
 	},
 })
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+---@diagnostic disable-next-line: duplicate-set-field
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+	opts = opts or {}
+	opts.border = opts.border or "single"
+	return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
