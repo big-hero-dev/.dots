@@ -7,6 +7,7 @@ vim.pack.add({
 	"https://github.com/dstein64/vim-startuptime",
 	"https://github.com/lambdalisue/suda.vim",
 	"https://github.com/akinsho/toggleterm.nvim",
+	"https://github.com/folke/zen-mode.nvim",
 })
 
 vim.cmd("packadd nvim.undotree")

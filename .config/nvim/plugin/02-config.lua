@@ -256,3 +256,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		trailspace.trim_last_lines()
 	end,
 })
+
+vim.keymap.set("n", "<Leader>z", "<cmd>ZenMode<cr>", { desc = "Toggle zen-mode" })
