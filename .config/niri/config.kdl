@@ -273,6 +273,7 @@ environment {
     XDG_CURRENT_DESKTOP "niri"
     QT_QPA_PLATFORM "wayland"
     MOZ_ENABLE_WAYLAND "1"
+	GTK_USE_PORTAL "1"
 }
 
 spawn-at-startup "fcitx5" "-d"
@@ -281,5 +282,6 @@ spawn-at-startup "udiskie"
 spawn-at-startup "waybar"
 spawn-at-startup "cava"
 spawn-at-startup "swayidle" "-w" "timeout" "60" "niri msg action do-screen-transition; niri msg action set-cursor-visibility hide" "resume" "niri msg action set-cursor-visibility show"
+spawn-at-startup "dbus-update-activation-environment --all"
 spawn-at-startup "awww-daemon"
 spawn-at-startup "gamedock"
