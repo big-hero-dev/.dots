@@ -11,7 +11,7 @@
 #waybar {
   background: alpha(@bg, 0.65);
   color: @fg;
-  border-radius: 0;
+  border-radius: 6;
   border: 1px solid @border;
 }
 

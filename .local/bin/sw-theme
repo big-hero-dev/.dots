@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-matugen image "$1" --source-color-index 1
+matugen image "$1" --source-color-index 2
+kitty @ --to unix:/tmp/kitty set-colors -a "~/.config/kitty/colors.conf"
 makoctl reload
 pkill -USR2 waybar
 tmux source-file ~/.config/tmux/tmux.conf

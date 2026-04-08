@@ -52,7 +52,7 @@ layout {
 }
 
 window-rule {
-    geometry-corner-radius 0
+    geometry-corner-radius 6
     clip-to-geometry true
     draw-border-with-background false
 }
@@ -72,7 +72,7 @@ layer-rule {
     match namespace="waybar"
 	match at-startup=true
     opacity 0.9
-    geometry-corner-radius 0
+    geometry-corner-radius 6
 	block-out-from "screencast"
 }
 
@@ -164,7 +164,7 @@ animations {
 
 binds {
     // Terminal & Launcher
-    Mod+Return { spawn "foot"; }
+    Mod+Return { spawn "kitty" "--listen-on" "unix:/tmp/kitty"; }
     Mod+Space { spawn "sh" "-c" "fuzzel --icon-theme=$(gsettings get org.gnome.desktop.interface icon-theme | tr -d \"'\")"; }
 	Mod+B     { spawn "firefox"; }
 
