@@ -1,5 +1,6 @@
 [config]
 version_check = false
+
 [templates.niri]
 input_path = '~/.config/matugen/templates/niri.kdl'
 output_path = '~/.config/niri/colors.kdl'
@@ -19,3 +20,7 @@ output_path = '~/.config/fuzzel/fuzzel.ini'
 [templates.mako]
 input_path = '~/.config/matugen/templates/mako.conf'
 output_path = '~/.config/mako/config'
+
+[templates.tmux]
+input_path = '~/.config/matugen/templates/tmux.conf'
+output_path = '~/.config/tmux/conf/status.conf'

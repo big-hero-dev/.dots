@@ -3,4 +3,5 @@
 matugen image "$1" --source-color-index 1
 makoctl reload
 pkill -USR2 waybar
+tmux source-file ~/.config/tmux/tmux.conf
 notify-send "Theme updated" "Applied colors from $1"

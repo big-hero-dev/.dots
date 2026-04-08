@@ -9,9 +9,9 @@ height=150
 border-size=1
 border-radius=0
 
-border-color=#8fd5af
-background-color=#0f1511
-text-color=#dee4de
+border-color=#ffb68b
+background-color=#1a120d
+text-color=#f0dfd7
 font=IBM Plex Mono 11
 
 # Icon
@@ -28,7 +28,7 @@ default-timeout=5000
 ignore-timeout=0
 
 # Progress bar
-progress-color=over #8fd5af
+progress-color=over #ffb68b
 
 # Do Not Disturb mode
 [mode=do-not-disturb]
@@ -36,11 +36,11 @@ invisible=1
 
 # Urgency levels
 [urgency=low]
-border-color=#b4ccbc
+border-color=#e5bfaa
 default-timeout=3000
 
 [urgency=normal]
-border-color=#8fd5af
+border-color=#ffb68b
 default-timeout=5000
 
 [urgency=critical]
@@ -49,7 +49,7 @@ default-timeout=0
 
 # App-specific rules
 [app-name="Spotify"]
-border-color=#a4cddd
+border-color=#ccc992
 default-timeout=3000
 
 # Volume notification (Steam Deck style)
@@ -59,12 +59,12 @@ width=300
 height=35
 margin=10
 padding=0,6
-background-color=#303632
-text-color=#dee4de
-border-color=#8a938c
+background-color=#3d332d
+text-color=#f0dfd7
+border-color=#9f8d84
 border-size=1
 border-radius=4
-progress-color=over #8fd5af
+progress-color=over #ffb68b
 font=IBM Plex Mono 12
 format=<span font='10'><b>%s</b> %b</span>
 max-icon-size=20
@@ -77,12 +77,12 @@ width=300
 height=35
 margin=10
 padding=0,10
-background-color=#303632
-text-color=#dee4de
-border-color=#8a938c
+background-color=#3d332d
+text-color=#f0dfd7
+border-color=#9f8d84
 border-size=1
 border-radius=4
-progress-color=over #8fd5af
+progress-color=over #ffb68b
 font=JetBrains Mono Nerd Font 12
 format=<span font='10'><b>%s</b> %b</span>
 max-icon-size=20
