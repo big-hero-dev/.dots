@@ -1,18 +1,34 @@
-# add to ~/.config/fish/config.fish
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH:$HOME/.local/share/bin"
-export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/"
-export EDITOR=nvim
-export BROWSER='/usr/bin/firefox'
-export PROVIDER='ollama'
-export MODEL=mistral
-export TASKRC="$HOME/.taskrc"
-export TASKDATA="$HOME/tasks"
-export XDG_CONFIG_HOME="$HOME/.config"
-export SASS_PATH="node_modules"
+# BUN
+set -gx BUN_INSTALL "$HOME/.bun"
 
-set -x GTK_IM_MODULE fcitx
-set -x QT_IM_MODULE fcitx
-set -x XMODIFIERS "@im=fcitx"
+# PATH - Fish dùng danh sách (space-separated) thay vì dấu ":"
+# Lệnh fish_add_path là cách an toàn nhất để thêm path mà không bị lặp
+fish_add_path "$BUN_INSTALL/bin"
+fish_add_path "$HOME/.local/share/bin"
 
-export ZNS_TOKEN='JP8bObLWEobDb2HZLsKy8a-R9snNSpuYIO5R4Z4K8bXtbZ9hCIaiH2lRDr5kRL5nA-upVJ0SJc4kgIvjC0nFP5EPNdW_QI8nLED51H8NF0m8lrCwQp4_DdsmH1O283ub7O92Q7u5Mc0xfK5tKo0WLnhHEcH-O4DN7UbIPaW2B4Gag4XmCm1NJrY_J5bFI2zs5kD8FMaL9dKqu3qvL6acC0t8MpnGF3W8Jh1Q4ni280eDyZ0J4mDT84snHZaf4o9tQwn3Qp8GFcTPxYCeBcr286h-8HOA271RI9y9PbuyTLKTeXXTSIST4J-PTr5833vE0v92GM4p75G3aNDYO2uyQdwAMKS90aLoPwmYFoqGU2bWksG122a9IcM8PK4yD2iCTRf4EpGAF78i_2LbKNiyLaRm9KeXTq9VByOeU5PwFom'
+# XDG & Directories
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -gx XDG_DATA_DIRS "$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/"
+
+# Apps & Editor
+set -gx EDITOR nvim
+set -gx BROWSER '/usr/bin/firefox'
+
+# AI & Tasks
+set -gx PROVIDER 'ollama'
+set -gx MODEL mistral
+set -gx TASKRC "$HOME/.taskrc"
+set -gx TASKDATA "$HOME/tasks"
+
+# Dev
+set -gx SASS_PATH "node_modules"
+
+# Input Method (Fcitx)
+set -gx GTK_IM_MODULE fcitx
+set -gx QT_IM_MODULE fcitx
+set -gx XMODIFIERS "@im=fcitx"
+
+# Lấy Icon Theme tự động từ gsettings cho môi trường (Cách 1 đã bàn)
+if type -q gsettings
+    set -gx GTK_ICON_THEME (gsettings get org.gnome.desktop.interface icon-theme | tr -d "'")
+end

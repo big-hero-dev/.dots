@@ -1,0 +1,21 @@
+[config]
+version_check = false
+[templates.niri]
+input_path = '~/.config/matugen/templates/niri.kdl'
+output_path = '~/.config/niri/colors.kdl'
+
+[templates.waybar]
+input_path = '~/.config/matugen/templates/waybar.css'
+output_path = '~/.config/waybar/colors.css'
+
+[templates.foot]
+input_path = '~/.config/matugen/templates/foot.ini'
+output_path = '~/.config/foot/colors.ini'
+
+[templates.fuzzel]
+input_path = '~/.config/matugen/templates/fuzzel.ini'
+output_path = '~/.config/fuzzel/fuzzel.ini'
+
+[templates.mako]
+input_path = '~/.config/matugen/templates/mako.conf'
+output_path = '~/.config/mako/config'

@@ -1,9 +1,4 @@
-/* Palette */
-@define-color bg #0a1428;
-@define-color fg #c8aa6e;
-@define-color border #c28f2c;
-@define-color dim #5c6370;
-@define-color red #ff4d4d;
+@import "colors.css";
 
 /* Base */
 * {
@@ -14,7 +9,7 @@
 
 /* Main bar */
 #waybar {
-  background: @bg;
+  background: alpha(@bg, 0.65);
   color: @fg;
   border-radius: 0;
   border: 1px solid @border;

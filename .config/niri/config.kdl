@@ -1,3 +1,5 @@
+include "colors.kdl"
+
 output "HDMI-A-1" {
     // Properties for an external monitor
     mode "1920x1080@100.001"
@@ -46,12 +48,7 @@ layout {
     default-column-width { proportion 0.5; }
 	focus-ring {
 		width 2
-		active-color "#d4a04a"
-		inactive-color "#504945"
 	}
-	insert-hint {
-        color "#ffc87f80"
-    }
 }
 
 window-rule {
@@ -168,7 +165,7 @@ animations {
 binds {
     // Terminal & Launcher
     Mod+Return { spawn "foot"; }
-    Mod+Space { spawn "fuzzel"; }
+    Mod+Space { spawn "sh" "-c" "fuzzel --icon-theme=$(gsettings get org.gnome.desktop.interface icon-theme | tr -d \"'\")"; }
 	Mod+B     { spawn "firefox"; }
 
     // Kill & Reload
@@ -235,7 +232,7 @@ binds {
 
     Print                 { spawn "screenshot"; }
     Shift+Print           { spawn "screenshot" "edit"; }
-    Mod+Shift+W           { spawn "change-wallpaper"; }
+    Mod+Shift+W           { spawn "waypaper"; }
     Mod+K                 { spawn "hyprpicker" "-aq"; }
     Mod+P                 { spawn "power-menu"; }
 

@@ -1,0 +1,5 @@
+@define-color bg {{colors.surface.default.hex}};
+@define-color fg {{colors.on_surface.default.hex}};
+@define-color border {{colors.primary.default.hex}};
+@define-color dim {{colors.surface_variant.default.hex}};
+@define-color red {{colors.error.default.hex}};

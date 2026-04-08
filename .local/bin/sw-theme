@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+matugen image "$1" --source-color-index 1
+makoctl reload
+pkill -USR2 waybar
+notify-send "Theme updated" "Applied colors from $1"

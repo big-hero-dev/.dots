@@ -53,6 +53,8 @@ fisher install rstacruz/fish-npm-global
 * `wl-clipboard`: Wayland clipboard tool.
 * `glow`: Render markdown on the CLI.
 * `paleta`: Color palettes.
+* `matugen`
+* `waypaper`
 
 ### Input method
 

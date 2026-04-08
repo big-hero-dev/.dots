@@ -1,0 +1,4 @@
+layout {
+    focus-ring { active-color  "{{colors.primary.default.hex}}";
+	inactive-color "{{colors.surface_variant.default.hex}}"; }
+}
