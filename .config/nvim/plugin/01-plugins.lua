@@ -9,6 +9,10 @@ vim.pack.add({
 	"https://github.com/folke/zen-mode.nvim",
 })
 
+vim.pack.add({
+	"https://github.com/rachartier/tiny-cmdline.nvim",
+})
+
 vim.cmd("packadd nvim.undotree")
 
 -- =========================================================
