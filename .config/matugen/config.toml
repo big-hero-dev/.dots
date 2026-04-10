@@ -24,3 +24,7 @@ output_path = '~/.config/tmux/conf/status.conf'
 [templates.kitty]
 input_path = '~/.config/matugen/templates/kitty-colors.conf'
 output_path = '~/.config/kitty/colors.conf'
+
+[templates.waypaper]
+input_path = '~/.config/matugen/templates/waypaper.css'
+output_path = '~/.config/waypaper/style.css'

@@ -1,0 +1,27 @@
+window {
+    background-color: {{colors.surface.default.hex}};
+}
+
+/* hover reset */
+button:hover {
+    background-image: none;
+    box-shadow: none;
+    border-color: transparent;
+}
+
+/* icon hover */
+button:hover > image {
+    -gtk-icon-shadow: none;
+    -gtk-icon-effect: none;
+}
+
+.highlighted-button {
+    background-image: none;
+    box-shadow: none;
+    background-color: alpha({{colors.primary.default.hex}}, 0.25);
+}
+
+.highlighted-button > image,
+.highlighted-button:hover > image {
+    -gtk-icon-effect: highlight;
+}
