@@ -1,0 +1,2 @@
+#!/bin/sh
+kitty --single-instance --listen-on unix:/tmp/kitty

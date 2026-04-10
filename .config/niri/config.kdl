@@ -164,7 +164,9 @@ animations {
 
 binds {
     // Terminal & Launcher
-    Mod+Return { spawn "kitty" "--listen-on" "unix:/tmp/kitty"; }
+	Mod+Return {
+		spawn "terminal";
+	}
     Mod+Space { spawn "sh" "-c" "fuzzel --icon-theme=$(gsettings get org.gnome.desktop.interface icon-theme | tr -d \"'\")"; }
 	Mod+B     { spawn "firefox"; }
 
