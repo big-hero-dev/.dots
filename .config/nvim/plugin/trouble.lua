@@ -72,7 +72,7 @@ vim.keymap.set("n", "[e", function()
 	vim.diagnostic.jump({
 		count = -1,
 		severity = vim.diagnostic.severity.ERROR,
-		float = { border = "single" },
+		float = { border = vim.g.border },
 	})
 end, { desc = "Prev error" })
 
@@ -80,7 +80,7 @@ vim.keymap.set("n", "]e", function()
 	vim.diagnostic.jump({
 		count = 1,
 		severity = vim.diagnostic.severity.ERROR,
-		float = { border = "single" },
+		float = { border = vim.g.border },
 	})
 end, { desc = "Next error" })
 
@@ -88,7 +88,7 @@ vim.keymap.set("n", "[w", function()
 	vim.diagnostic.jump({
 		count = -1,
 		severity = vim.diagnostic.severity.WARN,
-		float = { border = "single" },
+		float = { border = vim.g.border },
 	})
 end, { desc = "Prev warning" })
 
@@ -96,6 +96,6 @@ vim.keymap.set("n", "]w", function()
 	vim.diagnostic.jump({
 		count = 1,
 		severity = vim.diagnostic.severity.WARN,
-		float = { border = "single" },
+		float = { border = vim.g.border },
 	})
 end, { desc = "Next warning" })

@@ -247,7 +247,7 @@ function M.open_panel()
 	local win = api.nvim_open_win(buf, true, {
 		relative = "editor",
 		style = "minimal",
-		border = "rounded",
+		border = vim.g.border,
 		width = width,
 		height = height,
 		row = math.floor((vim.o.lines - height) / 2),

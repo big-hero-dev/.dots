@@ -129,7 +129,7 @@ local config = {
 }
 
 require("mini.notify").setup({
-	window = { config = { border = "rounded" } },
+	window = { config = { border = vim.g.border } },
 })
 
 vim.notify = require("mini.notify").make_notify()
