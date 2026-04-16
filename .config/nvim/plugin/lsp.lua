@@ -9,7 +9,6 @@ local servers = {
 	"dockerls",
 	"intelephense",
 	"pyright",
-	"ruff",
 }
 
 require("mason-lspconfig").setup({
