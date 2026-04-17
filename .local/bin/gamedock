@@ -3,11 +3,15 @@
 while true; do
     if adb get-state 1>/dev/null 2>&1; then
         if ! pgrep -x scrcpy > /dev/null; then
-            scrcpy \
-              --fullscreen \
-              --max-size 1920 \
-              --video-bit-rate 16M \
-              --turn-screen-off &
+			scrcpy \
+			  --fullscreen \
+			  --max-size 1440 \
+			  --video-bit-rate 10M \
+			  --max-fps 120 \
+			  --no-video-sync \
+			  --tunnel-forward \
+			  --turn-screen-off \
+			  --stay-awake &
         fi
     fi
     sleep 2
