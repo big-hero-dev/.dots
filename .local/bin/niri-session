@@ -1,16 +1,21 @@
 #!/bin/sh
-
-# Export PATH trước
 export PATH="$HOME/.local/bin:$PATH"
-
-# Session variables
 export XDG_DATA_DIRS="/usr/share:/usr/local/share"
 export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=niri
 export XDG_SESSION_DESKTOP=niri
-
-# GTK config
 export GTK_USE_PORTAL=1
 export QT_QPA_PLATFORMTHEME=gtk3
 
-exec niri
+niri &
+NIRI_PID=$!
+
+while [ ! -S "${XDG_RUNTIME_DIR}/niri/socket" ]; do
+    sleep 0.2
+done
+
+systemctl --user import-environment PATH XDG_SESSION_TYPE XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP WAYLAND_DISPLAY DISPLAY
+systemd-notify --ready || true
+systemctl --user start graphical-session.target
+
+wait $NIRI_PID
