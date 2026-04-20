@@ -13,8 +13,7 @@
 	],
 	"modules-center": [
 		"clock",
-		"custom/music",
-		"custom/gamedock"
+		"custom/music"
 	],
 	"modules-right": [
 		"battery",
@@ -66,16 +65,7 @@
 		"format-warning": "󰁻",
 		"format-critical": "󰁺",
 		"format-icons": [
-			"󰁺",
-			"󰁻",
-			"󰁼",
-			"󰁽",
-			"󰁾",
-			"󰁿",
-			"󰂀",
-			"󰂁",
-			"󰂂",
-			"󰁹"
+			"󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"
 		]
 	},
 	"pulseaudio": {
@@ -99,10 +89,7 @@
 		"device": "intel_backlight",
 		"format": "󰃞 ",
 		"format-icons": [
-			"󰃞",
-			"󰃝",
-			"󰃟",
-			"󰃠"
+			"󰃞", "󰃝", "󰃟", "󰃠"
 		],
 		"on-scroll-up": "brightness --inc",
 		"on-scroll-down": "brightness --dec"
@@ -143,11 +130,5 @@
 		"on-scroll-up": "playerctl previous",
 		"on-scroll-down": "playerctl next",
 		"escape": true
-	},
-	"custom/gamedock": {
-		"exec": "cat /tmp/gamedock-status 2>/dev/null || echo '{\"text\": \"󰊗\", \"class\": \"inactive\"}'",
-		"return-type": "json",
-		"interval": "once",
-		"signal": 9
 	}
 }

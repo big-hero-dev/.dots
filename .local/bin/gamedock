@@ -1,82 +1,36 @@
 #!/bin/bash
 
-BRIGHTNESS_FILE="/tmp/original_brightness"
-WAYBAR_STATUS_FILE="/tmp/gamedock-status"
-CLEANED=false
-
-# Write status immediately
-echo '{"text": "󰊗", "class": "inactive", "tooltip": "Gaming"}' > "$WAYBAR_STATUS_FILE"
-
-# Wait for waybar
-while ! pgrep -x waybar > /dev/null; do
-    sleep 1
-done
-sleep 0.5
-
-signal_waybar() {
-    for i in 1 2 3; do
-        pkill -RTMIN+9 waybar && break
-        sleep 0.5
-    done
-}
-
-update_waybar() {
-    echo "$1" > "$WAYBAR_STATUS_FILE"
-    signal_waybar
-}
-
-restore_brightness() {
-    if [ -f "$BRIGHTNESS_FILE" ]; then
-        SAVED=$(cat "$BRIGHTNESS_FILE")
-        timeout 3 adb shell settings put system screen_brightness_mode 0
-        timeout 3 adb shell cmd display set-brightness "$SAVED"
-    fi
-}
+# Lưu độ sáng hiện tại
+ORIGINAL_BRIGHTNESS=$(adb shell dumpsys display | grep mLatestFloatBrightness | awk -F= '{print $2}' | tr -d ' ')
 
 cleanup() {
-    [ "$CLEANED" = true ] && return
-    CLEANED=true
-    restore_brightness
+    echo "Restoring brightness to $ORIGINAL_BRIGHTNESS..."
+    adb shell settings put system screen_brightness_mode 0
+    adb shell cmd display set-brightness "$ORIGINAL_BRIGHTNESS"
     kill $(pgrep -x scrcpy) 2>/dev/null
-    update_waybar '{"text": "󰊗", "class": "inactive", "tooltip": "Gaming"}'
-    notify-send "Gamedock" "Stopped" -i phone -t 3000
     exit 0
 }
+
 trap cleanup SIGINT SIGTERM EXIT
-
-signal_waybar
-
-PHONE_CONNECTED=false
 
 while true; do
     if adb get-state 1>/dev/null 2>&1; then
-        if [ "$PHONE_CONNECTED" = false ]; then
-            ORIGINAL=$(adb shell dumpsys display \
-                | grep mLatestFloatBrightness \
-                | awk -F= '{print $2}' \
-                | tr -d ' ')
-            echo "$ORIGINAL" > "$BRIGHTNESS_FILE"
+        if ! pgrep -x scrcpy > /dev/null; then
+            # Lưu lại brightness phòng trường hợp mới cắm vào
+            ORIGINAL_BRIGHTNESS=$(adb shell dumpsys display | grep mLatestFloatBrightness | awk -F= '{print $2}' | tr -d ' ')
             adb shell settings put system screen_brightness_mode 0
             adb shell cmd display set-brightness 0.0
-            PHONE_CONNECTED=true
-            update_waybar '{"text": "󰊗", "class": "active", "tooltip": "Gaming - Phone connected"}'
-            notify-send "Gamedock" "Phone connected" -i phone -t 3000
-        fi
-
-        if ! pgrep -x scrcpy > /dev/null; then
             scrcpy \
               --fullscreen \
-              --video-buffer=0 \
-              --audio-buffer=0 \
+			  --video-buffer=0 \
+			  --audio-buffer=0 \
               --video-bit-rate 16M \
               --stay-awake &
         fi
     else
-        if [ "$PHONE_CONNECTED" = true ]; then
-            kill $(pgrep -x scrcpy) 2>/dev/null
-            PHONE_CONNECTED=false
-            update_waybar '{"text": "󰊗", "class": "disconnected", "tooltip": "Gaming - No device"}'
-            notify-send "Gamedock" "Phone disconnected" -i phone -t 3000
+        # Điện thoại ngắt kết nối, restore brightness
+        if [ -n "$ORIGINAL_BRIGHTNESS" ]; then
+            adb shell cmd display set-brightness "$ORIGINAL_BRIGHTNESS" 2>/dev/null
         fi
     fi
     sleep 2
