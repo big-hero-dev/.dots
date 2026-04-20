@@ -1,5 +1,0 @@
-#!/bin/sh
-while [ -z "$NIRI_SOCKET" ] && [ ! -S "${XDG_RUNTIME_DIR}/niri/socket" ]; do
-    sleep 0.5
-done
-exec waybar

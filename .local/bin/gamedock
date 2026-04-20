@@ -1,8 +1,5 @@
 #!/bin/bash
-
-# Lưu độ sáng hiện tại
 ORIGINAL_BRIGHTNESS=$(adb shell dumpsys display | grep mLatestFloatBrightness | awk -F= '{print $2}' | tr -d ' ')
-
 cleanup() {
     echo "Restoring brightness to $ORIGINAL_BRIGHTNESS..."
     adb shell settings put system screen_brightness_mode 0
@@ -10,25 +7,22 @@ cleanup() {
     kill $(pgrep -x scrcpy) 2>/dev/null
     exit 0
 }
-
 trap cleanup SIGINT SIGTERM EXIT
-
 while true; do
     if adb get-state 1>/dev/null 2>&1; then
         if ! pgrep -x scrcpy > /dev/null; then
-            # Lưu lại brightness phòng trường hợp mới cắm vào
             ORIGINAL_BRIGHTNESS=$(adb shell dumpsys display | grep mLatestFloatBrightness | awk -F= '{print $2}' | tr -d ' ')
             adb shell settings put system screen_brightness_mode 0
             adb shell cmd display set-brightness 0.0
             scrcpy \
               --fullscreen \
-			  --video-buffer=0 \
-			  --audio-buffer=0 \
+              --video-buffer=0 \
+              --audio-buffer=0 \
               --video-bit-rate 16M \
-              --stay-awake &
+              --stay-awake \
+              --max-size 1920 &
         fi
     else
-        # Điện thoại ngắt kết nối, restore brightness
         if [ -n "$ORIGINAL_BRIGHTNESS" ]; then
             adb shell cmd display set-brightness "$ORIGINAL_BRIGHTNESS" 2>/dev/null
         fi
