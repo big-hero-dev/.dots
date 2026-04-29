@@ -47,13 +47,11 @@ layout {
     }
     default-column-width { proportion 0.5; }
 	focus-ring {
-        width 4
-	}
-
-	border {
-		off
+        width 2
 	}
 }
+
+prefer-no-csd
 
 window-rule {
     geometry-corner-radius 0
