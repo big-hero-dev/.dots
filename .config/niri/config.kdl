@@ -39,7 +39,7 @@ cursor {
 
 
 layout {
-    gaps 6
+    gaps 12
 	preset-column-widths {
 		proportion 0.33337 // 1/3
         proportion 0.5     // 1/2
@@ -47,15 +47,20 @@ layout {
     }
     default-column-width { proportion 0.5; }
 	focus-ring {
-		width 2
+        width 4
+	}
+
+	border {
+		off
 	}
 }
 
 window-rule {
-    geometry-corner-radius 6
+    geometry-corner-radius 0
     clip-to-geometry true
     draw-border-with-background false
 }
+
 
 window-rule {
     match app-id="firefox$" title="^Picture-in-Picture$"
