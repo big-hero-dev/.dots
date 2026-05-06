@@ -7,9 +7,9 @@ format = """
 add_newline = true
 
 [character]
-success_symbol = "[λ](bold 2) "
-error_symbol = "[×](bold 1) "
-vimcmd_symbol = "[N](bold 4) "
+success_symbol = "[λ](bold 2)"
+error_symbol = "[×](bold 1)"
+vimcmd_symbol = "[N](bold 4)"
 
 [directory]
 style = "bold 6"
