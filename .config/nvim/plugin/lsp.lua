@@ -91,7 +91,7 @@ vim.lsp.config("intelephense", {
 		intelephense = {
 			storagePath = vim.fn.stdpath("cache") .. "/intelephense",
 			files = {
-				maxSize = 1000000,
+				maxSize = 5000000,
 			},
 			diagnostics = { enable = true },
 			inlayHints = {

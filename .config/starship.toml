@@ -1,4 +1,5 @@
 command_timeout = 1000
+scan_timeout = 3000
 
 format = """
 [┌](bold 8)$directory$git_branch$git_status$golang$nodejs$rust$docker_context

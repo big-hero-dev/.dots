@@ -1,5 +1,13 @@
-require("mfd").setup({ accessibility_contrast = 5 })
-vim.cmd.colorscheme("mfd-paper")
+require("kanagawa").setup({
+	theme = "dragon",
+	transparent = true,
+	background = {
+		dark = "dragon",
+		light = "lotus",
+	},
+})
+
+vim.cmd.colorscheme("kanagawa")
 
 -- =========================================================
 -- Core keymaps
