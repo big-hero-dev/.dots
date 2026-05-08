@@ -73,26 +73,23 @@ local config = {
 				local diff = MiniStatusline.section_diff({ trunc_width = 75 })
 				local diagnostics = MiniStatusline.section_diagnostics({
 					trunc_width = 75,
-					signs = {
-						ERROR = " ",
-						WARN = " ",
-						HINT = "󰌵 ",
-						INFO = " ",
-					},
+					signs = { ERROR = " ", WARN = " ", HINT = "󰌵 ", INFO = " " },
 				})
 				local filename = shorten_path(vim.api.nvim_buf_get_name(0), 45)
 				local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
-				local location = "%p%%"
+				local location = "󰦨 %p%% "
 				local lsp = lsp_cache[vim.api.nvim_get_current_buf()] or ""
+
 				mode = mode:upper()
+
 				return MiniStatusline.combine_groups({
-					{ hl = mode_hl, strings = { mode } },
-					{ hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics, lsp } },
+					{ hl = mode_hl, strings = { "  " .. mode .. " " } },
+					{ hl = "MiniStatuslineDevinfo", strings = { git, diff, lsp, diagnostics } },
 					"%<",
-					{ hl = "MiniStatuslineFilename", strings = { filename } },
+					{ hl = "MiniStatuslineFilename", strings = { " " .. filename .. " " } },
 					"%=",
 					{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
-					{ hl = mode_hl, strings = { location } },
+					{ hl = mode_hl, strings = { " " .. location } },
 				})
 			end,
 		},
