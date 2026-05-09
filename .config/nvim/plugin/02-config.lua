@@ -1,6 +1,6 @@
 require("kanagawa").setup({
 	theme = "dragon",
-	transparent = true,
+	transparent = false,
 	background = {
 		dark = "dragon",
 		light = "lotus",
@@ -56,6 +56,17 @@ vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach" }, {
 	end,
 })
 
+local function make_sep_hl(mode_hl, bg_hl)
+	local hl_name = mode_hl .. "To" .. bg_hl
+	local fg_color = vim.api.nvim_get_hl(0, { name = mode_hl, link = false })
+	local bg_color = vim.api.nvim_get_hl(0, { name = bg_hl, link = false })
+	vim.api.nvim_set_hl(0, hl_name, {
+		fg = fg_color.bg,
+		bg = bg_color.bg,
+	})
+	return hl_name
+end
+
 local config = {
 	basics = {
 		options = { basic = false },
@@ -82,17 +93,25 @@ local config = {
 
 				mode = mode:upper()
 
+				local sep_right = ""
+				local sep_left = ""
+
+				local sep_hl = make_sep_hl(mode_hl, "MiniStatuslineDevinfo")
+
 				return MiniStatusline.combine_groups({
-					{ hl = mode_hl, strings = { "  " .. mode .. " " } },
+					{ hl = mode_hl, strings = { "  " .. mode .. " " } },
+					string.format("%%#%s#%s", sep_hl, sep_right),
 					{ hl = "MiniStatuslineDevinfo", strings = { git, diff, lsp, diagnostics } },
 					"%<",
-					{ hl = "MiniStatuslineFilename", strings = { " " .. filename .. " " } },
+					{ hl = "MiniStatuslineDevinfo", strings = { filename } },
 					"%=",
-					{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
-					{ hl = mode_hl, strings = { " " .. location } },
+					{ hl = "MiniStatuslineDevinfo", strings = { fileinfo } },
+					string.format("%%#%s#%s", sep_hl, sep_left),
+					{ hl = mode_hl, strings = { " " .. location .. " " } },
 				})
 			end,
 		},
+		set_vim_settings = true,
 	},
 	tabline = {},
 	files = { mappings = { go_in = "i", go_in_plug = "I" } },
