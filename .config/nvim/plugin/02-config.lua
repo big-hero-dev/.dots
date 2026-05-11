@@ -96,17 +96,34 @@ local config = {
 				local sep_right = ""
 				local sep_left = ""
 
-				local sep_hl = make_sep_hl(mode_hl, "MiniStatuslineDevinfo")
-
 				return MiniStatusline.combine_groups({
 					{ hl = mode_hl, strings = { "  " .. mode .. " " } },
-					string.format("%%#%s#%s", sep_hl, sep_right),
-					{ hl = "MiniStatuslineDevinfo", strings = { git, diff, lsp, diagnostics } },
+					string.format("%%#%s#%s", make_sep_hl(mode_hl, "MiniTablineModifiedCurrent"), sep_right),
+					{
+						hl = "MiniTablineModifiedCurrent",
+						strings = {
+							git,
+							diff,
+							lsp,
+							diagnostics,
+						},
+					},
 					"%<",
-					{ hl = "StatusLineNC", strings = { filename } },
+					{
+						hl = "MiniTablineModifiedCurrent",
+						strings = {
+							string.format("%%#%s#%s", "MiniStatuslineDevinfo", sep_right),
+							filename,
+						},
+					},
 					"%=",
-					{ hl = "StatusLineNC", strings = { fileinfo } },
-					string.format("%%#%s#%s", sep_hl, sep_left),
+					{
+						hl = "MiniStatuslineDevinfo",
+						strings = {
+							fileinfo,
+						},
+					},
+					string.format("%%#%s#%s", make_sep_hl(mode_hl, "MiniStatuslineDevinfo"), sep_left),
 					{ hl = mode_hl, strings = { " " .. location .. " " } },
 				})
 			end,
@@ -150,6 +167,7 @@ local config = {
 	},
 	bufremove = {},
 	jump2d = {},
+	map = {},
 }
 
 require("mini.notify").setup({
@@ -178,6 +196,7 @@ local order = {
 	"pick",
 	"files",
 	"jump2d",
+	"map",
 }
 
 for _, name in ipairs(order) do
@@ -282,3 +301,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 vim.keymap.set("n", "<Leader>z", "<cmd>ZenMode<cr>", { desc = "Toggle zen-mode" })
+vim.keymap.set("n", "<leader>m", function()
+	require("mini.map").toggle()
+end, { desc = "Toggle map" })
