@@ -1,6 +1,6 @@
 require("kanagawa").setup({
 	theme = "dragon",
-	transparent = false,
+	transparent = true,
 	background = {
 		dark = "dragon",
 		light = "lotus",
@@ -103,9 +103,9 @@ local config = {
 					string.format("%%#%s#%s", sep_hl, sep_right),
 					{ hl = "MiniStatuslineDevinfo", strings = { git, diff, lsp, diagnostics } },
 					"%<",
-					{ hl = "MiniStatuslineDevinfo", strings = { filename } },
+					{ hl = "StatusLineNC", strings = { filename } },
 					"%=",
-					{ hl = "MiniStatuslineDevinfo", strings = { fileinfo } },
+					{ hl = "StatusLineNC", strings = { fileinfo } },
 					string.format("%%#%s#%s", sep_hl, sep_left),
 					{ hl = mode_hl, strings = { " " .. location .. " " } },
 				})
