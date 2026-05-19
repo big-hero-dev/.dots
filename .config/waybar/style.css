@@ -87,3 +87,24 @@
   color: @fg;
   font-size: 16px;
 }
+
+#custom-music.playing {
+  color: @border;
+}
+
+#custom-music.paused {
+  color: @dim;
+}
+
+#custom-music.stopped {
+  color: @red;
+}
+
+tooltip {
+  font-family: "Inter";
+  font-size: 13px;
+  background: @fg;
+  border-radius: 6px;
+  color: @bg;
+  padding: 4px;
+}

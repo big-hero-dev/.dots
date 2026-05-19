@@ -43,11 +43,11 @@
 			"mode": "month",
 			"weeks-pos": "right",
 			"format": {
-				"months": "<span color='#d3c6aa'><b>{}</b></span>",
-				"days": "<span color='#e67e80'><b>{}</b></span>",
-				"weeks": "<span color='#83c092'><b>W{}</b></span>",
-				"weekdays": "<span color='#dbbc7f'><b>{}</b></span>",
-				"today": "<span color='#7fbbb3'><b><u>{}</u></b></span>"
+				"months": "<span color='#1d1d1f'><b>{}</b></span>",
+				"days": "<span color='#515154'><b>{}</b></span>",
+				"weeks": "<span color='#636366'><b>W{}</b></span>",
+				"weekdays": "<span color='#ff9500'><b>{}</b></span>",
+				"today": "<span color='#fe4c56'><b><u>{}</u></b></span>"
 			}
 		},
 		"action": {
@@ -113,7 +113,7 @@
 	},
 	"custom/launcher": {
 		"format": "󱄅",
-		"on-click": "fuzzel",
+		"on-click": "fuzzel --icon-theme=$(gsettings get org.gnome.desktop.interface icon-theme | tr -d \"'\")",
 		"tooltip": false
 	},
 	"custom/powermenu": {
