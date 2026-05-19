@@ -82,11 +82,6 @@
   color: @red;
 }
 
-/* Tray */
-#tray {
-  margin: 4px 0;
-}
-
 /* Music subtle */
 #custom-music {
   color: @fg;
