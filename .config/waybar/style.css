@@ -9,9 +9,9 @@
 
 /* Main bar */
 #waybar {
-  background: alpha(@bg, 0.65);
+  background: @bg;
   color: @fg;
-  border-radius: 0;
+  border-radius: 4px;
   border: 2px solid @border;
 }
 
@@ -89,7 +89,7 @@
 }
 
 #custom-music.playing {
-  color: @border;
+  color: @fg;
 }
 
 #custom-music.paused {
@@ -107,4 +107,5 @@ tooltip {
   border-radius: 6px;
   color: @bg;
   padding: 4px;
+  border: 2px solid @border;
 }
