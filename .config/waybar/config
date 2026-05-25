@@ -13,7 +13,7 @@
 	],
 	"modules-center": [
 		"clock",
-		"custom/music"
+		"image#album-art"
 	],
 	"modules-right": [
 		"battery",
@@ -133,14 +133,13 @@
 		"icon-size": 14,
 		"spacing": 16
 	},
-	"custom/music": {
-		"format": "{}",
-		"return-type": "json",
-		"exec": "~/.config/waybar/scripts/music.sh",
+	"image#album-art": {
+		"exec": "~/.config/waybar/scripts/media_art.sh",
+		"size": 32,
+		"interval": 0.5,
 		"on-click": "playerctl play-pause",
-		"on-click-right": "playerctl next",
 		"on-scroll-up": "playerctl previous",
 		"on-scroll-down": "playerctl next",
-		"escape": true
+		"tooltip": true
 	}
 }
