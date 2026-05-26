@@ -4,7 +4,7 @@ local opt = vim.opt
 vim.g.editorconfig = false
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
-vim.g.border = "single"
+vim.g.border = "rounded"
 
 opt.termguicolors = true
 opt.clipboard = "unnamedplus"
