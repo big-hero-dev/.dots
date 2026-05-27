@@ -2,47 +2,47 @@
 
 /* Base */
 * {
-  font-family: "Iosevka Nerd Font", sans-serif;
-  font-size: 12px;
-  border-radius: 4px;
+	font-family: "Iosevka Nerd Font", sans-serif;
+	font-size: 12px;
+	border-radius: 4px;
 }
 
 /* Main bar */
 #waybar {
-  background: alpha(@bg, 0.65);
-  color: @fg;
-  border-radius: 4px;
-  border: 2px solid @border;
+	background: alpha(@bg, 0.65);
+	color: @fg;
+	border-radius: 4px;
+	border: 4px solid @border;
 }
 
-#waybar > * {
-  min-height: 0;
+#waybar>* {
+	min-height: 0;
 }
 
 /* Modules spacing */
-#waybar > box {
-  padding: 8px 0;
+#waybar>box {
+	padding: 8px 0;
 }
 
 /* Workspace */
 #workspaces button {
-  padding: 4px 0;
-  color: @dim;
-  background: transparent;
+	padding: 4px 0;
+	color: @dim;
+	background: transparent;
 }
 
 #workspaces button.active {
-  color: @fg;
+	color: @fg;
 }
 
 #workspaces button.urgent {
-  color: @red;
+	color: @red;
 }
 
 /* Clock */
 #clock {
-  font-weight: bold;
-  color: @fg;
+	font-weight: bold;
+	color: @fg;
 }
 
 /* Numbers > icons for clarity */
@@ -53,77 +53,77 @@
 #custom-launcher,
 #clock,
 #temperature {
-  padding: 4px 0;
+	padding: 4px 0;
 }
 
 /* Battery states */
 #battery.warning {
-  color: @fg;
+	color: @fg;
 }
 
 #battery.critical {
-  color: @red;
+	color: @red;
 }
 
 /* Updates */
 #custom-updates {
-  color: @fg;
-  font-size: 18px;
+	color: @fg;
+	font-size: 18px;
 }
 
 /* Launcher + power */
 #custom-launcher {
-  font-size: 16px;
-  color: @fg;
+	font-size: 16px;
+	color: @fg;
 }
 
 #custom-powermenu {
-  font-size: 16px;
-  color: @red;
+	font-size: 16px;
+	color: @red;
 }
 
 /* Music subtle */
 #custom-music {
-  color: @fg;
-  font-size: 16px;
+	color: @fg;
+	font-size: 16px;
 }
 
 #custom-music.playing {
-  color: @fg;
+	color: @fg;
 }
 
 #custom-music.paused {
-  color: @dim;
+	color: @dim;
 }
 
 #custom-music.stopped {
-  color: @red;
+	color: @red;
 }
 
 tooltip {
-  font-family: "Inter";
-  font-size: 13px;
-  background: @fg;
-  border-radius: 6px;
-  color: @bg;
-  padding: 4px;
-  border: 2px solid @border;
+	font-family: "Inter";
+	font-size: 13px;
+	background: @fg;
+	border-radius: 6px;
+	color: @bg;
+	padding: 4px;
+	border: 2px solid @border;
 }
 
 #image {
-  border-radius: 50%;
-  margin: 4px 6px;
-  border: 2px solid alpha(@border, 0.4);
-  transition: opacity 0.3s;
+	border-radius: 50%;
+	margin: 4px 6px;
+	border: 2px solid alpha(@border, 0.4);
+	transition: opacity 0.3s;
 }
 
 #image.paused {
-  opacity: 0.5;
-  border-color: alpha(@border, 0.2);
+	opacity: 0.5;
+	border-color: alpha(@border, 0.2);
 }
 
 #image.empty {
-  min-width: 0;
-  margin: 0;
-  border: none;
+	min-width: 0;
+	margin: 0;
+	border: none;
 }

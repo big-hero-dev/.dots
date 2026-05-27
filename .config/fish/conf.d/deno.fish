@@ -1,1 +1,0 @@
-source "/home/xxx/.deno/env.fish"
