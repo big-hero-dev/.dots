@@ -3,7 +3,7 @@
 /* Base */
 * {
   font-family: "Iosevka Nerd Font", sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   border-radius: 4px;
 }
 
@@ -11,7 +11,7 @@
 #waybar {
   background: alpha(@bg, 0.65);
   color: @fg;
-  border-radius: 4px;
+  border-radius: 18px;
   border: 2px solid @border;
 }
 
