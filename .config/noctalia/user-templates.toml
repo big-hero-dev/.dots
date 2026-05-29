@@ -1,0 +1,16 @@
+[config]
+
+[templates.niri]
+input_path = "~/.config/noctalia/templates/niri.kdl"
+output_path = "~/.config/niri/colors.kdl"
+post_hook = "niri msg action reconfigure"
+
+[templates.kitty]
+input_path = "~/.config/noctalia/templates/kitty-colors.conf"
+output_path = '~/.config/kitty/colors.conf'
+post_hook = "kill -SIGUSR1 $(pgrep -a kitty | awk '{print $1}')"
+
+[templates.tmux]
+input_path = "~/.config/noctalia/templates/tmux.conf"
+output_path = "~/.config/tmux/conf/status.conf"
+post_hook = "tmux source-file ~/.config/tmux/tmux.conf"
