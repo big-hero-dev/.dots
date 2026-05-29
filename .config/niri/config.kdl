@@ -349,3 +349,6 @@ spawn-at-startup "swayidle" "-w" \
     "resume" "qs -c noctalia-shell ipc call monitors on"
 spawn-at-startup "gamedock"
 spawn-at-startup "qs" "-c" "noctalia-shell"
+
+include "./noctalia.kdl"
+
