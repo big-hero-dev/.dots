@@ -1,25 +1,28 @@
+# dotfiles
+
 - **Window Manager** :bento: [Niri](https://github.com/YaLTeR/niri) (Scrollable Tiling)
-- **Status Bar** :chocolate_bar: Waybar (Niri module)
-- **Application Launcher** :rocket: Fuzzel
-- **Notification Daemon** :loudspeaker: Mako
-- **Shell** :fish: [Fish](https://fishshell.com/)
+- **Shell** :shell: [Noctalia Shell](https://noctalia.dev) (Bar, Launcher, Notifications, Wallpaper)
+- **Application Launcher** :rocket: Noctalia Launcher (built-in)
+- **Notification Daemon** :loudspeaker: Noctalia Notifications (built-in)
+- **Terminal Shell** :fish: [Fish](https://fishshell.com/)
 - **File Manager** :duck: [Yazi](https://yazi-rs.github.io/docs/)
 - **Editor** :fire: [Neovim](https://github.com/neovim/neovim) (>= 0.11)
 
 ---
-_Warning :rotating_light: Don't blindly use my settings unless you know what that entails. Use at your own risk!_
 
+_Warning :rotating_light: Don't blindly use my settings unless you know what that entails. Use at your own risk!_
 _Note :wrench: I use colemak-dh keyboard layout_
 
 ### Required
+
 - `nodejs`, `npm`
 - `rustup default nightly`
 - `xwayland-satellite` (For X11 apps support in Niri)
+- [Quickshell](https://quickshell.outfoxxed.me/) (required by Noctalia Shell)
 
 ```fish
 fisher install jorgebucaran/nvm.fish
 fisher install rstacruz/fish-npm-global
-
 ```
 
 ### Shell setup
@@ -52,9 +55,6 @@ fisher install rstacruz/fish-npm-global
 * `swappy`: Screenshot editor.
 * `wl-clipboard`: Wayland clipboard tool.
 * `glow`: Render markdown on the CLI.
-* `paleta`: Color palettes.
-* `matugen`
-* `waypaper`
 
 ### Input method
 
@@ -74,12 +74,10 @@ fisher install rstacruz/fish-npm-global
 niri xwayland-satellite
 
 # Desktop Components
-waybar foot mako fuzzel
-
-# Wallpaper & Lock (Wayland native)
-awww hyprlock hypridle
+noctalia-shell python-pywalfox
 
 # Utilities
 grim slurp wl-clipboard swappy imv hyprpicker
 xdg-desktop-portal-gtk xdg-desktop-portal
 greetd greetd-tuigreet swaylock-effects
+```

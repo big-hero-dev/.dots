@@ -1,15 +1,13 @@
 include "colors.kdl"
 
 output "HDMI-A-1" {
-    // Properties for an external monitor
     mode "1920x1080@100.001"
     scale 1.0
     position x=0 y=0
-	focus-at-startup
+    focus-at-startup
 }
 
 output "eDP-1" {
-    // off
     mode "1920x1080"
     scale 1.2
     position x=0 y=1080
@@ -23,10 +21,10 @@ input {
         }
     }
 
-	touchpad {
-		tap
-		natural-scroll
-	}
+    touchpad {
+        tap
+        natural-scroll
+    }
 }
 
 hotkey-overlay {
@@ -37,18 +35,17 @@ cursor {
     hide-when-typing true
 }
 
-
 layout {
     gaps 12
-	preset-column-widths {
-		proportion 0.33337 // 1/3
-        proportion 0.5     // 1/2
-        proportion 0.66667 // 2/3
+    preset-column-widths {
+        proportion 0.33337
+        proportion 0.5
+        proportion 0.66667
     }
     default-column-width { proportion 0.5; }
-	focus-ring {
+    focus-ring {
         width 4
-	}
+    }
 }
 
 prefer-no-csd
@@ -59,34 +56,36 @@ window-rule {
     draw-border-with-background false
 }
 
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
+
+// Noctalia: blurred overview wallpaper
+layer-rule {
+    match namespace="^noctalia-overview*"
+    place-within-backdrop true
+}
 
 window-rule {
     match app-id="firefox$" title="^Picture-in-Picture$"
     open-floating true
     default-column-width { fixed 480; }
     default-window-height { fixed 270; }
-	default-floating-position x=10 y=10 relative-to="bottom-right"
-	shadow {
-		on
-	}
-}
-
-layer-rule {
-    match namespace="waybar"
-	match at-startup=true
-    opacity 0.9
-    geometry-corner-radius 6
-	block-out-from "screencast"
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+    shadow {
+        on
+    }
 }
 
 layer-rule {
     match namespace="^launcher$"
     opacity 0.9
-	shadow {
+    shadow {
         on
     }
-	geometry-corner-radius 8
+    geometry-corner-radius 8
 }
+
 animations {
     window-open {
         duration-ms 650
@@ -113,8 +112,6 @@ animations {
                 if (dist.x > cell_progress * 0.5 || dist.y > cell_progress * 0.5)
                     return vec4(0.0);
 
-                // Blend sample point from cell centre toward exact pixel as cell opens,
-                // so the final frame matches the live window with no jump.
                 vec2 centre     = (cell + 0.5) / grid;
                 vec2 sample_geo = mix(centre, coords_geo.xy, cell_progress);
                 vec3 coords_tex = niri_geo_to_tex * vec3(clamp(sample_geo, 0.0, 1.0), 1.0);
@@ -151,8 +148,6 @@ animations {
                 if (dist.x > scale * 0.5 || dist.y > scale * 0.5)
                     return vec4(0.0);
 
-                // Start sampling the exact pixel so frame 0 matches the live window,
-                // then shift toward cell centre as the cell shrinks.
                 vec2 centre     = (cell + 0.5) / grid;
                 vec2 sample_geo = mix(coords_geo.xy, centre, cell_progress);
                 vec3 coords_tex = niri_geo_to_tex * vec3(clamp(sample_geo, 0.0, 1.0), 1.0);
@@ -164,27 +159,31 @@ animations {
     }
 }
 
-
 binds {
     // Terminal & Launcher
-	Mod+Return {
-		spawn "terminal";
-	}
-    Mod+Space { spawn "sh" "-c" "fuzzel --icon-theme=$(gsettings get org.gnome.desktop.interface icon-theme | tr -d \"'\")"; }
-	Mod+B     { spawn "firefox"; }
+    Mod+Return { spawn "terminal"; }
 
-    // Kill & Reload
+	// Noctalia IPC
+	Mod+Space  { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+	Mod+Ctrl+S { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
+	Mod+Ctrl+Comma { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
+	Mod+L { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
+
+
+    Mod+B      { spawn "firefox"; }
+
+    // Kill
     Mod+Q { close-window; }
 
     // Focus (Colemak-DH: HNEI)
-    Mod+H { focus-column-left; }
-    Mod+N { focus-window-or-workspace-down; }
-    Mod+E { focus-window-or-workspace-up; }
-    Mod+I { focus-column-right; }
-	Mod+Up { focus-monitor-up; }
-	Mod+Down { focus-monitor-down; }
-	Mod+Right { focus-monitor-right; }
-	Mod+Left { focus-monitor-left; }
+    Mod+H     { focus-column-left; }
+    Mod+N     { focus-window-or-workspace-down; }
+    Mod+E     { focus-window-or-workspace-up; }
+    Mod+I     { focus-column-right; }
+    Mod+Up    { focus-monitor-up; }
+    Mod+Down  { focus-monitor-down; }
+    Mod+Right { focus-monitor-right; }
+    Mod+Left  { focus-monitor-left; }
 
     // Move (Colemak-DH: HNEI)
     Mod+Shift+H { move-column-left; }
@@ -193,8 +192,8 @@ binds {
     Mod+Shift+I { move-column-right; }
 
     // Layout / Sizing
-    Mod+V { maximize-column; }
-    Mod+S { switch-preset-column-width; }
+    Mod+V       { maximize-column; }
+    Mod+S       { switch-preset-column-width; }
     Mod+Shift+F { toggle-window-floating; }
 
     // Workspaces
@@ -218,54 +217,46 @@ binds {
     Mod+Shift+8 { move-column-to-workspace 8; }
     Mod+Shift+9 { move-column-to-workspace 9; }
 
-	Mod+Ctrl+N { move-column-to-workspace-down; }
-	Mod+Ctrl+E { move-column-to-workspace-up; }
+    Mod+Ctrl+N { move-column-to-workspace-down; }
+    Mod+Ctrl+E { move-column-to-workspace-up; }
 
-    Mod+Tab { focus-window-previous; }
-	Mod+Shift+Tab { switch-focus-between-floating-and-tiling; }
+    Mod+Tab       { focus-window-previous; }
+    Mod+Shift+Tab { switch-focus-between-floating-and-tiling; }
 
     // Media & System
-    XF86AudioRaiseVolume  { spawn "volume" "--inc"; }
-    XF86AudioLowerVolume  { spawn "volume" "--dec"; }
-    XF86AudioMute         { spawn "volume" "--toggle"; }
-    Mod+Shift+Up          { spawn "volume" "--inc"; }
-    Mod+Shift+Down        { spawn "volume" "--dec"; }
-    Mod+Shift+M           { spawn "volume" "--toggle"; }
 
-    XF86MonBrightnessUp   { spawn "brightness" "--inc"; }
-    XF86MonBrightnessDown { spawn "brightness" "--dec"; }
+    Print       { spawn "screenshot"; }
+    Shift+Print { spawn "screenshot" "edit"; }
+    Mod+K       { spawn "hyprpicker" "-aq"; }
 
-    Print                 { spawn "screenshot"; }
-    Shift+Print           { spawn "screenshot" "edit"; }
-    Mod+Shift+W           { spawn "waypaper"; }
-    Mod+K                 { spawn "hyprpicker" "-aq"; }
-    Mod+P                 { spawn "power-menu"; }
+    // Consume / Expel windows
+    Mod+Comma  { consume-window-into-column; }
+    Mod+Period { expel-window-from-column; }
 
-    // Notification Control (Mako)
-    Mod+Shift+D           { spawn "makoctl" "dismiss"; }
-    Mod+D                 { spawn "makoctl" "dismiss" "--all"; }
+    // Center column
+    Mod+C { center-column; }
 
-    // Waybar reload
-    Mod+Shift+B           { spawn "pkill" "-SIGUSR2" "waybar"; }
-	// Toogle waybar
-    Mod+Shift+T			  { spawn "killall" "-SIGUSR1" "waybar"; }
+    // Fullscreen
+    Mod+F { fullscreen-window; }
 
-	// Consume / Expel windows
-	Mod+Comma { consume-window-into-column; }
-	Mod+Period { expel-window-from-column; }
+    // Exit Niri
+    Mod+Shift+Q { quit; }
 
-	// Center column
-	Mod+C { center-column;  }
+    Mod+WheelScrollDown { set-column-width "-10%"; }
+    Mod+WheelScrollUp   { set-column-width "+10%"; }
 
-	// FullScreen
-	Mod+F { fullscreen-window; }
+	// Media & System
+	XF86AudioRaiseVolume  { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
+	XF86AudioLowerVolume  { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
+	XF86AudioMute         { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }
+	Mod+Shift+Up          { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
+	Mod+Shift+Down        { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
+	Mod+Shift+M           { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }
+	XF86MonBrightnessUp   { spawn-sh "qs -c noctalia-shell ipc call brightness increase"; }
+	XF86MonBrightnessDown { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
 
-	// Exit Niri
-	Mod+Shift+Q { quit; }
-
-	Mod+WheelScrollDown { set-column-width "-10%"; }
-    Mod+WheelScrollUp { set-column-width "+10%"; }
-
+	Mod+Shift+D { spawn-sh "qs -c noctalia-shell ipc call notifications dismissOldest"; }
+	Mod+D       { spawn-sh "qs -c noctalia-shell ipc call notifications dismissAll"; }
 }
 
 environment {
@@ -275,15 +266,15 @@ environment {
     XDG_CURRENT_DESKTOP "niri"
     QT_QPA_PLATFORM "wayland"
     MOZ_ENABLE_WAYLAND "1"
-	GTK_USE_PORTAL "1"
+    GTK_USE_PORTAL "1"
 }
 
 spawn-at-startup "fcitx5" "-d"
-spawn-at-startup "mako"
 spawn-at-startup "udiskie"
 spawn-at-startup "cava"
-spawn-at-startup "swayidle" "-w" "timeout" "60" "niri msg action do-screen-transition; niri msg action set-cursor-visibility hide" "resume" "niri msg action set-cursor-visibility show"
+spawn-at-startup "swayidle" "-w" \
+  "timeout" "300" "qs -c noctalia-shell ipc call lockScreen lock" \
+  "resume" "qs -c noctalia-shell ipc call monitors on"
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "NIRI_SOCKET"
-spawn-at-startup "awww-daemon"
 spawn-at-startup "gamedock"
-spawn-at-startup "waybar"
+spawn-at-startup "qs" "-c" "noctalia-shell"
