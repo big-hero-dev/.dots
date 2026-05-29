@@ -80,4 +80,5 @@ noctalia-shell python-pywalfox
 grim slurp wl-clipboard swappy imv hyprpicker
 xdg-desktop-portal-gtk xdg-desktop-portal
 greetd greetd-tuigreet swaylock-effects
+plasma-browser-integration
 ```
