@@ -1,0 +1,8 @@
+{
+  "updateIntervalMinutes": 30,
+  "updateTerminalCommand": "kitty -e",
+  "currentIconName": "world-download",
+  "hideOnZero": true,
+  "customCmdGetNumUpdates": "",
+  "customCmdDoSystemUpdate": "paru -Syu"
+}

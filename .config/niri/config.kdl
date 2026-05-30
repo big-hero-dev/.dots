@@ -1,4 +1,3 @@
-include "colors.kdl"
 
 // ============================================================
 // OUTPUTS
@@ -351,4 +350,3 @@ spawn-at-startup "gamedock"
 spawn-at-startup "qs" "-c" "noctalia-shell"
 
 include "./noctalia.kdl"
-
