@@ -67,14 +67,13 @@ fisher install rstacruz/fish-npm-global
 * Pomotroid
 * Grub-customizer
 
-### NIRI STACK (Optimized)
+# NIRI STACK (Optimized)
 
-```bash
 # Core & Layout
 niri xwayland-satellite
 
 # Desktop Components
-noctalia-shell python-pywalfox
+noctalia-shell
 
 # Utilities
 grim slurp wl-clipboard swappy imv hyprpicker
@@ -82,3 +81,7 @@ xdg-desktop-portal-gtk xdg-desktop-portal
 greetd greetd-tuigreet swaylock-effects
 plasma-browser-integration
 ```
+
+### Theming
+* `pywal` (wal): Color scheme generator
+* `pywalfox` (pipx): Apply pywal colors to Firefox
