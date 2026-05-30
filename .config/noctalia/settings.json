@@ -673,6 +673,10 @@
             {
                 "enabled": true,
                 "id": "pywalfox"
+            },
+            {
+                "enabled": true,
+                "id": "alacritty"
             }
         ],
         "enableUserTheming": true
