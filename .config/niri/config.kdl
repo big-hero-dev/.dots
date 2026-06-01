@@ -190,13 +190,12 @@ binds {
     // ----------------------------------------------------------
     Mod+Return { spawn "kitty"; }
     Mod+B      { spawn "firefox"; }
-    Mod+K      { spawn "hyprpicker" "-aq"; }
 
     // ----------------------------------------------------------
     // Noctalia — Core
     // ----------------------------------------------------------
     Mod+Space      { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
-    Mod+Ctrl+S     { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
+    Mod+Ctrl+C     { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
     Mod+Ctrl+Comma { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
 
     // ----------------------------------------------------------
@@ -246,10 +245,9 @@ binds {
     XF86AudioPrev { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
 
     // ----------------------------------------------------------
-    // Screenshot
+    // Screen Toolkit
     // ----------------------------------------------------------
-    Print       { spawn "screenshot"; }
-    Shift+Print { spawn "screenshot" "edit"; }
+	Mod+Print {spawn-sh "qs -c noctalia-shell ipc call plugin:screen-toolkit toggle";}
 
     // ----------------------------------------------------------
     // Window Management
@@ -343,9 +341,6 @@ spawn-at-startup "fcitx5" "-d"
 spawn-at-startup "udiskie"
 spawn-at-startup "cava"
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "NIRI_SOCKET"
-spawn-at-startup "swayidle" "-w" \
-    "timeout" "300" "qs -c noctalia-shell ipc call lockScreen lock" \
-    "resume" "qs -c noctalia-shell ipc call monitors on"
 spawn-at-startup "gamedock"
 spawn-at-startup "qs" "-c" "noctalia-shell"
 

@@ -76,10 +76,9 @@ niri xwayland-satellite
 noctalia-shell
 
 # Utilities
-grim slurp wl-clipboard swappy imv hyprpicker
+grim slurp wl-clipboard swappy imv 
 xdg-desktop-portal-gtk xdg-desktop-portal
-greetd greetd-tuigreet swaylock-effects
-plasma-browser-integration
+greetd greetd-tuigreet plasma-browser-integration
 ```
 
 ### Theming
