@@ -245,10 +245,11 @@ binds {
     XF86AudioPrev { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
 
     // ----------------------------------------------------------
-    // Screen Toolkit
+    // Tool
     // ----------------------------------------------------------
 	Mod+Print {spawn-sh "qs -c noctalia-shell ipc call plugin:screen-toolkit toggle";}
 	Print {screenshot;}
+	Mod+Ctrl+S {spawn-sh "qs -c noctalia-shell ipc call plugin:sticky-notes toggle";}
 
     // ----------------------------------------------------------
     // Window Management

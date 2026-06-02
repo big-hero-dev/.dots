@@ -2,7 +2,16 @@
   "colorHistory": [
     "#E6E9FA"
   ],
-  "paletteColors": "",
+  "paletteColors": [
+    "#5E6135",
+    "#5F6059",
+    "#924B00",
+    "#A16F57",
+    "#8D8471",
+    "#DBBEAA",
+    "#E5D9D0",
+    "#F5F4F3"
+  ],
   "installedLangs": [
     "afr"
   ],
