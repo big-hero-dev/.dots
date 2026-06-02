@@ -248,6 +248,7 @@ binds {
     // Screen Toolkit
     // ----------------------------------------------------------
 	Mod+Print {spawn-sh "qs -c noctalia-shell ipc call plugin:screen-toolkit toggle";}
+	Print {screenshot;}
 
     // ----------------------------------------------------------
     // Window Management
