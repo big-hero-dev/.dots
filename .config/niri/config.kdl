@@ -48,6 +48,7 @@ layout {
     focus-ring {
         width 4
     }
+	background-color "transparent"
 }
 
 // ============================================================
@@ -97,6 +98,18 @@ window-rule {
 layer-rule {
     match namespace="^noctalia-overview*"
     place-within-backdrop true
+}
+
+layer-rule {
+  match namespace="^noctalia-wallpaper*"
+  place-within-backdrop true
+}
+
+
+overview {
+  workspace-shadow {
+    off
+  }
 }
 
 layer-rule {
