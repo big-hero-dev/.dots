@@ -143,6 +143,9 @@
                     "usePadding": false
                 },
                 {
+                    "id": "plugin:noctalia-calculator"
+                },
+                {
                     "colorizeIcons": false,
                     "hideMode": "hidden",
                     "id": "ActiveWindow",
@@ -180,6 +183,7 @@
                     "hidePassive": false,
                     "id": "Tray",
                     "pinned": [
+                        "YouTube Music: Alone Again - Asking Alexandria"
                     ]
                 },
                 {
@@ -233,9 +237,6 @@
                         "videoPath": ""
                     },
                     "id": "plugin:screen-toolkit"
-                },
-                {
-                    "id": "plugin:sticky-notes"
                 },
                 {
                     "colorizeDistroLogo": false,

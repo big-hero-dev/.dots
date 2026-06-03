@@ -7,11 +7,11 @@
         }
     ],
     "states": {
-        "screen-toolkit": {
+        "noctalia-calculator": {
             "enabled": true,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
-        "sticky-notes": {
+        "screen-toolkit": {
             "enabled": true,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         }
