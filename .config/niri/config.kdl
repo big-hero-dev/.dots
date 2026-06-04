@@ -263,12 +263,14 @@ binds {
 	Mod+Print {spawn-sh "qs -c noctalia-shell ipc call plugin:screen-toolkit toggle";}
 	Print {screenshot;}
 	Mod+Ctrl+S {spawn-sh "qs -c noctalia-shell ipc call plugin:sticky-notes toggle";}
+	Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "plugin:clipboard" "toggle"; }
+    Mod+Shift+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "plugin:clipboard" "wipe"; }
 
     // ----------------------------------------------------------
     // Window Management
     // ----------------------------------------------------------
     Mod+Q       { close-window; }
-    Mod+V       { maximize-column; }
+    Mod+M       { maximize-column; }
     Mod+S       { switch-preset-column-width; }
     Mod+F       { fullscreen-window; }
     Mod+Shift+F { toggle-window-floating; }
@@ -357,6 +359,7 @@ spawn-at-startup "udiskie"
 spawn-at-startup "cava"
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "NIRI_SOCKET"
 spawn-at-startup "gamedock"
-spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "qs" "-d" "-c" "noctalia-shell"
+spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 
 include "./noctalia.kdl"

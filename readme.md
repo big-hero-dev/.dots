@@ -55,6 +55,7 @@ fisher install rstacruz/fish-npm-global
 * `swappy`: Screenshot editor.
 * `wl-clipboard`: Wayland clipboard tool.
 * `glow`: Render markdown on the CLI.
+* `cliphist`: Manager clipboard history.
 
 ### Input method
 

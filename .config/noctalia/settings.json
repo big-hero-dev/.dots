@@ -143,6 +143,10 @@
                     "usePadding": false
                 },
                 {
+                    "defaultSettings": {
+                        "precision": 8,
+                        "showBarValue": true
+                    },
                     "id": "plugin:noctalia-calculator"
                 },
                 {
@@ -247,6 +251,14 @@
                     "icon": "noctalia",
                     "id": "ControlCenter",
                     "useDistroLogo": false
+                },
+                {
+                    "defaultSettings": {
+                        "density": "comfortable",
+                        "maxHistorySize": 100,
+                        "showImagePreviews": true
+                    },
+                    "id": "plugin:clipboard"
                 }
             ]
         }
