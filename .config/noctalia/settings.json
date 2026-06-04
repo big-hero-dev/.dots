@@ -404,7 +404,7 @@
         "animationDisabled": false,
         "animationSpeed": 1,
         "autoStartAuth": false,
-        "avatarImage": "",
+        "avatarImage": "/home/xxx/.face",
         "boxRadiusRatio": 1,
         "clockFormat": "hh\\nmm",
         "clockStyle": "custom",
