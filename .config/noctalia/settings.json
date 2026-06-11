@@ -259,6 +259,9 @@
                         "showImagePreviews": true
                     },
                     "id": "plugin:clipboard"
+                },
+                {
+                    "id": "plugin:pomodoro"
                 }
             ]
         }
