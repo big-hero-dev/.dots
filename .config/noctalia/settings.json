@@ -280,11 +280,11 @@
     },
     "colorSchemes": {
         "darkMode": false,
-        "generationMethod": "content",
+        "generationMethod": "muted",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Kanagawa",
+        "predefinedScheme": "Everforest",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": true
@@ -687,6 +687,14 @@
             {
                 "enabled": true,
                 "id": "alacritty"
+            },
+            {
+                "enabled": true,
+                "id": "yazi"
+            },
+            {
+                "enabled": true,
+                "id": "cava"
             }
         ],
         "enableUserTheming": true

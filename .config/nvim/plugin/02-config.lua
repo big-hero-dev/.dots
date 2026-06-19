@@ -1,13 +1,5 @@
-require("kanagawa").setup({
-	theme = "dragon",
-	transparent = true,
-	background = {
-		dark = "dragon",
-		light = "lotus",
-	},
-})
-
-vim.cmd.colorscheme("kanagawa")
+vim.g.gruvbox_material_background = "medium"
+vim.cmd.colorscheme("gruvbox-material")
 
 -- =========================================================
 -- Core keymaps
