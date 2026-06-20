@@ -287,7 +287,7 @@
         "predefinedScheme": "Everforest",
         "schedulingMode": "off",
         "syncGsettings": true,
-        "useWallpaperColors": true
+        "useWallpaperColors": false
     },
     "controlCenter": {
         "cards": [
@@ -697,7 +697,7 @@
                 "id": "cava"
             }
         ],
-        "enableUserTheming": true
+        "enableUserTheming": false
     },
     "ui": {
         "boxBorderEnabled": false,

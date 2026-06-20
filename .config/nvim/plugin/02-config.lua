@@ -1,5 +1,4 @@
-vim.g.gruvbox_material_background = "medium"
-vim.cmd.colorscheme("gruvbox-material")
+vim.cmd.colorscheme("everforest")
 
 -- =========================================================
 -- Core keymaps
@@ -90,21 +89,19 @@ local config = {
 
 				return MiniStatusline.combine_groups({
 					{ hl = mode_hl, strings = { "  " .. mode .. " " } },
-					string.format("%%#%s#%s", make_sep_hl(mode_hl, "MiniTablineModifiedCurrent"), sep_right),
+					string.format("%%#%s#%s", make_sep_hl(mode_hl, "MiniStatuslineDevinfo"), sep_right),
 					{
-						hl = "MiniTablineModifiedCurrent",
+						hl = "MiniStatuslineDevinfo",
 						strings = {
+							diagnostics,
 							git,
 							diff,
-							lsp,
-							diagnostics,
 						},
 					},
 					"%<",
 					{
-						hl = "MiniTablineModifiedCurrent",
+						hl = "MiniStatuslineDevinfo",
 						strings = {
-							string.format("%%#%s#%s", "MiniStatuslineDevinfo", sep_right),
 							filename,
 						},
 					},
@@ -115,7 +112,14 @@ local config = {
 							fileinfo,
 						},
 					},
-					string.format("%%#%s#%s", make_sep_hl(mode_hl, "MiniStatuslineDevinfo"), sep_left),
+					string.format("%%#%s#%s", make_sep_hl("MiniStatuslineDevinfo", "MiniHipatternsHack"), sep_right),
+					{
+						hl = "MiniHipatternsHack",
+						strings = {
+							lsp,
+						},
+					},
+					string.format("%%#%s#%s", make_sep_hl(mode_hl, "MiniHipatternsHack"), sep_left),
 					{ hl = mode_hl, strings = { " " .. location .. " " } },
 				})
 			end,
