@@ -65,8 +65,6 @@ fisher install rstacruz/fish-npm-global
 ### App
 
 * WebCatalog Desktop
-* Pomotroid
-* Grub-customizer
 
 # NIRI STACK (Optimized)
 
@@ -80,6 +78,7 @@ noctalia-shell
 grim slurp wl-clipboard swappy imv 
 xdg-desktop-portal-gtk xdg-desktop-portal
 greetd greetd-tuigreet plasma-browser-integration
+kanshi
 ```
 
 ### Theming

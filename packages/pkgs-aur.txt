@@ -1,4 +1,0 @@
-pomotroid
-webcatalog
-grub-customizer
-paleta

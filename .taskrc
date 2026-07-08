@@ -1,4 +1,0 @@
-data.location=~/tasks
-verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait
-include ~/task-theme.conf
-

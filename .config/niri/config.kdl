@@ -11,10 +11,7 @@ output "HDMI-A-1" {
 }
 
 output "eDP-1" {
-    mode "1920x1080"
-    scale 1.2
-    position x=0 y=1080
-    variable-refresh-rate
+	off
 }
 
 // ============================================================
@@ -355,7 +352,7 @@ spawn-at-startup "fcitx5" "-d"
 spawn-at-startup "udiskie"
 spawn-at-startup "cava"
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "NIRI_SOCKET"
-spawn-at-startup "gamedock"
+spawn-at-startup "kanshi"
 spawn-at-startup "qs" "-d" "-c" "noctalia-shell"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 

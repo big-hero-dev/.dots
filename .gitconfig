@@ -50,6 +50,8 @@
 	dot = "!git --git-dir=$HOME/.dots --work-tree=$HOME"
 	# Clean up merged local branches to keep things tidy
 	bclean = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
+	# Edit readme
+	readme = "!nvim $HOME/readme.md"
 [difftool]
 	prompt = false
 [diff]
