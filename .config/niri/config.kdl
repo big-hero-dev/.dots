@@ -191,6 +191,8 @@ binds {
     Mod+Space      { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+Ctrl+C     { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
     Mod+Ctrl+Comma { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
+	Mod+Ctrl+P     { spawn-sh "qs ipc -c noctalia-shell --any-display call sessionMenu toggle"; }
+	Mod+Shift+R { spawn "kanshictl" "reload"; }
 
     // ----------------------------------------------------------
     // Noctalia — Interface
@@ -212,8 +214,7 @@ binds {
     // Noctalia — Security
     // ----------------------------------------------------------
     Mod+L        { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
-    Mod+Ctrl+I   { spawn-sh "qs -c noctalia-shell ipc call idleInhibitor toggle"; }
-
+	Mod+Ctrl+I { spawn "kashi" "toggle"; }
     // ----------------------------------------------------------
     // Volume
     // ----------------------------------------------------------
