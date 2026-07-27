@@ -1,3 +1,9 @@
 **/nvim/lazy-lock.json
 **/tmux/plugins/
 **/.owm-key
+.cache/
+.local/share/Trash/
+Downloads/
+*/node_modules/
+.npm/
+.cargo/
