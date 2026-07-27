@@ -1,28 +1,27 @@
 # dotfiles
 
-- **Window Manager** :bento: [Niri](https://github.com/YaLTeR/niri) (Scrollable Tiling)
-- **Shell** :shell: [Noctalia Shell](https://noctalia.dev) (Bar, Launcher, Notifications, Wallpaper)
-- **Application Launcher** :rocket: Noctalia Launcher (built-in)
-- **Notification Daemon** :loudspeaker: Noctalia Notifications (built-in)
-- **Terminal Shell** :fish: [Fish](https://fishshell.com/)
-- **File Manager** :duck: [Yazi](https://yazi-rs.github.io/docs/)
-- **Editor** :fire: [Neovim](https://github.com/neovim/neovim) (>= 0.11)
+* **Desktop Environment** :bento: [KDE Plasma 6](https://kde.org/plasma-desktop/) (Wayland)
+* **Terminal Shell** :fish: [Fish](https://fishshell.com/)
+* **Terminal Emulator** :terminal: [Konsole](https://konsole.kde.org/) / [Foot](https://codeberg.org/dnkl/foot)
+* **File Manager** :duck: [Yazi](https://yazi-rs.github.io/docs/) & Dolphin
+* **Editor** :fire: [Neovim](https://github.com/neovim/neovim) (>= 0.11)
 
 ---
 
-_Warning :rotating_light: Don't blindly use my settings unless you know what that entails. Use at your own risk!_
-_Note :wrench: I use colemak-dh keyboard layout_
+*Warning :rotating_light: Don't blindly use my settings unless you know what that entails. Use at your own risk!*
+
+*Note :wrench: I use Colemak-DH keyboard layout*
 
 ### Required
 
-- `nodejs`, `npm`
-- `rustup default nightly`
-- `xwayland-satellite` (For X11 apps support in Niri)
-- [Quickshell](https://quickshell.outfoxxed.me/) (required by Noctalia Shell)
+* `nodejs`, `npm`
+* `rustup default nightly`
+* `plymouth` (For Apple boot logo splash)
 
 ```fish
 fisher install jorgebucaran/nvm.fish
 fisher install rstacruz/fish-npm-global
+
 ```
 
 ### Shell setup
@@ -32,6 +31,16 @@ fisher install rstacruz/fish-npm-global
 * [peco](https://github.com/peco/peco) - Interactive filtering
 * [tmux](https://github.com/tmux/tmux) - Terminal multiplexer
 * [tpm](https://github.com/tmux-plugins/tpm) - Tmux Plugin Manager
+
+### Boot Experience (Apple Logo)
+
+* `plymouth-theme-apple-bgrt` / `plymouth-theme-monarch-apple` - Apple logo splash screen on boot.
+
+```bash
+yay -S plymouth-theme-apple-bgrt
+sudo plymouth-set-default-theme -R apple-bgrt
+
+```
 
 ### Font
 
@@ -55,7 +64,7 @@ fisher install rstacruz/fish-npm-global
 * `swappy`: Screenshot editor.
 * `wl-clipboard`: Wayland clipboard tool.
 * `glow`: Render markdown on the CLI.
-* `cliphist`: Manager clipboard history.
+* `cliphist`: Clipboard history manager.
 
 ### Input method
 
@@ -64,23 +73,26 @@ fisher install rstacruz/fish-npm-global
 
 ### App
 
+* Responsively App
 * WebCatalog Desktop
 
-# NIRI STACK (Optimized)
+---
 
-# Core & Layout
-niri xwayland-satellite
+# KDE PLASMA STACK
 
-# Desktop Components
-noctalia-shell
+### Core & Desktop
 
-# Utilities
-grim slurp wl-clipboard swappy imv 
-xdg-desktop-portal-gtk xdg-desktop-portal
-greetd greetd-tuigreet plasma-browser-integration
-kanshi
-```
+* `plasma-desktop`
+* `kwin` (Wayland)
+* `plasma-browser-integration`
+* `sddm` (Display Manager)
+
+### Screen & Screenshot
+
+* `spectacle` / (`grim` + `slurp` + `swappy`)
+* `imv` (Image viewer)
 
 ### Theming
+
 * `pywal` (wal): Color scheme generator
 * `pywalfox` (pipx): Apply pywal colors to Firefox
