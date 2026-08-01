@@ -15,6 +15,7 @@ application/x-extension-xht=firefox.desktop
 x-scheme-handler/discord=legcord.desktop
 x-scheme-handler/webcatalog=appimagekit_27c57a1b5dc35a87c5a1685036bf26a0-WebCatalog.desktop
 x-scheme-handler/responsively=ResponsivelyApp.desktop
+x-scheme-handler/gitkraken=gitkraken-url-handler.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;
@@ -29,3 +30,4 @@ application/x-extension-xhtml=firefox.desktop;
 application/x-extension-xht=firefox.desktop;
 x-scheme-handler/webcatalog=appimagekit_27c57a1b5dc35a87c5a1685036bf26a0-WebCatalog.desktop;@webcatalogdesktop.desktop;
 x-scheme-handler/responsively=ResponsivelyApp.desktop
+x-scheme-handler/gitkraken=gitkraken-url-handler.desktop;gitkraken.desktop;
