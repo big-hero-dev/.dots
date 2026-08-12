@@ -44,10 +44,10 @@ sudo plymouth-set-default-theme -R apple-bgrt
 
 ### Font
 
-* Font Awesome 6 Pro
 * Noto Sans Mono CJK / Icons
-* JetBrains Mono / SpaceMono Nerd Font
-* Lexend
+* JetBrains Mono
+* Terminus
+* Unifont (gnu-free-font)
 
 ### Devtool
 
@@ -91,8 +91,3 @@ sudo plymouth-set-default-theme -R apple-bgrt
 
 * `spectacle` / (`grim` + `slurp` + `swappy`)
 * `imv` (Image viewer)
-
-### Theming
-
-* `pywal` (wal): Color scheme generator
-* `pywalfox` (pipx): Apply pywal colors to Firefox
