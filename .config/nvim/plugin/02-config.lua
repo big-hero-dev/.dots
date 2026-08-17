@@ -1,4 +1,7 @@
-vim.cmd.colorscheme("everforest")
+require("koda").setup({
+	theme = { dark = "moss", light = "glade" },
+})
+vim.cmd.colorscheme("koda")
 
 -- =========================================================
 -- Core keymaps
