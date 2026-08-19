@@ -78,52 +78,40 @@ local config = {
 				local diff = MiniStatusline.section_diff({ trunc_width = 75 })
 				local diagnostics = MiniStatusline.section_diagnostics({
 					trunc_width = 75,
-					signs = { ERROR = " ", WARN = " ", HINT = "󰌵 ", INFO = " " },
+					signs = { ERROR = "E", WARN = "W", HINT = "H", INFO = "I" },
 				})
 				local filename = shorten_path(vim.api.nvim_buf_get_name(0), 45)
 				local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
-				local location = "󰦨 %p%% "
-				local lsp = lsp_cache[vim.api.nvim_get_current_buf()] or ""
+				local lsp_info = lsp_cache[vim.api.nvim_get_current_buf()] or ""
+				local sep_right, sep_left = "", ""
 
 				mode = mode:upper()
 
-				local sep_right = ""
-				local sep_left = ""
+				local devinfo_parts = {}
+				for _, s in ipairs({ diagnostics, git, diff }) do
+					if s ~= "" then
+						table.insert(devinfo_parts, s)
+					end
+				end
+				local devinfo = table.concat(devinfo_parts, " ")
 
-				return MiniStatusline.combine_groups({
-					{ hl = mode_hl, strings = { "  " .. mode .. " " } },
-					string.format("%%#%s#%s", make_sep_hl(mode_hl, "MiniStatuslineDevinfo"), sep_right),
-					{
-						hl = "MiniStatuslineDevinfo",
-						strings = {
-							diagnostics,
-							git,
-							diff,
-						},
-					},
+				local HL_MODE = mode_hl
+				local HL_DEV = "MiniStatuslineDevinfo"
+				local HL_LSP = "MiniHipatternsHack"
+
+				return table.concat({
+					string.format("%%#%s# %s ", HL_MODE, mode),
+					string.format("%%#%s#%s", make_sep_hl(HL_MODE, HL_DEV), sep_right),
+					string.format("%%#%s# %s ", HL_DEV, devinfo),
 					"%<",
-					{
-						hl = "MiniStatuslineDevinfo",
-						strings = {
-							filename,
-						},
-					},
+					string.format("%%#%s#%s", HL_DEV, filename),
 					"%=",
-					{
-						hl = "MiniStatuslineDevinfo",
-						strings = {
-							fileinfo,
-						},
-					},
-					string.format("%%#%s#%s", make_sep_hl("MiniStatuslineDevinfo", "MiniHipatternsHack"), sep_right),
-					{
-						hl = "MiniHipatternsHack",
-						strings = {
-							lsp,
-						},
-					},
-					string.format("%%#%s#%s", make_sep_hl(mode_hl, "MiniHipatternsHack"), sep_left),
-					{ hl = mode_hl, strings = { " " .. location .. " " } },
+					string.format("%%#%s#%s", HL_LSP, sep_right),
+					string.format("%%#%s# %s ", HL_LSP, lsp_info),
+					string.format("%%#%s#%s", HL_LSP, sep_left),
+					string.format("%%#%s# %s ", HL_DEV, fileinfo),
+					string.format("%%#%s#%s", make_sep_hl(HL_MODE, HL_LSP), sep_left),
+					string.format("%%#%s# 󰦨 %s%%%% ", HL_MODE, "%p"),
 				})
 			end,
 		},
