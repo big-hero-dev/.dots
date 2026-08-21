@@ -1,7 +1,13 @@
-require("koda").setup({
-	theme = { dark = "moss", light = "glade" },
-})
-vim.cmd.colorscheme("koda")
+local token = require("token")
+
+local config = {
+	transparent = false,
+	plugins = { gitsigns = true, snacks = true },
+}
+
+token.setup(config)
+
+vim.cmd.colorscheme("token") -- or 'token-ultra', 'token-flint', 'token-temper'
 
 -- =========================================================
 -- Core keymaps
