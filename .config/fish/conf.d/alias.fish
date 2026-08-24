@@ -9,4 +9,5 @@ alias tpi="~/.config/tmux/plugins/tpm/bin/install_plugins" # Installs Tmux plugi
 alias tpu="~/.config/tmux/plugins/tpm/bin/update_plugins all" # Updates all Tmux plugins
 
 # translate shell
-alias t="trans :vi"
+alias tl="trans :vi"
+alias tlb="trans :vi -engine bing"
