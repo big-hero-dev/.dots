@@ -1,11 +1,11 @@
 local token = require("token")
 
-local config = {
+local token_config = {
 	transparent = false,
 	plugins = { gitsigns = true, snacks = true },
 }
 
-token.setup(config)
+token.setup(token_config)
 
 vim.cmd.colorscheme("token") -- or 'token-ultra', 'token-flint', 'token-temper'
 
@@ -67,6 +67,43 @@ local function make_sep_hl(mode_hl, bg_hl)
 	return hl_name
 end
 
+local function get_colored_diagnostics()
+	if not vim.diagnostic.is_enabled() then
+		return ""
+	end
+	local count = vim.diagnostic.get(0)
+	if #count == 0 then
+		return ""
+	end
+
+	local counts = {
+		[vim.diagnostic.severity.ERROR] = 0,
+		[vim.diagnostic.severity.WARN] = 0,
+		[vim.diagnostic.severity.INFO] = 0,
+		[vim.diagnostic.severity.HINT] = 0,
+	}
+
+	for _, d in ipairs(count) do
+		counts[d.severity] = (counts[d.severity] or 0) + 1
+	end
+
+	local parts = {}
+	if counts[vim.diagnostic.severity.ERROR] > 0 then
+		table.insert(parts, string.format("%%#DiagnosticError# %d", counts[vim.diagnostic.severity.ERROR]))
+	end
+	if counts[vim.diagnostic.severity.WARN] > 0 then
+		table.insert(parts, string.format("%%#DiagnosticWarn# %d", counts[vim.diagnostic.severity.WARN]))
+	end
+	if counts[vim.diagnostic.severity.INFO] > 0 then
+		table.insert(parts, string.format("%%#DiagnosticInfo# %d", counts[vim.diagnostic.severity.INFO]))
+	end
+	if counts[vim.diagnostic.severity.HINT] > 0 then
+		table.insert(parts, string.format("%%#DiagnosticHint#󰌵 %d", counts[vim.diagnostic.severity.HINT]))
+	end
+
+	return table.concat(parts, " ")
+end
+
 local config = {
 	basics = {
 		options = { basic = false },
@@ -82,10 +119,7 @@ local config = {
 				local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
 				local git = MiniStatusline.section_git({ trunc_width = 40 })
 				local diff = MiniStatusline.section_diff({ trunc_width = 75 })
-				local diagnostics = MiniStatusline.section_diagnostics({
-					trunc_width = 75,
-					signs = { ERROR = "E", WARN = "W", HINT = "H", INFO = "I" },
-				})
+				local diagnostics = get_colored_diagnostics()
 				local filename = shorten_path(vim.api.nvim_buf_get_name(0), 45)
 				local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
 				local lsp_info = lsp_cache[vim.api.nvim_get_current_buf()] or ""

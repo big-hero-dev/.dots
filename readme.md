@@ -46,8 +46,20 @@ sudo plymouth-set-default-theme -R apple-bgrt
 
 * Noto Sans Mono CJK / Icons
 * JetBrains Mono
-* Terminus
-* Unifont (gnu-free-font)
+* Terminus Vietnamese
+<details>
+<summary>Click to expland</summary>
+
+```bash
+sudo pacman -S --needed fontconfig
+
+mkdir -p ~/.config/fontconfig/conf.d
+ln -sf /usr/share/fontconfig/conf.avail/70-force-bitmaps-formal.conf ~/.config/fontconfig/conf.d/
+
+fc-cache -fv
+```
+
+</details>
 
 ### Devtool
 
