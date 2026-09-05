@@ -1,10 +1,9 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-vim.g.toggle_colemark = true
-
+----------------------------------------------------------------------
+-- Colemak layout
+----------------------------------------------------------------------
 local function clear_mappings()
 	local modes = { "n", "v", "x" }
 	local keys = { "n", "e", "i", "u", "U", "l" }
@@ -40,6 +39,9 @@ end
 
 map("n", "<leader>lc", toggle_layout, { desc = "Toggle Colemak layout" })
 
+----------------------------------------------------------------------
+-- General
+----------------------------------------------------------------------
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit file" })
 map("n", "x", '"_x', { desc = "Delete without yank" })
@@ -50,6 +52,9 @@ map("n", "sv", "<cmd>vsplit<CR><C-w>w", { desc = "Vertical split" })
 map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down centered" })
 map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up centered" })
 
+----------------------------------------------------------------------
+-- Move lines (Colemak-aware)
+----------------------------------------------------------------------
 map("n", "<A-n>", "<cmd>m .+1<CR>==", opts)
 map("n", "<A-e>", "<cmd>m .-2<CR>==", opts)
 map("v", "<A-n>", ":m '>+1<CR>gv=gv", opts)
@@ -57,16 +62,28 @@ map("v", "<A-e>", ":m '<-2<CR>gv=gv", opts)
 map("i", "<A-n>", "<Esc>:m .+1<CR>==gi", opts)
 map("i", "<A-e>", "<Esc>:m .-2<CR>==gi", opts)
 
+----------------------------------------------------------------------
+-- Search / Replace
+----------------------------------------------------------------------
 map("n", "<ESC>", "<cmd>noh<CR>", opts)
 map("n", "m", "nzzzv")
 map("n", "M", "Nzzzv")
 map("n", "<leader>R", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word" })
 
+----------------------------------------------------------------------
+-- Command line
+----------------------------------------------------------------------
 map("c", "<C-e>", "<C-p>")
 
+----------------------------------------------------------------------
+-- Buffers
+----------------------------------------------------------------------
 map("n", "<Tab>", "<cmd>bn<cr>")
 map("n", "<S-Tab>", "<cmd>bp<cr>")
 
+----------------------------------------------------------------------
+-- Misc
+----------------------------------------------------------------------
 map("n", "gx", function()
 	vim.ui.open(vim.fn.expand("<cfile>"))
 end, { desc = "Open link under cursor" })
@@ -75,6 +92,9 @@ map({ "n", "v" }, "s", "<Nop>")
 
 map("t", "<C-x>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
+----------------------------------------------------------------------
+-- Tmux-aware window navigation
+----------------------------------------------------------------------
 local function move(direction, tmux_flag)
 	local current = vim.api.nvim_get_current_win()
 	vim.cmd("wincmd " .. direction)
@@ -96,8 +116,21 @@ map("n", "<C-Right>", function()
 	move("l", "R")
 end, opts)
 
+----------------------------------------------------------------------
+-- Format
+----------------------------------------------------------------------
 map("n", "<Leader>f", function()
-	vim.lsp.buf.format({ async = true })
+	local ok, conform = pcall(require, "conform")
+	if ok then
+		conform.format({
+			async = true,
+			lsp_format = "fallback",
+			timeout_ms = 3000,
+		})
+	else
+		vim.lsp.buf.format({ async = true })
+	end
 end, { desc = "Format code" })
 
+-- Activate Colemak layout on startup
 active_layout()

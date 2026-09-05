@@ -12,16 +12,8 @@ require("conform").setup({
 	formatters = {
 		["php-cs-fixer"] = {
 			command = vim.fn.expand("~/.local/share/nvim/mason/bin/php-cs-fixer"),
-			env = {
-				PHP_CS_FIXER_IGNORE_ENV = "1",
-			},
-			args = {
-				"fix",
-				"--rules=@PSR12",
-				"--no-interaction",
-				"--using-cache=no",
-				"$FILENAME",
-			},
+			env = { PHP_CS_FIXER_IGNORE_ENV = "1" },
+			args = { "fix", "--rules=@PSR12", "--no-interaction", "--using-cache=no", "$FILENAME" },
 			stdin = false,
 			exit_codes = { 0, 1 },
 		},
@@ -29,6 +21,7 @@ require("conform").setup({
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
+	group = vim.api.nvim_create_augroup("conform_format", { clear = true }),
 	callback = function(args)
 		require("conform").format({
 			bufnr = args.buf,

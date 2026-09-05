@@ -1,0 +1,225 @@
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+
+----------------------------------------------------------------------
+-- FileType specific settings
+----------------------------------------------------------------------
+autocmd("FileType", {
+	group = augroup("ft_indent", { clear = true }),
+	pattern = { "xml", "html", "xhtml", "css", "scss", "javascript", "typescript", "yaml", "lua" },
+	callback = function()
+		vim.opt_local.shiftwidth = 2
+		vim.opt_local.tabstop = 2
+	end,
+})
+
+autocmd("FileType", {
+	group = augroup("ft_wrap", { clear = true }),
+	pattern = { "gitcommit", "markdown", "text", "NeogitCommitMessage" },
+	callback = function()
+		vim.opt_local.wrap = true
+		vim.opt_local.spell = false
+	end,
+})
+
+----------------------------------------------------------------------
+-- Highlight on yank
+----------------------------------------------------------------------
+autocmd("TextYankPost", {
+	group = augroup("highlight_yank", { clear = true }),
+	callback = function()
+		local hl_op = vim.hl.hl_op
+		hl_op({ higroup = "IncSearch", timeout = 200 })
+	end,
+})
+
+----------------------------------------------------------------------
+-- Close special buffers with q
+----------------------------------------------------------------------
+autocmd("FileType", {
+	group = augroup("close_with_q", { clear = true }),
+	pattern = {
+		"netrw",
+		"Jaq",
+		"qf",
+		"git",
+		"help",
+		"man",
+		"lspinfo",
+		"oil",
+		"spectre_panel",
+		"lir",
+		"DressingSelect",
+		"tsplayground",
+		"",
+	},
+	callback = function()
+		vim.keymap.set("n", "q", "<cmd>close<CR>", {
+			buffer = true,
+			silent = true,
+			desc = "Close special buffer",
+		})
+	end,
+})
+
+----------------------------------------------------------------------
+-- Window management
+----------------------------------------------------------------------
+autocmd("CmdwinEnter", {
+	group = augroup("disable_cmdwin", { clear = true }),
+	callback = function()
+		vim.cmd("quit")
+	end,
+})
+
+autocmd("VimResized", {
+	group = augroup("resize_splits", { clear = true }),
+	callback = function()
+		vim.cmd("tabdo wincmd =")
+	end,
+})
+
+----------------------------------------------------------------------
+-- Diagnostics → loclist / qflist (debounced)
+----------------------------------------------------------------------
+local diag_timer = nil
+autocmd("DiagnosticChanged", {
+	group = augroup("diag_lists", { clear = true }),
+	callback = function()
+		if diag_timer then
+			diag_timer:stop()
+		end
+		diag_timer = vim.defer_fn(function()
+			vim.diagnostic.setloclist({ open = false })
+			vim.diagnostic.setqflist({ open = false })
+		end, 200)
+	end,
+})
+
+----------------------------------------------------------------------
+-- LuaSnip: unlink when not jumpable
+----------------------------------------------------------------------
+local luasnip = nil
+autocmd("CursorHold", {
+	group = augroup("luasnip_cleanup", { clear = true }),
+	callback = function()
+		if not luasnip then
+			local ok, ls = pcall(require, "luasnip")
+			if not ok then
+				return
+			end
+			luasnip = ls
+		end
+		if luasnip.in_snippet() and not luasnip.jumpable(1) then
+			pcall(luasnip.unlink_current)
+		end
+	end,
+})
+
+----------------------------------------------------------------------
+-- Checktime on focus
+----------------------------------------------------------------------
+autocmd("FocusGained", {
+	group = augroup("checktime", { clear = true }),
+	callback = function()
+		if vim.bo.buftype ~= "nofile" then
+			vim.cmd("checktime")
+		end
+	end,
+})
+
+----------------------------------------------------------------------
+-- Auto create parent directories on save
+----------------------------------------------------------------------
+autocmd("BufWritePre", {
+	group = augroup("auto_mkdir", { clear = true }),
+	callback = function(args)
+		local dir = vim.fn.fnamemodify(args.file, ":p:h")
+		if vim.fn.isdirectory(dir) == 0 then
+			vim.fn.mkdir(dir, "p")
+		end
+	end,
+})
+
+----------------------------------------------------------------------
+-- Large file protection (> 1MB)
+----------------------------------------------------------------------
+autocmd("BufReadPre", {
+	group = augroup("large_file", { clear = true }),
+	callback = function(args)
+		local ok, stats = pcall(vim.uv.fs_stat, args.match)
+		if ok and stats and stats.size > 1000000 then
+			vim.b.large_file = true
+			vim.opt_local.foldmethod = "manual"
+			vim.opt_local.signcolumn = "no"
+			vim.opt_local.spell = false
+			vim.opt_local.swapfile = false
+			vim.opt_local.syntax = "off"
+			vim.opt_local.undofile = false
+			pcall(vim.treesitter.stop)
+		end
+	end,
+})
+
+----------------------------------------------------------------------
+-- Terminal
+----------------------------------------------------------------------
+autocmd("TermOpen", {
+	group = augroup("term_options", { clear = true }),
+	callback = function()
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+	end,
+})
+
+----------------------------------------------------------------------
+-- View (fold / cursor restore)
+----------------------------------------------------------------------
+autocmd("BufWinLeave", {
+	group = augroup("auto_view", { clear = true }),
+	callback = function()
+		if vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
+			vim.cmd("silent! mkview")
+		end
+	end,
+})
+
+autocmd("BufReadPost", {
+	group = augroup("auto_view", { clear = false }),
+	callback = function()
+		if vim.bo.buftype == "" then
+			vim.cmd("silent! loadview")
+		end
+	end,
+})
+
+----------------------------------------------------------------------
+-- Reset cursor shape on leave
+----------------------------------------------------------------------
+autocmd("VimLeave", {
+	group = augroup("cursor_shape", { clear = true }),
+	callback = function()
+		io.write("\27[3 q")
+	end,
+})
+
+----------------------------------------------------------------------
+-- LuaSnip setup (lazy on first InsertEnter)
+----------------------------------------------------------------------
+autocmd("InsertEnter", {
+	group = augroup("luasnip_setup", { clear = true }),
+	once = true,
+	callback = function()
+		local ok, ls = pcall(require, "luasnip")
+		if not ok then
+			return
+		end
+		ls.setup({
+			history = true,
+			updateevents = "TextChanged,TextChangedI",
+			enable_autosnippets = false,
+		})
+		require("luasnip.loaders.from_vscode").lazy_load()
+		require("luasnip.loaders.from_lua").lazy_load()
+	end,
+})
