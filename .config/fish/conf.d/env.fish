@@ -32,3 +32,4 @@ set -gx XMODIFIERS "@im=fcitx"
 if type -q gsettings
     set -gx GTK_ICON_THEME (gsettings get org.gnome.desktop.interface icon-theme | tr -d "'")
 end
+
