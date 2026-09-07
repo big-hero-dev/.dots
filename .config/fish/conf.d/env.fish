@@ -13,12 +13,7 @@ set -gx XDG_DATA_DIRS "$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak
 # Apps & Editor
 set -gx EDITOR nvim
 set -gx BROWSER '/usr/bin/firefox'
-
-# AI & Tasks
-set -gx PROVIDER 'ollama'
-set -gx MODEL mistral
-set -gx TASKRC "$HOME/.taskrc"
-set -gx TASKDATA "$HOME/tasks"
+set -gx MOZ_ENABLE_WAYLAND 1
 
 # Dev
 set -gx SASS_PATH "node_modules"
