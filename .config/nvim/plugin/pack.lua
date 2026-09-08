@@ -210,6 +210,13 @@ on_keys({
 		end,
 		{ desc = "Toggle map" },
 	},
+	{
+		"<leader>M",
+		function()
+			require("mini.map").toggle_focus()
+		end,
+		{ desc = "Toggle map focus" },
+	},
 }, {}, function()
 	require("mini.map").setup({})
 end)
