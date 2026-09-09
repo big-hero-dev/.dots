@@ -308,6 +308,8 @@ activate task manager entry 6=Meta+6,Meta+6,Activate Task Manager Entry 6
 activate task manager entry 7=Meta+7,Meta+7,Activate Task Manager Entry 7
 activate task manager entry 8=Meta+8,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=Meta+9,Meta+9,Activate Task Manager Entry 9
+activate widget 103=none,none,Activate Icons-Only Task Manager Widget
+activate widget 107=Alt+F1,none,Activate Application Launcher Widget
 activate widget 28=none,none,Activate Application Launcher Widget
 activate widget 56=none,none,Activate Application Launcher Widget
 clear history=none,none,Clear Notification History
@@ -336,6 +338,10 @@ _launch=none
 
 [services][org.kde.krunner.desktop]
 _launch=Search\tAlt+F2\tMeta+Space
+
+[services][org.kde.spectacle.desktop]
+CurrentMonitorScreenShot=none
+OpenWithoutScreenshot=none
 
 [services][systemsettings.desktop]
 _launch=Tools
