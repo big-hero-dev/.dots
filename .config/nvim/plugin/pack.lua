@@ -49,12 +49,7 @@ local function on_keys(keys, plugins, setup)
 
 		vim.keymap.set(mode, lhs, function()
 			load()
-
-			if type(rhs) == "function" then
-				rhs()
-			elseif type(rhs) == "string" then
-				vim.cmd(rhs)
-			end
+			rhs()
 		end, opts)
 	end
 end
@@ -180,7 +175,13 @@ end)
 
 -- ToggleTerm
 on_keys({
-	{ "<leader>T", "<cmd>ToggleTerm<cr>", { desc = "Toggle Terminal" } },
+	{
+		"<leader>T",
+		function()
+			vim.cmd("ToggleTerm")
+		end,
+		{ desc = "Toggle Terminal" },
+	},
 }, {
 	"https://github.com/akinsho/toggleterm.nvim",
 }, function()
@@ -191,7 +192,13 @@ end)
 
 -- Zen Mode
 on_keys({
-	{ "<leader>z", "<cmd>ZenMode<cr>", { desc = "Zen Mode" } },
+	{
+		"<leader>z",
+		function()
+			vim.cmd("ZenMode")
+		end,
+		{ desc = "Zen Mode" },
+	},
 }, {
 	"https://github.com/folke/zen-mode.nvim",
 })
