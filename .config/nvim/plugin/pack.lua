@@ -23,24 +23,32 @@ end
 -- Helper: lazy load on keymap (load once, keep keymap forever)
 ----------------------------------------------------------------------
 local function on_keys(keys, plugins, setup)
+	local loaded = false
+
+	local function load()
+		if loaded then
+			return
+		end
+
+		loaded = true
+
+		if plugins and #plugins > 0 then
+			pack.add(plugins)
+		end
+
+		if setup then
+			setup()
+		end
+	end
+
 	for _, key in ipairs(keys) do
 		local mode = key.mode or "n"
 		local lhs = key[1]
 		local rhs = key[2]
 		local opts = key[3] or {}
-		local loaded = false
 
 		vim.keymap.set(mode, lhs, function()
-			-- Only load + setup once
-			if not loaded then
-				loaded = true
-				if plugins and #plugins > 0 then
-					pack.add(plugins)
-				end
-				if setup then
-					setup()
-				end
-			end
+			load()
 
 			if type(rhs) == "function" then
 				rhs()
