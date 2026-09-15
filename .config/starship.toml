@@ -1,34 +1,91 @@
 command_timeout = 1000
-scan_timeout = 3000
+scan_timeout = 30
 format = """
-[┌](bold 8)$directory$git_branch$git_status$golang$nodejs$rust$docker_context
+[┌](bold 8)$directory$git_branch$git_status$golang$nodejs$rust$python$java$c$elixir$docker_context$kubernetes$aws$gcloud$terraform$cmd_duration
 [└](bold 8)$character"""
 add_newline = true
+
 [character]
-success_symbol = "[λ](bold 2)"
-error_symbol = "[×](bold 1)"
-vimcmd_symbol = "[N](bold 4)"
+success_symbol = " [λ](bold 2)"
+error_symbol = " [×](bold 1)"
+vimcmd_symbol = " [N](bold 4)"
+
 [directory]
 style = "bold 6"
 truncation_length = 3
 truncation_symbol = "…/"
-read_only = "   "
+read_only = " 🔒 "
+
 [git_branch]
-symbol = " "
+symbol = " "
 style = "bold 5"
 format = "[$symbol$branch]($style) "
+
 [git_status]
 style = "bold 1"
 format = "([(\\[$all_status$ahead_behind\\])]($style) )"
+
 [golang]
-symbol = " "
+symbol = " "
 style = "bold 4"
 format = "[$symbol($version)]($style) "
+
 [nodejs]
-symbol = " "
+symbol = " "
 style = "bold 2"
 format = "[$symbol($version)]($style) "
+
 [rust]
-symbol = " "
+symbol = " "
 style = "bold 3"
 format = "[$symbol($version)]($style) "
+
+[python]
+symbol = " "
+style = "bold 3"
+format = "[$symbol($version)(\\($virtualenv\\))]($style) "
+
+[java]
+symbol = " "
+style = "bold 1"
+format = "[$symbol($version)]($style) "
+
+[c]
+symbol = " "
+style = "bold 4"
+format = "[$symbol($version)]($style) "
+
+[elixir]
+symbol = " "
+style = "bold 5"
+format = "[$symbol($version)]($style) "
+
+[docker_context]
+symbol = " "
+style = "bold 4"
+format = "[$symbol$context]($style) "
+
+[kubernetes]
+symbol = "☸ "
+style = "bold 6"
+format = "[$symbol$context( \\($namespace\\))]($style) "
+
+[aws]
+symbol = " "
+style = "bold 3"
+format = "[$symbol$profile(\\($region\\))]($style) "
+
+[gcloud]
+symbol = " "
+style = "bold 4"
+format = "[$symbol$account(@$project)]($style) "
+
+[terraform]
+symbol = "   "
+style = "bold 5"
+format = "[$symbol$workspace]($style) "
+
+[cmd_duration]
+min_time = 2000
+style = "bold 3"
+format = "[took $duration]($style) "
