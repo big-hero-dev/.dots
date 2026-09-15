@@ -91,6 +91,7 @@ on_event({ "BufReadPre", "BufNewFile" }, {
 }, function()
 	require("plugins.treesitter")
 	require("plugins.gitsigns")
+	require("mini.ai")
 end)
 
 ----------------------------------------------------------------------
@@ -151,7 +152,7 @@ on_keys({
 	"https://github.com/nvim-lua/plenary.nvim",
 	{ src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
 }, function()
-	require("plugins.harpoon")
+	require("plugins.harpoon_setup")
 end)
 
 ----------------------------------------------------------------------
