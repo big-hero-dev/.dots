@@ -16,7 +16,7 @@
 
 * `nodejs`, `npm`
 * `rustup default nightly`
-* `plymouth` (For Apple boot logo splash)
+* `plymouth`
 
 ```fish
 fisher install jorgebucaran/nvm.fish
@@ -32,13 +32,10 @@ fisher install rstacruz/fish-npm-global
 * [tmux](https://github.com/tmux/tmux) - Terminal multiplexer
 * [tpm](https://github.com/tmux-plugins/tpm) - Tmux Plugin Manager
 
-### Boot Experience (Apple Logo)
-
-* `plymouth-theme-apple-bgrt` / `plymouth-theme-monarch-apple` - Apple logo splash screen on boot.
+### Boot Experience
 
 ```bash
-yay -S plymouth-theme-apple-bgrt
-sudo plymouth-set-default-theme -R apple-bgrt
+sudo plymouth-set-default-theme -R [theme-name]
 
 ```
 
