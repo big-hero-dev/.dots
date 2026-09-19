@@ -8,7 +8,7 @@ local servers = {
 	"jsonls",
 	"dockerls",
 	"intelephense",
-	"pyright",
+	"ruff",
 }
 
 require("mason-lspconfig").setup({
@@ -117,17 +117,11 @@ vim.lsp.config("dockerls", {
 	on_attach = on_attach,
 })
 
-vim.lsp.config("pyright", {
+vim.lsp.config("ruff", {
 	capabilities = capabilities,
 	on_attach = on_attach,
 	settings = {
-		python = {
-			analysis = {
-				autoSearchPaths = true,
-				useLibraryCodeForTypes = true,
-				typeCheckingMode = "basic",
-			},
-		},
+		logLevel = "info",
 	},
 })
 
