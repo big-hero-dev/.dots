@@ -1,6 +1,3 @@
--- lua/core/options.lua
--- Core options · Optimized for Neovim 0.13
-
 local opt = vim.opt
 local g = vim.g
 
@@ -9,6 +6,12 @@ g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 g.loaded_node_provider = 0
 g.loaded_python3_provider = 0
+g.clipboard = {
+	name = "xclip",
+	copy = { ["+"] = "xclip -selection clipboard", ["*"] = "xclip -selection primary" },
+	paste = { ["+"] = "xclip -selection clipboard -o", ["*"] = "xclip -selection primary -o" },
+	cache_enabled = 1,
+}
 
 -- Global
 g.editorconfig = false
@@ -32,10 +35,10 @@ opt.title = true
 opt.list = true
 opt.listchars = { eol = "", tab = " ", trail = "·" }
 opt.fillchars = {
-  fold = " ",
-  eob = " ",
-  diff = "∙",
-  msgsep = "‾",
+	fold = " ",
+	eob = " ",
+	diff = "∙",
+	msgsep = "‾",
 }
 opt.foldcolumn = "1"
 opt.foldlevel = 99
@@ -45,7 +48,6 @@ opt.conceallevel = 2
 
 -- Behavior
 opt.mouse = "a"
-opt.clipboard = "unnamedplus"
 opt.wrap = false
 opt.scrolloff = 8
 opt.sidescrolloff = 8

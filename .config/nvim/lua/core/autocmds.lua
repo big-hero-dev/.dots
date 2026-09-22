@@ -223,3 +223,9 @@ autocmd("InsertEnter", {
 		require("luasnip.loaders.from_lua").lazy_load()
 	end,
 })
+
+autocmd("VimEnter", {
+	callback = function()
+		vim.opt.clipboard = "unnamedplus"
+	end,
+})
