@@ -10,28 +10,12 @@ function M.setup_core()
 
 	-- Colorscheme
 	vim.o.background = "dark"
-	require("gruvbox").setup({
-		terminal_colors = true,
-		undercurl = true,
-		underline = true,
-		bold = true,
-		italic = {
-			strings = true,
-			comments = true,
-			operators = false,
-			folds = true,
-		},
-		strikethrough = true,
-		invert_selection = false,
-		invert_signs = false,
-		invert_tabline = false,
-		invert_intend_guides = false,
-		inverse = true,
-		contrast = "hard", -- "hard", "soft", or "" for default
-		dim_inactive = false,
-		transparent_mode = false,
-	})
-	vim.cmd.colorscheme("gruvbox")
+	vim.g.gruvbox_material_enable_italic = 1
+	vim.g.gruvbox_material_better_performance = 1
+	vim.g.gruvbox_material_background = "hard"
+	vim.g.gruvbox_material_cursor = "auto"
+	vim.g.gruvbox_material_show_eob = 1
+	vim.cmd.colorscheme("gruvbox-material")
 
 	-- LSP cache for statusline
 	local lsp_cache = {}

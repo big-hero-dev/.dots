@@ -33,6 +33,7 @@ local function on_attach(client, bufnr)
 				source = "if_many",
 				prefix = " ",
 				scope = "cursor",
+				border = vim.g.border,
 			})
 		end,
 	})
@@ -139,15 +140,9 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.INFO] = " ",
 		},
 	},
+	virtual_text = false,
+	underline = true,
 })
-
--- Floating preview border
-local orig = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-	opts = opts or {}
-	opts.border = opts.border or vim.g.border
-	return orig(contents, syntax, opts, ...)
-end
 
 -- Endhints
 pcall(require, "lsp-endhints")

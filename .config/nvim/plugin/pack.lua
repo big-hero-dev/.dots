@@ -58,7 +58,7 @@ end
 -- 1. EAGER
 ----------------------------------------------------------------------
 pack.add({
-	"https://github.com/ellisonleao/gruvbox.nvim",
+	"https://github.com/sainnhe/gruvbox-material",
 	"https://github.com/nvim-mini/mini.nvim",
 })
 

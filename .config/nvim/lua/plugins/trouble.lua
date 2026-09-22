@@ -1,8 +1,8 @@
 -- lua/plugins/trouble.lua
 
 require("trouble").setup({
-  auto_close = true,
-  focus = true,
+	auto_close = true,
+	focus = true,
 })
 
 local map = vim.keymap.set
@@ -16,27 +16,28 @@ map("n", "<leader>tt", "<cmd>Trouble lsp_type_definitions toggle<cr>", { desc = 
 map("n", "<leader>ts", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols" })
 map("n", "<leader>tL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location list" })
 map("n", "<leader>tQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix list" })
+map("n", "<leader>ta", vim.lsp.buf.code_action, { desc = "Code Action" })
 
 map("n", "[q", function()
-  if require("trouble").is_open() then
-    require("trouble").prev({ skip_groups = true, jump = true })
-  else
-    pcall(vim.cmd.cprev)
-  end
+	if require("trouble").is_open() then
+		require("trouble").prev({ skip_groups = true, jump = true })
+	else
+		pcall(vim.cmd.cprev)
+	end
 end, { desc = "Prev trouble/qf" })
 
 map("n", "]q", function()
-  if require("trouble").is_open() then
-    require("trouble").next({ skip_groups = true, jump = true })
-  else
-    pcall(vim.cmd.cnext)
-  end
+	if require("trouble").is_open() then
+		require("trouble").next({ skip_groups = true, jump = true })
+	else
+		pcall(vim.cmd.cnext)
+	end
 end, { desc = "Next trouble/qf" })
 
 map("n", "[d", function()
-  vim.diagnostic.jump({ count = -1 })
+	vim.diagnostic.jump({ count = -1 })
 end, { desc = "Prev diagnostic" })
 
 map("n", "]d", function()
-  vim.diagnostic.jump({ count = 1 })
+	vim.diagnostic.jump({ count = 1 })
 end, { desc = "Next diagnostic" })
