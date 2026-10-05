@@ -8,6 +8,7 @@ local servers = {
 	"jsonls",
 	"dockerls",
 	"intelephense",
+	"pyright",
 	"ruff",
 }
 
@@ -118,11 +119,46 @@ vim.lsp.config("dockerls", {
 	on_attach = on_attach,
 })
 
-vim.lsp.config("ruff", {
-	capabilities = capabilities,
-	on_attach = on_attach,
+local function get_python_path(root_dir)
+	-- 1. venv đang được activate
+	if vim.env.VIRTUAL_ENV then
+		return vim.env.VIRTUAL_ENV .. "/bin/python"
+	end
+	-- 2. .venv / venv nằm trong project
+	if root_dir then
+		for _, name in ipairs({ ".venv", "venv" }) do
+			local path = root_dir .. "/" .. name .. "/bin/python"
+			if vim.uv.fs_stat(path) then
+				return path
+			end
+		end
+	end
+	-- 3. fallback
+	return vim.fn.exepath("python3") ~= "" and vim.fn.exepath("python3") or "python"
+end
+
+vim.lsp.config("pyright", {
+	before_init = function(_, config)
+		config.settings = config.settings or {}
+		config.settings.python = config.settings.python or {}
+		config.settings.python.pythonPath = get_python_path(config.root_dir)
+	end,
 	settings = {
-		logLevel = "info",
+		pyright = {
+			disableOrganizeImports = true,
+		},
+		python = {
+			analysis = {
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
+				diagnosticMode = "openFilesOnly",
+				typeCheckingMode = "standard",
+				diagnosticSeverityOverrides = {
+					reportUnusedImport = "none",
+					reportUnusedVariable = "none",
+				},
+			},
+		},
 	},
 })
 
@@ -142,6 +178,7 @@ vim.diagnostic.config({
 	},
 	virtual_text = false,
 	underline = true,
+	update_in_insert = false,
 })
 
 -- Endhints

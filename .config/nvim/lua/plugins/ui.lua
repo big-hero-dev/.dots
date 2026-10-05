@@ -84,6 +84,7 @@ function M.setup_core()
 	-- vim.notify needs to be ready early (mason/lsp may notify right at startup)
 	require("mini.notify").setup({
 		window = { config = { border = vim.g.border } },
+		lsp_progress = { enable = false },
 	})
 	vim.notify = require("mini.notify").make_notify()
 end

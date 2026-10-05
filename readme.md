@@ -99,4 +99,4 @@ fc-cache -fv
 ### Screen & Screenshot
 
 * `spectacle` / (`grim` + `slurp` + `swappy`)
-* `imv` (Image viewer)
+* `timg` (Image viewer)
