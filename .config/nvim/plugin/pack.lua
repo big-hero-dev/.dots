@@ -262,6 +262,7 @@ end, { desc = "Pack clean" })
 pack.add({
 	"https://github.com/lambdalisue/suda.vim",
 	"https://github.com/dstein64/vim-startuptime",
+	"https://github.com/brianhuster/live-preview.nvim",
 })
 
 ----------------------------------------------------------------------
