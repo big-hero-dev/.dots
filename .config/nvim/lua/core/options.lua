@@ -1,4 +1,3 @@
-local opt = vim.opt
 local g = vim.g
 
 -- Disable unused providers (giảm startup)
@@ -7,9 +6,9 @@ g.loaded_ruby_provider = 0
 g.loaded_node_provider = 0
 g.loaded_python3_provider = 0
 g.clipboard = {
-	name = "xclip",
-	copy = { ["+"] = "xclip -selection clipboard", ["*"] = "xclip -selection primary" },
-	paste = { ["+"] = "xclip -selection clipboard -o", ["*"] = "xclip -selection primary -o" },
+	name = "wl-clipboard",
+	copy = { ["+"] = "wl-copy", ["*"] = "wl-copy --primary" },
+	paste = { ["+"] = "wl-paste", ["*"] = "wl-paste --primary --no-newline" },
 	cache_enabled = 1,
 }
 
@@ -19,79 +18,79 @@ g.border = "rounded"
 g.toggle_colemark = true
 
 -- UI
-opt.termguicolors = true
-opt.number = true
-opt.relativenumber = true
-opt.signcolumn = "yes"
-opt.cursorline = true
-opt.cmdheight = 0
-opt.laststatus = 3
-opt.showtabline = 2
-opt.showmode = false
-opt.showcmdloc = "statusline"
-opt.pumheight = 10
-opt.winblend = 0
-opt.title = true
-opt.list = true
-opt.listchars = { eol = "", tab = " ", trail = "·" }
-opt.fillchars = {
+vim.opt.termguicolors = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.signcolumn = "yes"
+vim.opt.cursorline = true
+vim.opt.cmdheight = 0
+vim.opt.laststatus = 3
+vim.opt.showtabline = 2
+vim.opt.showmode = false
+vim.opt.showcmdloc = "statusline"
+vim.opt.pumheight = 10
+vim.opt.winblend = 0
+vim.opt.title = true
+vim.opt.list = true
+vim.opt.listchars = { eol = "", tab = " ", trail = "·" }
+vim.opt.fillchars = {
 	fold = " ",
 	eob = " ",
 	diff = "∙",
 	msgsep = "‾",
 }
-opt.foldcolumn = "1"
-opt.foldlevel = 99
-opt.foldlevelstart = 99
-opt.foldenable = true
-opt.conceallevel = 2
+vim.opt.foldcolumn = "1"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+vim.opt.conceallevel = 2
 
 -- Behavior
-opt.mouse = "a"
-opt.wrap = false
-opt.scrolloff = 8
-opt.sidescrolloff = 8
-opt.scrolljump = 5
-opt.splitbelow = true
-opt.splitright = true
-opt.splitkeep = "cursor"
-opt.timeoutlen = 400
-opt.updatetime = 250
-opt.completeopt = { "menu", "menuone", "noselect" }
-opt.shortmess:append("c")
-opt.backspace = "indent,eol,start"
-opt.isfname:append("@-@")
-opt.iskeyword:append("-")
-opt.matchpairs = "(:),{:},[:],<:>"
+vim.opt.mouse = "a"
+vim.opt.wrap = false
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+vim.opt.scrolljump = 5
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.splitkeep = "cursor"
+vim.opt.timeoutlen = 400
+vim.opt.updatetime = 250
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.shortmess:append("c")
+vim.opt.backspace = "indent,eol,start"
+vim.opt.isfname:append("@-@")
+vim.opt.iskeyword:append("-")
+vim.opt.matchpairs = "(:),{:},[:],<:>"
 
 -- Indent
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.shiftwidth = 4
-opt.expandtab = false
-opt.autoindent = true
-opt.smartindent = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = false
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 
 -- Search
-opt.ignorecase = true
-opt.smartcase = true
-opt.hlsearch = false
-opt.incsearch = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
 
 -- Files
-opt.swapfile = false
-opt.backup = false
-opt.undofile = true
-opt.undodir = vim.fn.stdpath("data") .. "/undodir"
-opt.fileencoding = "utf-8"
-opt.fileencodings = "utf-8"
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
+vim.opt.fileencoding = "utf-8"
+vim.opt.fileencodings = "utf-8"
 
 -- Cursor
-opt.guicursor = "n-v-c:block,i-ci-ve:hor20,a:blinkwait700-blinkoff400-blinkon250"
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:hor20,a:blinkwait700-blinkoff400-blinkon250"
 
 -- Wildmenu
-opt.wildmenu = true
-opt.wildmode = { "longest:full", "full" }
-opt.wildignorecase = true
-opt.visualbell = false
-opt.ruler = false
+vim.opt.wildmenu = true
+vim.opt.wildmode = { "longest:full", "full" }
+vim.opt.wildignorecase = true
+vim.opt.visualbell = false
+vim.opt.ruler = false
