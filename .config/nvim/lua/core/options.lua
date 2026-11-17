@@ -5,10 +5,16 @@ g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 g.loaded_node_provider = 0
 g.loaded_python3_provider = 0
-g.clipboard = {
+vim.g.clipboard = {
 	name = "wl-clipboard",
-	copy = { ["+"] = "wl-copy", ["*"] = "wl-copy --primary" },
-	paste = { ["+"] = "wl-paste", ["*"] = "wl-paste --primary --no-newline" },
+	copy = {
+		["+"] = { "wl-copy", "--type", "text/plain" },
+		["*"] = { "wl-copy", "--primary", "--type", "text/plain" },
+	},
+	paste = {
+		["+"] = { "wl-paste", "--no-newline" },
+		["*"] = { "wl-paste", "--no-newline", "--primary" },
+	},
 	cache_enabled = 1,
 }
 
@@ -86,7 +92,11 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.fileencodings = "utf-8"
 
 -- Cursor
-vim.opt.guicursor = "n-v-c:block,i-ci-ve:hor20,a:blinkwait700-blinkoff400-blinkon250"
+vim.opt.guicursor = {
+	"n-v-c:block",
+	"i-ci-ve:ver25",
+	"r-cr:hor20",
+}
 
 -- Wildmenu
 vim.opt.wildmenu = true

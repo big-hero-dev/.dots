@@ -1,91 +1,104 @@
+# Classic Hacker - Everforest Dark
 command_timeout = 2000
-scan_timeout = 3000
-format = """
-[┌](bold 8)$directory$git_branch$git_status$golang$nodejs$rust$python$java$c$elixir$docker_context$kubernetes$aws$gcloud$terraform$cmd_duration
-[└](bold 8)$character"""
+scan_timeout = 1000
 add_newline = true
 
+format = """
+[┌─](#859289)$directory$git_branch$git_status$git_state$nodejs$golang$rust$python$php$docker_context$cmd_duration
+[└─](#859289)$character"""
+
+right_format = ""
+
 [character]
-success_symbol = " [λ](bold 2)"
-error_symbol = " [×](bold 1)"
-vimcmd_symbol = " [N](bold 4)"
+success_symbol = "[λ](bold #a7c080)"
+error_symbol = "[λ](bold #e67e80)"
+vimcmd_symbol = "[N](bold #7fbbb3)"
+format = "$symbol "
 
 [directory]
-style = "bold 6"
+style = "bold #a7c080"
+format = "[$path]($style) "
 truncation_length = 3
 truncation_symbol = "…/"
-read_only = " 🔒 "
+truncate_to_repo = true
+read_only = " 󰌾"
+read_only_style = "#e67e80"
 
 [git_branch]
 symbol = " "
-style = "bold 5"
-format = "[$symbol$branch]($style) "
+style = "#d699b6"
+format = "[ $symbol$branch]($style)"
 
 [git_status]
-style = "bold 1"
-format = "([(\\[$all_status$ahead_behind\\])]($style) )"
+style = "#e67e80"
+format = " [\\[$all_status$ahead_behind\\]]($style)"
 
-[golang]
-symbol = " "
-style = "bold 4"
-format = "[$symbol($version)]($style) "
+[git_state]
+style = "#e69875"
+format = " [$state]($style)"
 
 [nodejs]
 symbol = " "
-style = "bold 2"
-format = "[$symbol($version)]($style) "
+style = "#83c092"
+format = "[$symbol$version]($style) "
+
+[golang]
+symbol = " "
+style = "#7fbbb3"
+format = "[$symbol$version]($style) "
 
 [rust]
 symbol = " "
-style = "bold 3"
-format = "[$symbol($version)]($style) "
+style = "#e69875"
+format = "[$symbol$version]($style) "
 
 [python]
 symbol = " "
-style = "bold 3"
-format = "[$symbol($version)(\\($virtualenv\\))]($style) "
+style = "#dbbc7f"
+format = "[$symbol$version( $virtualenv)]($style) "
 
-[java]
-symbol = " "
-style = "bold 1"
-format = "[$symbol($version)]($style) "
-
-[c]
-symbol = " "
-style = "bold 4"
-format = "[$symbol($version)]($style) "
-
-[elixir]
-symbol = " "
-style = "bold 5"
-format = "[$symbol($version)]($style) "
+[php]
+symbol = " "
+style = "#d699b6"
+format = "[$symbol$version]($style) "
 
 [docker_context]
 symbol = " "
-style = "bold 4"
+style = "#7fbbb3"
 format = "[$symbol$context]($style) "
-
-[kubernetes]
-symbol = "☸ "
-style = "bold 6"
-format = "[$symbol$context( \\($namespace\\))]($style) "
-
-[aws]
-symbol = " "
-style = "bold 3"
-format = "[$symbol$profile(\\($region\\))]($style) "
-
-[gcloud]
-symbol = " "
-style = "bold 4"
-format = "[$symbol$account(@$project)]($style) "
-
-[terraform]
-symbol = "   "
-style = "bold 5"
-format = "[$symbol$workspace]($style) "
 
 [cmd_duration]
 min_time = 2000
-style = "bold 3"
-format = "[took $duration]($style) "
+show_milliseconds = false
+style = "#859289"
+format = " [$duration]($style)"
+
+[time]
+disabled = true
+
+[username]
+disabled = true
+
+[hostname]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[terraform]
+disabled = true
+
+[java]
+disabled = true
+
+[c]
+disabled = true
+
+[elixir]
+disabled = true
